@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #F0ECE3;
+  --surface: #FBF9F4;
+  --surface-2: #E9E2D3;
+  --border: #DCD2BE;
+  --text: #20241F;
+  --text-muted: #6B716A;
+  --accent: #3F5D50;
+  --accent-2: #B98B3E;
+  --azg: #2E8B84;
+  --accent-soft: rgba(63, 93, 80, 0.10);
+  --shadow-base: 0 2px 10px rgba(20, 30, 25, 0.06), 0 10px 30px rgba(20, 30, 25, 0.04);
+  --radius-base: 14px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html[data-theme="dark"] {
+  --bg: #141B19;
+  --surface: #1C2624;
+  --surface-2: #22302C;
+  --border: #31413B;
+  --text: #E7EDE9;
+  --text-muted: #93A8A0;
+  --accent: #74BC9E;
+  --accent-2: #D9A94F;
+  --azg: #55C4B6;
+  --accent-soft: rgba(116, 188, 158, 0.16);
+  --shadow-base: 0 2px 14px rgba(0, 0, 0, 0.3), 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-bebas: var(--font-bebas-next), sans-serif;
+  --font-mono: var(--font-mono-next), monospace;
+  --font-inter: var(--font-inter-next), sans-serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-azg: var(--azg);
+  --color-accent-soft: var(--accent-soft);
+
+  --shadow-card: var(--shadow-base);
+  --radius: var(--radius-base);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
+
+
+
+
+
+
