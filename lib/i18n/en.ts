@@ -19,7 +19,8 @@ export const en: Translations = {
     openMenu: "Open menu",
   },
   footer: {
-    tagline: "Personal travel logs of stadium visits and scarf collection across Europe.",
+    tagline:
+      "Personal travel logs of stadium visits and scarf collection across Europe.",
     copyright: "All rights reserved.",
     privacy: "Built with Next.js & Tailwind CSS.",
   },
@@ -28,7 +29,8 @@ export const en: Translations = {
   home: {
     heroEyebrow: "WELCOME TO SAZEJE FOOTBALL",
     heroTitle: "Football Travels & Scarf Collection",
-    heroSubtitle: "Travel logs of visited grounds, European groundhopping, and a growing collection of football scarves.",
+    heroSubtitle:
+      "Personal travelogues of stadium visits across Europe. Follow the journey, read the stories behind every stand, and discover which ground is next on the list.",
     heroCtaGrounds: "Explore Grounds",
     heroCtaScarves: "Scarf Collection",
     statsGrounds: "Grounds Visited",
@@ -46,26 +48,32 @@ export const en: Translations = {
   about: {
     heroEyebrow: "ABOUT & GOALS",
     heroTitle: "About SaZeJe Football",
-    heroSubtitle: "Background story behind the passion for football trips, groundhopping, and collecting scarves.",
+    heroSubtitle:
+      "Background story behind the passion for football trips, groundhopping, and collecting scarves.",
     bioTitle: "The Story",
-    bioParagraph1: "SaZeJe Football originated from a passionate love for pure football atmosphere in and around European stadiums. What started as a few spontaneous trips across borders evolved into a structured passion for groundhopping and collecting.",
-    bioParagraph2: "Every stadium visit brings unique stories — from floodlights to fan culture. As a lasting memory, I collect an official scarf from every ground or city visited.",
+    bioParagraph1:
+      "SaZeJe Football originated from a passionate love for pure football atmosphere in and around European stadiums. What started as a few spontaneous trips across borders evolved into a structured passion for groundhopping and collecting.",
+    bioParagraph2:
+      "Every stadium visit brings unique stories — from floodlights to fan culture. As a lasting memory, I collect an official scarf from every ground or city visited.",
     goalsTitle: "Personal Goals",
-    goalsSubtitle: "My objectives and milestones for stadium visits and collections.",
+    goalsSubtitle:
+      "My objectives and milestones for stadium visits and collections.",
     statusInProgress: "In Progress",
     statusCompleted: "Completed",
     target: "Target",
     current: "Current Status",
     detailsHeading: "Details & Status",
     backToGoals: "← Back to About & Goals",
-    originalContentNotice: "Note: The descriptions below are written in the author's original Dutch language.",
+    originalContentNotice:
+      "Note: The descriptions below are written in the author's original Dutch language.",
   },
 
   // Grounds Page
   grounds: {
     heroEyebrow: "DATABASE",
     heroTitle: "Grounds Database",
-    heroSubtitle: "The complete database of visited stadiums — filter by country, competition, or club.",
+    heroSubtitle:
+      "The complete database of visited stadiums — filter by country, competition, or club.",
     filterCountry: "Country",
     filterCompetition: "Competition",
     filterClub: "Club",
@@ -94,13 +102,17 @@ export const en: Translations = {
   scarves: {
     heroEyebrow: "COLLECTION",
     heroTitle: "Scarf Collection",
-    heroSubtitle: "Collection of official and secondhand football scarves from around the world.",
+    heroSubtitle:
+      "Collection of official and secondhand football scarves from around the world.",
     categoryNewTitle: "New Scarves",
-    categoryNewDesc: "Scarves bought directly during match visits, club stores, and official team shops.",
+    categoryNewDesc:
+      "Scarves bought directly during match visits, club stores, and official team shops.",
     categorySecondhandTitle: "Secondhand Scarves",
-    categorySecondhandDesc: "Special finds, traded scarves, and vintage discoveries obtained from collectors.",
+    categorySecondhandDesc:
+      "Special finds, traded scarves, and vintage discoveries obtained from collectors.",
     selectCountryTitle: "Select a Country",
-    selectCountrySubtitle: "Choose a country to browse scarves by league and club",
+    selectCountrySubtitle:
+      "Choose a country to browse scarves by league and club",
     filterSearch: "Search",
     filterSearchPlaceholder: "Search by club or scarf type...",
     filterClub: "Club",
@@ -134,7 +146,8 @@ export const en: Translations = {
   contact: {
     heroEyebrow: "CONTACT",
     heroTitle: "Get in Touch",
-    heroSubtitle: "Have a question, ground tip, or scarf swap proposal? Send a message.",
+    heroSubtitle:
+      "Have a question, ground tip, or scarf swap proposal? Send a message.",
     labelName: "Name",
     namePlaceholder: "Your full name",
     labelEmail: "Email Address",
@@ -143,12 +156,15 @@ export const en: Translations = {
     messagePlaceholder: "Write your message, question, or swap offer here...",
     submitButton: "Send Message",
     successTitle: "Message Received!",
-    successMessage: "Thank you for your message. We will get back to you as soon as possible.",
-    mailtoNotice: "Note: This form opens your email client with a pre-filled message.",
+    successMessage:
+      "Thank you for your message. We will get back to you as soon as possible.",
+    mailtoNotice:
+      "Note: This form opens your email client with a pre-filled message.",
   },
 
   // Common UI
   common: {
-    originalDutchNotice: "Content text is displayed in the author's original Dutch.",
+    originalDutchNotice:
+      "Content text is displayed in the author's original Dutch.",
   },
 };
