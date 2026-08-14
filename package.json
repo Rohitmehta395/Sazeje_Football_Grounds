@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:db": "node scripts/test-db-connection.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",
+    "@neondatabase/serverless": "^1.1.0",
     "framer-motion": "^13.0.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.30.0",
