@@ -1,94 +1,6 @@
-import { Scarf } from "@/types";
-
-export const SEED_SCARVES: Scarf[] = [
-  {
-    id: "s1",
-    category: "new",
-    club: "FC Barcelona",
-    country: "Spanje",
-    type: "Matchday sjaal",
-    description: "Gekocht bij de fanshop rond Camp Nou, editie seizoen 2024/25.",
-    stadium: "Camp Nou",
-    founded: "1899",
-    trophies: "5x Champions League, 27x Spaans landskampioen",
-    funFact: "Het clublied wordt in het Catalaans gezongen, ongeacht waar de speler vandaan komt.",
-    photo: "https://picsum.photos/seed/scarf-barca/500/400",
-    purchaseDate: "2025-03-14",
-    dateAdded: "2025-03-15",
-  },
-  {
-    id: "s2",
-    category: "new",
-    club: "Liverpool FC",
-    country: "Engeland",
-    type: "Dubbelzijdige sjaal",
-    description: "Straatverkoper net buiten Anfield Road, klassiek rood-geel ontwerp.",
-    stadium: "Anfield",
-    founded: "1892",
-    trophies: "6x Champions League, 19x Engels landskampioen",
-    funFact: "Spelers raken bij het betreden van het veld het bord 'This Is Anfield' aan.",
-    photo: "https://picsum.photos/seed/scarf-lfc/500/400",
-    purchaseDate: "2025-01-20",
-    dateAdded: "2025-01-21",
-  },
-  {
-    id: "s3",
-    category: "secondhand",
-    club: "Borussia Dortmund",
-    country: "Duitsland",
-    type: "Vintage sjaal",
-    description: "Gevonden op een ruilbeurs, jaren '90 ontwerp met oud logo.",
-    stadium: "Signal Iduna Park",
-    founded: "1909",
-    trophies: "1x Champions League, 8x Duits landskampioen",
-    funFact: "De Zuidtribune, de Gele Muur, biedt plaats aan bijna 25.000 staanplaatsen.",
-    photo: "https://picsum.photos/seed/scarf-bvb/500/400",
-    dateAdded: "2024-11-05",
-  },
-  {
-    id: "s4",
-    category: "secondhand",
-    club: "Ajax",
-    country: "Nederland",
-    type: "Retro sjaal",
-    description: "Tweedehands via een fanclub-ruilbeurs, seizoen 2010/11.",
-    stadium: "Johan Cruijff ArenA",
-    founded: "1900",
-    trophies: "4x Europacup I / Champions League, 36x landskampioen",
-    funFact: "Ajax was in 1971 de eerste Nederlandse club die de Europacup I won.",
-    photo: "https://picsum.photos/seed/scarf-ajax/500/400",
-    dateAdded: "2024-10-02",
-  },
-  {
-    id: "s5",
-    category: "new",
-    club: "AC Milan",
-    country: "Italië",
-    type: "Winter sjaal",
-    description: "Officiële fanshop bij San Siro, dik gebreid model.",
-    stadium: "San Siro",
-    founded: "1899",
-    trophies: "7x Champions League, 19x Italiaans landskampioen",
-    funFact: "San Siro wordt gedeeld met stadsrivaal Inter, elk met een eigen kleedkamergang.",
-    photo: "https://picsum.photos/seed/scarf-milan/500/400",
-    purchaseDate: "2024-04-11",
-    dateAdded: "2024-04-12",
-  },
-  {
-    id: "s6",
-    category: "secondhand",
-    club: "Club Brugge",
-    country: "België",
-    type: "Vintage sjaal",
-    description: "Gekocht op een kringloopmarkt in Brugge, jaren '80 stijl.",
-    stadium: "Jan Breydelstadion",
-    founded: "1891",
-    trophies: "18x Belgisch landskampioen",
-    funFact: "Club Brugge is vernoemd naar de stad, niet naar een persoon of dier.",
-    photo: "https://picsum.photos/seed/scarf-brugge/500/400",
-    dateAdded: "2024-02-20",
-  },
-];
+import { Scarf, ScarfCategory } from "@/types";
+import { getPayload } from "payload";
+import config from "@payload-config";
 
 export interface ScarfFilterParams {
   category?: "new" | "secondhand" | string;
@@ -97,40 +9,119 @@ export interface ScarfFilterParams {
   search?: string;
 }
 
-export function getScarves(filter?: ScarfFilterParams): Scarf[] {
-  let list = SEED_SCARVES;
-  if (!filter) return list;
+function mapPayloadScarf(doc: any): Scarf {
+  const photoUrl =
+    typeof doc.photo === "object" && doc.photo?.url
+      ? doc.photo.url
+      : typeof doc.photo === "string"
+      ? doc.photo
+      : "";
 
-  if (filter.category) {
-    list = list.filter((s) => s.category === filter.category);
-  }
-  if (filter.country) {
-    list = list.filter(
-      (s) => s.country.toLowerCase() === filter.country?.toLowerCase()
-    );
-  }
-  if (filter.club) {
-    list = list.filter((s) => s.club === filter.club);
-  }
-  if (filter.search) {
-    const q = filter.search.toLowerCase();
-    list = list.filter(
-      (s) =>
-        s.club.toLowerCase().includes(q) ||
-        s.type.toLowerCase().includes(q) ||
-        (s.description && s.description.toLowerCase().includes(q))
-    );
-  }
-  return list;
-}
-
-export function getScarfById(id: string): Scarf | undefined {
-  return SEED_SCARVES.find((s) => s.id === id);
-}
-
-export function getScarfCountsByCategory(): { new: number; secondhand: number } {
   return {
-    new: SEED_SCARVES.filter((s) => s.category === "new").length,
-    secondhand: SEED_SCARVES.filter((s) => s.category === "secondhand").length,
+    id: String(doc.id),
+    category: doc.category as ScarfCategory,
+    club: doc.club || "",
+    country: doc.country || "",
+    type: doc.type || "",
+    description: doc.description || "",
+    stadium: doc.stadium || "",
+    founded: doc.founded || "",
+    trophies: doc.trophies || "",
+    funFact: doc.funFact || "",
+    purchaseDate: doc.purchaseDate || undefined,
+    photo: photoUrl,
+    dateAdded: doc.dateAdded || doc.createdAt || new Date().toISOString(),
   };
+}
+
+export async function getScarves(filter?: ScarfFilterParams): Promise<Scarf[]> {
+  try {
+    const payload = await getPayload({ config });
+    const where: any = {};
+
+    if (filter?.category) {
+      where.category = { equals: filter.category };
+    }
+    if (filter?.country) {
+      where.country = { equals: filter.country };
+    }
+    if (filter?.club) {
+      where.club = { equals: filter.club };
+    }
+
+    const { docs } = await payload.find({
+      collection: "scarves",
+      where: Object.keys(where).length > 0 ? where : undefined,
+      depth: 1,
+      limit: 1000,
+      sort: "-dateAdded",
+    });
+
+    let list = docs.map(mapPayloadScarf);
+
+    if (filter?.search) {
+      const q = filter.search.toLowerCase();
+      list = list.filter(
+        (s) =>
+          s.club.toLowerCase().includes(q) ||
+          s.type.toLowerCase().includes(q) ||
+          (s.description && s.description.toLowerCase().includes(q))
+      );
+    }
+
+    return list;
+  } catch (error) {
+    console.error("Error fetching scarves from Payload:", error);
+    return [];
+  }
+}
+
+export async function getScarfById(id: string): Promise<Scarf | undefined> {
+  try {
+    const payload = await getPayload({ config });
+    const isNum = !isNaN(Number(id)) && Number.isInteger(Number(id));
+    if (!isNum) return undefined;
+
+    const doc = await payload.findByID({
+      collection: "scarves",
+      id: Number(id),
+      depth: 1,
+    });
+    return doc ? mapPayloadScarf(doc) : undefined;
+  } catch (error) {
+    console.error(`Error fetching scarf ${id} from Payload:`, error);
+    return undefined;
+  }
+}
+
+export async function getScarfCountsByCategory(): Promise<{
+  new: number;
+  secondhand: number;
+}> {
+  try {
+    const payload = await getPayload({ config });
+    const newCount = await payload.count({
+      collection: "scarves",
+      where: {
+        category: {
+          equals: "new",
+        },
+      },
+    });
+    const secondhandCount = await payload.count({
+      collection: "scarves",
+      where: {
+        category: {
+          equals: "secondhand",
+        },
+      },
+    });
+    return {
+      new: newCount.totalDocs,
+      secondhand: secondhandCount.totalDocs,
+    };
+  } catch (error) {
+    console.error("Error fetching scarf counts from Payload:", error);
+    return { new: 0, secondhand: 0 };
+  }
 }

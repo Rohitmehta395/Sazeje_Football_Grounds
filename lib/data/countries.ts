@@ -1,5 +1,4 @@
-import { Country } from "@/types";
-import { SEED_SCARVES } from "./scarves";
+import { Country, Scarf } from "@/types";
 
 export const UEFA_COUNTRIES: Country[] = [
   { name: "Albanië", nameEn: "Albania", flag: "🇦🇱" },
@@ -71,7 +70,6 @@ export function getCountryByName(name: string): Country | undefined {
 
 export function getCountryDisplayName(nameNL: string, lang: "nl" | "en" = "nl"): string {
   if (lang === "nl") return nameNL;
-  // Clean emoji flag prefix if present e.g. "🇳🇱 Nederland" -> "Nederland"
   const cleanName = nameNL.replace(/^[^\w\säöüéèáóúñçÅåØøÆæÀ-ÿ]+/, "").trim();
   const found = UEFA_COUNTRIES.find(
     (c) => c.name.toLowerCase() === cleanName.toLowerCase() || c.name.toLowerCase() === nameNL.toLowerCase()
@@ -79,9 +77,12 @@ export function getCountryDisplayName(nameNL: string, lang: "nl" | "en" = "nl"):
   return found?.nameEn || nameNL;
 }
 
-export function getCountriesWithScarfCounts(category: "new" | "secondhand" | string): Country[] {
+export function getCountriesWithScarfCounts(
+  category: "new" | "secondhand" | string,
+  scarves: Scarf[] = []
+): Country[] {
   return UEFA_COUNTRIES.map((c) => {
-    const count = SEED_SCARVES.filter(
+    const count = scarves.filter(
       (s) => s.category === category && s.country.toLowerCase() === c.name.toLowerCase()
     ).length;
     return { ...c, count };

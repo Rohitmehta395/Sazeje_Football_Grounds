@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { GoalDetailView } from "./GoalDetailView";
 import { getGoals, getGoalById } from "@/lib/data";
 
+export const dynamicParams = true;
+
 export interface GoalDetailPageProps {
   params: Promise<{
     goalId: string;
@@ -10,7 +12,7 @@ export interface GoalDetailPageProps {
 }
 
 export async function generateStaticParams() {
-  const goals = getGoals();
+  const goals = await getGoals();
   return goals.map((goal) => ({
     goalId: goal.id,
   }));
@@ -18,7 +20,7 @@ export async function generateStaticParams() {
 
 export default async function GoalDetailPage({ params }: GoalDetailPageProps) {
   const { goalId } = await params;
-  const goal = getGoalById(goalId);
+  const goal = await getGoalById(goalId);
 
   if (!goal) {
     notFound();

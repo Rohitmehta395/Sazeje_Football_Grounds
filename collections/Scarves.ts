@@ -9,6 +9,44 @@ export const Scarves: CollectionConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        try {
+          const { revalidatePath } = await import('next/cache')
+          revalidatePath('/scarves')
+          if (doc?.category) {
+            revalidatePath(`/scarves/${doc.category}`)
+            if (doc?.country) {
+              revalidatePath(
+                `/scarves/${doc.category}/${encodeURIComponent(doc.country)}`
+              )
+            }
+          }
+        } catch {
+          // Safe catch during static builds/scripts
+        }
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        try {
+          const { revalidatePath } = await import('next/cache')
+          revalidatePath('/scarves')
+          if (doc?.category) {
+            revalidatePath(`/scarves/${doc.category}`)
+            if (doc?.country) {
+              revalidatePath(
+                `/scarves/${doc.category}/${encodeURIComponent(doc.country)}`
+              )
+            }
+          }
+        } catch {
+          // Safe catch during static builds/scripts
+        }
+      },
+    ],
+  },
   fields: [
     {
       name: 'category',

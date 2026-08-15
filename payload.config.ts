@@ -28,7 +28,9 @@ export default buildConfig({
   plugins: [
     cloudinaryStorage({
       collections: {
-        media: true,
+        media: {
+          deleteFromCloudinary: true,
+        },
       },
       cloudConfig: {
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'placeholder_cloud_name',

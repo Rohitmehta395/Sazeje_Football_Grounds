@@ -9,6 +9,42 @@ export const Goals: CollectionConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        try {
+          const { revalidatePath } = await import('next/cache')
+          revalidatePath('/about')
+          if (doc?.number) {
+            revalidatePath(`/about/goals/${doc.number}`)
+            revalidatePath(`/about/goals/doel${doc.number}`)
+          }
+          if (doc?.id) {
+            revalidatePath(`/about/goals/${doc.id}`)
+          }
+        } catch {
+          // Safe catch during static builds/scripts
+        }
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        try {
+          const { revalidatePath } = await import('next/cache')
+          revalidatePath('/about')
+          if (doc?.number) {
+            revalidatePath(`/about/goals/${doc.number}`)
+            revalidatePath(`/about/goals/doel${doc.number}`)
+          }
+          if (doc?.id) {
+            revalidatePath(`/about/goals/${doc.id}`)
+          }
+        } catch {
+          // Safe catch during static builds/scripts
+        }
+      },
+    ],
+  },
   fields: [
     {
       name: 'number',

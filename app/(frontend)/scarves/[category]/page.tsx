@@ -1,7 +1,7 @@
 import * as React from "react";
 import { notFound } from "next/navigation";
 import { ScarfCategoryDirectoryView } from "./ScarfCategoryDirectoryView";
-import { getCountriesWithScarfCounts } from "@/lib/data";
+import { getCountriesWithScarfCounts, getScarves } from "@/lib/data";
 
 export interface ScarfCategoryPageProps {
   params: Promise<{
@@ -20,7 +20,8 @@ export default async function ScarfCategoryPage({ params }: ScarfCategoryPagePro
     notFound();
   }
 
-  const countries = getCountriesWithScarfCounts(category);
+  const scarves = await getScarves({ category });
+  const countries = getCountriesWithScarfCounts(category, scarves);
 
   return (
     <ScarfCategoryDirectoryView category={category} countries={countries} />

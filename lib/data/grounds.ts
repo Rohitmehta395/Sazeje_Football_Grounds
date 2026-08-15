@@ -1,220 +1,123 @@
 import { Ground } from "@/types";
+import { getPayload } from "payload";
+import config from "@payload-config";
 
-export const SEED_GROUNDS: Ground[] = [
-  {
-    id: "g1",
-    name: "Camp Nou",
-    club: "FC Barcelona",
-    country: "Spanje",
-    competition: "La Liga",
-    lat: 41.3809,
-    lng: 2.1228,
-    description: "Een van de grootste stadions van Europa, met een adembenemende drie-laags tribune.",
-    story: "Aankomst twee uur voor aftrap om de sfeer rond het stadion mee te maken. De laatste bocht van de metro naar buiten, en dan opent het stadion zich in volle omvang. Binnen overweldigt de schaal: drie ringen tribunes die tot in de wolken lijken te reiken. Bij de aftrap golft het geluid van boven naar beneden.",
-    matchInfo: "FC Barcelona — Girona FC, 3-1",
-    visitDate: "2025-03-14",
-    extra: "Tip: koop het stadiontoegangsbewijs vooraf online, de rij aan de kassa is enorm.",
-    images: [
-      "https://picsum.photos/seed/campnou1/600/400",
-      "https://picsum.photos/seed/campnou2/600/400",
-      "https://picsum.photos/seed/campnou3/600/400",
-    ],
-    photo: "https://picsum.photos/seed/campnoumain/700/500",
-    dateAdded: "2025-03-15",
-  },
-  {
-    id: "g2",
-    name: "Anfield",
-    club: "Liverpool FC",
-    country: "Engeland",
-    competition: "Premier League",
-    lat: 53.4308,
-    lng: -2.9608,
-    description: "Thuis van The Kop, waar 'You'll Never Walk Alone' voor de aftrap door het stadion galmt.",
-    story: "Al vanaf Anfield Road hoor je de fans zingen. Binnen is het Kop-vak een muur van geluid. Het moment vlak voor aftrap, als het hele stadion het clublied zingt, is iets wat je zelf moet meemaken om te geloven.",
-    matchInfo: "Liverpool FC — Everton FC, 2-0",
-    visitDate: "2025-01-20",
-    extra: "Het Anfield-museum en de stadiontour zijn de moeite waard als je vroeg bent.",
-    images: [
-      "https://picsum.photos/seed/anfield1/600/400",
-      "https://picsum.photos/seed/anfield2/600/400",
-    ],
-    photo: "https://picsum.photos/seed/anfieldmain/700/500",
-    dateAdded: "2025-01-21",
-  },
-  {
-    id: "g3",
-    name: "Signal Iduna Park",
-    club: "Borussia Dortmund",
-    country: "Duitsland",
-    competition: "Bundesliga",
-    lat: 51.4926,
-    lng: 7.4518,
-    description: "Thuis van de Gele Muur, de grootste staantribune van Europa.",
-    story: "De Gele Muur zien vullen vanaf de eerste minuut is een spektakel op zich. Duizenden sjaals gaan de lucht in bij de clubhymne, en het stadion trilt letterlijk mee met het gezang.",
-    matchInfo: "Borussia Dortmund — RB Leipzig, 1-1",
-    visitDate: "2024-11-02",
-    extra: "Kaartjes voor de Südtribüne zijn schaars — vroeg boeken is een must.",
-    images: [
-      "https://picsum.photos/seed/dortmund1/600/400",
-      "https://picsum.photos/seed/dortmund2/600/400",
-      "https://picsum.photos/seed/dortmund3/600/400",
-    ],
-    photo: "https://picsum.photos/seed/dortmundmain/700/500",
-    dateAdded: "2024-11-03",
-  },
-  {
-    id: "g4",
-    name: "Johan Cruijff ArenA",
-    club: "Ajax",
-    country: "Nederland",
-    competition: "Eredivisie",
-    lat: 52.3143,
-    lng: 4.9416,
-    description: "Modern stadion met schuifdak, thuisbasis van Ajax.",
-    story: "Een efficiënte reis vanaf station Bijlmer ArenA, direct het stadion in zicht. De akoestiek onder het dak zorgt voor een verrassend luide sfeer, ook bij een doordeweekse competitiewedstrijd.",
-    matchInfo: "Ajax — FC Twente, 2-2",
-    visitDate: "2024-09-28",
-    extra: "De ArenA Boulevard heeft genoeg eetgelegenheden voor en na de wedstrijd.",
-    images: [
-      "https://picsum.photos/seed/ajax1/600/400",
-      "https://picsum.photos/seed/ajax2/600/400",
-    ],
-    photo: "https://picsum.photos/seed/ajaxmain/700/500",
-    dateAdded: "2024-09-29",
-  },
-  {
-    id: "g5",
-    name: "San Siro",
-    club: "AC Milan / Inter",
-    country: "Italië",
-    competition: "Serie A",
-    lat: 45.4781,
-    lng: 9.124,
-    description: "Iconisch stadion gedeeld door twee grootmachten, met karakteristieke torens.",
-    story: "De spiraalvormige torens aan de buitenkant maken San Siro herkenbaar van ver. Binnen is het geluid rauwer dan verwacht — een San Siro-avond voelt als theater met tweeduizend jaar traditie in de lucht.",
-    matchInfo: "AC Milan — Juventus, 1-2",
-    visitDate: "2024-04-11",
-    extra: "Bezoek ook het museum onder de tribune voor de clubgeschiedenis van beide ploegen.",
-    images: [
-      "https://picsum.photos/seed/sansiro1/600/400",
-      "https://picsum.photos/seed/sansiro2/600/400",
-    ],
-    photo: "https://picsum.photos/seed/sansiromain/700/500",
-    dateAdded: "2024-04-12",
-  },
-  {
-    id: "g6",
-    name: "Jan Breydelstadion",
-    club: "Club Brugge",
-    country: "België",
-    competition: "Jupiler Pro League",
-    lat: 51.195,
-    lng: 3.18,
-    description: "Compact en luidruchtig stadion in het hart van Vlaanderen.",
-    story: "Kleiner dan de andere gronds op deze lijst, maar met een intimiteit die je dichter bij het veld brengt. De harde kern zingt het hele duel door, zelfs bij een achterstand.",
-    matchInfo: "Club Brugge — KAA Gent, 2-1",
-    visitDate: "2024-02-18",
-    extra: "Vlak bij het station, dus goed te combineren met een dagje Brugge.",
-    images: [
-      "https://picsum.photos/seed/brugge1/600/400",
-      "https://picsum.photos/seed/brugge2/600/400",
-    ],
-    photo: "https://picsum.photos/seed/bruggemain/700/500",
-    dateAdded: "2024-02-19",
-  },
-  {
-    id: "g7",
-    name: "Allianz Arena",
-    club: "Bayern München",
-    country: "Duitsland",
-    competition: "Bundesliga",
-    lat: 48.2188,
-    lng: 11.6247,
-    description: "Het opblaasbandje van München, oplichtend in clubkleuren op wedstrijddagen.",
-    story: "Al vanaf de metro-uitgang zie je de gevel oplichten in rood. Binnen is alles strak georganiseerd, van de rondlopende catering tot de vloeiende instroom — Duitse stadionlogistiek op zijn best, met net zoveel sfeer als efficiëntie.",
-    matchInfo: "Bayern München — VfB Stuttgart, 4-0",
-    visitDate: "2024-08-24",
-    extra: "Neem de U6 richting Fröttmaning, de wandeling naar het stadion is een attractie op zich.",
-    images: [
-      "https://picsum.photos/seed/allianz1/600/400",
-      "https://picsum.photos/seed/allianz2/600/400",
-    ],
-    photo: "https://picsum.photos/seed/allianzmain/700/500",
-    dateAdded: "2024-08-25",
-  },
-  {
-    id: "g8",
-    name: "Estádio da Luz",
-    club: "SL Benfica",
-    country: "Portugal",
-    competition: "Primeira Liga",
-    lat: 38.7527,
-    lng: -9.1846,
-    description: "Het 'Stadion van het Licht', met een dakconstructie die het hele veld bedekt.",
-    story: "De adelaar die voor aftrap een ronde over het veld vliegt, is alleen al de reis waard. De akoestiek onder het overkapte dak zorgt dat elk doelpunt met een enorme dreun binnenkomt.",
-    matchInfo: "SL Benfica — FC Porto, 1-1",
-    visitDate: "2023-12-03",
-    extra: "Combineer het bezoek met het clubmuseum onder de hoofdtribune.",
-    images: [
-      "https://picsum.photos/seed/benfica1/600/400",
-      "https://picsum.photos/seed/benfica2/600/400",
-    ],
-    photo: "https://picsum.photos/seed/benficamain/700/500",
-    dateAdded: "2023-12-04",
-  },
-  {
-    id: "g9",
-    name: "De Kuip",
-    club: "Feyenoord",
-    country: "Nederland",
-    competition: "Eredivisie",
-    lat: 51.8935,
-    lng: 4.5233,
-    description: "Klassiek Nederlands stadion zonder hoeken, waar de tribunes bovenop het veld staan.",
-    story: "Geen enkele hoek in de constructie, waardoor elke tribune het gevoel geeft bovenop de actie te zitten. Bij een avondwedstrijd zorgt het geluid van 'Hand in Hand' voor kippenvel, ongeacht welke club je zelf steunt.",
-    matchInfo: "Feyenoord — FC Utrecht, 3-0",
-    visitDate: "2023-10-22",
-    extra: "Koop een sjaal bij de kraampjes rond het stadion, niet bij de officiële shop — goedkoper en net zo origineel.",
-    images: [
-      "https://picsum.photos/seed/kuip1/600/400",
-      "https://picsum.photos/seed/kuip2/600/400",
-    ],
-    photo: "https://picsum.photos/seed/kuipmain/700/500",
-    dateAdded: "2023-10-23",
-  },
-  {
-    id: "g10",
-    name: "Stade Vélodrome",
-    club: "Olympique Marseille",
-    country: "Frankrijk",
-    competition: "Ligue 1",
-    lat: 43.2697,
-    lng: 5.3958,
-    description: "Open, winderig stadion aan de Middellandse Zee met een van de luidruchtigste aanhangen van Frankrijk.",
-    story: "De wind vanaf zee waait dwars door het stadion, wat de sfeer alleen maar ruiger maakt. Het Virage Sud blijft van de eerste tot de laatste minuut in beweging — bengaals vuur incluis.",
-    matchInfo: "Olympique Marseille — OGC Nice, 2-1",
-    visitDate: "2023-05-14",
-    extra: "Ga vroeg voor het stadion aankomen, de sfeer buiten begint al uren voor aftrap.",
-    images: [
-      "https://picsum.photos/seed/marseille1/600/400",
-      "https://picsum.photos/seed/marseille2/600/400",
-    ],
-    photo: "https://picsum.photos/seed/marseillemain/700/500",
-    dateAdded: "2023-05-15",
-  },
-];
+function mapPayloadGround(doc: any): Ground {
+  const photoUrl =
+    typeof doc.photo === "object" && doc.photo?.url
+      ? doc.photo.url
+      : typeof doc.photo === "string"
+      ? doc.photo
+      : "";
 
-export function getGrounds(): Ground[] {
-  return SEED_GROUNDS;
+  const images = Array.isArray(doc.images)
+    ? doc.images
+        .map((item: any) =>
+          typeof item?.image === "object" ? item.image?.url : item?.image
+        )
+        .filter(Boolean)
+    : [];
+
+  return {
+    id: doc.slug || String(doc.id),
+    name: doc.name || "",
+    club: doc.club || "",
+    country: doc.country || "",
+    competition: doc.competition || "",
+    lat: Number(doc.lat) || 0,
+    lng: Number(doc.lng) || 0,
+    description: doc.description || "",
+    story: doc.story || "",
+    matchInfo: doc.matchInfo || "",
+    visitDate: doc.visitDate || "",
+    extra: doc.extra || undefined,
+    photo: photoUrl,
+    images: images.length > 0 ? images : photoUrl ? [photoUrl] : [],
+    dateAdded: doc.dateAdded || doc.createdAt || new Date().toISOString(),
+  };
 }
 
-export function getGroundById(id: string): Ground | undefined {
-  return SEED_GROUNDS.find((g) => g.id === id);
+export async function getGrounds(): Promise<Ground[]> {
+  try {
+    const payload = await getPayload({ config });
+    const { docs } = await payload.find({
+      collection: "grounds",
+      where: {
+        published: {
+          equals: true,
+        },
+      },
+      depth: 1,
+      limit: 1000,
+      sort: "-dateAdded",
+    });
+    return docs.map(mapPayloadGround);
+  } catch (error) {
+    console.error("Error fetching grounds from Payload:", error);
+    return [];
+  }
 }
 
-export function getLatestGrounds(limit = 10): Ground[] {
-  return [...SEED_GROUNDS]
-    .sort((a, b) => new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime())
-    .slice(0, limit);
+export async function getGroundById(idOrSlug: string): Promise<Ground | undefined> {
+  try {
+    const payload = await getPayload({ config });
+    const isNum = !isNaN(Number(idOrSlug)) && Number.isInteger(Number(idOrSlug));
+    const { docs } = await payload.find({
+      collection: "grounds",
+      where: {
+        and: [
+          {
+            published: {
+              equals: true,
+            },
+          },
+          {
+            or: [
+              {
+                slug: {
+                  equals: idOrSlug,
+                },
+              },
+              ...(isNum
+                ? [
+                    {
+                      id: {
+                        equals: Number(idOrSlug),
+                      },
+                    },
+                  ]
+                : []),
+            ],
+          },
+        ],
+      },
+      depth: 1,
+      limit: 1,
+    });
+    return docs[0] ? mapPayloadGround(docs[0]) : undefined;
+  } catch (error) {
+    console.error(`Error fetching ground ${idOrSlug} from Payload:`, error);
+    return undefined;
+  }
+}
+
+export async function getLatestGrounds(limit = 10): Promise<Ground[]> {
+  try {
+    const payload = await getPayload({ config });
+    const { docs } = await payload.find({
+      collection: "grounds",
+      where: {
+        published: {
+          equals: true,
+        },
+      },
+      depth: 1,
+      limit,
+      sort: "-dateAdded",
+    });
+    return docs.map(mapPayloadGround);
+  } catch (error) {
+    console.error("Error fetching latest grounds from Payload:", error);
+    return [];
+  }
 }

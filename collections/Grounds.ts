@@ -3,6 +3,8 @@ import type { CollectionConfig } from 'payload'
 function slugify(text: string): string {
   return text
     .toString()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .trim()
     .replace(/\s+/g, '-')
@@ -26,6 +28,42 @@ export const Grounds: CollectionConfig = {
           data.slug = slugify(data.name)
         }
         return data
+      },
+    ],
+    afterChange: [
+      async ({ doc }) => {
+        try {
+          const { revalidatePath } = await import('next/cache')
+          revalidatePath('/')
+          revalidatePath('/grounds')
+          revalidatePath('/map')
+          if (doc?.slug) {
+            revalidatePath(`/grounds/${doc.slug}`)
+          }
+          if (doc?.id) {
+            revalidatePath(`/grounds/${doc.id}`)
+          }
+        } catch {
+          // Safe catch during static builds/scripts
+        }
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        try {
+          const { revalidatePath } = await import('next/cache')
+          revalidatePath('/')
+          revalidatePath('/grounds')
+          revalidatePath('/map')
+          if (doc?.slug) {
+            revalidatePath(`/grounds/${doc.slug}`)
+          }
+          if (doc?.id) {
+            revalidatePath(`/grounds/${doc.id}`)
+          }
+        } catch {
+          // Safe catch during static builds/scripts
+        }
       },
     ],
   },

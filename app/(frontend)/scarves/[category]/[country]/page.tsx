@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { ScarvesCountryBrowseView } from "./ScarvesCountryBrowseView";
 import { getCountries, getCountryByName, getScarves } from "@/lib/data";
 
+export const dynamicParams = true;
+
 export interface ScarfCountryBrowsePageProps {
   params: Promise<{
     category: string;
@@ -26,7 +28,9 @@ export async function generateStaticParams() {
   return paramsList;
 }
 
-export default async function ScarfCountryBrowsePage({ params }: ScarfCountryBrowsePageProps) {
+export default async function ScarfCountryBrowsePage({
+  params,
+}: ScarfCountryBrowsePageProps) {
   const { category, country } = await params;
   const decodedCountryName = decodeURIComponent(country);
 
@@ -35,7 +39,7 @@ export default async function ScarfCountryBrowsePage({ params }: ScarfCountryBro
   }
 
   const countryObj = getCountryByName(decodedCountryName);
-  const scarves = getScarves({ category, country: decodedCountryName });
+  const scarves = await getScarves({ category, country: decodedCountryName });
 
   return (
     <ScarvesCountryBrowseView
