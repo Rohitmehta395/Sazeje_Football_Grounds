@@ -2,6 +2,7 @@ export interface Ground {
   id: string;
   name: string;
   club: string;
+  clubLogo?: string;
   country: string;
   competition: string;
   lat: number;

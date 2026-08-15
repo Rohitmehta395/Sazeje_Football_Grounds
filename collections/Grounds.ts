@@ -94,10 +94,11 @@ export const Grounds: CollectionConfig = {
     },
     {
       name: 'club',
-      type: 'text',
-      required: true,
+      type: 'relationship',
+      relationTo: 'clubs',
+      required: false,
       admin: {
-        description: 'Home club name (e.g. AFC Ajax, FC Barcelona)',
+        description: 'Home club (select or create a Club with logo)',
       },
     },
     {

@@ -18,10 +18,25 @@ function mapPayloadGround(doc: any): Ground {
         .filter(Boolean)
     : [];
 
+  let clubName = "";
+  let clubLogoUrl: string | undefined = undefined;
+
+  if (typeof doc.club === "object" && doc.club !== null) {
+    clubName = doc.club.name || "";
+    if (typeof doc.club.logo === "object" && doc.club.logo !== null) {
+      clubLogoUrl = doc.club.logo.url || undefined;
+    } else if (typeof doc.club.logo === "string") {
+      clubLogoUrl = doc.club.logo;
+    }
+  } else if (typeof doc.club === "string") {
+    clubName = doc.club;
+  }
+
   return {
     id: doc.slug || String(doc.id),
     name: doc.name || "",
-    club: doc.club || "",
+    club: clubName,
+    clubLogo: clubLogoUrl,
     country: doc.country || "",
     competition: doc.competition || "",
     lat: Number(doc.lat) || 0,
@@ -47,7 +62,7 @@ export async function getGrounds(): Promise<Ground[]> {
           equals: true,
         },
       },
-      depth: 1,
+      depth: 2,
       limit: 1000,
       sort: "-dateAdded",
     });
@@ -91,7 +106,7 @@ export async function getGroundById(idOrSlug: string): Promise<Ground | undefine
           },
         ],
       },
-      depth: 1,
+      depth: 2,
       limit: 1,
     });
     return docs[0] ? mapPayloadGround(docs[0]) : undefined;
@@ -111,7 +126,7 @@ export async function getLatestGrounds(limit = 10): Promise<Ground[]> {
           equals: true,
         },
       },
-      depth: 1,
+      depth: 2,
       limit,
       sort: "-dateAdded",
     });

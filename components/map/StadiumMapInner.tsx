@@ -35,13 +35,23 @@ export function StadiumMapInner({
 }: StadiumMapInnerProps) {
   const { t, lang } = useTranslation();
 
-  const createClubMarker = (clubName: string) => {
-    const initials = clubName
-      .split(" ")
-      .map((w) => w[0])
-      .join("")
-      .slice(0, 3)
-      .toUpperCase();
+  const createClubMarker = (clubName: string, clubLogo?: string) => {
+    if (clubLogo) {
+      return L.divIcon({
+        className: "custom-leaflet-marker",
+        html: `<div className="club-marker" style="width:36px;height:36px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;border:2px solid var(--accent);box-shadow:0 3px 8px rgba(0,0,0,0.35);overflow:hidden;padding:3px;"><img src="${clubLogo}" alt="${clubName || "Club logo"}" style="width:100%;height:100%;object-fit:contain;border-radius:50%;" /></div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
+      });
+    }
+
+    const initials =
+      (clubName || "")
+        .split(" ")
+        .map((w) => w[0])
+        .join("")
+        .slice(0, 3)
+        .toUpperCase() || "•";
 
     return L.divIcon({
       className: "custom-leaflet-marker",
@@ -74,7 +84,7 @@ export function StadiumMapInner({
           <Marker
             key={ground.id}
             position={[ground.lat, ground.lng]}
-            icon={createClubMarker(ground.club)}
+            icon={createClubMarker(ground.club, ground.clubLogo)}
           >
             <Popup>
               <div className="p-1 max-w-[220px]">
