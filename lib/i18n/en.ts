@@ -155,11 +155,16 @@ export const en: Translations = {
     labelMessage: "Message",
     messagePlaceholder: "Write your message, question, or swap offer here...",
     submitButton: "Send Message",
+    submittingButton: "Sending...",
     successTitle: "Message Received!",
     successMessage:
       "Thank you for your message. We will get back to you as soon as possible.",
+    sendAnother: "Send another message",
+    errorTitle: "Sending Failed",
+    errorMessage:
+      "An error occurred while sending your message. Please try again later.",
     mailtoNotice:
-      "Note: This form opens your email client with a pre-filled message.",
+      "Note: Messages are sent directly to the SaZeJe Football management.",
   },
 
   // Common UI

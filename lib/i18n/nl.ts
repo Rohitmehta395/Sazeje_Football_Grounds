@@ -153,11 +153,16 @@ export const nl = {
     labelMessage: "Bericht",
     messagePlaceholder: "Schrijf hier je bericht, vraag of ruilvoorstel...",
     submitButton: "Verstuur bericht",
+    submittingButton: "Versturen...",
     successTitle: "Bericht ontvangen!",
     successMessage:
       "Bedankt voor je bericht. We nemen zo snel mogelijk contact met je op.",
+    sendAnother: "Nog een bericht sturen",
+    errorTitle: "Verzenden mislukt",
+    errorMessage:
+      "Er is een fout opgetreden bij het verzenden van je bericht. Probeer het later opnieuw.",
     mailtoNotice:
-      "Let op: Dit formulier opent je e-mailprogramma met een vooringevuld bericht.",
+      "Let op: Berichten worden rechtstreeks verzonden naar het beheer van SaZeJe Football.",
   },
 
   // Common UI
