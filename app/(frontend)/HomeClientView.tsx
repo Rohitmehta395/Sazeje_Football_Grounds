@@ -10,9 +10,14 @@ import { Ground } from "@/types";
 export interface HomeClientViewProps {
   grounds: Ground[];
   latestGrounds: Ground[];
+  scarvesCount?: number;
 }
 
-export function HomeClientView({ grounds, latestGrounds }: HomeClientViewProps) {
+export function HomeClientView({
+  grounds,
+  latestGrounds,
+  scarvesCount,
+}: HomeClientViewProps) {
   const { t } = useTranslation();
 
   const groundsCount = grounds.length;
@@ -26,6 +31,7 @@ export function HomeClientView({ grounds, latestGrounds }: HomeClientViewProps) 
         groundsCount={groundsCount}
         countriesCount={countriesCount}
         competitionsCount={competitionsCount}
+        scarvesCount={scarvesCount}
       />
 
       {/* Main Content Wrap */}

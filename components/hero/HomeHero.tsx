@@ -17,6 +17,7 @@ export interface HomeHeroProps {
   groundsCount?: number;
   countriesCount?: number;
   competitionsCount?: number;
+  scarvesCount?: number;
 }
 
 export function HomeHero({
@@ -28,6 +29,7 @@ export function HomeHero({
   groundsCount = 48,
   countriesCount = 14,
   competitionsCount = 12,
+  scarvesCount = 6,
 }: HomeHeroProps) {
   const { t } = useTranslation();
 
@@ -37,7 +39,7 @@ export function HomeHero({
   const stats: HeroStat[] = [
     { value: groundsCount, label: t.home.statsGrounds },
     { value: countriesCount, label: t.home.statsCountries },
-    { value: competitionsCount, label: t.home.statsScarves },
+    { value: scarvesCount, label: t.home.statsScarves },
   ];
 
   return (
