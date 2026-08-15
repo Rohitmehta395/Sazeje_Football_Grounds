@@ -16,7 +16,6 @@ export interface HomeHeroProps {
   topbarLabel?: string;
   groundsCount?: number;
   countriesCount?: number;
-  competitionsCount?: number;
   scarvesCount?: number;
 }
 
@@ -28,7 +27,6 @@ export function HomeHero({
   topbarLabel = "SAZEJE FOOTBALL ARCHIVE • 2024–2026",
   groundsCount = 48,
   countriesCount = 14,
-  competitionsCount = 12,
   scarvesCount = 6,
 }: HomeHeroProps) {
   const { t } = useTranslation();

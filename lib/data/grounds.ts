@@ -2,53 +2,62 @@ import { Ground } from "@/types";
 import { getPayload } from "payload";
 import config from "@payload-config";
 
-function mapPayloadGround(doc: any): Ground {
+function mapPayloadGround(doc: Record<string, unknown>): Ground {
+  const photo = doc.photo as Record<string, unknown> | string | undefined;
   const photoUrl =
-    typeof doc.photo === "object" && doc.photo?.url
-      ? doc.photo.url
-      : typeof doc.photo === "string"
-      ? doc.photo
+    typeof photo === "object" && photo && "url" in photo && typeof photo.url === "string"
+      ? photo.url
+      : typeof photo === "string"
+      ? photo
       : "";
 
-  const images = Array.isArray(doc.images)
-    ? doc.images
-        .map((item: any) =>
-          typeof item?.image === "object" ? item.image?.url : item?.image
-        )
-        .filter(Boolean)
+  const rawImages = doc.images as Array<Record<string, unknown>> | undefined;
+  const images = Array.isArray(rawImages)
+    ? rawImages
+        .map((item) => {
+          const img = item?.image as Record<string, unknown> | string | undefined;
+          return typeof img === "object" && img && "url" in img && typeof img.url === "string"
+            ? img.url
+            : typeof img === "string"
+            ? img
+            : undefined;
+        })
+        .filter((url): url is string => Boolean(url))
     : [];
 
   let clubName = "";
   let clubLogoUrl: string | undefined = undefined;
 
-  if (typeof doc.club === "object" && doc.club !== null) {
-    clubName = doc.club.name || "";
-    if (typeof doc.club.logo === "object" && doc.club.logo !== null) {
-      clubLogoUrl = doc.club.logo.url || undefined;
-    } else if (typeof doc.club.logo === "string") {
-      clubLogoUrl = doc.club.logo;
+  const club = doc.club as Record<string, unknown> | string | undefined;
+  if (typeof club === "object" && club !== null) {
+    clubName = typeof club.name === "string" ? club.name : "";
+    const logo = club.logo as Record<string, unknown> | string | undefined;
+    if (typeof logo === "object" && logo !== null && "url" in logo && typeof logo.url === "string") {
+      clubLogoUrl = logo.url;
+    } else if (typeof logo === "string") {
+      clubLogoUrl = logo;
     }
-  } else if (typeof doc.club === "string") {
-    clubName = doc.club;
+  } else if (typeof club === "string") {
+    clubName = club;
   }
 
   return {
-    id: doc.slug || String(doc.id),
-    name: doc.name || "",
+    id: String(doc.slug || doc.id),
+    name: String(doc.name || ""),
     club: clubName,
     clubLogo: clubLogoUrl,
-    country: doc.country || "",
-    competition: doc.competition || "",
+    country: String(doc.country || ""),
+    competition: String(doc.competition || ""),
     lat: Number(doc.lat) || 0,
     lng: Number(doc.lng) || 0,
-    description: doc.description || "",
-    story: doc.story || "",
-    matchInfo: doc.matchInfo || "",
-    visitDate: doc.visitDate || "",
-    extra: doc.extra || undefined,
+    description: String(doc.description || ""),
+    story: String(doc.story || ""),
+    matchInfo: String(doc.matchInfo || ""),
+    visitDate: String(doc.visitDate || ""),
+    extra: doc.extra ? String(doc.extra) : undefined,
     photo: photoUrl,
     images: images.length > 0 ? images : photoUrl ? [photoUrl] : [],
-    dateAdded: doc.dateAdded || doc.createdAt || new Date().toISOString(),
+    dateAdded: String(doc.dateAdded || doc.createdAt || new Date().toISOString()),
   };
 }
 

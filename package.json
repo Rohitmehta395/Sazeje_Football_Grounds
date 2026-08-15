@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:db": "node scripts/test-db-connection.mjs"
+    "seed": "tsx scripts/migrate-content.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

@@ -1,4 +1,4 @@
-import { getPayload } from "payload";
+import { Payload, getPayload } from "payload";
 import configPromise from "../payload.config";
 
 // Source Seed Data (10 Grounds, 6 Scarves, 8 Goals)
@@ -384,7 +384,7 @@ const SOURCE_GOALS = [
 const imageCache = new Map<string, number>();
 
 async function uploadImageFromUrl(
-  payload: any,
+  payload: Payload,
   url: string,
   alt: string,
   filenamePrefix: string
@@ -427,8 +427,9 @@ async function uploadImageFromUrl(
     console.log(
       `  Uploaded to Media ID: ${mediaDoc.id} (Cloudinary: ${mediaDoc.cloudinary_public_id || "ok"})`
     );
-    imageCache.set(url, mediaDoc.id);
-    return mediaDoc.id;
+    const mediaId = Number(mediaDoc.id);
+    imageCache.set(url, mediaId);
+    return mediaId;
   } catch (err) {
     console.error(`  Error uploading image ${url}:`, err);
     return null;
@@ -455,7 +456,7 @@ async function migrateContent() {
         description: g.description,
         targetCount: g.targetCount,
         currentCount: g.currentCount,
-        status: g.status as any,
+        status: g.status as "in_progress" | "completed",
         details: g.details,
       },
     });
@@ -479,7 +480,7 @@ async function migrateContent() {
     const createdScarf = await payload.create({
       collection: "scarves",
       data: {
-        category: s.category as any,
+        category: s.category as "new" | "secondhand",
         club: s.club,
         country: s.country,
         type: s.type,

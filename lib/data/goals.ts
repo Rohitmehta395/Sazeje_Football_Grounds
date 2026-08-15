@@ -2,16 +2,16 @@ import { Goal } from "@/types";
 import { getPayload } from "payload";
 import config from "@payload-config";
 
-function mapPayloadGoal(doc: any): Goal {
+function mapPayloadGoal(doc: Record<string, unknown>): Goal {
   return {
     id: String(doc.number ?? doc.id),
     number: Number(doc.number) || 0,
-    title: doc.title || "",
-    description: doc.description || "",
+    title: String(doc.title || ""),
+    description: String(doc.description || ""),
     targetCount: Number(doc.targetCount) || 0,
     currentCount: Number(doc.currentCount) || 0,
     status: (doc.status as "in_progress" | "completed") || "in_progress",
-    details: doc.details || undefined,
+    details: doc.details ? String(doc.details) : undefined,
   };
 }
 

@@ -50,8 +50,10 @@ export function ContactForm() {
         }
         setServerError(result.error || t.contact.errorMessage);
       }
-    } catch (err: any) {
-      setServerError(err?.message || t.contact.errorMessage);
+    } catch (err: unknown) {
+      setServerError(
+        err instanceof Error ? err.message : t.contact.errorMessage
+      );
     }
   };
 

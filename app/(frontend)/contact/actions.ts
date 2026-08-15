@@ -76,7 +76,7 @@ export async function sendContactEmail(
       process.env.RESEND_FROM_EMAIL ||
       "SaZeJe Football <onboarding@resend.dev>";
 
-    const { data: resendData, error: resendError } = await resend.emails.send({
+    const { error: resendError } = await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
       replyTo: email,
@@ -106,13 +106,14 @@ export async function sendContactEmail(
       success: true,
       message: "Email sent successfully!",
     };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Unexpected error sending email via Resend:", err);
     return {
       success: false,
       error:
-        err?.message ||
-        "An unexpected error occurred while sending your message.",
+        err instanceof Error
+          ? err.message
+          : "An unexpected error occurred while sending your message.",
     };
   }
 }

@@ -22,7 +22,6 @@ export function HomeClientView({
 
   const groundsCount = grounds.length;
   const countriesCount = new Set(grounds.map((g) => g.country)).size;
-  const competitionsCount = new Set(grounds.map((g) => g.competition)).size;
 
   return (
     <div>
@@ -30,7 +29,6 @@ export function HomeClientView({
       <HomeHero
         groundsCount={groundsCount}
         countriesCount={countriesCount}
-        competitionsCount={competitionsCount}
         scarvesCount={scarvesCount}
       />
 

@@ -9,35 +9,36 @@ export interface ScarfFilterParams {
   search?: string;
 }
 
-function mapPayloadScarf(doc: any): Scarf {
+function mapPayloadScarf(doc: Record<string, unknown>): Scarf {
+  const photo = doc.photo as Record<string, unknown> | string | undefined;
   const photoUrl =
-    typeof doc.photo === "object" && doc.photo?.url
-      ? doc.photo.url
-      : typeof doc.photo === "string"
-      ? doc.photo
+    typeof photo === "object" && photo && "url" in photo && typeof photo.url === "string"
+      ? photo.url
+      : typeof photo === "string"
+      ? photo
       : "";
 
   return {
     id: String(doc.id),
     category: doc.category as ScarfCategory,
-    club: doc.club || "",
-    country: doc.country || "",
-    type: doc.type || "",
-    description: doc.description || "",
-    stadium: doc.stadium || "",
-    founded: doc.founded || "",
-    trophies: doc.trophies || "",
-    funFact: doc.funFact || "",
-    purchaseDate: doc.purchaseDate || undefined,
+    club: String(doc.club || ""),
+    country: String(doc.country || ""),
+    type: String(doc.type || ""),
+    description: String(doc.description || ""),
+    stadium: String(doc.stadium || ""),
+    founded: String(doc.founded || ""),
+    trophies: String(doc.trophies || ""),
+    funFact: String(doc.funFact || ""),
+    purchaseDate: doc.purchaseDate ? String(doc.purchaseDate) : undefined,
     photo: photoUrl,
-    dateAdded: doc.dateAdded || doc.createdAt || new Date().toISOString(),
+    dateAdded: String(doc.dateAdded || doc.createdAt || new Date().toISOString()),
   };
 }
 
 export async function getScarves(filter?: ScarfFilterParams): Promise<Scarf[]> {
   try {
     const payload = await getPayload({ config });
-    const where: any = {};
+    const where: Record<string, Record<string, unknown>> = {};
 
     if (filter?.category) {
       where.category = { equals: filter.category };
