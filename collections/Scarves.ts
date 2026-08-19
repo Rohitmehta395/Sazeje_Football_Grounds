@@ -89,8 +89,36 @@ export const Scarves: CollectionConfig = {
       type: 'textarea',
       required: true,
       admin: {
-        description: 'Scarf design description',
+        description: 'Scarf design description (Dutch)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'descriptionEn',
+          type: 'textarea',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of scarf description',
+          },
+        },
+        {
+          name: 'descriptionEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'stadium',
@@ -113,16 +141,72 @@ export const Scarves: CollectionConfig = {
       type: 'text',
       required: true,
       admin: {
-        description: 'Key honors / trophy summary',
+        description: 'Key honors / trophy summary (Dutch)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'trophiesEn',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of trophy summary',
+          },
+        },
+        {
+          name: 'trophiesEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'funFact',
       type: 'textarea',
       required: true,
       admin: {
-        description: 'Interesting trivia or fun fact about the club/scarf',
+        description: 'Interesting trivia or fun fact about the club/scarf (Dutch)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'funFactEn',
+          type: 'textarea',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of fun fact',
+          },
+        },
+        {
+          name: 'funFactEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'purchaseDate',

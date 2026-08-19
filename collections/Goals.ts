@@ -60,16 +60,72 @@ export const Goals: CollectionConfig = {
       type: 'text',
       required: true,
       admin: {
-        description: 'Goal objective title (e.g. 50 Grounds in Europa, 100 Sjaals)',
+        description: 'Goal objective title (Dutch - e.g. 50 Grounds in Europa, 100 Sjaals)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'titleEn',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of goal title',
+          },
+        },
+        {
+          name: 'titleEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'description',
       type: 'textarea',
       required: true,
       admin: {
-        description: 'Goal description and motivation',
+        description: 'Goal description and motivation (Dutch)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'descriptionEn',
+          type: 'textarea',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of goal description',
+          },
+        },
+        {
+          name: 'descriptionEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       type: 'row',
@@ -113,8 +169,36 @@ export const Goals: CollectionConfig = {
       type: 'textarea',
       required: false,
       admin: {
-        description: 'Extra milestones or notes',
+        description: 'Extra milestones or notes (Dutch)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'detailsEn',
+          type: 'textarea',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of extra milestones/notes',
+          },
+        },
+        {
+          name: 'detailsEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
   ],
 }

@@ -157,32 +157,144 @@ export const Grounds: CollectionConfig = {
       type: 'textarea',
       required: true,
       admin: {
-        description: 'Primary ground description',
+        description: 'Primary ground description (Dutch)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'descriptionEn',
+          type: 'textarea',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation (Auto-translated or edited)',
+          },
+        },
+        {
+          name: 'descriptionEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'story',
       type: 'textarea',
       required: false,
       admin: {
-        description: 'Personal visit story/experience',
+        description: 'Personal visit story/experience (Dutch)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'storyEn',
+          type: 'textarea',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of visit story',
+          },
+        },
+        {
+          name: 'storyEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'matchInfo',
       type: 'textarea',
       required: false,
       admin: {
-        description: 'Match details (e.g. fixture, score, attendance)',
+        description: 'Match details (Dutch - e.g. fixture, score, attendance)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'matchInfoEn',
+          type: 'textarea',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of match details',
+          },
+        },
+        {
+          name: 'matchInfoEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'extra',
       type: 'textarea',
       required: false,
       admin: {
-        description: 'Additional notes or highlights',
+        description: 'Additional notes or highlights (Dutch)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'extraEn',
+          type: 'textarea',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of additional notes',
+          },
+        },
+        {
+          name: 'extraEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'photo',
