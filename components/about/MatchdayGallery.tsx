@@ -36,6 +36,8 @@ function GalleryCard({
 }) {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [hasError, setHasError] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [cursorPos, setCursorPos] = React.useState<{ x: number; y: number } | null>(null);
   const caption = lang === "en" && item.captionEn ? item.captionEn : item.caption;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -43,6 +45,29 @@ function GalleryCard({
       e.preventDefault();
       onOpenLightbox();
     }
+  };
+
+  const updateCursorPosition = (clientX: number, clientY: number, currentTarget: HTMLDivElement) => {
+    const rect = currentTarget.getBoundingClientRect();
+    const rawX = clientX - rect.left;
+    const rawY = clientY - rect.top;
+    const x = Math.max(70, Math.min(rect.width - 70, rawX));
+    setCursorPos({ x, y: rawY });
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsHovered(true);
+    updateCursorPosition(e.clientX, e.clientY, e.currentTarget);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsHovered(true);
+    updateCursorPosition(e.clientX, e.clientY, e.currentTarget);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setCursorPos(null);
   };
 
   const imageSrc = hasError ? "/Hero_Image.jpg" : item.image;
@@ -53,6 +78,11 @@ function GalleryCard({
       tabIndex={0}
       onClick={onOpenLightbox}
       onKeyDown={handleKeyDown}
+      onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
       aria-label={caption || `Gallery photo ${index + 1}`}
       className="group relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-surface-2 shadow-card hover:border-accent/50 hover:shadow-lg transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg animate-in fade-in duration-300"
     >
@@ -80,22 +110,37 @@ function GalleryCard({
       {/* Atmospheric Dark Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent transition-opacity" />
 
-      {/* Quick Expand Badge */}
-      <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-y-1 group-hover:translate-y-0">
-        <Maximize2 className="w-4 h-4" />
+      {/* Dynamic Near-Cursor Hover Tooltip */}
+      <div
+        className={`pointer-events-none absolute z-30 transition-opacity duration-150 select-none ${
+          isHovered ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          left: cursorPos ? `${cursorPos.x}px` : "50%",
+          top: cursorPos ? `${cursorPos.y}px` : "50%",
+          transform: cursorPos
+            ? cursorPos.y < 45
+              ? "translate(-50%, 15px)"
+              : "translate(-50%, -125%)"
+            : "translate(-50%, -50%)",
+        }}
+      >
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white shadow-xl">
+          <Maximize2 className="w-3 h-3 text-accent" />
+          <span className="font-mono text-[10px] uppercase tracking-wider font-semibold text-white whitespace-nowrap">
+            {lang === "en" ? "Click to expand" : "Klik om te vergroten"}
+          </span>
+        </div>
       </div>
 
-      {/* Caption & Indicator at Bottom */}
-      <div className="absolute bottom-0 inset-x-0 p-4 space-y-1">
-        {caption && (
+      {/* Clean Caption at Bottom */}
+      {caption && (
+        <div className="absolute bottom-0 inset-x-0 p-4">
           <p className="font-inter text-sm text-white font-medium leading-snug m-0 line-clamp-2 drop-shadow-md">
             {caption}
           </p>
-        )}
-        <span className="font-mono text-[10px] text-accent uppercase tracking-wider block font-semibold opacity-90">
-          {lang === "en" ? "Click to expand" : "Klik om te vergroten"}
-        </span>
-      </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -227,81 +272,90 @@ export function MatchdayGallery({ items }: MatchdayGalleryProps) {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/92 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 z-[2000] bg-black/95 backdrop-blur-md flex flex-col justify-between animate-in fade-in duration-200"
           onClick={handleClose}
         >
-          <div
-            className="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center"
+          {/* 1. Top Bar: Counter & Close Button (Always visible at top, never cut off) */}
+          <header
+            className="w-full h-16 px-4 sm:px-8 flex items-center justify-between z-30 shrink-0 select-none"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Top Bar: Counter & Close Button */}
-            <div className="w-full flex items-center justify-between pb-3 px-2 text-white">
-              <span className="font-mono text-xs text-white/70">
+            {/* Photo Counter Badge */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-md shadow-sm">
+              <span className="font-mono text-xs text-white/90 font-medium">
                 {activeLightboxIndex! + 1} / {items.length}
               </span>
+            </div>
+
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={handleClose}
+              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center justify-center transition-colors shadow-lg cursor-pointer"
+              aria-label="Close lightbox"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </header>
+
+          {/* 2. Middle Stage: Constrained Image Viewport with Previous/Next controls */}
+          <main
+            className="flex-1 min-h-0 relative w-full flex items-center justify-center px-4 sm:px-16 py-2"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Previous Button (if multiple images) */}
+            {items.length > 1 && (
               <button
                 type="button"
-                onClick={handleClose}
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center justify-center transition-colors shadow-lg cursor-pointer"
-                aria-label="Close lightbox"
+                onClick={handlePrev}
+                className="absolute left-2 sm:left-6 z-30 w-11 h-11 rounded-full bg-black/60 hover:bg-black/85 border border-white/20 text-white flex items-center justify-center transition-colors shadow-xl cursor-pointer"
+                aria-label="Previous photo"
               >
-                <X className="w-5 h-5" />
+                <ChevronLeft className="w-6 h-6" />
               </button>
+            )}
+
+            {/* Image Container strictly constrained to middle stage flex height */}
+            <div className="relative w-full h-full flex items-center justify-center">
+              <img
+                src={lightboxImgError ? "/Hero_Image.jpg" : activeItem.image}
+                alt={activeCaption || "Gallery expanded view"}
+                onError={() => setLightboxImgError(true)}
+                className="max-h-full max-w-full object-contain rounded-xl shadow-2xl select-none"
+              />
             </div>
 
-            {/* Main Stage with Navigation Arrows */}
-            <div className="relative w-full flex items-center justify-center">
-              {/* Previous Button (if multiple images) */}
-              {items.length > 1 && (
-                <button
-                  type="button"
-                  onClick={handlePrev}
-                  className="absolute left-2 sm:-left-12 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white flex items-center justify-center transition-colors shadow-lg cursor-pointer"
-                  aria-label="Previous photo"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-              )}
+            {/* Next Button (if multiple images) */}
+            {items.length > 1 && (
+              <button
+                type="button"
+                onClick={handleNext}
+                className="absolute right-2 sm:right-6 z-30 w-11 h-11 rounded-full bg-black/60 hover:bg-black/85 border border-white/20 text-white flex items-center justify-center transition-colors shadow-xl cursor-pointer"
+                aria-label="Next photo"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            )}
+          </main>
 
-              {/* High-Resolution Modal Image */}
-              <div className="relative w-full max-h-[72vh] flex items-center justify-center rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black/60">
-                <img
-                  src={lightboxImgError ? "/Hero_Image.jpg" : activeItem.image}
-                  alt={activeCaption || "Gallery expanded view"}
-                  onError={() => setLightboxImgError(true)}
-                  className="max-h-[72vh] max-w-full object-contain"
-                />
-              </div>
-
-              {/* Next Button (if multiple images) */}
-              {items.length > 1 && (
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="absolute right-2 sm:-right-12 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white flex items-center justify-center transition-colors shadow-lg cursor-pointer"
-                  aria-label="Next photo"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              )}
-            </div>
-
-            {/* Caption & Navigation Hint */}
-            <div className="mt-4 text-center px-4 max-w-2xl space-y-1">
-              {activeCaption && (
-                <p className="font-inter text-base text-white font-medium m-0 drop-shadow">
-                  {activeCaption}
-                </p>
-              )}
-              {items.length > 1 && (
-                <span className="font-mono text-[11px] text-white/50 block">
-                  {lang === "en"
-                    ? "Use ← and → arrow keys to navigate"
-                    : "Gebruik ← en → pijltjestoetsen om te bladeren"}
-                </span>
-              )}
-            </div>
-          </div>
+          {/* 3. Bottom Bar: Caption & Keyboard Navigation Hints */}
+          <footer
+            className="w-full min-h-[60px] py-3 px-4 sm:px-8 flex flex-col items-center justify-center shrink-0 z-30 text-center select-none"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {activeCaption && (
+              <p className="font-inter text-base sm:text-lg text-white font-medium m-0 max-w-2xl drop-shadow">
+                {activeCaption}
+              </p>
+            )}
+            {items.length > 1 && (
+              <span className="font-mono text-[11px] text-white/50 block mt-1">
+                {lang === "en"
+                  ? "Use ← and → arrow keys to navigate • Esc to close"
+                  : "Gebruik ← en → pijltjestoetsen om te bladeren • Esc om te sluiten"}
+              </span>
+            )}
+          </footer>
         </div>
       )}
     </section>
