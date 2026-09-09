@@ -29,6 +29,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "SaZeJe Football — Voetbalreizen & Sjaalcollectie",
   description: "Persoonlijke reisverslagen van stadionbezoeken en sjaalcollectie door heel Europa.",
+  icons: {
+    icon: "/Sazaje_groundhopping_logo.jpg",
+    shortcut: "/Sazaje_groundhopping_logo.jpg",
+    apple: "/Sazaje_groundhopping_logo.jpg",
+  },
 };
 
 const BLOCKING_INIT_SCRIPT = `(function(){try{var t=document.cookie.match(/(?:^|; )theme=([^;]*)/);var m=t?t[1]:"light";document.documentElement.setAttribute("data-theme",m);var l=document.cookie.match(/(?:^|; )lang=([^;]*)/);var n=l?l[1]:"nl";document.documentElement.setAttribute("data-lang",n);}catch(e){}})();`;

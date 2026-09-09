@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import * as React from "react";
+import Image from "next/image";
 import { PageHero } from "@/components/hero/PageHero";
 import { GoalCard } from "@/components/about/GoalCard";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
@@ -44,7 +45,18 @@ export function AboutClientView({ goals }: AboutClientViewProps) {
           </div>
 
           <div className="space-y-4">
-            <h2 className="font-bebas text-[34px] text-text m-0">{t.about.bioTitle}</h2>
+            <div className="flex items-center gap-3.5">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border border-border shadow-sm flex-shrink-0">
+                <Image
+                  src="/Sazaje_groundhopping_logo.jpg"
+                  alt="SaZeJe Groundhopping Emblem"
+                  fill
+                  sizes="48px"
+                  className="object-cover"
+                />
+              </div>
+              <h2 className="font-bebas text-[34px] text-text m-0">{t.about.bioTitle}</h2>
+            </div>
 
             {lang === "en" && (
               <div className="font-mono text-[11px] text-azg uppercase tracking-[0.06em] bg-surface-2 border border-border px-3 py-1.5 rounded-md inline-block mb-1">

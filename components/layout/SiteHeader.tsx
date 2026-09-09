@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { ThemeToggle } from "./ThemeToggle";
 import { LanguageToggle } from "./LanguageToggle";
 import { MobileNav, NavItem } from "./MobileNav";
@@ -34,9 +35,16 @@ export function SiteHeader({ activeHref }: SiteHeaderProps) {
     <header className="fixed top-0 left-0 right-0 z-[1000] bg-surface/90 border-b border-border backdrop-blur-md">
       <div className="max-w-[1920px] mx-auto px-5 md:px-[40px] h-[72px] flex items-center justify-between gap-4">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-[12px] flex-shrink-0">
-          <div className="w-[38px] h-[38px] rounded-full bg-accent text-white flex items-center justify-center font-bebas text-[18px] flex-shrink-0 shadow-[inset_0_0_0_2px_var(--accent-2)]">
-            SZJ
+        <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
+          <div className="relative w-[42px] h-[42px] rounded-full overflow-hidden border border-border shadow-sm group-hover:scale-105 transition-transform duration-200">
+            <Image
+              src="/Sazaje_groundhopping_logo.jpg"
+              alt="SaZeJe Groundhopping Logo"
+              fill
+              sizes="42px"
+              className="object-cover"
+              priority
+            />
           </div>
           <div className="font-bebas text-[23px] tracking-[0.04em] whitespace-nowrap text-text">
             SaZeJe <span>Football</span>

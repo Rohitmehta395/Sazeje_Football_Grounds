@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { ArrowRight, Compass, Heart, Layers, Quote } from "lucide-react";
 
@@ -16,6 +17,17 @@ export function HomeStorySection() {
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <div className="text-center mb-10">
+          <div className="flex justify-center mb-4">
+            <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-border shadow-md">
+              <Image
+                src="/Sazaje_groundhopping_logo.jpg"
+                alt="SaZeJe Groundhopping Emblem"
+                fill
+                sizes="64px"
+                className="object-cover"
+              />
+            </div>
+          </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-2 border border-border text-azg text-xs font-mono uppercase tracking-wider mb-3">
             <Heart className="w-3.5 h-3.5 text-accent-2" />
             <span>{t.home.storySectionEyebrow}</span>
