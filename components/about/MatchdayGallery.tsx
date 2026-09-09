@@ -34,7 +34,6 @@ function GalleryCard({
   lang: string;
   onOpenLightbox: () => void;
 }) {
-  const [isLoaded, setIsLoaded] = React.useState(false);
   const [hasError, setHasError] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
   const [cursorPos, setCursorPos] = React.useState<{ x: number; y: number } | null>(null);
@@ -84,27 +83,16 @@ function GalleryCard({
       onFocus={() => setIsHovered(true)}
       onBlur={() => setIsHovered(false)}
       aria-label={caption || `Gallery photo ${index + 1}`}
-      className="group relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-surface-2 shadow-card hover:border-accent/50 hover:shadow-lg transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg animate-in fade-in duration-300"
+      className="group relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-surface-2 shadow-card hover:border-accent/50 hover:shadow-lg transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg"
     >
-      {/* Skeleton / Placeholder Pulse */}
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-surface-2 animate-pulse" />
-      )}
-
       {/* Main Image */}
       <img
         src={imageSrc}
         alt={caption || `Gallery photo ${index + 1}`}
         loading="lazy"
         decoding="async"
-        onLoad={() => setIsLoaded(true)}
-        onError={() => {
-          setHasError(true);
-          setIsLoaded(true);
-        }}
-        className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        onError={() => setHasError(true)}
+        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
       />
 
       {/* Atmospheric Dark Gradient Overlay */}
