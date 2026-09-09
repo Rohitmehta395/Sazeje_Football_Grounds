@@ -268,10 +268,7 @@ export function SiteFooter() {
             <span>
               © {currentYear} SaZeJe Football. {t.footer.copyright}
             </span>
-            <span className="hidden sm:inline text-border">•</span>
-            <span className="font-mono text-[11px] text-text-muted/80">
-              {t.footer.privacy}
-            </span>
+
           </div>
 
           <button
