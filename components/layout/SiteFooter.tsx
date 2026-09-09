@@ -33,7 +33,7 @@ export function SiteFooter() {
           </p>
         </div>
 
-        <p className="m-0 font-mono text-xs text-azg text-center sm:text-right">
+        <p className="m-0 font-mono text-xs text-text-muted text-center sm:text-right">
           {t.footer.tagline}
         </p>
       </div>

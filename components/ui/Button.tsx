@@ -22,7 +22,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "inline-flex items-center justify-center gap-2 rounded-[8px] font-semibold font-inter cursor-pointer transition-colors duration-150 border-none outline-none disabled:opacity-50 disabled:cursor-not-allowed";
 
     const variantStyles = {
-      primary: "bg-accent text-white hover:opacity-90",
+      primary: "bg-accent text-white dark:text-zinc-950 hover:opacity-90",
       ghost:
         "bg-transparent text-text border border-border hover:bg-surface-2 hover:border-accent",
     };

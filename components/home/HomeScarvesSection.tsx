@@ -6,7 +6,8 @@ import { Scarf } from "@/types";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName } from "@/lib/data/countries";
 import { formatDate } from "@/lib/utils/formatDate";
-import { ArrowRight, Building2, Calendar, Sparkles, Trophy } from "lucide-react";
+import { ArrowRight, Building2, Calendar, Trophy } from "lucide-react";
+import { ScarfIcon } from "@/components/ui/Icons";
 
 export interface HomeScarvesSectionProps {
   scarves: Scarf[];
@@ -26,7 +27,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-4 border-b border-border">
         <div>
           <div className="font-mono text-xs uppercase tracking-widest text-azg font-semibold flex items-center gap-1.5 mb-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-accent-2" />
+            <ScarfIcon className="w-3.5 h-3.5 text-accent-2" />
             <span>SJAALCOLLECTIE ARCHIEF</span>
           </div>
           <h2 className="font-bebas text-3xl sm:text-4xl text-text m-0 tracking-wide">
