@@ -10,11 +10,19 @@ export interface NavItem {
   href: string;
 }
 
+export interface MobileNavSocial {
+  key: string;
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+}
+
 export interface MobileNavProps {
   isOpen: boolean;
   onClose?: () => void;
   items: NavItem[];
   activeHref?: string;
+  socials?: MobileNavSocial[];
 }
 
 export function MobileNav({
@@ -22,6 +30,7 @@ export function MobileNav({
   onClose,
   items,
   activeHref,
+  socials,
 }: MobileNavProps) {
   const pathname = usePathname();
   const currentPath = activeHref ?? pathname;
@@ -64,6 +73,24 @@ export function MobileNav({
           </Link>
         );
       })}
+
+      {socials && socials.length > 0 && (
+        <div className="flex items-center gap-2 pt-3 mt-1 border-t border-border/60 w-full">
+          {socials.map((item) => (
+            <a
+              key={item.key}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              className="w-[34px] h-[34px] rounded-full bg-surface-2 border border-border/50 flex items-center justify-center text-text-muted hover:bg-accent-soft hover:text-accent transition-colors"
+              aria-label={item.label}
+            >
+              {item.icon}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
+

@@ -14,8 +14,13 @@ import {
   Trophy,
 } from "lucide-react";
 import { FootballPitchIcon, ScarfIcon } from "@/components/ui/Icons";
+import type { SocialLinks } from "@/types";
 
-export function SiteFooter() {
+export interface SiteFooterProps {
+  socialLinks?: SocialLinks | null;
+}
+
+export function SiteFooter({ socialLinks }: SiteFooterProps = {}) {
   const currentYear = new Date().getFullYear();
   const { t } = useTranslation();
 
@@ -33,6 +38,158 @@ export function SiteFooter() {
     { label: t.nav.about, href: "/about" },
     { label: t.nav.contact, href: "/contact" },
   ];
+
+  const hasConfiguredSocials = Boolean(
+    socialLinks &&
+      Object.values(socialLinks).some(
+        (val) => typeof val === "string" && val.trim().length > 0
+      )
+  );
+
+  const fallbackFooterSocials = [
+    {
+      key: "instagram",
+      href: "https://instagram.com",
+      label: "Instagram",
+      icon: (
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="1" />
+        </svg>
+      ),
+    },
+    {
+      key: "x",
+      href: "https://x.com",
+      label: "X (Twitter)",
+      icon: (
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z" />
+        </svg>
+      ),
+    },
+    {
+      key: "facebook",
+      href: "https://facebook.com",
+      label: "Facebook",
+      icon: (
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+        </svg>
+      ),
+    },
+  ];
+
+  const configuredFooterSocials = [
+    socialLinks?.instagram?.trim()
+      ? {
+          key: "instagram",
+          href: socialLinks.instagram.trim(),
+          label: "Instagram",
+          icon: (
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" />
+            </svg>
+          ),
+        }
+      : null,
+    socialLinks?.x?.trim()
+      ? {
+          key: "x",
+          href: socialLinks.x.trim(),
+          label: "X (Twitter)",
+          icon: (
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z" />
+            </svg>
+          ),
+        }
+      : null,
+    socialLinks?.facebook?.trim()
+      ? {
+          key: "facebook",
+          href: socialLinks.facebook.trim(),
+          label: "Facebook",
+          icon: (
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+          ),
+        }
+      : null,
+    socialLinks?.youtube?.trim()
+      ? {
+          key: "youtube",
+          href: socialLinks.youtube.trim(),
+          label: "YouTube",
+          icon: (
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+              <polygon points="10 15 15 12 10 9 10 15" fill="currentColor" stroke="none" />
+            </svg>
+          ),
+        }
+      : null,
+  ].filter((item): item is NonNullable<typeof item> => Boolean(item));
+
+  const visibleFooterSocials = hasConfiguredSocials
+    ? configuredFooterSocials
+    : fallbackFooterSocials;
+
 
   return (
     <footer className="border-t border-border bg-surface text-text mt-20 transition-colors">
@@ -70,62 +227,18 @@ export function SiteFooter() {
 
             {/* Social & Contact Shortcuts */}
             <div className="pt-1 flex items-center gap-2">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent transition-all duration-200"
-                aria-label="Facebook"
-              >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {visibleFooterSocials.map((item) => (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent transition-all duration-200"
+                  aria-label={item.label}
                 >
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                </svg>
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent transition-all duration-200"
-                aria-label="Instagram"
-              >
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="1" />
-                </svg>
-              </a>
-              <a
-                href="https://x.com"
-                target="_blank"
-                rel="noreferrer"
-                className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent transition-all duration-200"
-                aria-label="X (Twitter)"
-              >
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z" />
-                </svg>
-              </a>
+                  {item.icon}
+                </a>
+              ))}
               <Link
                 href="/contact"
                 className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent transition-all duration-200"

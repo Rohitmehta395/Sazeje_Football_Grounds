@@ -64,4 +64,18 @@ export const Settings: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [
+      async () => {
+        try {
+          const { revalidatePath } = await import('next/cache')
+          revalidatePath('/', 'layout')
+          revalidatePath('/')
+        } catch {
+          // Safe catch during static builds/scripts
+        }
+      },
+    ],
+  },
 }
+
