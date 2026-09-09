@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 
 export interface PageHeroProps {
   eyebrow?: string;
@@ -11,13 +12,21 @@ export function PageHero({
   eyebrow = "GROUNDHOPPING LOG",
   title,
   description,
-  backgroundImage = "https://picsum.photos/seed/sazeje-page-hero/1600/600",
+  backgroundImage = "/Hero_Image.jpg",
 }: PageHeroProps) {
   return (
-    <div
-      className="relative h-[230px] flex flex-col bg-cover bg-center text-white rounded-b-radius overflow-hidden mb-0"
-      style={{ backgroundImage: `url('${backgroundImage}')` }}
-    >
+    <div className="relative h-[230px] flex flex-col text-white rounded-b-radius overflow-hidden mb-0">
+      {/* Background Stadium Photo */}
+      <div className="absolute inset-0">
+        <Image
+          src={backgroundImage}
+          alt={title}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(20,25,20,0.15)] to-[rgba(15,18,15,0.78)] z-0" />
 

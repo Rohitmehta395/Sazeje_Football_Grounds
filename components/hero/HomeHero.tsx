@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import {
   ArrowRight,
@@ -69,7 +70,7 @@ export function HomeHero({
   eyebrow,
   title = "SAZEJE FOOTBALL ARCHIVE",
   description,
-  backgroundImage = "https://picsum.photos/seed/sazeje-hero/1600/900",
+  backgroundImage = "/Hero_Image.jpg",
   topbarLabel = "SAZEJE FOOTBALL ARCHIVE • 2024–2026",
   groundsCount = 10,
   countriesCount = 7,
@@ -108,10 +109,16 @@ export function HomeHero({
   return (
     <div className="relative min-h-[calc(100vh-72px)] flex flex-col justify-between text-white overflow-hidden border-b border-border/40">
       {/* Background Stadium Photo */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('${backgroundImage}')` }}
-      />
+      <div className="absolute inset-0">
+        <Image
+          src={backgroundImage}
+          alt={heroTitle || "Hero stadium background"}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
       {/* Transparent Dark Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,20,16,0.35)] via-[rgba(15,20,16,0.55)] to-[rgba(15,20,16,0.85)] z-0" />
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-bg via-bg/40 to-transparent z-10 pointer-events-none" />
