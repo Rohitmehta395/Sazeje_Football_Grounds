@@ -22,7 +22,19 @@ export const en: Translations = {
     tagline:
       "Personal travel logs of stadium visits and scarf collection across Europe.",
     copyright: "All rights reserved.",
-    privacy: "Built with Next.js & Tailwind CSS.",
+    privacy: "Independent groundhopping & scarf archive.",
+    aboutHeading: "About SaZeJe",
+    aboutText:
+      "An independent groundhopping and scarf archive documenting authentic European football culture, stadium architecture, and matchday travelogues.",
+    navHeading: "Navigation",
+    collectionsHeading: "Collections & Regions",
+    communityHeading: "Community & Swap",
+    communityText:
+      "Have a stadium tip, a travel story, or a rare scarf you'd like to trade? We'd love to hear from you.",
+    ctaShareTip: "Submit Tip or Scarf",
+    statusBadge: "Exploring Europe • Season 2024–2026",
+    backToTop: "Back to top",
+    disclaimer: "Non-commercial supporter archive. All rights reserved.",
   },
 
   // Home Page

@@ -20,7 +20,19 @@ export const nl = {
     tagline:
       "Persoonlijke reisverslagen van stadionbezoeken en sjaalcollectie door heel Europa.",
     copyright: "Alle rechten voorbehouden.",
-    privacy: "Gebouwd met Next.js & Tailwind CSS.",
+    privacy: "Onafhankelijk groundhopping- en sjaalarchief.",
+    aboutHeading: "Over SaZeJe",
+    aboutText:
+      "Een onafhankelijk groundhopping- en sjaalarchief gewijd aan authentieke Europese voetbalcultuur, stadionarchitectuur en unieke wedstrijdverhalen.",
+    navHeading: "Navigatie",
+    collectionsHeading: "Collecties & Regio's",
+    communityHeading: "Community & Ruil",
+    communityText:
+      "Heb je een stadionaanbeveling, een reisverhaal of wil je een sjaal ruilen? Laat gerust van je horen.",
+    ctaShareTip: "Tip of Sjaal Insturen",
+    statusBadge: "Onderweg in Europa • Seizoen 2024–2026",
+    backToTop: "Naar boven",
+    disclaimer: "Niet-commercieel supportersarchief. Alle rechten voorbehouden.",
   },
 
   // Home Page
