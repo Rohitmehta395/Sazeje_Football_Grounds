@@ -17,8 +17,8 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
   const [activeCategory, setActiveCategory] = React.useState<"all" | "new" | "secondhand">("all");
 
   const filteredScarves = React.useMemo(() => {
-    if (activeCategory === "all") return scarves.slice(0, 6);
-    return scarves.filter((s) => s.category === activeCategory).slice(0, 6);
+    if (activeCategory === "all") return scarves.slice(0, 3);
+    return scarves.filter((s) => s.category === activeCategory).slice(0, 3);
   }, [scarves, activeCategory]);
 
   return (
