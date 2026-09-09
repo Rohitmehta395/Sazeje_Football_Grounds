@@ -47,7 +47,10 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: BLOCKING_INIT_SCRIPT }} />
       </head>
-      <body className="min-h-screen bg-bg text-text transition-colors duration-200 flex flex-col justify-between">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen bg-bg text-text transition-colors duration-200 flex flex-col justify-between"
+      >
         <LanguageProvider>
           <SiteHeader />
           <main className="pt-[72px] flex-1">{children}</main>
