@@ -147,7 +147,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] text-text-muted hover:text-accent transition-colors duration-150 group"
+                    className="inline-flex items-center gap-1.5 text-sm sm:text-[13px] text-text-muted hover:text-accent transition-colors duration-150 group"
                   >
                     <ChevronRight className="w-3 h-3 text-border group-hover:text-accent group-hover:translate-x-0.5 transition-all shrink-0" />
                     <span>{item.label}</span>
