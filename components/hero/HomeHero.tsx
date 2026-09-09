@@ -9,50 +9,7 @@ import {
   Flag,
   Trophy,
 } from "lucide-react";
-
-// Tailored football groundhopping icons
-function FootballPitchIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <rect x="3" y="4" width="18" height="16" rx="2" />
-      <line x1="12" y1="4" x2="12" y2="20" />
-      <circle cx="12" cy="12" r="3" />
-      <path d="M3 8.5h2.5v7H3" />
-      <path d="M21 8.5h-2.5v7H21" />
-    </svg>
-  );
-}
-
-function ScarfIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <rect x="3" y="6" width="18" height="5" rx="1.5" />
-      <line x1="7" y1="6" x2="7" y2="11" />
-      <line x1="12" y1="6" x2="12" y2="11" />
-      <line x1="17" y1="6" x2="17" y2="11" />
-      <path d="M6 11v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-6" />
-      <line x1="6" y1="14.5" x2="11" y2="14.5" />
-      <line x1="7.5" y1="18" x2="7.5" y2="20" />
-      <line x1="9.5" y1="18" x2="9.5" y2="20" />
-    </svg>
-  );
-}
+import { FootballPitchIcon, ScarfIcon } from "@/components/ui/Icons";
 
 export interface HomeHeroProps {
   eyebrow?: string;

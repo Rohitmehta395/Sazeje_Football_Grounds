@@ -4,7 +4,8 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
-import { ArrowRight, Compass, Heart, Layers, Quote } from "lucide-react";
+import { ArrowRight, Compass, Quote } from "lucide-react";
+import { FootballIcon, ScarfIcon } from "@/components/ui/Icons";
 
 export function HomeStorySection() {
   const { t } = useTranslation();
@@ -29,7 +30,7 @@ export function HomeStorySection() {
             </div>
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-2 border border-border text-azg text-xs font-mono uppercase tracking-wider mb-3">
-            <Heart className="w-3.5 h-3.5 text-accent-2" />
+            <Compass className="w-3.5 h-3.5 text-accent-2" />
             <span>{t.home.storySectionEyebrow}</span>
           </div>
 
@@ -51,7 +52,7 @@ export function HomeStorySection() {
           <div className="bg-surface/80 dark:bg-surface/50 p-6 rounded-2xl border border-border/70 shadow-sm flex flex-col justify-between hover:border-azg/50 transition-colors">
             <div>
               <div className="w-10 h-10 rounded-xl bg-azg/10 text-azg flex items-center justify-center mb-4">
-                <Heart className="w-5 h-5" />
+                <FootballIcon className="w-5 h-5" />
               </div>
               <h3 className="font-bebas text-xl text-text m-0 mb-2">
                 {t.home.storyPillar1Title}
@@ -65,7 +66,7 @@ export function HomeStorySection() {
           <div className="bg-surface/80 dark:bg-surface/50 p-6 rounded-2xl border border-border/70 shadow-sm flex flex-col justify-between hover:border-azg/50 transition-colors">
             <div>
               <div className="w-10 h-10 rounded-xl bg-accent-2/15 text-accent-2 flex items-center justify-center mb-4">
-                <Layers className="w-5 h-5" />
+                <ScarfIcon className="w-5 h-5" />
               </div>
               <h3 className="font-bebas text-xl text-text m-0 mb-2">
                 {t.home.storyPillar2Title}
