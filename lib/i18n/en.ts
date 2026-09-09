@@ -27,7 +27,12 @@ export const en: Translations = {
     aboutText:
       "An independent groundhopping and scarf archive documenting authentic European football culture, stadium architecture, and matchday travelogues.",
     navHeading: "Navigation",
-    collectionsHeading: "Collections & Regions",
+    statsHeading: "Archive Stats",
+    statsGrounds: "Grounds",
+    statsCountries: "Countries",
+    statsScarves: "Scarves",
+    statsGoals: "Active Goals",
+    viewAllStats: "View Bucketlist & Goals",
     communityHeading: "Community & Swap",
     communityText:
       "Have a stadium tip, a travel story, or a rare scarf you'd like to trade? We'd love to hear from you.",

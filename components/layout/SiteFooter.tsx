@@ -4,8 +4,16 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
-import { ArrowUp, ChevronRight, Compass, Mail, MapPin, Send } from "lucide-react";
-import { ScarfIcon } from "@/components/ui/Icons";
+import {
+  ArrowUp,
+  ChevronRight,
+  Compass,
+  Flag,
+  Mail,
+  Send,
+  Trophy,
+} from "lucide-react";
+import { FootballPitchIcon, ScarfIcon } from "@/components/ui/Icons";
 
 export function SiteFooter() {
   const currentYear = new Date().getFullYear();
@@ -26,15 +34,6 @@ export function SiteFooter() {
     { label: t.nav.contact, href: "/contact" },
   ];
 
-  const collectionLinks = [
-    { label: "Nederland Grounds", href: "/grounds?country=Netherlands" },
-    { label: "Duitsland Grounds", href: "/grounds?country=Germany" },
-    { label: "Engeland Grounds", href: "/grounds?country=England" },
-    { label: "België Grounds", href: "/grounds?country=Belgium" },
-    { label: t.home.featuredScarvesTitle, href: "/scarves" },
-    { label: t.home.goalsSectionTitle, href: "/about#goals" },
-  ];
-
   return (
     <footer className="border-t border-border bg-surface text-text mt-20 transition-colors">
       {/* Main Footer Grid */}
@@ -42,7 +41,10 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 xl:gap-10">
           {/* Column 1: Brand & Philosophy */}
           <div className="flex flex-col space-y-4">
-            <Link href="/" className="inline-flex items-center gap-3 group h-10">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-3 group h-10"
+            >
               <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border shadow-sm group-hover:scale-105 transition-transform duration-200 shrink-0">
                 <Image
                   src="/Sazaje_groundhopping_logo.jpg"
@@ -75,7 +77,16 @@ export function SiteFooter() {
                 className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent transition-all duration-200"
                 aria-label="Facebook"
               >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                 </svg>
               </a>
@@ -86,7 +97,14 @@ export function SiteFooter() {
                 className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent transition-all duration-200"
                 aria-label="Instagram"
               >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <rect x="3" y="3" width="18" height="18" rx="5" />
                   <circle cx="12" cy="12" r="4" />
                   <circle cx="17.5" cy="6.5" r="1" />
@@ -99,7 +117,12 @@ export function SiteFooter() {
                 className="w-8 h-8 rounded-lg bg-surface-2 border border-border flex items-center justify-center text-text-muted hover:text-accent hover:border-accent transition-all duration-200"
                 aria-label="X (Twitter)"
               >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
                   <path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z" />
                 </svg>
               </a>
@@ -134,25 +157,86 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* Column 3: Collections & Regions */}
+          {/* Column 3: Archive Stats & Milestones */}
           <div className="flex flex-col space-y-4">
             <h3 className="font-bebas text-lg text-text tracking-wider uppercase m-0 flex items-center gap-1.5 h-10 whitespace-nowrap">
-              <MapPin className="w-4 h-4 text-accent shrink-0" />
-              <span>{t.footer.collectionsHeading}</span>
+              <Trophy className="w-4 h-4 text-accent shrink-0" />
+              <span>{t.footer.statsHeading}</span>
             </h3>
-            <ul className="space-y-2.5 list-none p-0 m-0">
-              {collectionLinks.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] text-text-muted hover:text-accent transition-colors duration-150 group"
-                  >
-                    <ChevronRight className="w-3 h-3 text-border group-hover:text-accent group-hover:translate-x-0.5 transition-all shrink-0" />
-                    <span className="truncate">{item.label}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+
+            {/* Box-free Open 2x2 Stats Grid */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-4 pt-0.5">
+              <Link
+                href="/grounds"
+                className="group flex flex-col space-y-1 transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <FootballPitchIcon className="w-4 h-4 text-azg shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-bebas text-2xl text-text leading-none group-hover:text-azg transition-colors">
+                    10+
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] text-text-muted uppercase tracking-wider group-hover:text-text transition-colors">
+                  {t.footer.statsGrounds}
+                </span>
+              </Link>
+
+              <Link
+                href="/map"
+                className="group flex flex-col space-y-1 transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <Flag className="w-4 h-4 text-azg shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-bebas text-2xl text-text leading-none group-hover:text-azg transition-colors">
+                    7
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] text-text-muted uppercase tracking-wider group-hover:text-text transition-colors">
+                  {t.footer.statsCountries}
+                </span>
+              </Link>
+
+              <Link
+                href="/scarves"
+                className="group flex flex-col space-y-1 transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <ScarfIcon className="w-4 h-4 text-accent-2 shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-bebas text-2xl text-text leading-none group-hover:text-accent-2 transition-colors">
+                    6
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] text-text-muted uppercase tracking-wider group-hover:text-text transition-colors">
+                  {t.footer.statsScarves}
+                </span>
+              </Link>
+
+              <Link
+                href="/about#goals"
+                className="group flex flex-col space-y-1 transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <Trophy className="w-4 h-4 text-accent shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-bebas text-2xl text-accent leading-none group-hover:scale-105 transition-transform">
+                    8
+                  </span>
+                </div>
+                <span className="font-mono text-[11px] text-text-muted uppercase tracking-wider group-hover:text-text transition-colors">
+                  {t.footer.statsGoals}
+                </span>
+              </Link>
+            </div>
+
+            {/* Quick Link to Roadmap & Goals */}
+            <div className="pt-1">
+              <Link
+                href="/about#goals"
+                className="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-accent font-mono transition-colors group"
+              >
+                <span>{t.footer.viewAllStats}</span>
+                <ChevronRight className="w-3 h-3 text-border group-hover:text-accent group-hover:translate-x-0.5 transition-all shrink-0" />
+              </Link>
+            </div>
           </div>
 
           {/* Column 4: Community & Scarf Swap */}
@@ -181,9 +265,13 @@ export function SiteFooter() {
       <div className="border-t border-border/80 bg-surface-2/40">
         <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-text-muted font-inter">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
-            <span>© {currentYear} SaZeJe Football. {t.footer.copyright}</span>
+            <span>
+              © {currentYear} SaZeJe Football. {t.footer.copyright}
+            </span>
             <span className="hidden sm:inline text-border">•</span>
-            <span className="font-mono text-[11px] text-text-muted/80">{t.footer.privacy}</span>
+            <span className="font-mono text-[11px] text-text-muted/80">
+              {t.footer.privacy}
+            </span>
           </div>
 
           <button

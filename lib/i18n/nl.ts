@@ -25,7 +25,12 @@ export const nl = {
     aboutText:
       "Een onafhankelijk groundhopping- en sjaalarchief gewijd aan authentieke Europese voetbalcultuur, stadionarchitectuur en unieke wedstrijdverhalen.",
     navHeading: "Navigatie",
-    collectionsHeading: "Collecties & Regio's",
+    statsHeading: "Archief Statistieken",
+    statsGrounds: "Stadions",
+    statsCountries: "Landen",
+    statsScarves: "Sjaals",
+    statsGoals: "Doelen Actief",
+    viewAllStats: "Bekijk Bucketlist & Doelen",
     communityHeading: "Community & Ruil",
     communityText:
       "Heb je een stadionaanbeveling, een reisverhaal of wil je een sjaal ruilen? Laat gerust van je horen.",
