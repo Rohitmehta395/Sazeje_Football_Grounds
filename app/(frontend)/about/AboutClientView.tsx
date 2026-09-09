@@ -3,91 +3,401 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { PageHero } from "@/components/hero/PageHero";
 import { GoalCard } from "@/components/about/GoalCard";
+import { MatchdayGallery } from "@/components/about/MatchdayGallery";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
-import { Goal } from "@/types";
+import { Goal, AboutContent } from "@/types";
+import {
+  Compass,
+  Globe,
+  Target,
+  Clock,
+  ArrowRight,
+  Flame,
+  MessageSquare,
+  Sparkles,
+} from "lucide-react";
 
-export interface AboutClientViewProps {
-  goals: Goal[];
+export interface AboutStats {
+  groundsCount: number;
+  countriesCount: number;
+  scarvesCount: number;
+  completedGoalsCount: number;
+  totalGoalsCount: number;
 }
 
-export function AboutClientView({ goals }: AboutClientViewProps) {
+export interface AboutClientViewProps {
+  aboutContent: AboutContent;
+  goals: Goal[];
+  stats: AboutStats;
+}
+
+export function AboutClientView({
+  aboutContent,
+  goals,
+  stats,
+}: AboutClientViewProps) {
   const { t, lang } = useTranslation();
+  const [goalFilter, setGoalFilter] = React.useState<"all" | "in_progress" | "completed">("all");
+
+  // Localized Hero Content
+  const heroTitle = lang === "en" && aboutContent.hero.titleEn ? aboutContent.hero.titleEn : aboutContent.hero.title;
+  const heroSubtitle = lang === "en" && aboutContent.hero.subtitleEn ? aboutContent.hero.subtitleEn : aboutContent.hero.subtitle;
+  const heroEyebrow = lang === "en" && aboutContent.hero.eyebrowEn ? aboutContent.hero.eyebrowEn : aboutContent.hero.eyebrow;
+  const heroImage = aboutContent.hero.heroImage || "/Hero_Image.jpg";
+
+  // Localized Story Content
+  const bioBadge = lang === "en" && aboutContent.story.badgeEn ? aboutContent.story.badgeEn : aboutContent.story.badge;
+  const bioTitle = lang === "en" && aboutContent.story.titleEn ? aboutContent.story.titleEn : aboutContent.story.title;
+  const bioLead = lang === "en" && aboutContent.story.leadEn ? aboutContent.story.leadEn : aboutContent.story.lead;
+
+  // Localized Media
+  const portraitImage = aboutContent.media.portraitImage || "/Sazaje_groundhopping_logo.jpg";
+  const secondaryImage = aboutContent.media.secondaryImage || "/Hero_Image.jpg";
+  const tertiaryImage = aboutContent.media.tertiaryImage || "/cta-stadium-scarves.jpg";
+
+  // Filter goals
+  const filteredGoals = React.useMemo(() => {
+    if (goalFilter === "completed") {
+      return goals.filter((g) => g.status === "completed" || (g.currentCount >= g.targetCount));
+    }
+    if (goalFilter === "in_progress") {
+      return goals.filter((g) => g.status !== "completed" && g.currentCount < g.targetCount);
+    }
+    return goals;
+  }, [goals, goalFilter]);
+
+  // Overall Goals progress calculation
+  const overallProgressPercentage = React.useMemo(() => {
+    if (!goals.length) return 0;
+    const totalPerc = goals.reduce((acc, g) => {
+      return acc + Math.min(100, Math.round((g.currentCount / g.targetCount) * 100));
+    }, 0);
+    return Math.round(totalPerc / goals.length);
+  }, [goals]);
+
+  // Icon mapper helper for pillars
+  const renderPillarIcon = (iconName: string) => {
+    switch (iconName) {
+      case "stadium":
+        return <Compass className="w-5 h-5 text-accent" />;
+      case "scarf":
+        return <Sparkles className="w-5 h-5 text-accent-2" />;
+      case "map":
+        return <Globe className="w-5 h-5 text-azg" />;
+      case "target":
+        return <Target className="w-5 h-5 text-accent" />;
+      case "passion":
+      default:
+        return <Flame className="w-5 h-5 text-azg" />;
+    }
+  };
 
   return (
-    <div>
+    <div className="space-y-12 sm:space-y-16 pb-20">
+      {/* 1. Page Hero */}
       <PageHero
-        title={t.about.heroTitle}
-        description={t.about.heroSubtitle}
-        eyebrow={t.about.heroEyebrow}
+        title={heroTitle}
+        description={heroSubtitle}
+        eyebrow={heroEyebrow}
+        backgroundImage={heroImage}
       />
 
-      <div className="max-w-[1160px] mx-auto px-[24px] pt-[40px] pb-[70px] space-y-16">
-        {/* About Bio Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-[40px] items-start">
-          <div className="grid grid-cols-2 gap-3">
-            <img
-              src="https://picsum.photos/seed/groundhopper-main/700/500"
-              alt="Portret op een tribune"
-              className="col-span-2 w-full h-[260px] object-cover rounded-xl border border-border shadow-card"
-            />
-            <img
-              src="https://picsum.photos/seed/groundhopper-2/400/300"
-              alt="Bij een stadionpoort"
-              className="w-full h-[140px] object-cover rounded-lg border border-border shadow-card"
-            />
-            <img
-              src="https://picsum.photos/seed/groundhopper-3/400/300"
-              alt="Met sjaal op de tribune"
-              className="w-full h-[140px] object-cover rounded-lg border border-border shadow-card"
-            />
+      <div className="max-w-[1160px] mx-auto px-4 sm:px-6 space-y-16 pt-8 sm:pt-10">
+        {/* 2. The Groundhopper Story & Media Collage */}
+        <section aria-label="About the Groundhopper" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Left Column: Visual Showcase Collage */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="relative rounded-2xl overflow-hidden border border-border shadow-card bg-surface group">
+              <div className="relative w-full h-[300px] sm:h-[340px] overflow-hidden">
+                <img
+                  src={secondaryImage}
+                  alt="Groundhopping matchday atmosphere"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              </div>
+
+              {/* Floating Groundhopper Avatar / Logo Overlay */}
+              <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3.5 bg-surface/90 backdrop-blur-md border border-border/80 p-3 rounded-xl shadow-lg">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-accent shrink-0 shadow-md">
+                  <Image
+                    src={portraitImage}
+                    alt="SaZeJe Groundhopper Emblem"
+                    fill
+                    sizes="48px"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <span className="font-bebas text-xl text-text leading-none block truncate">
+                    SaZeJe Football
+                  </span>
+                  <span className="font-mono text-[11px] text-azg uppercase tracking-wider block truncate">
+                    European Groundhopper & Collector
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Secondary Photo Strip */}
+            <div className="grid grid-cols-2 gap-3.5">
+              <div className="relative h-[150px] rounded-xl overflow-hidden border border-border shadow-card group">
+                <img
+                  src={tertiaryImage}
+                  alt="Football scarves archive"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-0 inset-x-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
+                  <span className="font-mono text-[10px] text-white uppercase tracking-wider block">
+                    {lang === "en" ? "Scarf Collection" : "Sjaalcollectie"}
+                  </span>
+                </div>
+              </div>
+
+              <div className="relative h-[150px] rounded-xl overflow-hidden border border-border shadow-card group">
+                <img
+                  src={portraitImage}
+                  alt="Groundhopper badge and insignia"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute bottom-0 inset-x-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
+                  <span className="font-mono text-[10px] text-white uppercase tracking-wider block">
+                    {lang === "en" ? "Official Insignia" : "Officieel Embleem"}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quote Card */}
+            {aboutContent.story.quote && (
+              <div className="bg-surface border border-border rounded-2xl p-5 shadow-card relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-accent/5 rounded-full blur-xl pointer-events-none" />
+                <p className="font-inter italic text-sm text-text-muted leading-relaxed m-0 mb-2">
+                  &ldquo;{aboutContent.story.quote}&rdquo;
+                </p>
+                {aboutContent.story.quoteAuthor && (
+                  <span className="font-mono text-[11px] text-accent uppercase tracking-widest font-semibold block">
+                    — {aboutContent.story.quoteAuthor}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
 
-          <div className="space-y-4">
-            <div className="flex items-center gap-3.5">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden border border-border shadow-sm flex-shrink-0">
-                <Image
-                  src="/Sazaje_groundhopping_logo.jpg"
-                  alt="SaZeJe Groundhopping Emblem"
-                  fill
-                  sizes="48px"
-                  className="object-cover"
-                />
-              </div>
-              <h2 className="font-bebas text-[34px] text-text m-0">{t.about.bioTitle}</h2>
+          {/* Right Column: Editorial Bio & Content */}
+          <div className="lg:col-span-7 space-y-6">
+            <div>
+              {bioBadge && (
+                <div className="font-mono text-xs uppercase tracking-widest text-azg font-bold flex items-center gap-1.5 mb-2">
+                  <Compass className="w-3.5 h-3.5 text-accent" />
+                  <span>{bioBadge}</span>
+                </div>
+              )}
+
+              <h2 className="font-bebas text-3xl sm:text-5xl text-text m-0 tracking-wide leading-tight">
+                {bioTitle}
+              </h2>
             </div>
 
             {lang === "en" && (
-              <div className="font-mono text-[11px] text-azg uppercase tracking-[0.06em] bg-surface-2 border border-border px-3 py-1.5 rounded-md inline-block mb-1">
+              <div className="font-mono text-[11px] text-azg uppercase tracking-[0.06em] bg-surface-2 border border-border px-3 py-1.5 rounded-md inline-block">
                 {t.common.originalDutchNotice}
               </div>
             )}
 
-            <p className="font-inter text-[15px] text-text-muted leading-[1.75] m-0">
-              {t.about.bioParagraph1}
-            </p>
-            <p className="font-inter text-[15px] text-text-muted leading-[1.75] m-0">
-              {t.about.bioParagraph2}
-            </p>
-          </div>
-        </div>
+            {/* Editorial Lead Highlight */}
+            {bioLead && (
+              <p className="font-inter text-base sm:text-lg text-text font-medium leading-relaxed border-l-2 border-accent pl-4 my-4">
+                {bioLead}
+              </p>
+            )}
 
-        {/* Goals Section */}
-        <section>
-          <div className="mb-[26px] pb-[16px] border-b border-border">
-            <h2 className="font-bebas text-[34px] leading-tight text-text m-0">
-              {t.about.goalsTitle}
-            </h2>
-            <p className="font-inter text-[13.5px] text-text-muted m-0">
-              {t.about.goalsSubtitle}
-            </p>
+            {/* Dynamic Paragraphs from Payload CMS */}
+            <div className="space-y-4 font-inter text-[15px] text-text-muted leading-relaxed">
+              {aboutContent.story.paragraphs.map((p, idx) => {
+                const text = lang === "en" && p.paragraphEn ? p.paragraphEn : p.paragraph;
+                return (
+                  <p key={p.id || idx} className="m-0">
+                    {text}
+                  </p>
+                );
+              })}
+            </div>
+
+            {/* Groundhopping Pillars / Philosophy */}
+            {aboutContent.pillars && aboutContent.pillars.length > 0 && (
+              <div className="pt-4 border-t border-border space-y-3">
+                <span className="font-mono text-xs uppercase tracking-widest text-text-muted font-bold block mb-3">
+                  {lang === "en" ? "Groundhopping Philosophy" : "De SaZeJe Filosofie"}
+                </span>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                  {aboutContent.pillars.map((pillar, idx) => {
+                    const title = lang === "en" && pillar.titleEn ? pillar.titleEn : pillar.title;
+                    const desc = lang === "en" && pillar.descriptionEn ? pillar.descriptionEn : pillar.description;
+                    return (
+                      <div
+                        key={pillar.id || idx}
+                        className="bg-surface border border-border rounded-xl p-4 shadow-sm hover:border-accent/40 transition-colors"
+                      >
+                        <div className="mb-2">
+                          {renderPillarIcon(pillar.icon)}
+                        </div>
+                        <h3 className="font-bebas text-lg text-text m-0 mb-1 leading-tight">
+                          {title}
+                        </h3>
+                        <p className="font-inter text-xs text-text-muted m-0 line-clamp-3 leading-relaxed">
+                          {desc}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* 3. Matchday & Grounds Gallery Section */}
+        {aboutContent.media.gallery && aboutContent.media.gallery.length > 0 && (
+          <MatchdayGallery items={aboutContent.media.gallery} />
+        )}
+
+        {/* 4. Personal Goals Section */}
+        <section id="goals" className="scroll-mt-24 pt-4 border-t border-border space-y-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <div className="font-mono text-xs uppercase tracking-widest text-azg font-bold flex items-center gap-1.5 mb-1.5">
+                <Target className="w-3.5 h-3.5 text-accent" />
+                <span>{lang === "en" ? "MILESTONES & BUCKETLIST" : "MIJLPALEN & BUCKETLIST"}</span>
+              </div>
+              <h2 className="font-bebas text-3xl sm:text-4xl text-text m-0 tracking-wide">
+                {t.about.goalsTitle}
+              </h2>
+              <p className="font-inter text-sm text-text-muted m-0 mt-1 max-w-2xl">
+                {t.about.goalsSubtitle}
+              </p>
+            </div>
+
+            {/* Filter Tabs */}
+            <div className="flex items-center gap-1 bg-surface border border-border p-1 rounded-xl shrink-0 self-start md:self-auto">
+              <button
+                type="button"
+                onClick={() => setGoalFilter("all")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+                  goalFilter === "all"
+                    ? "bg-accent text-white shadow-sm"
+                    : "text-text-muted hover:text-text"
+                }`}
+              >
+                {lang === "en" ? "All" : "Alle"} ({goals.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setGoalFilter("in_progress")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+                  goalFilter === "in_progress"
+                    ? "bg-accent text-white shadow-sm"
+                    : "text-text-muted hover:text-text"
+                }`}
+              >
+                {t.about.statusInProgress} ({goals.filter(g => g.status !== "completed" && g.currentCount < g.targetCount).length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setGoalFilter("completed")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all ${
+                  goalFilter === "completed"
+                    ? "bg-accent text-white shadow-sm"
+                    : "text-text-muted hover:text-text"
+                }`}
+              >
+                {t.about.statusCompleted} ({stats.completedGoalsCount})
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px]">
-            {goals.map((goal) => (
+          {/* Overall Progress Banner */}
+          <div className="bg-surface border border-border rounded-2xl p-5 shadow-card flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div className="space-y-1 w-full sm:w-auto">
+              <div className="flex items-center gap-2">
+                <span className="font-bebas text-2xl text-text m-0">
+                  {lang === "en" ? "Cumulative Goals Progress" : "Totale Voortgang Doelen"}
+                </span>
+                <span className="font-mono text-xs text-azg font-bold px-2 py-0.5 rounded-full bg-azg/10 border border-azg/20">
+                  {overallProgressPercentage}%
+                </span>
+              </div>
+              <p className="font-inter text-xs text-text-muted m-0">
+                {lang === "en"
+                  ? `${stats.completedGoalsCount} of ${stats.totalGoalsCount} personal milestones fully achieved`
+                  : `${stats.completedGoalsCount} van de ${stats.totalGoalsCount} persoonlijke doelstellingen voltooid`}
+              </p>
+            </div>
+
+            <div className="w-full sm:w-64 shrink-0 space-y-1.5">
+              <div className="w-full bg-surface-2 h-3 rounded-full overflow-hidden border border-border/40 p-[1px]">
+                <div
+                  className="bg-azg h-full rounded-full transition-all duration-700 shadow-[0_0_10px_rgba(46,139,132,0.3)]"
+                  style={{ width: `${overallProgressPercentage}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Goals Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {filteredGoals.map((goal) => (
               <GoalCard key={goal.id} goal={goal} href={`/about/goals/${goal.id}`} />
             ))}
+          </div>
+
+          {filteredGoals.length === 0 && (
+            <div className="text-center py-12 border border-dashed border-border rounded-2xl bg-surface/50">
+              <Clock className="w-8 h-8 text-text-muted mx-auto mb-2 opacity-60" />
+              <p className="font-inter text-sm text-text-muted m-0">
+                {lang === "en" ? "No goals match the selected filter." : "Geen doelen gevonden voor deze filter."}
+              </p>
+            </div>
+          )}
+        </section>
+
+        {/* 5. Community & Collaboration Banner */}
+        <section aria-label="Community CTA" className="bg-surface-2/70 border border-border rounded-3xl p-6 sm:p-10 shadow-card flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+          <div className="space-y-2 max-w-xl text-center md:text-left">
+            <span className="font-mono text-xs uppercase tracking-widest text-accent font-bold">
+              {lang === "en" ? "COMMUNITY & SCARF SWAP" : "COMMUNITY & SJAALS RUILEN"}
+            </span>
+            <h2 className="font-bebas text-2xl sm:text-3xl text-text m-0">
+              {lang === "en"
+                ? "Have a stadium tip, match report, or unique scarf?"
+                : "Heb je een stadiontip, wedstrijdverhaal of unieke sjaal?"}
+            </h2>
+            <p className="font-inter text-xs sm:text-sm text-text-muted m-0 leading-relaxed">
+              {lang === "en"
+                ? "We are always eager to discover rare European grounds, exchange scarves, or hear from fellow passionate groundhoppers."
+                : "We staan altijd open voor unieke Europese stadionaanbevelingen, sjaalruil of verhalen van medegroundhoppers."}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent text-white font-inter text-xs font-semibold hover:bg-accent/90 transition-colors shadow-md"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>{lang === "en" ? "Get in Touch" : "Neem Contact Op"}</span>
+            </Link>
+            <Link
+              href="/scarves"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-surface border border-border text-text font-inter text-xs font-semibold hover:bg-surface-2 transition-colors"
+            >
+              <span>{lang === "en" ? "View Scarves" : "Bekijk Sjaals"}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </section>
       </div>

@@ -7,11 +7,14 @@ function mapPayloadGoal(doc: Record<string, unknown>): Goal {
     id: String(doc.number ?? doc.id),
     number: Number(doc.number) || 0,
     title: String(doc.title || ""),
+    titleEn: doc.titleEn ? String(doc.titleEn) : undefined,
     description: String(doc.description || ""),
+    descriptionEn: doc.descriptionEn ? String(doc.descriptionEn) : undefined,
     targetCount: Number(doc.targetCount) || 0,
     currentCount: Number(doc.currentCount) || 0,
     status: (doc.status as "in_progress" | "completed") || "in_progress",
     details: doc.details ? String(doc.details) : undefined,
+    detailsEn: doc.detailsEn ? String(doc.detailsEn) : undefined,
   };
 }
 
@@ -70,3 +73,20 @@ export async function getGoalById(idOrNumber: string): Promise<Goal | undefined>
     return undefined;
   }
 }
+
+export async function getAdjacentGoals(currentNumber: number): Promise<{
+  prevGoal?: Goal;
+  nextGoal?: Goal;
+  totalGoals: number;
+}> {
+  const allGoals = await getGoals();
+  const sorted = [...allGoals].sort((a, b) => a.number - b.number);
+  const currentIndex = sorted.findIndex((g) => g.number === currentNumber);
+
+  return {
+    prevGoal: currentIndex > 0 ? sorted[currentIndex - 1] : undefined,
+    nextGoal: currentIndex >= 0 && currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : undefined,
+    totalGoals: sorted.length,
+  };
+}
+

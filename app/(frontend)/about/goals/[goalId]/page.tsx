@@ -1,7 +1,7 @@
 import * as React from "react";
 import { notFound } from "next/navigation";
 import { GoalDetailView } from "./GoalDetailView";
-import { getGoals, getGoalById } from "@/lib/data";
+import { getGoals, getGoalById, getAdjacentGoals } from "@/lib/data";
 
 export const dynamicParams = true;
 
@@ -26,5 +26,14 @@ export default async function GoalDetailPage({ params }: GoalDetailPageProps) {
     notFound();
   }
 
-  return <GoalDetailView goal={goal} />;
+  const { prevGoal, nextGoal, totalGoals } = await getAdjacentGoals(goal.number);
+
+  return (
+    <GoalDetailView
+      goal={goal}
+      prevGoal={prevGoal}
+      nextGoal={nextGoal}
+      totalGoals={totalGoals}
+    />
+  );
 }
