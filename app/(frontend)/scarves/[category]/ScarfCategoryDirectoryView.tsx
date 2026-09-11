@@ -22,6 +22,7 @@ import {
   X,
   LayoutGrid,
   Globe2,
+  ChevronDown,
   ArrowRight,
   Flag,
   ArrowRightLeft,
@@ -93,6 +94,13 @@ export function ScarfCategoryDirectoryView({
   // Countries that have at least 1 scarf in this category
   const populatedCountries = React.useMemo(() => {
     return countries.filter((c) => (c.count || 0) > 0);
+  }, [countries]);
+
+  // Other European countries in directory with 0 scarves
+  const otherCountries = React.useMemo(() => {
+    return countries
+      .filter((c) => (c.count || 0) === 0)
+      .sort((a, b) => a.name.localeCompare(b.name));
   }, [countries]);
 
   // Filter scarves in memory (instant sub-millisecond response)
@@ -262,8 +270,56 @@ export function ScarfCategoryDirectoryView({
               )}
             </div>
 
+            {/* Country Dropdown Filter (Visible in Showcase Mode) */}
+            {viewMode === "showcase" && (
+              <div className="relative w-full sm:w-auto min-w-[210px] shrink-0">
+                <Globe2
+                  className={`w-4 h-4 pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 ${
+                    isNew ? "text-azg" : "text-accent-2"
+                  }`}
+                />
+                <select
+                  aria-label={t.scarves.filterCountryAll}
+                  value={selectedCountry}
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                  className={`w-full appearance-none pl-9.5 pr-8 py-2.5 rounded-xl bg-surface border text-xs font-mono font-medium text-text outline-none cursor-pointer shadow-sm transition-all ${
+                    selectedCountry !== "ALL"
+                      ? isNew
+                        ? "border-azg ring-1 ring-azg/40 font-bold"
+                        : "border-accent-2 ring-1 ring-accent-2/40 font-bold"
+                      : "border-border hover:border-border/80 focus:border-accent"
+                  }`}
+                >
+                  <option value="ALL">
+                    {t.scarves.filterCountryAll} ({scarves.length})
+                  </option>
+                  {populatedCountries.map((c) => {
+                    const displayName = getCountryDisplayName(c.name, lang);
+                    return (
+                      <option key={c.name} value={c.name}>
+                        {displayName} ({c.count})
+                      </option>
+                    );
+                  })}
+                  {otherCountries.length > 0 && (
+                    <optgroup label={isEn ? "Other European Countries" : "Overige Europese Landen"}>
+                      {otherCountries.map((c) => {
+                        const displayName = getCountryDisplayName(c.name, lang);
+                        return (
+                          <option key={c.name} value={c.name}>
+                            {displayName} (0)
+                          </option>
+                        );
+                      })}
+                    </optgroup>
+                  )}
+                </select>
+                <ChevronDown className="w-3.5 h-3.5 text-text-muted pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
+              </div>
+            )}
+
             {/* View Mode Switcher Toggle */}
-            <div className="inline-flex items-center p-1 rounded-xl bg-surface border border-border self-start sm:self-auto">
+            <div className="inline-flex items-center p-1 rounded-xl bg-surface border border-border self-start sm:self-auto shrink-0">
               <button
                 type="button"
                 onClick={() => setViewMode("showcase")}
@@ -291,48 +347,6 @@ export function ScarfCategoryDirectoryView({
               </button>
             </div>
           </div>
-
-          {/* Country Quick Filter Pills */}
-          {viewMode === "showcase" && (
-            <div className="flex items-center gap-2 overflow-x-auto py-1 scrollbar-none">
-              <button
-                type="button"
-                onClick={() => setSelectedCountry("ALL")}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium whitespace-nowrap transition-all border cursor-pointer ${
-                  selectedCountry === "ALL"
-                    ? isNew
-                      ? "bg-azg text-black border-azg font-bold shadow-sm"
-                      : "bg-accent-2 text-black border-accent-2 font-bold shadow-sm"
-                    : "bg-surface border-border text-text-muted hover:text-text hover:border-border/80"
-                }`}
-              >
-                <span>{t.scarves.filterCountryAll}</span>
-                <span className="text-[10px] opacity-75">({scarves.length})</span>
-              </button>
-
-              {populatedCountries.map((c) => {
-                const isSelected = selectedCountry === c.name;
-                const displayName = getCountryDisplayName(c.name, lang);
-                return (
-                  <button
-                    key={c.name}
-                    type="button"
-                    onClick={() => setSelectedCountry(isSelected ? "ALL" : c.name)}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono font-medium whitespace-nowrap transition-all border cursor-pointer ${
-                      isSelected
-                        ? isNew
-                          ? "bg-azg text-black border-azg font-bold shadow-sm"
-                          : "bg-accent-2 text-black border-accent-2 font-bold shadow-sm"
-                        : "bg-surface border-border text-text-muted hover:text-text hover:border-border/80"
-                    }`}
-                  >
-                    <span>{displayName}</span>
-                    <span className="text-[10px] opacity-75">({c.count})</span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
         </div>
 
         {/* 5. Main Content Area */}
