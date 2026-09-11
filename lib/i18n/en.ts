@@ -210,6 +210,9 @@ export const en: Translations = {
     countriesWithScarves: "Countries with Scarves in Collection",
     allCountriesList: "All European Countries",
     resetFilters: "Reset filters",
+    loadMore: "Load next {count} scarves",
+    showingCount: "Showing {visible} of {total} scarves",
+    allLoaded: "All scarves loaded",
   },
 
   // Map Page

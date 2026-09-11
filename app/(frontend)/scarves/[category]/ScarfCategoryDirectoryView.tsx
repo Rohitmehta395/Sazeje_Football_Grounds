@@ -23,11 +23,15 @@ import {
   LayoutGrid,
   Globe2,
   ChevronDown,
+  Check,
   ArrowRight,
   Flag,
   ArrowRightLeft,
   Sparkles,
 } from "lucide-react";
+
+const INITIAL_VISIBLE_SCARVES = 9;
+const LOAD_MORE_STEP = 3;
 
 export interface ScarfCategoryDirectoryViewProps {
   category: string;
@@ -62,6 +66,25 @@ export function ScarfCategoryDirectoryView({
   const [selectedCountry, setSelectedCountry] = React.useState<string>(
     searchParams.get("country") || "ALL"
   );
+
+  // Progressive loading: start with 9 scarves, load next 3 per click
+  const [visibleCount, setVisibleCount] = React.useState<number>(INITIAL_VISIBLE_SCARVES);
+
+  // Reset pagination when search query or country filter changes
+  React.useEffect(() => {
+    setVisibleCount(INITIAL_VISIBLE_SCARVES);
+  }, [searchQuery, selectedCountry]);
+
+  // Handlers with performance optimization
+  const handleResetFilters = React.useCallback(() => {
+    setSearchQuery("");
+    setSelectedCountry("ALL");
+    setVisibleCount(INITIAL_VISIBLE_SCARVES);
+  }, []);
+
+  const handleLoadMore = React.useCallback(() => {
+    setVisibleCount((prev) => prev + LOAD_MORE_STEP);
+  }, []);
 
   // Lightbox state
   const [activeLightboxScarf, setActiveLightboxScarf] = React.useState<Scarf | null>(null);
@@ -103,30 +126,55 @@ export function ScarfCategoryDirectoryView({
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [countries]);
 
-  // Filter scarves in memory (instant sub-millisecond response)
+  // Optimized in-memory filtering with property short-circuiting
   const filteredScarves = React.useMemo(() => {
+    if (!scarves || scarves.length === 0) return [];
+    const q = searchQuery.trim().toLowerCase();
+    const hasCountryFilter = selectedCountry !== "ALL";
+
     return scarves.filter((scarf) => {
-      // Country filter
-      if (selectedCountry !== "ALL" && scarf.country !== selectedCountry) {
+      // 1. Country filter check (fastest check)
+      if (hasCountryFilter && scarf.country !== selectedCountry) {
         return false;
       }
 
-      // Search filter
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase().trim();
+      // 2. Search query check
+      if (q) {
         const countryDisplay = getCountryDisplayName(scarf.country, lang).toLowerCase();
-        const haystack = `${scarf.club} ${scarf.country} ${countryDisplay} ${scarf.stadium} ${
-          scarf.type
-        } ${scarf.description || ""} ${scarf.descriptionEn || ""} ${scarf.funFact || ""} ${
-          scarf.funFactEn || ""
-        }`.toLowerCase();
+        const club = (scarf.club || "").toLowerCase();
+        const stadium = (scarf.stadium || "").toLowerCase();
+        const type = (scarf.type || "").toLowerCase();
+        const desc = (scarf.description || "").toLowerCase();
+        const descEn = (scarf.descriptionEn || "").toLowerCase();
+        const fun = (scarf.funFact || "").toLowerCase();
+        const funEn = (scarf.funFactEn || "").toLowerCase();
 
-        if (!haystack.includes(q)) return false;
+        const matches =
+          club.includes(q) ||
+          stadium.includes(q) ||
+          scarf.country.toLowerCase().includes(q) ||
+          countryDisplay.includes(q) ||
+          type.includes(q) ||
+          desc.includes(q) ||
+          descEn.includes(q) ||
+          fun.includes(q) ||
+          funEn.includes(q);
+
+        if (!matches) return false;
       }
 
       return true;
     });
   }, [scarves, selectedCountry, searchQuery, lang]);
+
+  // Slice visible scarves according to progressive load state
+  const visibleScarves = React.useMemo(() => {
+    return filteredScarves.slice(0, visibleCount);
+  }, [filteredScarves, visibleCount]);
+
+  const hasMore = visibleCount < filteredScarves.length;
+  const remainingCount = Math.max(0, filteredScarves.length - visibleCount);
+  const nextBatchCount = Math.min(LOAD_MORE_STEP, remainingCount);
 
   return (
     <div className="space-y-8 pb-20">
@@ -373,10 +421,7 @@ export function ScarfCategoryDirectoryView({
               {(searchQuery || selectedCountry !== "ALL") && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setSearchQuery("");
-                    setSelectedCountry("ALL");
-                  }}
+                  onClick={handleResetFilters}
                   className="text-accent hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -387,15 +432,30 @@ export function ScarfCategoryDirectoryView({
 
             {/* Scarf Showcase Grid */}
             {filteredScarves.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredScarves.map((scarf) => (
-                  <ScarfCard
-                    key={scarf.id}
-                    scarf={scarf}
-                    onOpenLightbox={(s) => setActiveLightboxScarf(s)}
-                  />
-                ))}
-              </div>
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {visibleScarves.map((scarf) => (
+                    <ScarfCard
+                      key={scarf.id}
+                      scarf={scarf}
+                      onOpenLightbox={(s) => setActiveLightboxScarf(s)}
+                    />
+                  ))}
+                </div>
+
+                {/* Load More Button */}
+                {hasMore && (
+                  <div className="pt-8 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={handleLoadMore}
+                      className="px-6 py-2.5 rounded-xl bg-surface border border-border text-sm font-medium text-text hover:border-accent hover:text-accent transition-colors cursor-pointer"
+                    >
+                      {isEn ? "Load more" : "Laad meer"}
+                    </button>
+                  </div>
+                )}
+              </>
             ) : (
               <div className="p-12 text-center rounded-2xl bg-surface border border-border shadow-card space-y-3">
                 <div className="w-12 h-12 rounded-full bg-surface-2 flex items-center justify-center text-text-muted mx-auto">
@@ -409,10 +469,7 @@ export function ScarfCategoryDirectoryView({
                 </p>
                 <button
                   type="button"
-                  onClick={() => {
-                    setSearchQuery("");
-                    setSelectedCountry("ALL");
-                  }}
+                  onClick={handleResetFilters}
                   className="px-4 py-2 rounded-xl bg-surface-2 border border-border text-xs font-mono text-text hover:text-accent transition-colors"
                 >
                   {t.scarves.resetFilters}

@@ -208,6 +208,9 @@ export const nl = {
     countriesWithScarves: "Landen met Sjaals in Collectie",
     allCountriesList: "Alle Europese Landen",
     resetFilters: "Wis filters",
+    loadMore: "Laad volgende {count} sjaals",
+    showingCount: "{visible} van {total} sjaals getoond",
+    allLoaded: "Alle sjaals getoond",
   },
 
   // Map Page
