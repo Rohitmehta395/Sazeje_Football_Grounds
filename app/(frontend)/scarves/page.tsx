@@ -1,24 +1,44 @@
-"use client";
-
 import * as React from "react";
-import { PageHero } from "@/components/hero/PageHero";
-import { ScarfCategoryChooser } from "@/components/scarves/ScarfCategoryChooser";
-import { useTranslation } from "@/lib/i18n/LanguageContext";
+import type { Metadata } from "next";
+import { getScarves, getScarvesPageContent } from "@/lib/data";
+import { ScarvesClientView } from "./ScarvesClientView";
 
-export default function ScarvesPage() {
-  const { t } = useTranslation();
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageContent = await getScarvesPageContent();
+  const title =
+    pageContent.seo?.metaTitle ||
+    pageContent.hero.title ||
+    "Sjaalcollectie | SaZeJe Football";
+  const description =
+    pageContent.seo?.metaDescription ||
+    pageContent.hero.subtitle ||
+    "Verzameling van officiële en tweedehands voetbalsjaals uit de hele wereld.";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: pageContent.hero.heroImage
+        ? [{ url: pageContent.hero.heroImage }]
+        : undefined,
+    },
+  };
+}
+
+export default async function ScarvesPage() {
+  const [scarves, scarvesPageContent] = await Promise.all([
+    getScarves(),
+    getScarvesPageContent(),
+  ]);
 
   return (
-    <div>
-      <PageHero
-        title={t.scarves.heroTitle}
-        description={t.scarves.heroSubtitle}
-        eyebrow={t.scarves.heroEyebrow}
-      />
-
-      <div className="max-w-[1160px] mx-auto px-[24px] pt-[40px] pb-[60px]">
-        <ScarfCategoryChooser />
-      </div>
-    </div>
+    <ScarvesClientView
+      scarves={scarves}
+      scarvesPageContent={scarvesPageContent}
+    />
   );
 }

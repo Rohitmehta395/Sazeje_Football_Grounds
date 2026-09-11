@@ -169,11 +169,15 @@ export const en: Translations = {
     heroSubtitle:
       "Collection of official and secondhand football scarves from around the world.",
     categoryNewTitle: "New Scarves",
+    categoryNewTag: "MATCHDAY EDITIONS • FANSHOP NEW",
     categoryNewDesc:
       "Scarves bought directly during match visits, club stores, and official team shops.",
-    categorySecondhandTitle: "Secondhand Scarves",
+    categoryNewCta: "Browse New Scarves",
+    categorySecondhandTitle: "Secondhand & Swaps",
+    categorySecondhandTag: "TERRACE SWAPS & VINTAGE FINDS",
     categorySecondhandDesc:
-      "Special finds, traded scarves, and vintage discoveries obtained from collectors.",
+      "Special finds, traded scarves, and vintage discoveries obtained from fellow collectors.",
+    categorySecondhandCta: "Browse Swap Collection",
     selectCountryTitle: "Select a Country",
     selectCountrySubtitle:
       "Choose a country to browse scarves by league and club",

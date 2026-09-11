@@ -167,11 +167,15 @@ export const nl = {
     heroSubtitle:
       "Verzameling van officiële en tweedehands voetbalsjaals uit de hele wereld.",
     categoryNewTitle: "Nieuwe Sjaals",
+    categoryNewTag: "MATCHDAY EDITIES • OFFICIEEL NIEUW",
     categoryNewDesc:
       "Sjaals rechtstreeks aangeschaft bij stadionbezoeken, fanshops en officiële clubwinkels.",
-    categorySecondhandTitle: "Tweedehands Sjaals",
+    categoryNewCta: "Blader door Nieuwe Sjaals",
+    categorySecondhandTitle: "Tweedehands & Ruil",
+    categorySecondhandTag: "TERRACE RUIL & VINTAGE VONDSTEN",
     categorySecondhandDesc:
-      "Bijzondere vondsten, ruilsjaals en vintage ontdekkingen verkregen via verzamelaars.",
+      "Bijzondere vondsten, ruilsjaals en vintage ontdekkingen verkregen via supporters en verzamelaars.",
+    categorySecondhandCta: "Blader door Ruilsjaals",
     selectCountryTitle: "Selecteer een Land",
     selectCountrySubtitle:
       "Kies een land om de sjaals per competitie en club te bekijken",
