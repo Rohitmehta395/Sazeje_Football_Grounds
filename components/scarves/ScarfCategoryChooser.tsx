@@ -46,9 +46,9 @@ export function ScarfCategoryChooser({
       icon: <OfficialScarfIcon className="w-8 h-8 text-azg transition-transform duration-300 group-hover:scale-110" />,
       watermark: <OfficialScarfIcon className="w-44 h-44 text-azg/[0.04] group-hover:text-azg/[0.08] transition-all duration-500 group-hover:scale-110" />,
       accentBorder: "hover:border-azg/60",
-      accentGlow: "from-emerald-500/10 via-surface to-surface",
-      iconBg: "bg-emerald-950/40 border-azg/30 text-azg shadow-[0_0_24px_rgba(20,184,166,0.18)]",
-      badgeBg: "bg-emerald-950/50 text-azg border-azg/25",
+      accentGlow: "from-azg/10 via-surface to-surface dark:from-emerald-950/20",
+      iconBg: "bg-azg/10 border-azg/25 text-azg dark:bg-azg/20 dark:border-azg/40 shadow-sm",
+      badgeBg: "bg-azg/10 text-teal-800 dark:bg-azg/20 dark:text-azg border-azg/30",
       dotColor: "bg-azg",
       pills: isEn
         ? ["100% Official", "Matchday Fanshop", "Mint Condition"]
@@ -65,9 +65,9 @@ export function ScarfCategoryChooser({
       icon: <SwapScarvesIcon className="w-8 h-8 text-accent-2 transition-transform duration-300 group-hover:scale-110" />,
       watermark: <SwapScarvesIcon className="w-44 h-44 text-accent-2/[0.04] group-hover:text-accent-2/[0.08] transition-all duration-500 group-hover:scale-110" />,
       accentBorder: "hover:border-accent-2/60",
-      accentGlow: "from-amber-500/10 via-surface to-surface",
-      iconBg: "bg-amber-950/40 border-accent-2/30 text-accent-2 shadow-[0_0_24px_rgba(234,179,8,0.18)]",
-      badgeBg: "bg-amber-950/50 text-accent-2 border-accent-2/25",
+      accentGlow: "from-accent-2/10 via-surface to-surface dark:from-amber-950/20",
+      iconBg: "bg-accent-2/10 border-accent-2/25 text-accent-2 dark:bg-accent-2/20 dark:border-accent-2/40 shadow-sm",
+      badgeBg: "bg-accent-2/10 text-amber-900 dark:bg-accent-2/20 dark:text-accent-2 border-accent-2/30",
       dotColor: "bg-accent-2",
       pills: isEn
         ? ["Supporter Trades", "Vintage Terrace Heritage", "Open for Swap"]

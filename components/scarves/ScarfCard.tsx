@@ -64,18 +64,18 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
             <span
               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-md font-mono text-[10.5px] uppercase tracking-wider font-bold border shadow-sm ${
                 isNew
-                  ? "bg-black/75 border-azg/40 text-azg"
-                  : "bg-black/75 border-accent-2/40 text-accent-2"
+                  ? "bg-black/80 border-emerald-500/40 text-emerald-300"
+                  : "bg-black/80 border-amber-500/40 text-amber-300"
               }`}
             >
               {isNew ? (
                 <>
-                  <OfficialScarfIcon className="w-3.5 h-3.5 text-azg" />
+                  <OfficialScarfIcon className="w-3.5 h-3.5 text-emerald-300" />
                   <span>{isEn ? "MATCHDAY FANSHOP" : "OFFICIEEL FANSHOP"}</span>
                 </>
               ) : (
                 <>
-                  <SwapScarvesIcon className="w-3.5 h-3.5 text-accent-2" />
+                  <SwapScarvesIcon className="w-3.5 h-3.5 text-amber-300" />
                   <span>{isEn ? "TERRACE TRADE / SWAP" : "TERRACE RUIL"}</span>
                 </>
               )}
@@ -152,9 +152,9 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
           {displayFunFact && (
             <div className="p-3.5 rounded-xl bg-surface-2/60 border border-border/70 text-xs relative">
               <div className={`flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider font-bold mb-1 ${
-                isNew ? "text-azg" : "text-accent-2"
+                isNew ? "text-teal-800 dark:text-azg" : "text-amber-900 dark:text-accent-2"
               }`}>
-                <Lightbulb className={`w-3.5 h-3.5 ${isNew ? "text-azg" : "text-accent-2"}`} />
+                <Lightbulb className={`w-3.5 h-3.5 ${isNew ? "text-teal-700 dark:text-azg" : "text-amber-800 dark:text-accent-2"}`} />
                 <span>{t.scarves.funFact}</span>
               </div>
               <p className="font-inter text-text-muted italic leading-relaxed m-0 line-clamp-3 text-[12.5px]">
@@ -176,7 +176,7 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
                   <strong className="text-text font-bold">{formatDate(scarf.purchaseDate, lang)}</strong>
                 </span>
               ) : (
-                <span className="text-azg font-semibold">
+                <span className="text-teal-800 dark:text-azg font-semibold">
                   {isEn ? "Matchday Acquisition" : "Matchday Aankoop"}
                 </span>
               )}
@@ -186,7 +186,7 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
               <button
                 type="button"
                 onClick={() => onOpenLightbox?.(scarf)}
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-azg hover:text-white transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-teal-800 dark:text-azg hover:text-accent transition-colors cursor-pointer"
               >
                 <Maximize2 className="w-3.5 h-3.5" />
                 <span>{isEn ? "View Photo" : "Vergroot"}</span>
@@ -195,14 +195,14 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
           </>
         ) : (
           <>
-            <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-accent-2 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-accent-2 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-amber-900 dark:text-accent-2 font-semibold">
+              <span className="w-2 h-2 rounded-full bg-amber-600 dark:bg-accent-2 animate-pulse" />
               <span>{isEn ? "Open for Swap" : "Beschikbaar voor Ruil"}</span>
             </div>
 
             <Link
               href={`/contact?swap=${encodeURIComponent(scarf.club)}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent-2/15 hover:bg-accent-2 text-accent-2 hover:text-black border border-accent-2/30 text-xs font-mono font-bold transition-all cursor-pointer shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent-2/15 hover:bg-[#946A24] dark:hover:bg-accent-2 text-amber-900 dark:text-accent-2 hover:text-white dark:hover:text-black border border-accent-2/30 text-xs font-mono font-bold transition-all cursor-pointer shadow-sm"
             >
               <ArrowRightLeft className="w-3.5 h-3.5" />
               <span>{isEn ? "Propose Swap" : "Ruilvoorstel"}</span>

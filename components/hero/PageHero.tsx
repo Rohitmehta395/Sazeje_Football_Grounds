@@ -33,7 +33,7 @@ export function PageHero({
       {/* Hero Content Inner */}
       <div className="relative z-10 px-[24px] pb-[22px] max-w-[1160px] mx-auto w-full flex-1 flex flex-col justify-end">
         {eyebrow && (
-          <div className="font-mono text-[12px] tracking-[0.15em] uppercase text-azg mb-1">
+          <div className="font-mono text-[12px] tracking-[0.15em] uppercase text-emerald-300 font-medium mb-1">
             {eyebrow}
           </div>
         )}

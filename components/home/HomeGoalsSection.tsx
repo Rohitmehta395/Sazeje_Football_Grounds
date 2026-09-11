@@ -60,7 +60,7 @@ export function HomeGoalsSection({ goals }: HomeGoalsSectionProps) {
                     Doel #{goal.number}
                   </span>
                   {isCompleted ? (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-emerald-500/15 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-500/20">
                       <CheckCircle2 className="w-3 h-3" /> Behaald
                     </span>
                   ) : (

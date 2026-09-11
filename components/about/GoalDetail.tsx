@@ -42,7 +42,7 @@ export function GoalDetail({ goal, prevGoal, nextGoal, totalGoals }: GoalDetailP
           </div>
 
           {isCompleted ? (
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-sm">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/15 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-500/20 shadow-sm">
               <CheckCircle2 className="w-4 h-4" />
               <span>{t.about.statusCompleted}</span>
             </span>

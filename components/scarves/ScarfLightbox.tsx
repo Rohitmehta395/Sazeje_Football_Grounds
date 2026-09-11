@@ -70,8 +70,8 @@ export function ScarfLightbox({ scarf, isOpen, onClose }: ScarfLightboxProps) {
           <span
             className={`font-mono text-xs px-3 py-1 rounded-full uppercase tracking-wider font-bold border ${
               isNew
-                ? "bg-emerald-950/60 border-azg/40 text-azg"
-                : "bg-amber-950/60 border-accent-2/40 text-accent-2"
+                ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-300"
+                : "bg-amber-950/80 border-amber-500/40 text-amber-300"
             }`}
           >
             {isNew ? "OFFICIAL MATCHDAY" : "VINTAGE TRADE"}
