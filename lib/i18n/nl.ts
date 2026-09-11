@@ -117,7 +117,7 @@ export const nl = {
     target: "Doel",
     current: "Huidige Stand",
     detailsHeading: "Details & Status",
-    backToGoals: "← Terug naar Over & Doelen",
+    backToGoals: "Terug naar Over & Doelen",
     originalContentNotice:
       "Opmerking: Onderstaande beschrijvingen zijn geschreven in de originele Nederlandse auteurstaal.",
   },
@@ -156,7 +156,7 @@ export const nl = {
     rating: "Beoordeling",
     storyHeading: "Wedstrijdverslag & Ervaring",
     galleryHeading: "Foto Galerij",
-    backToGrounds: "← Terug naar Grounds",
+    backToGrounds: "Terug naar Grounds",
     viewDetails: "Bekijk details",
   },
 

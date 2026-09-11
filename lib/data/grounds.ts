@@ -51,10 +51,14 @@ function mapPayloadGround(doc: Record<string, unknown>): Ground {
     lat: Number(doc.lat) || 0,
     lng: Number(doc.lng) || 0,
     description: String(doc.description || ""),
+    descriptionEn: doc.descriptionEn ? String(doc.descriptionEn) : undefined,
     story: String(doc.story || ""),
+    storyEn: doc.storyEn ? String(doc.storyEn) : undefined,
     matchInfo: String(doc.matchInfo || ""),
+    matchInfoEn: doc.matchInfoEn ? String(doc.matchInfoEn) : undefined,
     visitDate: String(doc.visitDate || ""),
     extra: doc.extra ? String(doc.extra) : undefined,
+    extraEn: doc.extraEn ? String(doc.extraEn) : undefined,
     photo: photoUrl,
     images: images.length > 0 ? images : photoUrl ? [photoUrl] : [],
     dateAdded: String(doc.dateAdded || doc.createdAt || new Date().toISOString()),
@@ -145,3 +149,25 @@ export async function getLatestGrounds(limit = 10): Promise<Ground[]> {
     return [];
   }
 }
+
+export async function getRelatedGrounds(currentGround: Ground, limit = 3): Promise<Ground[]> {
+  try {
+    const allGrounds = await getGrounds();
+    return allGrounds
+      .filter((g) => g.id !== currentGround.id)
+      .sort((a, b) => {
+        // Priority 1: Same country
+        const aCountry = a.country === currentGround.country ? 2 : 0;
+        const bCountry = b.country === currentGround.country ? 2 : 0;
+        // Priority 2: Same competition
+        const aComp = a.competition === currentGround.competition ? 1 : 0;
+        const bComp = b.competition === currentGround.competition ? 1 : 0;
+        return bCountry + bComp - (aCountry + aComp);
+      })
+      .slice(0, limit);
+  } catch (error) {
+    console.error("Error fetching related grounds:", error);
+    return [];
+  }
+}
+

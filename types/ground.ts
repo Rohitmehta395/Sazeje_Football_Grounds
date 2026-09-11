@@ -8,10 +8,14 @@ export interface Ground {
   lat: number;
   lng: number;
   description: string;
+  descriptionEn?: string;
   story: string;
+  storyEn?: string;
   matchInfo: string;
+  matchInfoEn?: string;
   visitDate: string;
   extra?: string;
+  extraEn?: string;
   images: string[];
   photo: string;
   dateAdded: string;

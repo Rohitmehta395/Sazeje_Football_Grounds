@@ -119,7 +119,7 @@ export const en: Translations = {
     target: "Target",
     current: "Current Status",
     detailsHeading: "Details & Status",
-    backToGoals: "← Back to About & Goals",
+    backToGoals: "Back to About & Goals",
     originalContentNotice:
       "Note: The descriptions below are written in the author's original Dutch language.",
   },
@@ -158,7 +158,7 @@ export const en: Translations = {
     rating: "Rating",
     storyHeading: "Match Report & Story",
     galleryHeading: "Photo Gallery",
-    backToGrounds: "← Back to Grounds",
+    backToGrounds: "Back to Grounds",
     viewDetails: "View details",
   },
 
