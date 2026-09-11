@@ -4,3 +4,4 @@ export * from "./goals";
 export * from "./countries";
 export * from "./settings";
 export * from "./about";
+export * from "./groundsPage";

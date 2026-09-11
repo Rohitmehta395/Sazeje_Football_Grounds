@@ -70,3 +70,50 @@ export function ScarfIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+export function StadiumIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      {/* Stadium outer arena structure */}
+      <path d="M2 10.5C2 7.2 6.5 4.5 12 4.5s10 2.7 10 6v3c0 3.3-4.5 6-10 6s-10-2.7-10-6v-3z" />
+      {/* Inner field pitch */}
+      <ellipse cx="12" cy="12" rx="5.5" ry="2.2" />
+      <line x1="12" y1="9.8" x2="12" y2="14.2" />
+      {/* Grandstand structural pillar ribs */}
+      <path d="M4 12.5v3" />
+      <path d="M7.5 14.5v2.8" />
+      <path d="M16.5 14.5v2.8" />
+      <path d="M20 12.5v3" />
+    </svg>
+  );
+}
+
+export function ClubBadgeIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      {/* Classic football club crest shield */}
+      <path d="M12 22s8-4 8-10V4.5L12 2 4 4.5V12c0 6 8 10 8 10z" />
+      {/* Inner diagonal sash stripe */}
+      <path d="M8 8.5l8 8" />
+      {/* Club star */}
+      <circle cx="12" cy="7.5" r="1.3" fill="currentColor" />
+    </svg>
+  );
+}
+

@@ -126,10 +126,15 @@ export const en: Translations = {
 
   // Grounds Page
   grounds: {
-    heroEyebrow: "DATABASE",
-    heroTitle: "Grounds Database",
+    heroEyebrow: "GROUNDHOPPING ARCHIVE • EST. 2024",
+    heroTitle: "Grounds & Stadiums Archive",
     heroSubtitle:
-      "The complete database of visited stadiums — filter by country, competition, or club.",
+      "A curated archive of visited football grounds across the Netherlands and Europe — documenting authentic stadium architecture, roaring terrace culture, and matchday expeditions.",
+    statGrounds: "Stadiums Visited",
+    statCountries: "Countries Visited",
+    statCompetitions: "Competitions",
+    statClubs: "Clubs",
+    editorialTag: "PASSION FOR THE TERRACES",
     filterCountry: "Country",
     filterCompetition: "Competition",
     filterClub: "Club",

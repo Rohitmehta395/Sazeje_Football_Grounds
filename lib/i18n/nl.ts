@@ -124,10 +124,15 @@ export const nl = {
 
   // Grounds Page
   grounds: {
-    heroEyebrow: "DATABASE",
-    heroTitle: "Grounds Database",
+    heroEyebrow: "GROUNDHOPPING ARCHIEF • EST. 2024",
+    heroTitle: "Bezochte Grounds & Stadions",
     heroSubtitle:
-      "De volledige database van bezochte stadions — filter op land, competitie of club.",
+      "Een levend archief van bezochte voetbalstadions in Nederland en door heel Europa. Van sfeervolle dorpsvelden en historische staantribunes tot monumentale Europese voetbaltempels — filter op land, competitie of club.",
+    statGrounds: "Bezochte Stadions",
+    statCountries: "Bezochte Landen",
+    statCompetitions: "Competities",
+    statClubs: "Clubs",
+    editorialTag: "PASSIE VOOR DE TRIBUNE",
     filterCountry: "Land",
     filterCompetition: "Competitie",
     filterClub: "Club",

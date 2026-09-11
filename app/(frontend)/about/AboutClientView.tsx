@@ -19,6 +19,7 @@ import {
   MessageSquare,
   Sparkles,
 } from "lucide-react";
+import { StadiumIcon } from "@/components/ui/Icons";
 
 export interface AboutStats {
   groundsCount: number;
@@ -82,7 +83,7 @@ export function AboutClientView({
   const renderPillarIcon = (iconName: string) => {
     switch (iconName) {
       case "stadium":
-        return <Compass className="w-5 h-5 text-accent" />;
+        return <StadiumIcon className="w-5 h-5 text-accent" />;
       case "scarf":
         return <Sparkles className="w-5 h-5 text-accent-2" />;
       case "map":
