@@ -4,8 +4,11 @@ import * as React from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { Scarf } from "@/types";
 import { ScarvesFilterBar, ScarvesFilterValues } from "@/components/scarves/ScarvesFilterBar";
-import { ScarfEntry } from "@/components/scarves/ScarfEntry";
+import { ScarfCard } from "@/components/scarves/ScarfCard";
+import { ScarfLightbox } from "@/components/scarves/ScarfLightbox";
 import { ScarfPagination } from "@/components/scarves/ScarfPagination";
+import { useTranslation } from "@/lib/i18n/LanguageContext";
+import { Search } from "lucide-react";
 
 export interface ScarvesBrowseViewProps {
   initialScarves: Scarf[];
@@ -13,31 +16,38 @@ export interface ScarvesBrowseViewProps {
   countryName: string;
 }
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 12;
 
 export function ScarvesBrowseView({
   initialScarves,
+  categoryLabel,
+  countryName,
 }: ScarvesBrowseViewProps) {
+  const { t, lang } = useTranslation();
+  const isEn = lang === "en";
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+
+  const [activeLightboxScarf, setActiveLightboxScarf] = React.useState<Scarf | null>(null);
 
   // Read state from URL search params
   const currentFilters: ScarvesFilterValues = React.useMemo(() => {
     return {
       search: searchParams.get("search") || "",
-      club: searchParams.get("club") || "Alle clubs",
+      club: searchParams.get("club") || (isEn ? "All clubs" : "Alle clubs"),
     };
-  }, [searchParams]);
+  }, [searchParams, isEn]);
 
   const currentPage = React.useMemo(() => {
     const p = parseInt(searchParams.get("page") || "1", 10);
     return isNaN(p) || p < 1 ? 1 : p;
   }, [searchParams]);
 
+  const allClubsLabel = isEn ? "All clubs" : "Alle clubs";
   const clubs = React.useMemo(
-    () => ["Alle clubs", ...Array.from(new Set(initialScarves.map((s) => s.club)))].sort(),
-    [initialScarves]
+    () => [allClubsLabel, ...Array.from(new Set(initialScarves.map((s) => s.club)))].sort(),
+    [initialScarves, allClubsLabel]
   );
 
   // Synchronize filter & page changes with URL search params
@@ -50,7 +60,7 @@ export function ScarvesBrowseView({
       params.delete("search");
     }
 
-    if (newFilters.club && newFilters.club !== "Alle clubs") {
+    if (newFilters.club && newFilters.club !== allClubsLabel && newFilters.club !== "Alle clubs" && newFilters.club !== "All clubs") {
       params.set("club", newFilters.club);
     } else {
       params.delete("club");
@@ -79,15 +89,23 @@ export function ScarvesBrowseView({
   // Filter list based on search params
   const filteredScarves = React.useMemo(() => {
     return initialScarves.filter((s) => {
-      if (currentFilters.club !== "Alle clubs" && s.club !== currentFilters.club) return false;
+      if (
+        currentFilters.club !== allClubsLabel &&
+        currentFilters.club !== "Alle clubs" &&
+        currentFilters.club !== "All clubs" &&
+        s.club !== currentFilters.club
+      ) {
+        return false;
+      }
+
       if (currentFilters.search) {
         const q = currentFilters.search.toLowerCase();
-        const haystack = `${s.club} ${s.type} ${s.description || ""}`.toLowerCase();
+        const haystack = `${s.club} ${s.stadium} ${s.type} ${s.description || ""} ${s.descriptionEn || ""}`.toLowerCase();
         if (!haystack.includes(q)) return false;
       }
       return true;
     });
-  }, [initialScarves, currentFilters]);
+  }, [initialScarves, currentFilters, allClubsLabel]);
 
   const totalPages = Math.max(1, Math.ceil(filteredScarves.length / ITEMS_PER_PAGE));
   const validPage = Math.min(currentPage, totalPages);
@@ -106,16 +124,42 @@ export function ScarvesBrowseView({
         clubs={clubs}
       />
 
-      {/* Scarves Entries */}
+      {/* Matching Results Counter */}
+      <div className="text-xs font-mono text-text-muted pb-2 border-b border-border/60 flex items-center justify-between">
+        <span>
+          <strong className="text-text">{filteredScarves.length}</strong>{" "}
+          {filteredScarves.length === 1
+            ? isEn
+              ? "scarf found"
+              : "sjaal gevonden"
+            : isEn
+            ? "scarves found"
+            : "sjaals gevonden"}
+        </span>
+      </div>
+
+      {/* Grid of ScarfCards */}
       {paginatedScarves.length > 0 ? (
-        <div className="max-w-[640px] mx-auto space-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {paginatedScarves.map((scarf) => (
-            <ScarfEntry key={scarf.id} scarf={scarf} />
+            <ScarfCard
+              key={scarf.id}
+              scarf={scarf}
+              onOpenLightbox={(s) => setActiveLightboxScarf(s)}
+            />
           ))}
         </div>
       ) : (
-        <div className="p-12 text-center border border-border rounded-xl bg-surface text-text-muted font-mono text-sm shadow-card">
-          Nog geen sjaals gevonden in deze selectie.
+        <div className="p-12 text-center rounded-2xl bg-surface border border-border shadow-card space-y-3">
+          <div className="w-12 h-12 rounded-full bg-surface-2 flex items-center justify-center text-text-muted mx-auto">
+            <Search className="w-5 h-5" />
+          </div>
+          <h3 className="font-bebas text-2xl text-text m-0">
+            {isEn ? "No scarves found" : "Geen sjaals gevonden"}
+          </h3>
+          <p className="font-inter text-sm text-text-muted max-w-md mx-auto">
+            {t.scarves.empty}
+          </p>
         </div>
       )}
 
@@ -127,6 +171,13 @@ export function ScarvesBrowseView({
           onPageChange={handlePageChange}
         />
       )}
+
+      {/* Photo Lightbox */}
+      <ScarfLightbox
+        scarf={activeLightboxScarf}
+        isOpen={Boolean(activeLightboxScarf)}
+        onClose={() => setActiveLightboxScarf(null)}
+      />
     </div>
   );
 }
