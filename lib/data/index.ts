@@ -5,3 +5,4 @@ export * from "./countries";
 export * from "./settings";
 export * from "./about";
 export * from "./groundsPage";
+export * from "./mapPage";

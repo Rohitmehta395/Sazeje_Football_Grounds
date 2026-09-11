@@ -197,13 +197,18 @@ export const en: Translations = {
 
   // Map Page
   map: {
-    heroEyebrow: "INTERACTIVE",
+    heroEyebrow: "INTERACTIVE MAP • EUROPE",
     heroTitle: "Stadium Map Europe",
-    heroSubtitle: "Overview of all visited stadiums on the interactive map.",
+    heroSubtitle: "Interactive geospatial overview of all visited football stadiums across Europe. Click any club badge to explore the stadium, home club, and visited matchday details.",
     loadingMap: "Loading stadium map...",
     popupVisitDate: "Visited:",
     popupMatch: "Match:",
     popupViewGround: "View Stadium →",
+    statStadiums: "Stadiums on Map",
+    statCountries: "Countries Mapped",
+    statCompetitions: "Competitions",
+    editorialTag: "FOOTBALL GEOGRAPHY",
+    viewGroundsList: "View Grounds Archive",
   },
 
   // Contact Page

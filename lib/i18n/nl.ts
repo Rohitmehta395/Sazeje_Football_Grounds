@@ -195,13 +195,18 @@ export const nl = {
 
   // Map Page
   map: {
-    heroEyebrow: "INTERACTIEF",
+    heroEyebrow: "INTERACTIEVE KAART • EUROPA",
     heroTitle: "Stadionkaart Europa",
-    heroSubtitle: "Overzicht van alle bezochte stadions op de kaart.",
+    heroSubtitle: "Overzicht van alle bezochte stadions op de interactieve kaart. Klik op een clubspeld om het stadion, de club en de bezochte wedstrijd te ontdekken.",
     loadingMap: "Stadionkaart laden...",
     popupVisitDate: "Bezocht:",
     popupMatch: "Wedstrijd:",
     popupViewGround: "Bekijk Stadion →",
+    statStadiums: "Stadions op de Kaart",
+    statCountries: "Landen in Kaart Gebracht",
+    statCompetitions: "Competities",
+    editorialTag: "GEOGRAFIE VAN HET VOETBAL",
+    viewGroundsList: "Bekijk Grounds Lijst",
   },
 
   // Contact Page

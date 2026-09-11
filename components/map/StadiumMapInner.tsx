@@ -15,15 +15,21 @@ export interface StadiumMapInnerProps {
   className?: string;
 }
 
-// Helper component to auto-fit map bounds to markers
+// Helper component to auto-fit map bounds and invalidate size on mount
 function MapBounds({ grounds }: { grounds: Ground[] }) {
   const map = useMap();
 
   React.useEffect(() => {
+    const timer = setTimeout(() => {
+      map.invalidateSize();
+    }, 100);
+
     if (grounds && grounds.length > 0) {
       const bounds = L.latLngBounds(grounds.map((g) => [g.lat, g.lng]));
       map.fitBounds(bounds, { padding: [40, 40] });
     }
+
+    return () => clearTimeout(timer);
   }, [grounds, map]);
 
   return null;
@@ -66,7 +72,7 @@ export function StadiumMapInner({
 
   return (
     <div
-      className={`h-[560px] rounded border border-border overflow-hidden relative shadow-card ${className}`.trim()}
+      className={`h-[560px] rounded-2xl border border-border overflow-hidden relative isolate z-0 shadow-card ${className}`.trim()}
     >
       <MapContainer
         center={defaultCenter}
