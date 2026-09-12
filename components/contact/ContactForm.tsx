@@ -159,7 +159,10 @@ export function ContactForm({
     setIsRateLimited(false);
 
     try {
-      const result = await sendContactEmail(data);
+      const result = await sendContactEmail({
+        ...data,
+        lang: isEn ? "en" : "nl",
+      });
 
       if (result.success) {
         setSubmitted(true);

@@ -8,6 +8,10 @@ import { contactSchema, ContactFormData } from "@/lib/validations/contact";
 import { sanitizeInput, sanitizeSingleLine, escapeHtml } from "@/lib/security/sanitize";
 import { checkRateLimit } from "@/lib/security/rateLimit";
 import { verifyTurnstileToken } from "@/lib/security/turnstile";
+import {
+  generateContactConfirmationEmail,
+  generateAdminNotificationEmail,
+} from "@/lib/email/contactEmails";
 
 export interface ContactActionResult {
   success: boolean;
@@ -98,6 +102,8 @@ export async function sendContactEmail(
   const safeHtmlTopic = escapeHtml(cleanTopic);
   const safeHtmlMessage = escapeHtml(cleanMessage);
 
+  const userLang = rawData.lang === "en" ? "en" : "nl";
+
   // 7. Fetch destination email (prioritize environment variable, fallback to Payload Settings global)
   let toEmail = process.env.CONTACT_EMAIL?.trim() || "";
   if (!toEmail) {
@@ -135,8 +141,10 @@ export async function sendContactEmail(
       console.info("[Dev Note] Message received in dev mode:", {
         from: `${cleanName} <${cleanEmail}>`,
         topic: cleanTopic,
+        lang: userLang,
         message: cleanMessage,
       });
+      console.info("[Dev Note] Simulated auto-responder delivery to:", cleanEmail);
       return {
         success: true,
         message: "Message processed successfully (Development mode: simulated delivery).",
@@ -156,29 +164,22 @@ export async function sendContactEmail(
       process.env.RESEND_FROM_EMAIL ||
       "SaZeJe Football <onboarding@resend.dev>";
 
-    const topicLabel = cleanTopic ? `[${cleanTopic.toUpperCase()}] ` : "";
-    const emailSubject = `[SaZeJe Football] ${topicLabel}Nieuw bericht van ${cleanName}`;
+    // Generate admin notification email
+    const adminEmailData = generateAdminNotificationEmail({
+      name: cleanName,
+      email: cleanEmail,
+      topic: cleanTopic,
+      message: cleanMessage,
+      lang: userLang,
+    });
 
     const { error: resendError } = await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
       replyTo: cleanEmail,
-      subject: emailSubject,
-      text: `Nieuw contactbericht via SaZeJe Football\n\nOnderwerp: ${cleanTopic}\nNaam: ${cleanName}\nE-mail: ${cleanEmail}\n\nBericht:\n${cleanMessage}`,
-      html: `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #DCD2BE; border-radius: 12px; background-color: #FBF9F4; color: #20241F;">
-          <div style="border-bottom: 2px solid #2E8B84; padding-bottom: 12px; margin-bottom: 20px;">
-            <h2 style="color: #20241F; margin: 0; font-size: 20px; letter-spacing: 0.5px;">SaZeJe Football — Contact</h2>
-            <span style="display: inline-block; margin-top: 8px; font-size: 11px; text-transform: uppercase; font-family: monospace; font-weight: bold; background: #e6f4f1; color: #1e6b65; padding: 4px 10px; border-radius: 9999px; border: 1px solid #b3ded8;">${safeHtmlTopic}</span>
-          </div>
-          <p style="margin: 6px 0; font-size: 14px;"><strong>Afzender:</strong> ${safeHtmlName}</p>
-          <p style="margin: 6px 0; font-size: 14px;"><strong>E-mailadres:</strong> <a href="mailto:${safeHtmlEmail}" style="color: #2E8B84; text-decoration: none;">${safeHtmlEmail}</a></p>
-          <hr style="border: 0; border-top: 1px solid #DCD2BE; margin: 20px 0;" />
-          <h3 style="color: #20241F; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">Bericht:</h3>
-          <div style="white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #20241F; background: #F0ECE3; padding: 16px; border-radius: 8px; border: 1px solid #DCD2BE;">${safeHtmlMessage}</div>
-          <p style="font-size: 11px; color: #6B716A; margin-top: 24px; text-align: center;">Verzonden via het beveiligde contactformulier op sazejefootball.nl</p>
-        </div>
-      `,
+      subject: adminEmailData.subject,
+      text: adminEmailData.text,
+      html: adminEmailData.html,
     });
 
     if (resendError) {
@@ -189,6 +190,38 @@ export async function sendContactEmail(
         success: false,
         error: "Unable to deliver your message at this time. Please try again later or reach out directly via email.",
       };
+    }
+
+    // 10. Send customer auto-reply confirmation email (custom themed)
+    try {
+      const confirmationEmailData = generateContactConfirmationEmail({
+        name: cleanName,
+        email: cleanEmail,
+        topic: cleanTopic,
+        message: cleanMessage,
+        lang: userLang,
+      });
+
+      const { error: autoReplyError } = await resend.emails.send({
+        from: fromEmail,
+        to: [cleanEmail],
+        replyTo: toEmail, // Replies to confirmation go directly to the SaZeJe Football admin inbox
+        subject: confirmationEmailData.subject,
+        text: confirmationEmailData.text,
+        html: confirmationEmailData.html,
+      });
+
+      if (autoReplyError) {
+        console.warn(
+          "[Contact Action] Customer auto-responder email could not be sent:",
+          autoReplyError
+        );
+      } else {
+        console.info(`[Contact Action] Auto-responder confirmation sent successfully to ${cleanEmail}`);
+      }
+    } catch (autoReplyErr) {
+      // Non-blocking catch: don't fail user submission if confirmation dispatch hits a third-party restriction
+      console.warn("[Contact Action] Error dispatching auto-responder email:", autoReplyErr);
     }
 
     return {

@@ -44,6 +44,9 @@ export const contactSchema = z.object({
 
   // Cloudflare Turnstile token
   turnstileToken: z.string().optional(),
+
+  // Preferred language for auto-responder (nl | en)
+  lang: z.enum(["nl", "en"]).optional(),
 });
 
 export type ContactFormData = z.infer<typeof contactSchema>;
