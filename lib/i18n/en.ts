@@ -267,6 +267,11 @@ export const en: Translations = {
     errorTitle: "Sending Failed",
     errorMessage:
       "An error occurred while sending your message. Please try again later.",
+    rateLimitError:
+      "Too many messages sent from your network. Please wait a few minutes before trying again.",
+    charLimitLabel: "characters",
+    charRemainingLabel: "remaining",
+    maxCharsWarning: "Maximum character limit reached (2,000 characters).",
     mailtoNotice:
       "Note: Messages are sent directly to the SaZeJe Football management.",
     directInfoTitle: "Direct Contact",

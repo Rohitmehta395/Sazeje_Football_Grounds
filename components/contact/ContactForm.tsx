@@ -18,8 +18,11 @@ import {
   RefreshCw,
   AlertCircle,
   Handshake,
+  ShieldCheck,
+  Clock,
 } from "lucide-react";
 import { StadiumIcon, SwapScarvesIcon } from "@/components/ui/Icons";
+import { TurnstileWidget } from "./TurnstileWidget";
 
 export interface ContactFormProps {
   selectedTopicOverride?: string;
@@ -36,6 +39,7 @@ export function ContactForm({
 
   const [submitted, setSubmitted] = React.useState(false);
   const [serverError, setServerError] = React.useState<string | null>(null);
+  const [isRateLimited, setIsRateLimited] = React.useState(false);
 
   // Check URL parameters for pre-filling (e.g. from Scarf Swap or Ground detail)
   const urlSubject = searchParams.get("subject") || "";
@@ -78,6 +82,8 @@ export function ContactForm({
       email: "",
       topic: initialTopic,
       message: initialMessage,
+      _hp_verification: "",
+      turnstileToken: "",
     },
   });
 
@@ -150,13 +156,26 @@ export function ContactForm({
 
   const onSubmit = async (data: ContactFormData) => {
     setServerError(null);
+    setIsRateLimited(false);
+
     try {
       const result = await sendContactEmail(data);
 
       if (result.success) {
         setSubmitted(true);
-        reset();
+        reset({
+          name: "",
+          email: "",
+          topic: "general",
+          message: "",
+          _hp_verification: "",
+          turnstileToken: "",
+        });
       } else {
+        if (result.code === "RATE_LIMITED") {
+          setIsRateLimited(true);
+        }
+
         if (result.fieldErrors) {
           if (result.fieldErrors.name?.[0]) {
             setError("name", { message: result.fieldErrors.name[0] });
@@ -171,9 +190,8 @@ export function ContactForm({
         setServerError(result.error || t.contact.errorMessage);
       }
     } catch (err: unknown) {
-      setServerError(
-        err instanceof Error ? err.message : t.contact.errorMessage
-      );
+      console.error("[Contact Form] Submit error:", err);
+      setServerError(t.contact.errorMessage);
     }
   };
 
@@ -208,6 +226,8 @@ export function ContactForm({
                     email: "",
                     topic: "general",
                     message: "",
+                    _hp_verification: "",
+                    turnstileToken: "",
                   });
                 }}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface-2 border border-border text-text hover:border-accent hover:text-accent font-mono text-xs font-semibold transition-all cursor-pointer shadow-2xs"
@@ -240,17 +260,50 @@ export function ContactForm({
           noValidate
           className="bg-surface border border-border/80 rounded-2xl p-6 sm:p-8 shadow-card relative overflow-hidden space-y-6"
         >
-          <div className="pb-2 border-b border-border/60">
+          {/* Honeypot Field - Invisible Decoy for Automated Spam Bots */}
+          <div
+            className="opacity-0 absolute -top-[9999px] -left-[9999px] h-0 w-0 z-[-1] pointer-events-none overflow-hidden"
+            aria-hidden="true"
+          >
+            <label htmlFor="contact-company-website">Please do not fill this field</label>
+            <input
+              id="contact-company-website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              {...register("_hp_verification")}
+            />
+          </div>
+
+          <div className="pb-2 border-b border-border/60 flex items-center justify-between">
             <h3 className="font-bebas text-2xl sm:text-3xl text-text m-0 tracking-wide">
               {isEn ? "Send a Message" : "Stuur een Bericht"}
             </h3>
+            <div className="flex items-center gap-1.5 text-[11px] font-mono text-text-muted bg-surface-2 px-2.5 py-1 rounded-md border border-border/60">
+              <ShieldCheck className="w-3.5 h-3.5 text-accent" />
+              <span>{isEn ? "Protected & Encrypted" : "Beveiligd & Versleuteld"}</span>
+            </div>
           </div>
 
           {serverError && (
-            <div className="p-4 border border-rose-500/40 bg-rose-500/10 text-rose-800 dark:text-rose-200 rounded-xl text-sm font-inter flex items-start gap-3 animate-in fade-in">
-              <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+            <div
+              className={`p-4 border rounded-xl text-sm font-inter flex items-start gap-3 animate-in fade-in ${
+                isRateLimited
+                  ? "border-amber-500/40 bg-amber-500/10 text-amber-900 dark:text-amber-200"
+                  : "border-rose-500/40 bg-rose-500/10 text-rose-800 dark:text-rose-200"
+              }`}
+            >
+              {isRateLimited ? (
+                <Clock className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+              ) : (
+                <AlertCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+              )}
               <div className="space-y-1">
-                <strong className="block font-medium">{t.contact.errorTitle}</strong>
+                <strong className="block font-medium">
+                  {isRateLimited
+                    ? isEn ? "Rate Limit Notice" : "Tijdelijke Wachttijd"
+                    : t.contact.errorTitle}
+                </strong>
                 <p className="m-0 text-xs leading-relaxed">{serverError}</p>
               </div>
             </div>
@@ -297,6 +350,7 @@ export function ContactForm({
                 <input
                   id="contact-name-input"
                   type="text"
+                  maxLength={100}
                   {...register("name")}
                   placeholder={t.contact.namePlaceholder}
                   className={`w-full bg-surface-2/40 border ${
@@ -324,6 +378,7 @@ export function ContactForm({
                 <input
                   id="contact-email-input"
                   type="email"
+                  maxLength={255}
                   {...register("email")}
                   placeholder={t.contact.emailPlaceholder}
                   className={`w-full bg-surface-2/40 border ${
@@ -341,7 +396,7 @@ export function ContactForm({
             </div>
           </div>
 
-          {/* Message Textarea */}
+          {/* Message Textarea with Length Limit & Live Counter */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label
@@ -350,14 +405,23 @@ export function ContactForm({
               >
                 {t.contact.labelMessage} <span className="text-rose-500">*</span>
               </label>
-              <span className="font-mono text-[10px] text-text-muted">
-                {messageValue.length > 0 ? `${messageValue.length} chars` : ""}
+              <span
+                className={`font-mono text-[10px] transition-colors ${
+                  messageValue.length >= 2000
+                    ? "text-rose-500 font-bold"
+                    : messageValue.length >= 1800
+                    ? "text-amber-500 font-semibold"
+                    : "text-text-muted"
+                }`}
+              >
+                {messageValue.length} / 2000 {t.contact.charLimitLabel}
               </span>
             </div>
             <div className="relative">
               <textarea
                 id="contact-message-input"
                 rows={5}
+                maxLength={2000}
                 {...register("message")}
                 placeholder={getDynamicPlaceholder()}
                 className={`w-full bg-surface-2/40 border ${
@@ -373,6 +437,12 @@ export function ContactForm({
               </p>
             )}
           </div>
+
+          {/* Cloudflare Turnstile Widget (Badge Only) */}
+          <TurnstileWidget
+            onVerify={(token) => setValue("turnstileToken", token)}
+            onExpire={() => setValue("turnstileToken", "")}
+          />
 
           {/* Submit Button */}
           <div className="pt-1">

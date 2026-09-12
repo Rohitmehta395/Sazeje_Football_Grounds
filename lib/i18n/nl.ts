@@ -265,6 +265,11 @@ export const nl = {
     errorTitle: "Verzenden mislukt",
     errorMessage:
       "Er is een fout opgetreden bij het verzenden van je bericht. Probeer het later opnieuw.",
+    rateLimitError:
+      "Te veel berichten verzonden vanaf jouw netwerk. Wacht een paar minuten voordat je het opnieuw probeert.",
+    charLimitLabel: "tekens",
+    charRemainingLabel: "over",
+    maxCharsWarning: "Maximale tekenlimiet bereikt (2.000 tekens).",
     mailtoNotice:
       "Let op: Berichten worden rechtstreeks verzonden naar het beheer van SaZeJe Football.",
     directInfoTitle: "Direct Contact",
