@@ -16,6 +16,7 @@ import { About } from './globals/About'
 import { GroundsPage } from './globals/GroundsPage'
 import { MapPage } from './globals/MapPage'
 import { ScarvesPage } from './globals/ScarvesPage'
+import { ContactPage } from './globals/ContactPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,7 +29,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Clubs, Grounds, Scarves, Goals],
-  globals: [Settings, About, GroundsPage, MapPage, ScarvesPage],
+  globals: [Settings, About, GroundsPage, MapPage, ScarvesPage, ContactPage],
   plugins: [
     cloudinaryStorage({
       collections: {

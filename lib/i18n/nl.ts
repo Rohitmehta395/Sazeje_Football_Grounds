@@ -231,27 +231,85 @@ export const nl = {
 
   // Contact Page
   contact: {
-    heroEyebrow: "CONTACT",
+    heroEyebrow: "COMMUNITY & VERBINDING",
     heroTitle: "Neem Contact Op",
     heroSubtitle:
-      "Vraag, tip voor een ground, of een sjaal om te ruilen? Stuur een bericht.",
+      "Vraag, tip voor een stadion, of een sjaal om te ruilen? Stuur ons een bericht en deel je passie voor voetbalcultuur.",
+    topicLabel: "Waar gaat je bericht over?",
+    topicGroundTip: "🏟️ Ground Tip",
+    topicScarfSwap: "🧣 Sjaal Ruilvoorstel",
+    topicCollaboration: "🤝 Samenwerking",
+    topicGeneral: "💬 Algemeen",
     labelName: "Naam",
     namePlaceholder: "Je volledige naam",
     labelEmail: "E-mailadres",
     emailPlaceholder: "naam@voorbeeld.nl",
+    labelTopic: "Onderwerp",
     labelMessage: "Bericht",
     messagePlaceholder: "Schrijf hier je bericht, vraag of ruilvoorstel...",
+    messagePlaceholderGroundTip:
+      "Vertel ons over het stadion, de club, de sfeer en waarom we deze ground moeten bezoeken...",
+    messagePlaceholderScarfSwap:
+      "Geef aan welke sjaal uit onze collectie je interesseert en wat voor stuk je zelf wilt aanbieden...",
+    messagePlaceholderCollab:
+      "Deel je idee voor een samenwerking, gastreportage, fotografie of podcast...",
+    messagePlaceholderGeneral: "Schrijf hier je bericht of vraag...",
     submitButton: "Verstuur bericht",
     submittingButton: "Versturen...",
     successTitle: "Bericht ontvangen!",
     successMessage:
-      "Bedankt voor je bericht. We nemen zo snel mogelijk contact met je op.",
+      "Bedankt voor je bericht. We hebben je inzending goed ontvangen en nemen zo snel mogelijk contact met je op.",
     sendAnother: "Nog een bericht sturen",
+    exploreGrounds: "Bekijk Grounds",
+    exploreScarves: "Bekijk Sjaalcollectie",
     errorTitle: "Verzenden mislukt",
     errorMessage:
       "Er is een fout opgetreden bij het verzenden van je bericht. Probeer het later opnieuw.",
     mailtoNotice:
       "Let op: Berichten worden rechtstreeks verzonden naar het beheer van SaZeJe Football.",
+    directInfoTitle: "Direct Contact",
+    directInfoDesc:
+      "Heb je een snelle vraag of tip? Neem rechtstreeks contact op via e-mail of volg onze actuele bezoeken via sociale media.",
+    responseTime: "Reactietijd",
+    responseTimeValue: "Binnen 24-48 uur",
+    baseLocation: "Thuisbasis",
+    baseLocationValue: "Nederland (Reizend door Europa)",
+    copyEmail: "Kopieer e-mail",
+    copiedEmail: "Gekopieerd!",
+    socialsTitle: "Volg SaZeJe Football",
+    socialsSubtitle: "Foto's, matchday video's en sfeerverslagen",
+    faqTitle: "Veelgestelde Vragen",
+    faqSubtitle: "Alles over groundhopping tips, sjaalruil en onze collectie",
+    faqs: [
+      {
+        q: "Hoe werkt een sjaalruil?",
+        a: "In onze sjaalcollectie hebben we een sectie 'Tweedehands / Ruil'. Zie je daar een sjaal tussen die je aanspreekt? Stuur ons een voorstel met details (en eventueel foto's) van de sjaal die je wilt ruilen. We ruilen per post of tijdens een matchday ontmoeting!",
+      },
+      {
+        q: "Accepteren jullie stadionaanbevelingen?",
+        a: "Zeker! We zijn altijd op zoek naar verborgen parels, sfeervolle derby's en authentieke grounds in Nederland, België, Duitsland en de rest van Europa. Tip ons gerust over grounds met karakter.",
+      },
+      {
+        q: "Zijn alle sjaals op de site beschikbaar voor ruil?",
+        a: "Nee, de 'Nieuwe Sjaals' zijn aangeschaft als officiële souvenirs tijdens onze eigen stadionbezoeken en vormen ons permanente archief. Alleen sjaals in de 'Tweedehands / Ruil' categorie zijn beschikbaar voor swap.",
+      },
+      {
+        q: "Kan ik foto's of een verslag insturen?",
+        a: "Ja, we waarderen bijdragen van medegroundhoppers! Neem contact op via het formulier en we kunnen afspreken hoe je beelden of verslagen het beste kunt aanleveren.",
+      },
+    ],
+    reasonsTitle: "Waarom Contact Opnemen?",
+    reasonsSubtitle:
+      "SaZeJe Football verbindt supporters, groundhoppers en verzamelaars uit heel Europa.",
+    reason1Title: "Stadiontips & Verborgen Parels",
+    reason1Desc:
+      "Ken je een authentiek amateurstadion, een vergeten traditie of een derby die we moeten bezoeken? Laat het ons weten!",
+    reason2Title: "Sjaals Ruilen & Verzamelen",
+    reason2Desc:
+      "Heb je een zeldzame club- of vriendschapssjaal om te ruilen? Wij staan altijd open voor een goed ruilvoorstel.",
+    reason3Title: "Samenwerkingen & Matchday Verhalen",
+    reason3Desc:
+      "Interesse in een gezamenlijke reportage, fotoreeks, gastbijdrage of podcast? We gaan graag in gesprek.",
   },
 
   // Common UI

@@ -233,27 +233,85 @@ export const en: Translations = {
 
   // Contact Page
   contact: {
-    heroEyebrow: "CONTACT",
+    heroEyebrow: "COMMUNITY & CONNECT",
     heroTitle: "Get in Touch",
     heroSubtitle:
-      "Have a question, ground tip, or scarf swap proposal? Send a message.",
+      "Have a question, ground tip, or scarf swap proposal? Send us a message and share your passion for European football culture.",
+    topicLabel: "What is your inquiry about?",
+    topicGroundTip: "🏟️ Ground Tip",
+    topicScarfSwap: "🧣 Scarf Swap Offer",
+    topicCollaboration: "🤝 Collaboration",
+    topicGeneral: "💬 General Question",
     labelName: "Name",
     namePlaceholder: "Your full name",
     labelEmail: "Email Address",
     emailPlaceholder: "name@example.com",
+    labelTopic: "Topic",
     labelMessage: "Message",
     messagePlaceholder: "Write your message, question, or swap offer here...",
+    messagePlaceholderGroundTip:
+      "Tell us about the ground, the club, the terrace atmosphere, and why we should visit...",
+    messagePlaceholderScarfSwap:
+      "Specify which scarf from our collection you're interested in and what piece you'd like to offer in exchange...",
+    messagePlaceholderCollab:
+      "Share your ideas for a collaboration, feature report, photography, or podcast...",
+    messagePlaceholderGeneral: "Write your message or question here...",
     submitButton: "Send Message",
     submittingButton: "Sending...",
     successTitle: "Message Received!",
     successMessage:
-      "Thank you for your message. We will get back to you as soon as possible.",
+      "Thank you for reaching out. We have safely received your note and will get back to you as soon as possible.",
     sendAnother: "Send another message",
+    exploreGrounds: "Explore Grounds",
+    exploreScarves: "Explore Scarves",
     errorTitle: "Sending Failed",
     errorMessage:
       "An error occurred while sending your message. Please try again later.",
     mailtoNotice:
       "Note: Messages are sent directly to the SaZeJe Football management.",
+    directInfoTitle: "Direct Contact",
+    directInfoDesc:
+      "Have a quick question or tip? Contact us directly via email or follow our ongoing matchday travels across social channels.",
+    responseTime: "Response Time",
+    responseTimeValue: "Within 24-48 hours",
+    baseLocation: "Base Location",
+    baseLocationValue: "Netherlands (Traveling Europe)",
+    copyEmail: "Copy email",
+    copiedEmail: "Copied!",
+    socialsTitle: "Follow SaZeJe Football",
+    socialsSubtitle: "Photos, matchday videos, and ground reports",
+    faqTitle: "Frequently Asked Questions",
+    faqSubtitle: "Everything about ground recommendations, scarf swaps, and our archive",
+    faqs: [
+      {
+        q: "How does a scarf swap work?",
+        a: "In our Scarf Collection, check out the 'Secondhand / Swaps' section. If you spot a scarf you'd like to add to your collection, send us a proposal with details (and photos) of what you have to offer. We swap via tracked post or in person on matchday!",
+      },
+      {
+        q: "Do you accept ground recommendations?",
+        a: "Absolutely! We are constantly looking for overlooked lower-league gems, lively local derbies, and authentic grounds across the Netherlands, Belgium, Germany, and Europe. Send us your tips!",
+      },
+      {
+        q: "Are all scarves on the site available for trade?",
+        a: "No, 'New Scarves' were bought directly as official matchday souvenirs during our visits and remain part of our permanent archive. Only scarves listed in the 'Secondhand / Swaps' catalog are open for trade.",
+      },
+      {
+        q: "Can I submit matchday photos or stories?",
+        a: "Yes, we love connecting with fellow groundhoppers! Reach out using this contact form, and we can coordinate how to best feature your images or terrace reports.",
+      },
+    ],
+    reasonsTitle: "Why Connect With Us?",
+    reasonsSubtitle:
+      "SaZeJe Football connects supporters, groundhoppers, and collectors from across Europe.",
+    reason1Title: "Ground Tips & Hidden Gems",
+    reason1Desc:
+      "Know an authentic non-league ground, a forgotten tradition, or a derby we must experience? Let us know!",
+    reason2Title: "Scarf Swapping & Collecting",
+    reason2Desc:
+      "Have a rare club or friendship scarf to trade? We are always open to fair swaps with fellow passionate collectors.",
+    reason3Title: "Collaborations & Match Reports",
+    reason3Desc:
+      "Interested in a joint match report, photography exchange, guest article, or podcast? We'd love to chat.",
   },
 
   // Common UI

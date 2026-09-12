@@ -7,3 +7,4 @@ export * from "./about";
 export * from "./groundsPage";
 export * from "./mapPage";
 export * from "./scarvesPage";
+export * from "./contactPage";

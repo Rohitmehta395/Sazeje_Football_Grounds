@@ -1,26 +1,44 @@
-"use client";
-
 import * as React from "react";
-import { PageHero } from "@/components/hero/PageHero";
-import { ContactForm } from "@/components/contact/ContactForm";
-import { useTranslation } from "@/lib/i18n/LanguageContext";
+import type { Metadata } from "next";
+import { getContactPageContent, getSettings } from "@/lib/data";
+import { ContactClientView } from "./ContactClientView";
 
-export default function ContactPage() {
-  const { t } = useTranslation();
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageContent = await getContactPageContent();
+  const title =
+    pageContent.seo?.metaTitle ||
+    pageContent.hero.title ||
+    "Contact & Community | SaZeJe Football";
+  const description =
+    pageContent.seo?.metaDescription ||
+    pageContent.hero.subtitle ||
+    "Neem contact op met SaZeJe Football voor stadiontips, sjaalruil voorstellen of samenwerkingen.";
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: pageContent.hero.heroImage
+        ? [{ url: pageContent.hero.heroImage }]
+        : undefined,
+    },
+  };
+}
+
+export default async function ContactPage() {
+  const [contactContent, settings] = await Promise.all([
+    getContactPageContent(),
+    getSettings(),
+  ]);
 
   return (
-    <div>
-      <PageHero
-        title={t.contact.heroTitle}
-        description={t.contact.heroSubtitle}
-        eyebrow={t.contact.heroEyebrow}
-      />
-
-      <div className="max-w-[1160px] mx-auto px-[24px] pt-[40px] pb-[60px]">
-        <div className="max-w-[640px] mx-auto">
-          <ContactForm />
-        </div>
-      </div>
-    </div>
+    <ContactClientView
+      contactContent={contactContent}
+      settings={settings}
+    />
   );
 }
