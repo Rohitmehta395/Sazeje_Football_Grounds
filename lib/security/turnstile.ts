@@ -31,9 +31,16 @@ export async function verifyTurnstileToken(
       );
       return { success: true };
     }
-    console.warn(
-      "[Security] TURNSTILE_SECRET_KEY is missing in production environment."
-    );
+    // In production: if Turnstile site key is deployed, require secret key to prevent bot bypass
+    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim()) {
+      console.error(
+        "[Security] TURNSTILE_SECRET_KEY is missing in production while NEXT_PUBLIC_TURNSTILE_SITE_KEY is configured. Failing closed."
+      );
+      return {
+        success: false,
+        error: "Security verification service is misconfigured. Please try again later.",
+      };
+    }
     return { success: true };
   }
 

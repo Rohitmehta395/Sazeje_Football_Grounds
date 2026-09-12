@@ -1,12 +1,15 @@
 /**
  * In-memory sliding-window IP rate limiter.
  * Protects form endpoints and Server Actions against flood and brute-force abuse.
+ * Includes upper capacity bounding to prevent memory exhaustion / DoS attacks.
  */
 
 interface RateLimitRecord {
   timestamps: number[];
 }
 
+// Upper capacity limit on stored IPs to prevent memory exhaustion attacks
+const MAX_STORE_CAPACITY = 5000;
 const rateLimitStore = new Map<string, RateLimitRecord>();
 
 // Cleanup old records periodically every 15 minutes
@@ -25,6 +28,23 @@ function cleanupExpiredRecords(windowMs: number) {
     } else {
       record.timestamps = validTimestamps;
     }
+  }
+}
+
+/**
+ * Ensures the in-memory map does not exceed maximum capacity.
+ * Evicts oldest entries if limit is exceeded.
+ */
+function evictIfOverCapacity() {
+  if (rateLimitStore.size <= MAX_STORE_CAPACITY) return;
+
+  // Evict the oldest 10% of entries to keep memory bounded
+  const toDelete = Math.ceil(MAX_STORE_CAPACITY * 0.1);
+  let count = 0;
+  for (const key of rateLimitStore.keys()) {
+    rateLimitStore.delete(key);
+    count++;
+    if (count >= toDelete) break;
   }
 }
 
@@ -53,6 +73,7 @@ export function checkRateLimit(
 
   let record = rateLimitStore.get(identifier);
   if (!record) {
+    evictIfOverCapacity();
     record = { timestamps: [] };
     rateLimitStore.set(identifier, record);
   }

@@ -3,8 +3,8 @@ import { z } from "zod";
 // Strict email regex matching RFC 5322 compatible patterns with proper TLD
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-// Safe characters for human names across international latin alphabets
-const NAME_REGEX = /^[a-zA-Z0-9\s.,'’\-À-ž]{2,100}$/;
+// Safe characters for human names across international latin alphabets (disallowing line breaks)
+const NAME_REGEX = /^[a-zA-Z0-9 .,'’\-À-ž]{2,100}$/;
 
 export const contactTopics = [
   "ground_tip",

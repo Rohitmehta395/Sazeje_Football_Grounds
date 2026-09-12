@@ -5,7 +5,7 @@ import { Resend } from "resend";
 import { getPayload } from "payload";
 import config from "@payload-config";
 import { contactSchema, ContactFormData } from "@/lib/validations/contact";
-import { sanitizeInput, escapeHtml } from "@/lib/security/sanitize";
+import { sanitizeInput, sanitizeSingleLine, escapeHtml } from "@/lib/security/sanitize";
 import { checkRateLimit } from "@/lib/security/rateLimit";
 import { verifyTurnstileToken } from "@/lib/security/turnstile";
 
@@ -26,13 +26,18 @@ export async function sendContactEmail(
   data: ContactFormData
 ): Promise<ContactActionResult> {
   // 1. Resolve client IP securely from incoming request headers
+  // Prioritizes trusted reverse-proxy headers to prevent spoofing
   let clientIp = "127.0.0.1";
   try {
     const headerList = await headers();
-    const forwardedFor = headerList.get("x-forwarded-for");
-    const realIp = headerList.get("x-real-ip");
     const cfIp = headerList.get("cf-connecting-ip");
-    clientIp = (forwardedFor?.split(",")[0] || realIp || cfIp || "127.0.0.1").trim();
+    const realIp = headerList.get("x-real-ip");
+    const forwardedFor = headerList.get("x-forwarded-for");
+    
+    const resolved = cfIp || realIp || (forwardedFor ? forwardedFor.split(",")[0] : null);
+    if (resolved && resolved.trim()) {
+      clientIp = resolved.trim();
+    }
   } catch (headerErr) {
     console.warn("[Security] Could not retrieve request headers for client IP:", headerErr);
   }
@@ -83,9 +88,9 @@ export async function sendContactEmail(
 
   // 6. Input sanitization (strip control characters and prepare safe text & escaped HTML)
   const rawData = validationResult.data;
-  const cleanName = sanitizeInput(rawData.name);
-  const cleanEmail = sanitizeInput(rawData.email).toLowerCase();
-  const cleanTopic = rawData.topic ? sanitizeInput(rawData.topic) : "general";
+  const cleanName = sanitizeSingleLine(rawData.name);
+  const cleanEmail = sanitizeSingleLine(rawData.email).toLowerCase();
+  const cleanTopic = rawData.topic ? sanitizeSingleLine(rawData.topic) : "general";
   const cleanMessage = sanitizeInput(rawData.message);
 
   const safeHtmlName = escapeHtml(cleanName);
