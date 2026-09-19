@@ -11,15 +11,6 @@ export interface AboutGalleryItem {
   captionEn?: string;
 }
 
-export interface AboutPillar {
-  id?: string;
-  title: string;
-  titleEn?: string;
-  description: string;
-  descriptionEn?: string;
-  icon: 'stadium' | 'scarf' | 'map' | 'target' | 'passion';
-}
-
 export interface AboutContent {
   hero: {
     eyebrow?: string;
@@ -47,5 +38,4 @@ export interface AboutContent {
     tertiaryImage?: string;
     gallery?: AboutGalleryItem[];
   };
-  pillars?: AboutPillar[];
 }

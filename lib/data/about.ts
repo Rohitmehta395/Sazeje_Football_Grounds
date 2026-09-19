@@ -48,29 +48,6 @@ const DEFAULT_ABOUT_CONTENT: AboutContent = {
     secondaryImage: "/Hero_Image.jpg",
     gallery: [],
   },
-  pillars: [
-    {
-      title: "Stadionarchitectuur & Karakter",
-      titleEn: "Stadium Architecture & Character",
-      description: "Van rauwe Engelse bakstenen tribunes tot monumentale Europese betonkolossen. We documenteren de unieke ziel van elk bezocht stadion.",
-      descriptionEn: "From gritty English brick stands to monumental European concrete arenas. We document the unique soul of every stadium visited.",
-      icon: "stadium",
-    },
-    {
-      title: "Authentieke Supporterscultuur",
-      titleEn: "Authentic Supporter Culture",
-      description: "Geen klinische commercie, maar de echte clubliefde van de lokale achterban. Het ritueel van de wedstrijddag staat centraal.",
-      descriptionEn: "No plastic commercialism, but genuine supporter passion. The matchday ritual and terrace atmosphere take center stage.",
-      icon: "passion",
-    },
-    {
-      title: "Reisverhalen & Wedstrijdbeleving",
-      titleEn: "Travel Stories & Matchday Experience",
-      description: "Van planning van reizen en tickets tot het ontdekken van verborgen voetbalcultuur in steden over heel Europa.",
-      descriptionEn: "From route planning and tickets to discovering hidden football culture in cities across Europe.",
-      icon: "map",
-    },
-  ],
 };
 
 export async function getAboutContent(): Promise<AboutContent> {
@@ -88,7 +65,6 @@ export async function getAboutContent(): Promise<AboutContent> {
     const heroDoc = (doc.hero as Record<string, unknown>) || {};
     const storyDoc = (doc.story as Record<string, unknown>) || {};
     const mediaDoc = (doc.media as Record<string, unknown>) || {};
-    const pillarsDoc = Array.isArray(doc.pillars) ? doc.pillars : [];
 
     // Map hero
     const heroImage = extractMediaUrl(heroDoc.heroImage) || DEFAULT_ABOUT_CONTENT.hero.heroImage;
@@ -146,23 +122,10 @@ export async function getAboutContent(): Promise<AboutContent> {
       gallery,
     };
 
-    // Map pillars
-    const pillars = pillarsDoc.length > 0
-      ? pillarsDoc.map((p: Record<string, unknown>) => ({
-          id: p.id ? String(p.id) : undefined,
-          title: String(p.title || ""),
-          titleEn: p.titleEn ? String(p.titleEn) : undefined,
-          description: String(p.description || ""),
-          descriptionEn: p.descriptionEn ? String(p.descriptionEn) : undefined,
-          icon: (p.icon as AboutContent["pillars"] extends Array<infer T> ? T extends { icon: infer I } ? I : never : never) || "stadium",
-        }))
-      : DEFAULT_ABOUT_CONTENT.pillars;
-
     return {
       hero,
       story,
       media,
-      pillars,
     };
   } catch (error) {
     console.error("Error fetching About content from Payload:", error);

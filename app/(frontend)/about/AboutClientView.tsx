@@ -10,15 +10,11 @@ import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { Goal, AboutContent } from "@/types";
 import {
   Compass,
-  Globe,
   Target,
   Clock,
   ArrowRight,
-  Flame,
   MessageSquare,
-  Sparkles,
 } from "lucide-react";
-import { StadiumIcon } from "@/components/ui/Icons";
 
 export interface AboutStats {
   groundsCount: number;
@@ -76,23 +72,6 @@ export function AboutClientView({
     return Math.round(totalPerc / goals.length);
   }, [goals]);
 
-  // Icon mapper helper for pillars
-  const renderPillarIcon = (iconName: string) => {
-    switch (iconName) {
-      case "stadium":
-        return <StadiumIcon className="w-5 h-5 text-accent" />;
-      case "scarf":
-        return <Sparkles className="w-5 h-5 text-accent-2" />;
-      case "map":
-        return <Globe className="w-5 h-5 text-azg" />;
-      case "target":
-        return <Target className="w-5 h-5 text-accent" />;
-      case "passion":
-      default:
-        return <Flame className="w-5 h-5 text-azg" />;
-    }
-  };
-
   return (
     <div className="space-y-12 sm:space-y-16 pb-20">
       {/* 1. Page Hero */}
@@ -104,121 +83,87 @@ export function AboutClientView({
       />
 
       <div className="max-w-[1160px] mx-auto px-4 sm:px-6 space-y-16 pt-8 sm:pt-10">
-        {/* 2. The Groundhopper Story & Media Collage */}
-        <section aria-label="About the Groundhopper" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column: Visual Showcase Card */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="relative rounded-2xl overflow-hidden border border-border shadow-card bg-surface group">
-              <div className="relative w-full h-[360px] sm:h-[420px] overflow-hidden">
-                <img
-                  src={secondaryImage}
-                  alt="Groundhopping matchday atmosphere"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              </div>
+        {/* 2. The Groundhopper Story & Full-width Quote */}
+        <section aria-label="About the Groundhopper" className="space-y-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left Column: Visual Showcase Card */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-2xl overflow-hidden border border-border shadow-card bg-surface group">
+                <div className="relative w-full h-[360px] sm:h-[420px] overflow-hidden">
+                  <img
+                    src={secondaryImage}
+                    alt="Groundhopping matchday atmosphere"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                </div>
 
-              {/* Author / Identity Label Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-surface/90 backdrop-blur-md border border-border/80 px-4 py-3 rounded-xl shadow-lg">
-                <div className="min-w-0">
-                  <span className="font-bebas text-xl text-text leading-none block truncate">
-                    SaZeJe Football
-                  </span>
-                  <span className="font-mono text-[11px] text-azg uppercase tracking-wider block truncate">
-                    {lang === "en" ? "European Groundhopper" : "Europese Groundhopper"}
-                  </span>
+                {/* Author / Identity Label Overlay */}
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-surface/90 backdrop-blur-md border border-border/80 px-4 py-3 rounded-xl shadow-lg">
+                  <div className="min-w-0">
+                    <span className="font-bebas text-xl text-text leading-none block truncate">
+                      SaZeJe Football
+                    </span>
+                    <span className="font-mono text-[11px] text-azg uppercase tracking-wider block truncate">
+                      {lang === "en" ? "European Groundhopper" : "Europese Groundhopper"}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Quote Card */}
-            {aboutContent.story.quote && (
-              <div className="bg-surface border border-border rounded-2xl p-5 shadow-card relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-accent/5 rounded-full blur-xl pointer-events-none" />
-                <p className="font-inter italic text-sm text-text-muted leading-relaxed m-0 mb-2">
+            {/* Right Column: Editorial Bio & Content */}
+            <div className="lg:col-span-7 space-y-6">
+              <div>
+                {bioBadge && (
+                  <div className="font-mono text-xs uppercase tracking-widest text-azg font-bold flex items-center gap-1.5 mb-2">
+                    <Compass className="w-3.5 h-3.5 text-accent" />
+                    <span>{bioBadge}</span>
+                  </div>
+                )}
+
+                <h2 className="font-bebas text-3xl sm:text-5xl text-text m-0 tracking-wide leading-tight">
+                  {bioTitle}
+                </h2>
+              </div>
+
+              {/* Editorial Lead Highlight */}
+              {bioLead && (
+                <p className="font-inter text-base sm:text-lg text-text font-medium leading-relaxed border-l-2 border-accent pl-4 my-4">
+                  {bioLead}
+                </p>
+              )}
+
+              {/* Dynamic Paragraphs from Payload CMS */}
+              <div className="space-y-4 font-inter text-[15px] text-text-muted leading-relaxed">
+                {aboutContent.story.paragraphs.map((p, idx) => {
+                  const text = lang === "en" && p.paragraphEn ? p.paragraphEn : p.paragraph;
+                  return (
+                    <p key={p.id || idx} className="m-0">
+                      {text}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Full-width Quote Banner */}
+          {aboutContent.story.quote && (
+            <div className="relative bg-surface border border-border rounded-xl px-5 py-3.5 sm:py-4 shadow-sm overflow-hidden">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-full blur-xl pointer-events-none" />
+              <div className="relative flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 text-center">
+                <p className="font-inter italic text-xs sm:text-sm text-text leading-relaxed m-0">
                   &ldquo;{aboutContent.story.quote}&rdquo;
                 </p>
                 {aboutContent.story.quoteAuthor && (
-                  <span className="font-mono text-[11px] text-accent uppercase tracking-widest font-semibold block">
+                  <span className="font-mono text-[11px] text-accent uppercase tracking-wider font-semibold shrink-0">
                     — {aboutContent.story.quoteAuthor}
                   </span>
                 )}
               </div>
-            )}
-          </div>
-
-          {/* Right Column: Editorial Bio & Content */}
-          <div className="lg:col-span-7 space-y-6">
-            <div>
-              {bioBadge && (
-                <div className="font-mono text-xs uppercase tracking-widest text-azg font-bold flex items-center gap-1.5 mb-2">
-                  <Compass className="w-3.5 h-3.5 text-accent" />
-                  <span>{bioBadge}</span>
-                </div>
-              )}
-
-              <h2 className="font-bebas text-3xl sm:text-5xl text-text m-0 tracking-wide leading-tight">
-                {bioTitle}
-              </h2>
             </div>
-
-            {lang === "en" && (
-              <div className="font-mono text-[11px] text-azg uppercase tracking-[0.06em] bg-surface-2 border border-border px-3 py-1.5 rounded-md inline-block">
-                {t.common.originalDutchNotice}
-              </div>
-            )}
-
-            {/* Editorial Lead Highlight */}
-            {bioLead && (
-              <p className="font-inter text-base sm:text-lg text-text font-medium leading-relaxed border-l-2 border-accent pl-4 my-4">
-                {bioLead}
-              </p>
-            )}
-
-            {/* Dynamic Paragraphs from Payload CMS */}
-            <div className="space-y-4 font-inter text-[15px] text-text-muted leading-relaxed">
-              {aboutContent.story.paragraphs.map((p, idx) => {
-                const text = lang === "en" && p.paragraphEn ? p.paragraphEn : p.paragraph;
-                return (
-                  <p key={p.id || idx} className="m-0">
-                    {text}
-                  </p>
-                );
-              })}
-            </div>
-
-            {/* Groundhopping Pillars / Philosophy */}
-            {aboutContent.pillars && aboutContent.pillars.length > 0 && (
-              <div className="pt-4 border-t border-border space-y-3">
-                <span className="font-mono text-xs uppercase tracking-widest text-text-muted font-bold block mb-3">
-                  {lang === "en" ? "Groundhopping Philosophy" : "De SaZeJe Filosofie"}
-                </span>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-                  {aboutContent.pillars.map((pillar, idx) => {
-                    const title = lang === "en" && pillar.titleEn ? pillar.titleEn : pillar.title;
-                    const desc = lang === "en" && pillar.descriptionEn ? pillar.descriptionEn : pillar.description;
-                    return (
-                      <div
-                        key={pillar.id || idx}
-                        className="bg-surface border border-border rounded-xl p-4 shadow-sm hover:border-accent/40 transition-colors"
-                      >
-                        <div className="mb-2">
-                          {renderPillarIcon(pillar.icon)}
-                        </div>
-                        <h3 className="font-bebas text-lg text-text m-0 mb-1 leading-tight">
-                          {title}
-                        </h3>
-                        <p className="font-inter text-xs text-text-muted m-0 line-clamp-3 leading-relaxed">
-                          {desc}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
+          )}
         </section>
 
         {/* 3. Matchday & Grounds Gallery Section */}
