@@ -190,7 +190,6 @@ export const nl = {
     founded: "Opgericht",
     trophies: "Prijzenkast",
     funFact: "Wist Je Dat?",
-    purchaseDate: "Aankoopdatum",
     prevPage: "Vorige",
     nextPage: "Volgende",
     pageOf: "Pagina {current} van {total}",

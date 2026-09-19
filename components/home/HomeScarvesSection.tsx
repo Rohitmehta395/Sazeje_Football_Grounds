@@ -5,8 +5,7 @@ import Link from "next/link";
 import { Scarf } from "@/types";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName } from "@/lib/data/countries";
-import { formatDate } from "@/lib/utils/formatDate";
-import { ArrowRight, Building2, Calendar, Trophy } from "lucide-react";
+import { ArrowRight, Building2, Trophy } from "lucide-react";
 import { ScarfIcon } from "@/components/ui/Icons";
 
 export interface HomeScarvesSectionProps {
@@ -169,17 +168,6 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                       </div>
                     )}
 
-                    {scarf.purchaseDate && (
-                      <div className="flex items-center justify-between text-text">
-                        <span className="text-text-muted flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-accent" />
-                          <span>{t.scarves.purchaseDate}</span>
-                        </span>
-                        <span className="font-mono font-semibold text-accent">
-                          {formatDate(scarf.purchaseDate, lang)}
-                        </span>
-                      </div>
-                    )}
                   </div>
                 </div>
 

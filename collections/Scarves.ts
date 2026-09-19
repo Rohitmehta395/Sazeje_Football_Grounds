@@ -208,18 +208,7 @@ export const Scarves: CollectionConfig = {
         },
       ],
     },
-    {
-      name: 'purchaseDate',
-      type: 'date',
-      required: false,
-      admin: {
-        date: {
-          pickerAppearance: 'dayOnly',
-          displayFormat: 'yyyy-MM-dd',
-        },
-        description: 'Purchase date (optional, relevant for new scarves)',
-      },
-    },
+
     {
       name: 'photo',
       type: 'upload',

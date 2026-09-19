@@ -14,7 +14,6 @@ export interface Scarf {
   trophiesEn?: string;
   funFact: string;
   funFactEn?: string;
-  purchaseDate?: string;
   photo: string;
   dateAdded: string;
 }

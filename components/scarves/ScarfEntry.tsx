@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Scarf } from "@/types";
-import { Building2, Calendar, Flag, Lightbulb, Trophy } from "lucide-react";
+import { Building2, Calendar, Lightbulb, Trophy } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName } from "@/lib/data/countries";
 
@@ -73,7 +73,7 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
           </span>
         </div>
 
-        <div className="flex items-center justify-between py-[16px] border-b border-dashed border-border">
+        <div className="flex items-center justify-between py-[16px]">
           <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
             <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
               <Lightbulb className="w-4 h-4" />
@@ -84,20 +84,6 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
             {scarf.funFact}
           </span>
         </div>
-
-        {scarf.purchaseDate && (
-          <div className="flex items-center justify-between py-[16px]">
-            <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
-              <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
-                <Flag className="w-4 h-4" />
-              </span>
-              {t.scarves.purchaseDate}
-            </span>
-            <span className="text-right max-w-[56%] text-[13px] leading-[1.5] text-text font-mono font-bold">
-              {scarf.purchaseDate}
-            </span>
-          </div>
-        )}
       </div>
 
       {/* Description */}

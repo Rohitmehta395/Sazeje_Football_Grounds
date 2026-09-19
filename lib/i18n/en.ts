@@ -192,7 +192,6 @@ export const en: Translations = {
     founded: "Founded",
     trophies: "Honours",
     funFact: "Did You Know?",
-    purchaseDate: "Purchase Date",
     prevPage: "Previous",
     nextPage: "Next",
     pageOf: "Page {current} of {total}",

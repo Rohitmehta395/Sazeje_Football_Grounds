@@ -156,9 +156,6 @@ export function ScarfLightbox({ scarf, isOpen, onClose }: ScarfLightboxProps) {
       <div className="w-full max-w-6xl mx-auto text-white/80 text-xs font-mono flex items-center justify-between gap-4 pt-2 border-t border-white/10">
         <div className="truncate">
           <span className="text-azg font-bold">{scarf.stadium}</span>
-          {scarf.purchaseDate && (
-            <span className="text-white/60"> • Acquired: {scarf.purchaseDate}</span>
-          )}
         </div>
         <div className="text-white/50 text-[11px] hidden sm:block">
           Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white">Esc</kbd> to close,{" "}

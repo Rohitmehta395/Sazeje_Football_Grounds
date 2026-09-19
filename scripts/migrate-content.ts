@@ -220,7 +220,6 @@ const SOURCE_SCARVES = [
     trophies: "5x Champions League, 27x Spaans landskampioen",
     funFact: "Het clublied wordt in het Catalaans gezongen, ongeacht waar de speler vandaan komt.",
     photo: "https://picsum.photos/seed/scarf-barca/500/400",
-    purchaseDate: "2025-03-14",
     dateAdded: "2025-03-15",
   },
   {
@@ -235,7 +234,6 @@ const SOURCE_SCARVES = [
     trophies: "6x Champions League, 19x Engels landskampioen",
     funFact: "Spelers raken bij het betreden van het veld het bord 'This Is Anfield' aan.",
     photo: "https://picsum.photos/seed/scarf-lfc/500/400",
-    purchaseDate: "2025-01-20",
     dateAdded: "2025-01-21",
   },
   {
@@ -278,7 +276,6 @@ const SOURCE_SCARVES = [
     trophies: "7x Champions League, 19x Italiaans landskampioen",
     funFact: "San Siro wordt gedeeld met stadsrivaal Inter, elk met een eigen kleedkamergang.",
     photo: "https://picsum.photos/seed/scarf-milan/500/400",
-    purchaseDate: "2024-04-11",
     dateAdded: "2024-04-12",
   },
   {
@@ -489,7 +486,6 @@ async function migrateContent() {
         founded: s.founded,
         trophies: s.trophies,
         funFact: s.funFact,
-        purchaseDate: s.purchaseDate,
         dateAdded: s.dateAdded,
         photo: photoId || undefined,
       },

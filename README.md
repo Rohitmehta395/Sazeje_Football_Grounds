@@ -122,7 +122,6 @@ Open [`lib/data/scarves.ts`](file:///d:/Projects/Football%20-%20Netherlands/saze
   founded: "1887",
   trophies: "53x Landskampioen, 1x Europa Cup I",
   funFact: "Eerste Britse club die de Europa Cup I won in 1967 (Lisbon Lions).",
-  purchaseDate: "2024-02-18",
   photo: "https://picsum.photos/id/1050/800/600",
   description: "Gekocht in de hoofdwinkel bij Celtic Park voor de wedstrijd.",
 }

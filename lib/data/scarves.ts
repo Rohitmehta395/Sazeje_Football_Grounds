@@ -32,7 +32,6 @@ function mapPayloadScarf(doc: Record<string, unknown>): Scarf {
     trophiesEn: doc.trophiesEn ? String(doc.trophiesEn) : undefined,
     funFact: String(doc.funFact || ""),
     funFactEn: doc.funFactEn ? String(doc.funFactEn) : undefined,
-    purchaseDate: doc.purchaseDate ? String(doc.purchaseDate) : undefined,
     photo: photoUrl,
     dateAdded: String(doc.dateAdded || doc.createdAt || new Date().toISOString()),
   };

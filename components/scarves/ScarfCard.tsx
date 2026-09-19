@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Scarf } from "@/types";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName } from "@/lib/data/countries";
-import { formatDate } from "@/lib/utils/formatDate";
 import { StadiumIcon, OfficialScarfIcon, SwapScarvesIcon } from "@/components/ui/Icons";
 import { Calendar, Trophy, Lightbulb, Maximize2, ArrowRightLeft } from "lucide-react";
 
@@ -170,16 +169,9 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
         {isNew ? (
           <>
             <div className="font-mono text-[11px] text-text-muted">
-              {scarf.purchaseDate ? (
-                <span>
-                  {t.scarves.purchaseDate}:{" "}
-                  <strong className="text-text font-bold">{formatDate(scarf.purchaseDate, lang)}</strong>
-                </span>
-              ) : (
-                <span className="text-teal-800 dark:text-azg font-semibold">
-                  {isEn ? "Matchday Acquisition" : "Matchday Aankoop"}
-                </span>
-              )}
+              <span className="text-teal-800 dark:text-azg font-semibold">
+                {isEn ? "Matchday Acquisition" : "Matchday Aankoop"}
+              </span>
             </div>
 
             {scarf.photo && (
