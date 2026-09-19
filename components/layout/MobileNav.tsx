@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export interface NavItem {
@@ -76,18 +75,6 @@ export function MobileNav({
             : "-translate-y-3 opacity-0 pointer-events-none"
         }`}
       >
-        <div className="flex items-center gap-2.5 pb-2 border-b border-border/60 w-full mb-1">
-          <div className="relative w-7 h-7 rounded-full overflow-hidden border border-border flex-shrink-0">
-            <Image
-              src="/Sazaje_groundhopping_logo.jpg"
-              alt="SaZeJe Football"
-              fill
-              sizes="28px"
-              className="object-cover"
-            />
-          </div>
-          <span className="font-bebas text-lg text-text">SaZeJe Football</span>
-        </div>
         {items.map((item) => {
           const isActive =
             item.href === "/"
