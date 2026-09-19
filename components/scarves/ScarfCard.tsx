@@ -116,21 +116,21 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
           {/* Description */}
           {displayDescription && (
-            <p className="font-inter text-sm text-text/85 leading-relaxed m-0 line-clamp-2">
+            <p className="font-inter text-sm text-text/85 leading-relaxed m-0">
               {displayDescription}
             </p>
           )}
 
           {/* Metadata Chips Grid */}
           <div className="grid grid-cols-2 gap-2 pt-2 border-t border-border/50 text-xs font-mono">
-            <div className="flex items-center gap-2 text-text-muted truncate">
+            <div className="flex items-center gap-2 text-text-muted min-w-0">
               <StadiumIcon className="w-3.5 h-3.5 text-azg shrink-0" />
               <span className="truncate" title={scarf.stadium}>
                 {scarf.stadium || "—"}
               </span>
             </div>
 
-            <div className="flex items-center gap-2 text-text-muted truncate">
+            <div className="flex items-center gap-2 text-text-muted min-w-0">
               <Calendar className="w-3.5 h-3.5 text-accent-2 shrink-0" />
               <span className="truncate">
                 {isEn ? `Est. ${scarf.founded}` : `Opgericht ${scarf.founded}`}
@@ -138,9 +138,9 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
             </div>
 
             {displayTrophies && (
-              <div className="col-span-2 flex items-center gap-2 text-text-muted truncate">
-                <Trophy className="w-3.5 h-3.5 text-accent-2 shrink-0" />
-                <span className="truncate text-[11.5px]" title={displayTrophies}>
+              <div className="col-span-2 flex items-start gap-2 text-text-muted pt-1">
+                <Trophy className="w-3.5 h-3.5 text-accent-2 shrink-0 mt-0.5" />
+                <span className="text-[11.5px] leading-relaxed break-words">
                   {displayTrophies}
                 </span>
               </div>
@@ -156,7 +156,7 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
                 <Lightbulb className={`w-3.5 h-3.5 ${isNew ? "text-teal-700 dark:text-azg" : "text-amber-800 dark:text-accent-2"}`} />
                 <span>{t.scarves.funFact}</span>
               </div>
-              <p className="font-inter text-text-muted italic leading-relaxed m-0 line-clamp-3 text-[12.5px]">
+              <p className="font-inter text-text-muted italic leading-relaxed m-0 text-[12.5px]">
                 &ldquo;{displayFunFact}&rdquo;
               </p>
             </div>

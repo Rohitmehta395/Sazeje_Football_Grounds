@@ -20,34 +20,32 @@ const DEFAULT_ABOUT_CONTENT: AboutContent = {
     eyebrowEn: "ABOUT & GOALS",
     title: "Over SaZeJe Football",
     titleEn: "About SaZeJe Football",
-    subtitle: "Achtergrondverhaal over de passie voor voetbalreizen, groundhopping en het verzamelen van sjaals.",
-    subtitleEn: "Background story behind the passion for football trips, groundhopping, and collecting scarves.",
+    subtitle: "Achtergrondverhaal over de passie voor voetbalreizen en groundhopping.",
+    subtitleEn: "Background story behind the passion for football trips and groundhopping.",
     heroImage: "/Hero_Image.jpg",
   },
   story: {
-    badge: "GROUNDHOPPER & SJAALVERZAMELAAR",
-    badgeEn: "GROUNDHOPPER & COLLECTOR",
+    badge: "GROUNDHOPPER & REIZIGER",
+    badgeEn: "GROUNDHOPPER & TRAVELER",
     title: "Het Verhaal Achter SaZeJe",
     titleEn: "The Story Behind SaZeJe",
     lead: "SaZeJe Football is ontstaan uit een gepassioneerde liefde voor de pure voetbalsfeer in en rondom Europese stadions.",
     leadEn: "SaZeJe Football originated from a passionate love for pure football atmosphere in and around European stadiums.",
     paragraphs: [
       {
-        paragraph: "Wat begon als een paar spontane uitstapjes naar wedstrijden over de grens, is uitgegroeid tot een gestructureerde passie voor groundhopping en verzamelen. Het doel is niet alleen om stadions af te vinken, maar vooral om de authentieke sfeer, architectuur en supporterscultuur van dichtbij te beleven.",
-        paragraphEn: "What began as a few spontaneous trips to matches across the border has grown into a structured passion for groundhopping and collecting. The goal is not just to tick off grounds, but to experience authentic atmosphere, architecture, and supporter culture up close.",
+        paragraph: "Wat begon als een paar spontane uitstapjes naar wedstrijden over de grens, is uitgegroeid tot een gestructureerde passie voor groundhopping. Het doel is niet alleen om stadions af te vinken, maar vooral om de authentieke sfeer, architectuur en supporterscultuur van dichtbij te beleven.",
+        paragraphEn: "What began as a few spontaneous trips to matches across the border has grown into a structured passion for groundhopping. The goal is not just to tick off grounds, but to experience authentic atmosphere, architecture, and supporter culture up close.",
       },
       {
-        paragraph: "Elk stadionbezoek brengt unieke verhalen met zich mee — van monumentale lichtmasten tot de karakteristieke geur van wedstrijddagen en gezang op de tribunes. Als tastbare herinnering neem ik bij voorkeur uit elk bezocht stadion of stad een officiële sjaal mee.",
-        paragraphEn: "Every stadium visit brings unique stories — from towering floodlights to the characteristic matchday sights and terrace anthems. As a lasting keepsake, I make a point of bringing home an official scarf from every visited stadium or host city.",
+        paragraph: "Elk stadionbezoek brengt unieke verhalen met zich mee — van monumentale lichtmasten tot de karakteristieke geur van wedstrijddagen en gezang op de tribunes.",
+        paragraphEn: "Every stadium visit brings unique stories — from towering floodlights to the characteristic matchday sights and terrace anthems.",
       },
     ],
     quote: "Geen wedstrijd te klein, geen stadion te ver: de magie van het spel leeft op elke tribune.",
-    quoteAuthor: "SaZeJe Groundhopping",
+    quoteAuthor: "SaZeJe Football",
   },
   media: {
-    portraitImage: "/Sazaje_groundhopping_logo.jpg",
     secondaryImage: "/Hero_Image.jpg",
-    tertiaryImage: "/cta-stadium-scarves.jpg",
     gallery: [],
   },
   pillars: [
@@ -66,11 +64,11 @@ const DEFAULT_ABOUT_CONTENT: AboutContent = {
       icon: "passion",
     },
     {
-      title: "Elk Stadion Een Sjaal",
-      titleEn: "A Scarf From Every Ground",
-      description: "Een groeiend fysiek archief van officiële matchday- en retro-sjaals als tastbare herinnering aan elke bezochte ground.",
-      descriptionEn: "A growing physical archive of official matchday and vintage scarves as a tangible memory of each visited ground.",
-      icon: "scarf",
+      title: "Reisverhalen & Wedstrijdbeleving",
+      titleEn: "Travel Stories & Matchday Experience",
+      description: "Van planning van reizen en tickets tot het ontdekken van verborgen voetbalcultuur in steden over heel Europa.",
+      descriptionEn: "From route planning and tickets to discovering hidden football culture in cities across Europe.",
+      icon: "map",
     },
   ],
 };
@@ -127,9 +125,7 @@ export async function getAboutContent(): Promise<AboutContent> {
     };
 
     // Map media
-    const portraitImage = extractMediaUrl(mediaDoc.portraitImage) || DEFAULT_ABOUT_CONTENT.media.portraitImage;
     const secondaryImage = extractMediaUrl(mediaDoc.secondaryImage) || DEFAULT_ABOUT_CONTENT.media.secondaryImage;
-    const tertiaryImage = extractMediaUrl(mediaDoc.tertiaryImage) || DEFAULT_ABOUT_CONTENT.media.tertiaryImage;
 
     const rawGallery = Array.isArray(mediaDoc.gallery) ? mediaDoc.gallery : [];
     const gallery = rawGallery
@@ -146,9 +142,7 @@ export async function getAboutContent(): Promise<AboutContent> {
       .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
     const media = {
-      portraitImage,
       secondaryImage,
-      tertiaryImage,
       gallery,
     };
 

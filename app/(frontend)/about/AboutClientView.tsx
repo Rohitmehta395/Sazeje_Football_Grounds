@@ -2,7 +2,6 @@
 
 /* eslint-disable @next/next/no-img-element */
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/hero/PageHero";
 import { GoalCard } from "@/components/about/GoalCard";
@@ -24,7 +23,7 @@ import { StadiumIcon } from "@/components/ui/Icons";
 export interface AboutStats {
   groundsCount: number;
   countriesCount: number;
-  scarvesCount: number;
+  scarvesCount?: number;
   completedGoalsCount: number;
   totalGoalsCount: number;
 }
@@ -55,9 +54,7 @@ export function AboutClientView({
   const bioLead = lang === "en" && aboutContent.story.leadEn ? aboutContent.story.leadEn : aboutContent.story.lead;
 
   // Localized Media
-  const portraitImage = aboutContent.media.portraitImage || "/Sazaje_groundhopping_logo.jpg";
   const secondaryImage = aboutContent.media.secondaryImage || "/Hero_Image.jpg";
-  const tertiaryImage = aboutContent.media.tertiaryImage || "/cta-stadium-scarves.jpg";
 
   // Filter goals
   const filteredGoals = React.useMemo(() => {
@@ -109,10 +106,10 @@ export function AboutClientView({
       <div className="max-w-[1160px] mx-auto px-4 sm:px-6 space-y-16 pt-8 sm:pt-10">
         {/* 2. The Groundhopper Story & Media Collage */}
         <section aria-label="About the Groundhopper" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column: Visual Showcase Collage */}
+          {/* Left Column: Visual Showcase Card */}
           <div className="lg:col-span-5 space-y-4">
             <div className="relative rounded-2xl overflow-hidden border border-border shadow-card bg-surface group">
-              <div className="relative w-full h-[300px] sm:h-[340px] overflow-hidden">
+              <div className="relative w-full h-[360px] sm:h-[420px] overflow-hidden">
                 <img
                   src={secondaryImage}
                   alt="Groundhopping matchday atmosphere"
@@ -121,52 +118,14 @@ export function AboutClientView({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               </div>
 
-              {/* Floating Groundhopper Avatar / Logo Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3.5 bg-surface/90 backdrop-blur-md border border-border/80 p-3 rounded-xl shadow-lg">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-accent shrink-0 shadow-md">
-                  <Image
-                    src={portraitImage}
-                    alt="SaZeJe Groundhopper Emblem"
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                  />
-                </div>
+              {/* Author / Identity Label Overlay */}
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-surface/90 backdrop-blur-md border border-border/80 px-4 py-3 rounded-xl shadow-lg">
                 <div className="min-w-0">
                   <span className="font-bebas text-xl text-text leading-none block truncate">
                     SaZeJe Football
                   </span>
                   <span className="font-mono text-[11px] text-azg uppercase tracking-wider block truncate">
-                    European Groundhopper & Collector
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Secondary Photo Strip */}
-            <div className="grid grid-cols-2 gap-3.5">
-              <div className="relative h-[150px] rounded-xl overflow-hidden border border-border shadow-card group">
-                <img
-                  src={tertiaryImage}
-                  alt="Football scarves archive"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute bottom-0 inset-x-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
-                  <span className="font-mono text-[10px] text-white uppercase tracking-wider block">
-                    {lang === "en" ? "Scarf Collection" : "Sjaalcollectie"}
-                  </span>
-                </div>
-              </div>
-
-              <div className="relative h-[150px] rounded-xl overflow-hidden border border-border shadow-card group">
-                <img
-                  src={portraitImage}
-                  alt="Groundhopper badge and insignia"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute bottom-0 inset-x-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
-                  <span className="font-mono text-[10px] text-white uppercase tracking-wider block">
-                    {lang === "en" ? "Official Insignia" : "Officieel Embleem"}
+                    {lang === "en" ? "European Groundhopper" : "Europese Groundhopper"}
                   </span>
                 </div>
               </div>
@@ -370,17 +329,17 @@ export function AboutClientView({
         <section aria-label="Community CTA" className="bg-surface-2/70 border border-border rounded-3xl p-6 sm:p-10 shadow-card flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
           <div className="space-y-2 max-w-xl text-center md:text-left">
             <span className="font-mono text-xs uppercase tracking-widest text-accent font-bold">
-              {lang === "en" ? "COMMUNITY & SCARF SWAP" : "COMMUNITY & SJAALS RUILEN"}
+              {lang === "en" ? "COMMUNITY & GROUND TIPS" : "COMMUNITY & STADIONTIPS"}
             </span>
             <h2 className="font-bebas text-2xl sm:text-3xl text-text m-0">
               {lang === "en"
-                ? "Have a stadium tip, match report, or unique scarf?"
-                : "Heb je een stadiontip, wedstrijdverhaal of unieke sjaal?"}
+                ? "Have a stadium tip or match report?"
+                : "Heb je een stadiontip of wedstrijdverhaal?"}
             </h2>
             <p className="font-inter text-xs sm:text-sm text-text-muted m-0 leading-relaxed">
               {lang === "en"
-                ? "We are always eager to discover rare European grounds, exchange scarves, or hear from fellow passionate groundhoppers."
-                : "We staan altijd open voor unieke Europese stadionaanbevelingen, sjaalruil of verhalen van medegroundhoppers."}
+                ? "We are always eager to discover rare European grounds or hear from fellow passionate groundhoppers."
+                : "We staan altijd open voor unieke Europese stadionaanbevelingen of verhalen van medegroundhoppers."}
             </p>
           </div>
 

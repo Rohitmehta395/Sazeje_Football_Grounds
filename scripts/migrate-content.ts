@@ -219,7 +219,7 @@ const SOURCE_SCARVES = [
     founded: "1899",
     trophies: "5x Champions League, 27x Spaans landskampioen",
     funFact: "Het clublied wordt in het Catalaans gezongen, ongeacht waar de speler vandaan komt.",
-    photo: "https://picsum.photos/seed/scarf-barca/500/400",
+    photo: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=80",
     dateAdded: "2025-03-15",
   },
   {
@@ -233,7 +233,7 @@ const SOURCE_SCARVES = [
     founded: "1892",
     trophies: "6x Champions League, 19x Engels landskampioen",
     funFact: "Spelers raken bij het betreden van het veld het bord 'This Is Anfield' aan.",
-    photo: "https://picsum.photos/seed/scarf-lfc/500/400",
+    photo: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80",
     dateAdded: "2025-01-21",
   },
   {
@@ -247,7 +247,7 @@ const SOURCE_SCARVES = [
     founded: "1909",
     trophies: "1x Champions League, 8x Duits landskampioen",
     funFact: "De Zuidtribune, de Gele Muur, biedt plaats aan bijna 25.000 staanplaatsen.",
-    photo: "https://picsum.photos/seed/scarf-bvb/500/400",
+    photo: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80",
     dateAdded: "2024-11-05",
   },
   {
@@ -261,7 +261,7 @@ const SOURCE_SCARVES = [
     founded: "1900",
     trophies: "4x Europacup I / Champions League, 36x landskampioen",
     funFact: "Ajax was in 1971 de eerste Nederlandse club die de Europacup I won.",
-    photo: "https://picsum.photos/seed/scarf-ajax/500/400",
+    photo: "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?auto=format&fit=crop&w=800&q=80",
     dateAdded: "2024-10-02",
   },
   {
@@ -275,7 +275,7 @@ const SOURCE_SCARVES = [
     founded: "1899",
     trophies: "7x Champions League, 19x Italiaans landskampioen",
     funFact: "San Siro wordt gedeeld met stadsrivaal Inter, elk met een eigen kleedkamergang.",
-    photo: "https://picsum.photos/seed/scarf-milan/500/400",
+    photo: "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?auto=format&fit=crop&w=800&q=80",
     dateAdded: "2024-04-12",
   },
   {
@@ -289,7 +289,7 @@ const SOURCE_SCARVES = [
     founded: "1891",
     trophies: "18x Belgisch landskampioen",
     funFact: "Club Brugge is vernoemd naar de stad, niet naar een persoon of dier.",
-    photo: "https://picsum.photos/seed/scarf-brugge/500/400",
+    photo: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=800&q=80",
     dateAdded: "2024-02-20",
   },
 ];

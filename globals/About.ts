@@ -214,35 +214,12 @@ export const About: GlobalConfig = {
       label: 'About Photos & Showcase',
       fields: [
         {
-          name: 'portraitImage',
+          name: 'secondaryImage',
           type: 'upload',
           relationTo: 'media',
           admin: {
-            description: 'Primary portrait or action photo of the groundhopper',
+            description: 'Featured showcase photo (e.g. stadium atmosphere or matchday)',
           },
-        },
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'secondaryImage',
-              type: 'upload',
-              relationTo: 'media',
-              admin: {
-                width: '50%',
-                description: 'Secondary photo (e.g. stadium atmosphere or matchday)',
-              },
-            },
-            {
-              name: 'tertiaryImage',
-              type: 'upload',
-              relationTo: 'media',
-              admin: {
-                width: '50%',
-                description: 'Tertiary photo (e.g. scarf collection or ground details)',
-              },
-            },
-          ],
         },
         {
           name: 'gallery',
@@ -338,7 +315,6 @@ export const About: GlobalConfig = {
           defaultValue: 'stadium',
           options: [
             { label: '🏟️ Stadium / Ground', value: 'stadium' },
-            { label: '🧣 Scarf / Collector', value: 'scarf' },
             { label: '🗺️ Map / Travel', value: 'map' },
             { label: '🎯 Target / Goals', value: 'target' },
             { label: '⚡ Atmosphere / Passion', value: 'passion' },
