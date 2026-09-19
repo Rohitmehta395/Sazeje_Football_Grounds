@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { autoTranslateAboutHook } from '../lib/services/cmsAutoTranslate'
 
 export const About: GlobalConfig = {
   slug: 'about',
@@ -192,19 +193,26 @@ export const About: GlobalConfig = {
               name: 'quote',
               type: 'text',
               admin: {
-                width: '70%',
-                description: 'Inspirational groundhopping quote/motto',
+                width: '50%',
+                description: 'Inspirational groundhopping quote/motto (Dutch)',
               },
             },
             {
-              name: 'quoteAuthor',
+              name: 'quoteEn',
               type: 'text',
               admin: {
-                width: '30%',
-                description: 'Quote attribution (e.g. SaZeJe Football)',
+                width: '50%',
+                description: 'Inspirational groundhopping quote/motto (English)',
               },
             },
           ],
+        },
+        {
+          name: 'quoteAuthor',
+          type: 'text',
+          admin: {
+            description: 'Quote attribution (e.g. SaZeJe Football)',
+          },
         },
       ],
     },
@@ -259,6 +267,7 @@ export const About: GlobalConfig = {
     },
   ],
   hooks: {
+    beforeChange: [autoTranslateAboutHook],
     afterChange: [
       async () => {
         try {

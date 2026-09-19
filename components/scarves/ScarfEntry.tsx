@@ -12,6 +12,10 @@ export interface ScarfEntryProps {
 
 export function ScarfEntry({ scarf }: ScarfEntryProps) {
   const { t, lang } = useTranslation();
+  const displayType = lang === "en" && scarf.typeEn ? scarf.typeEn : scarf.type;
+  const displayTrophies = lang === "en" && scarf.trophiesEn ? scarf.trophiesEn : scarf.trophies;
+  const displayFunFact = lang === "en" && scarf.funFactEn ? scarf.funFactEn : scarf.funFact;
+  const displayDescription = lang === "en" && scarf.descriptionEn ? scarf.descriptionEn : scarf.description;
 
   return (
     <article className="mb-[44px] pb-[44px] border-b border-border last:border-b-0 last:mb-0 last:pb-0 max-w-[640px] mx-auto">
@@ -20,7 +24,7 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
         className="w-full aspect-[32/9] bg-cover bg-center rounded-[12px] border border-border shadow-card bg-surface-2"
         style={{ backgroundImage: `url('${scarf.photo}')` }}
         role="img"
-        aria-label={`Foto van ${scarf.club} sjaal`}
+        aria-label={lang === "en" ? `Photo of ${scarf.club} scarf` : `Foto van ${scarf.club} sjaal`}
       />
 
       {/* Title & Meta */}
@@ -28,7 +32,7 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
         {scarf.club}
       </h3>
       <div className="font-mono text-[12px] text-azg uppercase tracking-[0.06em] mb-[16px] text-center">
-        {scarf.type} • {getCountryDisplayName(scarf.country, lang)}
+        {displayType} • {getCountryDisplayName(scarf.country, lang)}
       </div>
 
       {/* Receipt-style Scarf Info Box */}
@@ -61,35 +65,39 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
           </span>
         </div>
 
-        <div className="flex items-center justify-between py-[16px] border-b border-dashed border-border">
-          <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
-            <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
-              <Trophy className="w-4 h-4" />
+        {displayTrophies && (
+          <div className="flex items-center justify-between py-[16px] border-b border-dashed border-border">
+            <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
+              <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
+                <Trophy className="w-4 h-4" />
+              </span>
+              {t.scarves.trophies}
             </span>
-            {t.scarves.trophies}
-          </span>
-          <span className="text-right max-w-[56%] text-[13px] leading-[1.5] text-text font-inter">
-            {scarf.trophies}
-          </span>
-        </div>
+            <span className="text-right max-w-[56%] text-[13px] leading-[1.5] text-text font-inter">
+              {displayTrophies}
+            </span>
+          </div>
+        )}
 
-        <div className="flex items-center justify-between py-[16px]">
-          <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
-            <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
-              <Lightbulb className="w-4 h-4" />
+        {displayFunFact && (
+          <div className="flex items-center justify-between py-[16px]">
+            <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
+              <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
+                <Lightbulb className="w-4 h-4" />
+              </span>
+              {t.scarves.funFact}
             </span>
-            {t.scarves.funFact}
-          </span>
-          <span className="text-right max-w-[56%] text-[13px] leading-[1.5] text-text-muted italic font-inter">
-            {scarf.funFact}
-          </span>
-        </div>
+            <span className="text-right max-w-[56%] text-[13px] leading-[1.5] text-text-muted italic font-inter">
+              {displayFunFact}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Description */}
-      {scarf.description && (
+      {displayDescription && (
         <p className="text-[13px] text-text-muted italic leading-[1.6] text-center m-0">
-          &quot;{scarf.description}&quot;
+          &quot;{displayDescription}&quot;
         </p>
       )}
     </article>

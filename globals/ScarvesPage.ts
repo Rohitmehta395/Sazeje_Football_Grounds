@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { autoTranslateScarvesPageHook } from '../lib/services/cmsAutoTranslate'
 
 export const ScarvesPage: GlobalConfig = {
   slug: 'scarves-page',
@@ -320,6 +321,7 @@ export const ScarvesPage: GlobalConfig = {
     },
   ],
   hooks: {
+    beforeChange: [autoTranslateScarvesPageHook],
     afterChange: [
       async () => {
         try {

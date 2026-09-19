@@ -9,6 +9,7 @@ export interface SiteSettings {
   id?: number | string;
   contactEmail?: string | null;
   siteTagline?: string | null;
+  siteTaglineEn?: string | null;
   socialLinks?: SocialLinks;
   createdAt?: string;
   updatedAt?: string;

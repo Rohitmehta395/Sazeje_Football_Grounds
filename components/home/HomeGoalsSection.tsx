@@ -11,7 +11,7 @@ export interface HomeGoalsSectionProps {
 }
 
 export function HomeGoalsSection({ goals }: HomeGoalsSectionProps) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   // Highlight up to 4 primary goals
   const displayGoals = goals.slice(0, 4);
@@ -48,6 +48,9 @@ export function HomeGoalsSection({ goals }: HomeGoalsSectionProps) {
             Math.round((goal.currentCount / goal.targetCount) * 100)
           );
           const isCompleted = goal.status === "completed" || percentage >= 100;
+          const displayTitle = lang === "en" && goal.titleEn ? goal.titleEn : goal.title;
+          const displayDescription =
+            lang === "en" && goal.descriptionEn ? goal.descriptionEn : goal.description;
 
           return (
             <div
@@ -57,11 +60,11 @@ export function HomeGoalsSection({ goals }: HomeGoalsSectionProps) {
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
                   <span className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-surface-2 border border-border text-azg font-semibold">
-                    Doel #{goal.number}
+                    {t.home.goalNumber.replace("{number}", String(goal.number))}
                   </span>
                   {isCompleted ? (
                     <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-emerald-500/15 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-500/20">
-                      <CheckCircle2 className="w-3 h-3" /> Behaald
+                      <CheckCircle2 className="w-3 h-3" /> {t.about.statusCompleted}
                     </span>
                   ) : (
                     <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-surface-2 text-text-muted border border-border">
@@ -71,16 +74,18 @@ export function HomeGoalsSection({ goals }: HomeGoalsSectionProps) {
                 </div>
 
                 <h3 className="font-bebas text-xl text-text m-0 group-hover:text-accent transition-colors leading-tight">
-                  {goal.title}
+                  {displayTitle}
                 </h3>
-                <p className="font-inter text-xs text-text-muted mt-2 line-clamp-2 leading-relaxed">
-                  {goal.description}
-                </p>
+                {displayDescription && (
+                  <p className="font-inter text-xs text-text-muted mt-2 line-clamp-2 leading-relaxed">
+                    {displayDescription}
+                  </p>
+                )}
               </div>
 
               <div className="mt-5 pt-3 border-t border-border/70">
                 <div className="flex items-center justify-between text-xs font-mono mb-2">
-                  <span className="text-text-muted text-[11px]">Huidige Stand:</span>
+                  <span className="text-text-muted text-[11px]">{t.about.current}:</span>
                   <span className="font-bold text-text">
                     <span className="text-azg">{goal.currentCount}</span> / {goal.targetCount}
                   </span>

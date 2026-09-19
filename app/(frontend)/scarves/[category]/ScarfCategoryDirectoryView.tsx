@@ -144,6 +144,7 @@ export function ScarfCategoryDirectoryView({
         const club = (scarf.club || "").toLowerCase();
         const stadium = (scarf.stadium || "").toLowerCase();
         const type = (scarf.type || "").toLowerCase();
+        const typeEn = (scarf.typeEn || "").toLowerCase();
         const desc = (scarf.description || "").toLowerCase();
         const descEn = (scarf.descriptionEn || "").toLowerCase();
         const fun = (scarf.funFact || "").toLowerCase();
@@ -155,6 +156,7 @@ export function ScarfCategoryDirectoryView({
           scarf.country.toLowerCase().includes(q) ||
           countryDisplay.includes(q) ||
           type.includes(q) ||
+          typeEn.includes(q) ||
           desc.includes(q) ||
           descEn.includes(q) ||
           fun.includes(q) ||

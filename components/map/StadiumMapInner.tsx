@@ -108,7 +108,7 @@ export function StadiumMapInner({
                   {ground.club} • {getCountryDisplayName(ground.country, lang)}
                 </p>
                 <p className="font-inter text-xs text-text-muted m-0 mb-2 line-clamp-2">
-                  {ground.description}
+                  {lang === "en" && ground.descriptionEn ? ground.descriptionEn : ground.description}
                 </p>
                 <Link
                   href={`/grounds/${ground.id}`}

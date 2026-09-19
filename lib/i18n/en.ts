@@ -98,6 +98,13 @@ export const en: Translations = {
       "We are always eager for groundhopping recommendations, atmospheric stories, or rare scarves to trade.",
     ctaButtonContact: "Get in Touch",
     ctaButtonScarves: "Browse Swappable Scarves",
+    scarvesArchive: "SCARF COLLECTION ARCHIVE",
+    viewInCollection: "View in Collection",
+    filterResults: "Filter results",
+    stadiumFound: "{count} stadium found",
+    stadiumsFound: "{count} stadiums found",
+    communityEyebrow: "COMMUNITY & GROUND TIPS",
+    goalNumber: "Goal #{number}",
   },
 
   // About Page
@@ -122,6 +129,9 @@ export const en: Translations = {
     backToGoals: "Back to About & Goals",
     originalContentNotice:
       "Note: The descriptions below are written in the author's original Dutch language.",
+    goalCode: "Goal Code",
+    milestone: "Milestone",
+    progress: "Progress",
   },
 
   // Grounds Page
@@ -160,6 +170,15 @@ export const en: Translations = {
     galleryHeading: "Photo Gallery",
     backToGrounds: "Back to Grounds",
     viewDetails: "View details",
+    shareGround: "Share Ground",
+    linkCopied: "Link Copied!",
+    verifiedGroundhop: "Verified Groundhop",
+    coordinates: "Coordinates",
+    homeClub: "Home Club",
+    officialMatchLog: "Official Match Log",
+    viewOnEuropeMap: "View on Europe Map",
+    groundhopperTipNotes: "Groundhopper Tip & Notes",
+    moreVisitedGrounds: "More Visited Grounds in {country}",
   },
 
   // Scarves Page
@@ -212,6 +231,11 @@ export const en: Translations = {
     loadMore: "Load next {count} scarves",
     showingCount: "Showing {visible} of {total} scarves",
     allLoaded: "All scarves loaded",
+    matchdayFanshop: "Matchday Fanshop",
+    terraceTrade: "Terrace Trade",
+    matchdayAcquisition: "Matchday Acquisition",
+    openForSwap: "Open for Swap",
+    proposeSwap: "Propose Swap",
   },
 
   // Map Page

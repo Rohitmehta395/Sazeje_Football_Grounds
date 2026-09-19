@@ -19,9 +19,11 @@ export function GroundCard({
   href = `/grounds/${ground.id}`,
   isStatic = false,
 }: GroundCardProps) {
-  const { lang } = useTranslation();
+  const { t, lang } = useTranslation();
   const formattedDate = formatDate(ground.visitDate, lang);
   const countryName = getCountryDisplayName(ground.country, lang);
+  const displayMatchInfo = lang === "en" && ground.matchInfoEn ? ground.matchInfoEn : ground.matchInfo;
+  const displayDescription = lang === "en" && ground.descriptionEn ? ground.descriptionEn : ground.description;
 
   const content = (
     <Card isStatic={isStatic} className="relative group overflow-hidden flex flex-col h-full hover:shadow-xl transition-all duration-300">
@@ -30,15 +32,15 @@ export function GroundCard({
         className="h-[185px] bg-cover bg-center relative overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]"
         style={{ backgroundImage: `url('${ground.photo || "/placeholder-ground.jpg"}')` }}
         role="img"
-        aria-label={`Foto van stadion ${ground.name}`}
+        aria-label={lang === "en" ? `Photo of stadium ${ground.name}` : `Foto van stadion ${ground.name}`}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
         <Badge variant="dark" className="absolute top-[12px] left-[12px] shadow-sm backdrop-blur-md bg-black/50 border border-white/20">
           {countryName}
         </Badge>
-        {ground.matchInfo && (
+        {displayMatchInfo && (
           <div className="absolute bottom-[10px] left-[12px] right-[12px] font-mono text-[11px] text-white/95 truncate bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded border border-white/10">
-            ⚽ {ground.matchInfo}
+            ⚽ {displayMatchInfo}
           </div>
         )}
       </div>
@@ -63,7 +65,7 @@ export function GroundCard({
           </h3>
 
           <p className="text-text-muted text-[13px] m-[4px_0_0] line-clamp-2 leading-relaxed">
-            {ground.description}
+            {displayDescription}
           </p>
         </div>
 
@@ -80,7 +82,7 @@ export function GroundCard({
               {formattedDate || ground.visitDate}
             </span>
             <span className="flex items-center gap-1 font-semibold text-accent group-hover:translate-x-1 transition-transform">
-              Details <ArrowRight className="w-3.5 h-3.5" />
+              {t.grounds.viewDetails} <ArrowRight className="w-3.5 h-3.5" />
             </span>
           </div>
         </div>

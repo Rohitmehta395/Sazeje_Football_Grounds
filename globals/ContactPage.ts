@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { autoTranslateContactPageHook } from '../lib/services/cmsAutoTranslate'
 
 export const ContactPage: GlobalConfig = {
   slug: 'contact-page',
@@ -588,6 +589,7 @@ export const ContactPage: GlobalConfig = {
     },
   ],
   hooks: {
+    beforeChange: [autoTranslateContactPageHook],
     afterChange: [
       async () => {
         try {

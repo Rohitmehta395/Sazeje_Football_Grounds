@@ -12,7 +12,7 @@ export interface HomeMapSectionProps {
 }
 
 export function HomeMapSection({ grounds }: HomeMapSectionProps) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const countriesCount = new Set(grounds.map((g) => g.country)).size;
 
   return (
@@ -34,7 +34,24 @@ export function HomeMapSection({ grounds }: HomeMapSectionProps) {
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface border border-border text-xs font-mono text-text-muted">
             <MapPin className="w-3.5 h-3.5 text-azg" />
-            <span>{grounds.length} Stadions • {countriesCount} Landen</span>
+            <span>
+              {grounds.length}{" "}
+              {lang === "en"
+                ? grounds.length === 1
+                  ? "Stadium"
+                  : "Stadiums"
+                : grounds.length === 1
+                ? "Stadion"
+                : "Stadions"}{" "}
+              • {countriesCount}{" "}
+              {lang === "en"
+                ? countriesCount === 1
+                  ? "Country"
+                  : "Countries"
+                : countriesCount === 1
+                ? "Land"
+                : "Landen"}
+            </span>
           </div>
           <Link
             href="/map"

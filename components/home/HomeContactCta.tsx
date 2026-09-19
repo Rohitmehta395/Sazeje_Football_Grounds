@@ -32,7 +32,7 @@ export function HomeContactCta() {
       <div className="relative z-10 max-w-2xl">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white text-xs font-mono uppercase tracking-wider mb-4 shadow-sm">
           <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-          <span>COMMUNITY & GROUND TIPS</span>
+          <span>{t.home.communityEyebrow}</span>
         </div>
 
         <h2 className="font-bebas text-3xl sm:text-5xl text-white tracking-wide leading-tight m-0 drop-shadow-md">

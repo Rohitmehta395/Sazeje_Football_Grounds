@@ -30,7 +30,7 @@ export function HomeClientView({
   goals,
   countries,
 }: HomeClientViewProps) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const [selectedCountry, setSelectedCountry] = React.useState("");
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -131,10 +131,12 @@ export function HomeClientView({
           {isFiltering && (
             <div className="mb-6 flex items-center justify-between bg-surface-2/60 border border-border px-4 py-2.5 rounded-xl text-xs font-mono">
               <span className="text-text">
-                Filter resultaten: <strong>{filteredGrounds.length}</strong>{" "}
-                {filteredGrounds.length === 1 ? "stadion" : "stadions"} gevonden
-                {selectedCountry ? ` in "${selectedCountry}"` : ""}
-                {searchQuery ? ` voor "${searchQuery}"` : ""}
+                {t.home.filterResults}: <strong>{filteredGrounds.length}</strong>{" "}
+                {filteredGrounds.length === 1
+                  ? t.home.stadiumFound.replace("{count} ", "").replace("1 ", "")
+                  : t.home.stadiumsFound.replace("{count} ", "").replace("0 ", "")}
+                {selectedCountry ? ` ${lang === "en" ? "in" : "in"} "${selectedCountry}"` : ""}
+                {searchQuery ? ` ${lang === "en" ? "for" : "voor"} "${searchQuery}"` : ""}
               </span>
               <button
                 type="button"

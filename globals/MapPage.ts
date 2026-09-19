@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { autoTranslateMapPageHook } from '../lib/services/cmsAutoTranslate'
 
 export const MapPage: GlobalConfig = {
   slug: 'map-page',
@@ -214,6 +215,7 @@ export const MapPage: GlobalConfig = {
     },
   ],
   hooks: {
+    beforeChange: [autoTranslateMapPageHook],
     afterChange: [
       async () => {
         try {

@@ -21,6 +21,8 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
   const countryDisplayName = getCountryDisplayName(scarf.country, lang);
   const displayDescription =
     (isEn && scarf.descriptionEn ? scarf.descriptionEn : scarf.description) || scarf.description;
+  const displayType =
+    (isEn && scarf.typeEn ? scarf.typeEn : scarf.type) || scarf.type;
   const displayTrophies =
     (isEn && scarf.trophiesEn ? scarf.trophiesEn : scarf.trophies) || scarf.trophies;
   const displayFunFact =
@@ -105,7 +107,7 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
                 {scarf.club}
               </h3>
               <div className="font-mono text-xs text-text-muted mt-0.5">
-                {scarf.type}
+                {displayType}
               </div>
             </div>
 

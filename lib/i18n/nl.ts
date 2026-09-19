@@ -96,6 +96,13 @@ export const nl = {
       "We zijn altijd op zoek naar bijzondere stadionaanbevelingen, verhalen of unieke sjaals voor het archief.",
     ctaButtonContact: "Neem Contact Op",
     ctaButtonScarves: "Bekijk Sjaals",
+    scarvesArchive: "SJAALCOLLECTIE ARCHIEF",
+    viewInCollection: "Bekijk in Collectie",
+    filterResults: "Filter resultaten",
+    stadiumFound: "{count} stadion gevonden",
+    stadiumsFound: "{count} stadions gevonden",
+    communityEyebrow: "COMMUNITY & STADIONTIPS",
+    goalNumber: "Doel #{number}",
   },
 
   // About Page
@@ -120,6 +127,9 @@ export const nl = {
     backToGoals: "Terug naar Over & Doelen",
     originalContentNotice:
       "Opmerking: Onderstaande beschrijvingen zijn geschreven in de originele Nederlandse auteurstaal.",
+    goalCode: "Doel Code",
+    milestone: "Mijlpaal",
+    progress: "Voortgang",
   },
 
   // Grounds Page
@@ -158,6 +168,15 @@ export const nl = {
     galleryHeading: "Foto Galerij",
     backToGrounds: "Terug naar Grounds",
     viewDetails: "Bekijk details",
+    shareGround: "Deel Stadion",
+    linkCopied: "Gekopieerd!",
+    verifiedGroundhop: "Geverifieerd Bezoek",
+    coordinates: "Coördinaten",
+    homeClub: "Thuisclub",
+    officialMatchLog: "Officieel Matchlog",
+    viewOnEuropeMap: "Bekijk op Europa Kaart",
+    groundhopperTipNotes: "Groundhopper Tip & Bijzonderheden",
+    moreVisitedGrounds: "Meer Bezochte Stadions in {country}",
   },
 
   // Scarves Page
@@ -210,6 +229,11 @@ export const nl = {
     loadMore: "Laad volgende {count} sjaals",
     showingCount: "{visible} van {total} sjaals getoond",
     allLoaded: "Alle sjaals getoond",
+    matchdayFanshop: "Officiële Fanshop",
+    terraceTrade: "Terrace Ruil",
+    matchdayAcquisition: "Matchday Aankoop",
+    openForSwap: "Beschikbaar voor Ruil",
+    proposeSwap: "Ruilvoorstel",
   },
 
   // Map Page

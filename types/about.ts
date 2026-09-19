@@ -30,6 +30,7 @@ export interface AboutContent {
     leadEn?: string;
     paragraphs: AboutParagraph[];
     quote?: string;
+    quoteEn?: string;
     quoteAuthor?: string;
   };
   media: {

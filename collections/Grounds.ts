@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { autoTranslateGroundHook } from '../lib/services/cmsAutoTranslate'
 
 function slugify(text: string): string {
   return text
@@ -30,6 +31,7 @@ export const Grounds: CollectionConfig = {
         return data
       },
     ],
+    beforeChange: [autoTranslateGroundHook],
     afterChange: [
       async ({ doc }) => {
         try {

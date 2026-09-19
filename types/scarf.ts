@@ -6,6 +6,7 @@ export interface Scarf {
   club: string;
   country: string;
   type: string;
+  typeEn?: string;
   description: string;
   descriptionEn?: string;
   stadium: string;

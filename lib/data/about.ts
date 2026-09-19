@@ -42,6 +42,7 @@ const DEFAULT_ABOUT_CONTENT: AboutContent = {
       },
     ],
     quote: "Geen wedstrijd te klein, geen stadion te ver: de magie van het spel leeft op elke tribune.",
+    quoteEn: "No match too small, no ground too far: the magic of the game lives on every terrace.",
     quoteAuthor: "SaZeJe Football",
   },
   media: {
@@ -97,6 +98,7 @@ export async function getAboutContent(): Promise<AboutContent> {
       leadEn: (storyDoc.leadEn as string) || DEFAULT_ABOUT_CONTENT.story.leadEn,
       paragraphs,
       quote: (storyDoc.quote as string) || DEFAULT_ABOUT_CONTENT.story.quote,
+      quoteEn: (storyDoc.quoteEn as string) || DEFAULT_ABOUT_CONTENT.story.quoteEn,
       quoteAuthor: (storyDoc.quoteAuthor as string) || DEFAULT_ABOUT_CONTENT.story.quoteAuthor,
     };
 

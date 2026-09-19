@@ -24,6 +24,7 @@ function mapPayloadScarf(doc: Record<string, unknown>): Scarf {
     club: String(doc.club || ""),
     country: String(doc.country || ""),
     type: String(doc.type || ""),
+    typeEn: doc.typeEn ? String(doc.typeEn) : undefined,
     description: String(doc.description || ""),
     descriptionEn: doc.descriptionEn ? String(doc.descriptionEn) : undefined,
     stadium: String(doc.stadium || ""),

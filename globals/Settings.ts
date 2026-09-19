@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { autoTranslateSettingsHook } from '../lib/services/cmsAutoTranslate'
 
 export const Settings: GlobalConfig = {
   slug: 'settings',
@@ -15,12 +16,27 @@ export const Settings: GlobalConfig = {
       },
     },
     {
-      name: 'siteTagline',
-      type: 'text',
-      required: false,
-      admin: {
-        description: 'Short website tagline/meta description',
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'siteTagline',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Short website tagline/meta description (Dutch)',
+          },
+        },
+        {
+          name: 'siteTaglineEn',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Short website tagline/meta description (English)',
+          },
+        },
+      ],
     },
     {
       name: 'socialLinks',
@@ -65,6 +81,7 @@ export const Settings: GlobalConfig = {
     },
   ],
   hooks: {
+    beforeChange: [autoTranslateSettingsHook],
     afterChange: [
       async () => {
         try {

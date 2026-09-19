@@ -1,6 +1,9 @@
+"use client";
+
 import * as React from "react";
 import { Country } from "@/types";
 import { CountryLink } from "./CountryLink";
+import { useTranslation } from "@/lib/i18n/LanguageContext";
 
 export interface CountryDirectoryProps {
   countries: Country[];
@@ -11,13 +14,17 @@ export interface CountryDirectoryProps {
 export function CountryDirectory({
   countries,
   baseHref = "/scarves/new",
-  heading = "LANDEN OVERZICHT",
+  heading,
 }: CountryDirectoryProps) {
+  const { lang } = useTranslation();
+  const defaultHeading = lang === "en" ? "COUNTRIES DIRECTORY" : "LANDEN OVERZICHT";
+  const displayHeading = heading !== undefined ? heading : defaultHeading;
+
   return (
     <div className="space-y-3">
-      {heading && (
+      {displayHeading && (
         <div className="font-mono text-[13px] tracking-[0.08em] uppercase text-azg my-[30px] pb-[8px] border-b border-border first:mt-0">
-          {heading}
+          {displayHeading}
         </div>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-[10px_24px]">

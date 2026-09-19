@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { autoTranslateGroundsPageHook } from '../lib/services/cmsAutoTranslate'
 
 export const GroundsPage: GlobalConfig = {
   slug: 'grounds-page',
@@ -229,6 +230,7 @@ export const GroundsPage: GlobalConfig = {
     },
   ],
   hooks: {
+    beforeChange: [autoTranslateGroundsPageHook],
     afterChange: [
       async () => {
         try {

@@ -157,7 +157,7 @@ export function GoalDetail({ goal, prevGoal, nextGoal, totalGoals }: GoalDetailP
           <div className="bg-surface border border-border rounded-2xl p-5 shadow-card flex flex-col justify-between">
             <div className="flex items-center justify-between text-text-muted mb-2">
               <span className="font-mono text-xs uppercase tracking-wider font-semibold">
-                Doel Code
+                {t.about.goalCode}
               </span>
               <ShieldAlert className="w-4 h-4 text-text-muted" />
             </div>

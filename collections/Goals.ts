@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { autoTranslateGoalHook } from '../lib/services/cmsAutoTranslate'
 
 export const Goals: CollectionConfig = {
   slug: 'goals',
@@ -10,6 +11,7 @@ export const Goals: CollectionConfig = {
     read: () => true,
   },
   hooks: {
+    beforeChange: [autoTranslateGoalHook],
     afterChange: [
       async ({ doc }) => {
         try {

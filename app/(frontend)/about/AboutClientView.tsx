@@ -154,7 +154,7 @@ export function AboutClientView({
               <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-full blur-xl pointer-events-none" />
               <div className="relative flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 text-center">
                 <p className="font-inter italic text-xs sm:text-sm text-text leading-relaxed m-0">
-                  &ldquo;{aboutContent.story.quote}&rdquo;
+                  &ldquo;{lang === "en" && aboutContent.story.quoteEn ? aboutContent.story.quoteEn : aboutContent.story.quote}&rdquo;
                 </p>
                 {aboutContent.story.quoteAuthor && (
                   <span className="font-mono text-[11px] text-accent uppercase tracking-wider font-semibold shrink-0">

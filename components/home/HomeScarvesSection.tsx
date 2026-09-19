@@ -27,7 +27,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
         <div>
           <div className="font-mono text-xs uppercase tracking-widest text-azg font-semibold flex items-center gap-1.5 mb-1.5">
             <ScarfIcon className="w-3.5 h-3.5 text-accent-2" />
-            <span>SJAALCOLLECTIE ARCHIEF</span>
+            <span>{t.home.scarvesArchive}</span>
           </div>
           <h2 className="font-bebas text-3xl sm:text-4xl text-text m-0 tracking-wide">
             {t.home.featuredScarvesTitle}
@@ -92,6 +92,11 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
         {filteredScarves.map((scarf) => {
           const countryDisplay = getCountryDisplayName(scarf.country, lang);
           const isNew = scarf.category === "new";
+          const displayType = lang === "en" && scarf.typeEn ? scarf.typeEn : scarf.type;
+          const displayDescription =
+            lang === "en" && scarf.descriptionEn ? scarf.descriptionEn : scarf.description;
+          const displayTrophies =
+            lang === "en" && scarf.trophiesEn ? scarf.trophiesEn : scarf.trophies;
 
           return (
             <article
@@ -105,7 +110,11 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                   backgroundImage: `url('${scarf.photo || "/placeholder-scarf.jpg"}')`,
                 }}
                 role="img"
-                aria-label={`Foto van sjaal ${scarf.club}`}
+                aria-label={
+                  lang === "en"
+                    ? `Photo of ${scarf.club} scarf`
+                    : `Foto van sjaal ${scarf.club}`
+                }
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
                 <div className="absolute top-3 left-3 flex items-center gap-1.5">
@@ -116,7 +125,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                         : "bg-amber-900/80 text-amber-200 border border-amber-500/30"
                     }`}
                   >
-                    {isNew ? "Nieuw" : "Vintage"}
+                    {isNew ? (lang === "en" ? "New" : "Nieuw") : "Vintage"}
                   </span>
                 </div>
 
@@ -125,7 +134,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                 </div>
 
                 <div className="absolute bottom-2.5 left-3 right-3 text-xs font-mono text-white/90 truncate">
-                  {scarf.type}
+                  {displayType}
                 </div>
               </div>
 
@@ -136,9 +145,9 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                     {scarf.club}
                   </h3>
 
-                  {scarf.description && (
+                  {displayDescription && (
                     <p className="text-xs text-text-muted mt-2 line-clamp-2 leading-relaxed italic">
-                      &quot;{scarf.description}&quot;
+                      &quot;{displayDescription}&quot;
                     </p>
                   )}
 
@@ -156,14 +165,14 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                       </div>
                     )}
 
-                    {scarf.trophies && (
+                    {displayTrophies && (
                       <div className="flex items-center justify-between text-text">
                         <span className="text-text-muted flex items-center gap-1.5">
                           <Trophy className="w-3.5 h-3.5 text-accent-2" />
                           <span>{t.scarves.trophies}</span>
                         </span>
                         <span className="text-right truncate max-w-[170px] font-mono text-[11px]">
-                          {scarf.trophies}
+                          {displayTrophies}
                         </span>
                       </div>
                     )}
@@ -179,7 +188,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                     href={`/scarves?country=${encodeURIComponent(scarf.country)}`}
                     className="inline-flex items-center gap-1 font-semibold text-accent hover:underline group-hover:translate-x-0.5 transition-transform"
                   >
-                    <span>Bekijk in Collectie</span>
+                    <span>{t.home.viewInCollection}</span>
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>

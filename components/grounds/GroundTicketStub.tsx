@@ -38,7 +38,7 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-azg animate-pulse" />
           <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-azg font-bold">
-            {lang === "en" ? "OFFICIAL MATCH LOG" : "OFFICIEEL MATCHLOG"}
+            {t.grounds.officialMatchLog.toUpperCase()}
           </span>
         </div>
         <span className="font-mono text-[10px] text-text-muted/70 uppercase">
@@ -63,7 +63,7 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
           )}
           <div className="min-w-0">
             <div className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
-              {lang === "en" ? "Home Club" : "Thuisclub"}
+              {t.grounds.homeClub}
             </div>
             <div className="font-bebas text-2xl text-text leading-tight truncate">
               {ground.club || "—"}
@@ -108,7 +108,7 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
           <div className="flex items-center justify-between">
             <span className="flex items-center gap-2 text-text-muted">
               <MapPin className="w-3.5 h-3.5 text-text-muted" />
-              <span>{lang === "en" ? "Coordinates" : "Coördinaten"}</span>
+              <span>{t.grounds.coordinates}</span>
             </span>
             <span className="font-mono text-[11px] text-text-muted">
               {ground.lat.toFixed(4)}°, {ground.lng.toFixed(4)}°
@@ -133,7 +133,7 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
             className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-azg hover:bg-azg/90 text-white font-medium text-xs shadow-sm hover:shadow transition-all"
           >
             <MapIcon className="w-3.5 h-3.5" />
-            <span>{lang === "en" ? "View on Europe Map" : "Bekijk op Europa Kaart"}</span>
+            <span>{t.grounds.viewOnEuropeMap}</span>
           </Link>
 
           <a
@@ -153,7 +153,7 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
             <div className="flex items-center justify-center gap-1.5 text-azg mb-0.5">
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span className="font-mono text-[10px] font-bold tracking-[0.16em] uppercase">
-                VERIFIED GROUNDHOP
+                {t.grounds.verifiedGroundhop.toUpperCase()}
               </span>
             </div>
             <div className="font-mono text-[9px] text-text-muted tracking-wider uppercase">

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { autoTranslateScarfHook } from '../lib/services/cmsAutoTranslate'
 
 export const Scarves: CollectionConfig = {
   slug: 'scarves',
@@ -10,6 +11,7 @@ export const Scarves: CollectionConfig = {
     read: () => true,
   },
   hooks: {
+    beforeChange: [autoTranslateScarfHook],
     afterChange: [
       async ({ doc }) => {
         try {
@@ -83,6 +85,34 @@ export const Scarves: CollectionConfig = {
       admin: {
         description: 'Scarf type / material (e.g. Geweven sjaal, HD Jacquard, Barscarf)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'typeEn',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of scarf type / material (Auto-translated or edited)',
+          },
+        },
+        {
+          name: 'typeEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
     },
     {
       name: 'description',
