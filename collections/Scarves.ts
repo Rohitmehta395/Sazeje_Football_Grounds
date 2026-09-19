@@ -51,6 +51,15 @@ export const Scarves: CollectionConfig = {
   },
   fields: [
     {
+      name: 'autoTranslateUI',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/AutoTranslateBar#AutoTranslateBar',
+        },
+      },
+    },
+    {
       name: 'category',
       type: 'select',
       required: true,

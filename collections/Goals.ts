@@ -49,6 +49,15 @@ export const Goals: CollectionConfig = {
   },
   fields: [
     {
+      name: 'autoTranslateUI',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/AutoTranslateBar#AutoTranslateBar',
+        },
+      },
+    },
+    {
       name: 'number',
       type: 'number',
       required: true,

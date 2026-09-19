@@ -402,3 +402,18 @@ export async function autoTranslateSettingsHook({
     { source: "siteTagline", target: "siteTaglineEn" },
   ]);
 }
+
+/**
+ * Auto-translation hooks for Media Collection
+ */
+export async function autoTranslateMediaHook({
+  data,
+}: {
+  data: Record<string, unknown>;
+}) {
+  if (!data) return data;
+  return autoTranslateFields(data, undefined, [
+    { source: "alt", target: "altEn" },
+  ]);
+}
+

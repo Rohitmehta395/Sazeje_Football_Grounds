@@ -8,6 +8,15 @@ export const Settings: GlobalConfig = {
   },
   fields: [
     {
+      name: 'autoTranslateUI',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/AutoTranslateBar#AutoTranslateBar',
+        },
+      },
+    },
+    {
       name: 'contactEmail',
       type: 'email',
       required: false,

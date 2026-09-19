@@ -9,6 +9,15 @@ export const MapPage: GlobalConfig = {
   },
   fields: [
     {
+      name: 'autoTranslateUI',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/AutoTranslateBar#AutoTranslateBar',
+        },
+      },
+    },
+    {
       name: 'hero',
       type: 'group',
       label: 'Hero Section',

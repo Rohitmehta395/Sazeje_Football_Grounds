@@ -71,6 +71,15 @@ export const Grounds: CollectionConfig = {
   },
   fields: [
     {
+      name: 'autoTranslateUI',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/AutoTranslateBar#AutoTranslateBar',
+        },
+      },
+    },
+    {
       name: 'name',
       type: 'text',
       required: true,
