@@ -133,21 +133,21 @@ export function SiteHeader({ activeHref, socialLinks }: SiteHeaderProps) {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[1000] bg-surface/90 border-b border-border backdrop-blur-md">
-      <div className="max-w-[1920px] mx-auto px-5 md:px-[40px] h-[72px] flex items-center justify-between gap-4">
+      <div className="max-w-[1920px] mx-auto px-3 sm:px-5 md:px-[40px] h-[72px] flex items-center justify-between gap-2 sm:gap-4">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
-          <div className="relative w-[42px] h-[42px] rounded-full overflow-hidden border border-border shadow-sm group-hover:scale-105 transition-transform duration-200">
+        <Link href="/" className="flex items-center gap-2 sm:gap-2.5 md:gap-3 min-w-0 group">
+          <div className="relative w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[42px] md:h-[42px] rounded-full overflow-hidden border border-border shadow-sm group-hover:scale-105 transition-transform duration-200 flex-shrink-0">
             <Image
               src="/Sazaje_groundhopping_logo.jpg"
               alt="SaZeJe Groundhopping Logo"
               fill
-              sizes="42px"
+              sizes="(max-width: 640px) 34px, 42px"
               className="object-cover"
               priority
             />
           </div>
-          <div className="font-bebas text-[23px] tracking-[0.04em] whitespace-nowrap text-text">
-            SaZeJe <span>Football</span>
+          <div className="font-bebas text-[18px] min-[360px]:text-[20px] sm:text-[22px] md:text-[23px] tracking-[0.04em] whitespace-nowrap text-text">
+            SaZeJe <span className="hidden min-[340px]:inline">Football</span>
           </div>
         </Link>
 
@@ -175,7 +175,7 @@ export function SiteHeader({ activeHref, socialLinks }: SiteHeaderProps) {
         </nav>
 
         {/* Right Controls */}
-        <div className="flex items-center gap-[12px]">
+        <div className="flex items-center gap-1.5 sm:gap-2 md:gap-[12px] flex-shrink-0">
           {/* Socials */}
           {visibleSocials.length > 0 && (
             <div className="hidden lg:flex items-center gap-[10px]">
@@ -204,12 +204,12 @@ export function SiteHeader({ activeHref, socialLinks }: SiteHeaderProps) {
           <button
             onClick={() => setIsMobileOpen((prev) => !prev)}
             aria-label={t.header.openMenu}
-            className="min-[901px]:hidden w-[40px] h-[40px] border border-border rounded-[8px] bg-surface-2 flex items-center justify-center text-text cursor-pointer hover:border-accent transition-colors"
+            className="min-[901px]:hidden w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] border border-border rounded-[8px] bg-surface-2 flex items-center justify-center text-text cursor-pointer hover:border-accent transition-colors flex-shrink-0"
           >
             {isMobileOpen ? (
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             ) : (
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
             )}
           </button>
         </div>

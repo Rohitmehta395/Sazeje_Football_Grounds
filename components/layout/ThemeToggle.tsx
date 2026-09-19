@@ -25,12 +25,12 @@ export function ThemeToggle({ className = "" }: ThemeToggleProps) {
     <button
       onClick={toggleTheme}
       aria-label="Toggle Theme"
-      className={`w-[40px] h-[40px] rounded-full border border-border bg-surface-2 flex items-center justify-center text-text cursor-pointer transition-colors hover:border-accent ${className}`.trim()}
+      className={`w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-border bg-surface-2 flex items-center justify-center text-text cursor-pointer transition-colors hover:border-accent flex-shrink-0 ${className}`.trim()}
     >
       {theme === "light" ? (
-        <Moon className="w-[18px] h-[18px] text-text" />
+        <Moon className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-text" />
       ) : (
-        <Sun className="w-[18px] h-[18px] text-accent-2" />
+        <Sun className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-accent-2" />
       )}
     </button>
   );

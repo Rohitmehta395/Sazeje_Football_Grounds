@@ -19,7 +19,7 @@ export function LanguageToggle({ className = "" }: LanguageToggleProps) {
     <button
       onClick={toggleLanguage}
       aria-label="Toggle language"
-      className={`px-[10px] py-[6px] rounded-[20px] border border-border bg-surface-2 font-mono text-[12px] font-bold text-text cursor-pointer transition-colors hover:border-accent ${className}`.trim()}
+      className={`px-2 py-1 sm:px-[10px] sm:py-[6px] rounded-[20px] border border-border bg-surface-2 font-mono text-[11px] sm:text-[12px] font-bold text-text cursor-pointer transition-colors hover:border-accent flex-shrink-0 ${className}`.trim()}
     >
       <span className={lang === "nl" ? "text-accent" : "text-text-muted"}>NL</span>
       <span className="text-text-muted mx-[2px]">/</span>

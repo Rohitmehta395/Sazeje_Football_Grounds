@@ -51,6 +51,12 @@ html[data-theme="dark"] {
   --radius: var(--radius-base);
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);
