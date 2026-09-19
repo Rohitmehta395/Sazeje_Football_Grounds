@@ -181,14 +181,14 @@ export function HomeClientView({
         {/* Section 3: Curated Scarf Archive Showcase */}
         <HomeScarvesSection scarves={scarves} />
 
-        {/* Section 4: Groundhopping Goals & Milestone Tracker */}
-        <HomeGoalsSection goals={goals} />
+        {/* Section 4: Groundhopping Goals & Milestone Tracker (Hidden/Commented) */}
+        {/* <HomeGoalsSection goals={goals} /> */}
 
-        {/* Section 5: Editorial Ethos & Story */}
-        <HomeStorySection />
+        {/* Section 5: Editorial Ethos & Story (Hidden/Commented) */}
+        {/* <HomeStorySection /> */}
 
-        {/* Section 6: Community & Scarf Swap Callout */}
-        <HomeContactCta />
+        {/* Section 6: Community & Scarf Swap Callout (Hidden/Commented) */}
+        {/* <HomeContactCta /> */}
       </div>
     </div>
   );
