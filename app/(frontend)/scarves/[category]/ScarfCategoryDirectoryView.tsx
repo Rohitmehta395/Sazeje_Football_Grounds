@@ -214,30 +214,22 @@ export function ScarfCategoryDirectoryView({
 
         {/* 3. Category Feature Banner Card */}
         <div
-          className={`p-6 sm:p-7 rounded-2xl bg-surface border relative overflow-hidden shadow-card ${
-            isNew
-              ? "border-azg/30 bg-gradient-to-br from-azg/10 via-surface to-surface dark:from-emerald-950/30 dark:border-azg/40"
-              : "border-accent-2/30 bg-gradient-to-br from-accent-2/10 via-surface to-surface dark:from-amber-950/30 dark:border-accent-2/40"
-          }`}
+          className="p-6 sm:p-7 rounded-2xl bg-surface border border-border relative overflow-hidden shadow-card"
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
             <div className="space-y-2 max-w-2xl">
               <div className="flex items-center gap-2">
                 <span
-                  className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px] uppercase tracking-wider font-bold border shadow-xs ${
-                    isNew
-                      ? "bg-azg/10 border-azg/30 text-teal-800 dark:bg-azg/20 dark:border-azg/40 dark:text-azg"
-                      : "bg-accent-2/10 border-accent-2/30 text-amber-900 dark:bg-accent-2/20 dark:border-accent-2/40 dark:text-accent-2"
-                  }`}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px] uppercase tracking-wider font-semibold border border-border bg-surface-2 text-text shadow-xs"
                 >
                   {isNew ? (
                     <>
-                      <OfficialScarfIcon className="w-3.5 h-3.5 text-teal-700 dark:text-azg" />
+                      <OfficialScarfIcon className="w-3.5 h-3.5 text-text-muted" />
                       <span>{isEn ? "MATCHDAY EDITIONS • OFFICIAL" : "MATCHDAY EDITIES • OFFICIEEL"}</span>
                     </>
                   ) : (
                     <>
-                      <SwapScarvesIcon className="w-3.5 h-3.5 text-amber-800 dark:text-accent-2" />
+                      <SwapScarvesIcon className="w-3.5 h-3.5 text-text-muted" />
                       <span>{isEn ? "TERRACE SWAPS & TRADES" : "TERRACE RUIL & VINTAGE"}</span>
                     </>
                   )}
@@ -285,7 +277,7 @@ export function ScarfCategoryDirectoryView({
               {!isNew && (
                 <Link
                   href="/contact?subject=Scarf%20Swap"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#946A24] dark:bg-accent-2 hover:brightness-110 text-white dark:text-black font-mono text-xs font-bold transition-all shadow-md hover:scale-105"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-2 hover:bg-surface border border-border text-text font-mono text-xs font-semibold transition-all shadow-sm hover:border-text-muted/50"
                 >
                   <ArrowRightLeft className="w-3.5 h-3.5" />
                   <span>{isEn ? "Propose a Scarf Swap" : "Stuur een Ruilvoorstel"}</span>
@@ -324,9 +316,7 @@ export function ScarfCategoryDirectoryView({
             {viewMode === "showcase" && (
               <div className="relative w-full sm:w-auto min-w-[210px] shrink-0">
                 <Globe2
-                  className={`w-4 h-4 pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 ${
-                    isNew ? "text-azg" : "text-accent-2"
-                  }`}
+                  className="w-4 h-4 pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-text-muted"
                 />
                 <select
                   aria-label={t.scarves.filterCountryAll}
@@ -334,9 +324,7 @@ export function ScarfCategoryDirectoryView({
                   onChange={(e) => setSelectedCountry(e.target.value)}
                   className={`w-full appearance-none pl-9.5 pr-8 py-2.5 rounded-xl bg-surface border text-xs font-mono font-medium text-text outline-none cursor-pointer shadow-sm transition-all ${
                     selectedCountry !== "ALL"
-                      ? isNew
-                        ? "border-azg ring-1 ring-azg/40 font-bold"
-                        : "border-accent-2 ring-1 ring-accent-2/40 font-bold"
+                      ? "border-text-muted/60 ring-1 ring-border font-bold"
                       : "border-border hover:border-border/80 focus:border-accent"
                   }`}
                 >
@@ -414,7 +402,7 @@ export function ScarfCategoryDirectoryView({
                   ? "scarves found"
                   : "sjaals gevonden"}
                 {selectedCountry !== "ALL" && (
-                  <span className="text-teal-800 dark:text-azg ml-1.5 font-semibold">
+                  <span className="text-text ml-1.5 font-semibold">
                     • {getCountryDisplayName(selectedCountry, lang)}
                   </span>
                 )}
@@ -484,8 +472,8 @@ export function ScarfCategoryDirectoryView({
           <div className="space-y-8">
             {/* Populated Countries with Scarves */}
             <div className="space-y-4">
-              <div className="font-mono text-xs tracking-wider uppercase text-teal-800 dark:text-azg font-bold flex items-center gap-2">
-                <Flag className="w-3.5 h-3.5" />
+              <div className="font-mono text-xs tracking-wider uppercase text-text font-bold flex items-center gap-2">
+                <Flag className="w-3.5 h-3.5 text-text-muted" />
                 <span>{t.scarves.countriesWithScarves}</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">

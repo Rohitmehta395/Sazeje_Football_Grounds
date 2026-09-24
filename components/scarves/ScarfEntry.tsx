@@ -31,19 +31,19 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
       <h3 className="font-bebas text-[24px] text-text mt-[16px] mb-[4px] text-center">
         {scarf.club}
       </h3>
-      <div className="font-mono text-[12px] text-azg uppercase tracking-[0.06em] mb-[16px] text-center">
+      <div className="font-mono text-[12px] text-text-muted uppercase tracking-[0.06em] mb-[16px] text-center">
         {displayType} • {getCountryDisplayName(scarf.country, lang)}
       </div>
 
       {/* Receipt-style Scarf Info Box */}
-      <div className="bg-surface shadow-card px-[26px] py-[8px] rounded border-t-[3px] border-t-azg text-left mb-[14px] relative">
-        <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-azg py-[18px] pb-[14px] border-b border-border mb-[2px]">
+      <div className="bg-surface shadow-card px-[26px] py-[8px] rounded border-t-[3px] border-t-accent text-left mb-[14px] relative">
+        <div className="font-mono text-[11px] tracking-[0.16em] uppercase text-text py-[18px] pb-[14px] border-b border-border mb-[2px]">
           {t.scarves.officialLog} #{scarf.id}
         </div>
 
         <div className="flex items-center justify-between py-[16px] border-b border-dashed border-border">
           <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
-            <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
+            <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-text-muted">
               <Building2 className="w-4 h-4" />
             </span>
             {t.scarves.stadium}
@@ -55,7 +55,7 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
 
         <div className="flex items-center justify-between py-[16px] border-b border-dashed border-border">
           <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
-            <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
+            <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-text-muted">
               <Calendar className="w-4 h-4" />
             </span>
             {t.scarves.founded}
@@ -68,7 +68,7 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
         {displayTrophies && (
           <div className="flex items-center justify-between py-[16px] border-b border-dashed border-border">
             <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
-              <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
+              <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-text-muted">
                 <Trophy className="w-4 h-4" />
               </span>
               {t.scarves.trophies}
@@ -82,7 +82,7 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
         {displayFunFact && (
           <div className="flex items-center justify-between py-[16px]">
             <span className="inline-flex items-center gap-[12px] text-text font-semibold font-inter text-[13.5px]">
-              <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-azg">
+              <span className="inline-flex items-center justify-center w-[30px] h-[30px] rounded-full bg-surface-2 border border-border text-[14px] flex-shrink-0 text-text-muted">
                 <Lightbulb className="w-4 h-4" />
               </span>
               {t.scarves.funFact}

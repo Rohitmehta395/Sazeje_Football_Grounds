@@ -25,8 +25,8 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
     <section id="scarves-section" className="scroll-mt-24">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 pb-4 border-b border-border">
         <div>
-          <div className="font-mono text-xs uppercase tracking-widest text-azg font-semibold flex items-center gap-1.5 mb-1.5">
-            <ScarfIcon className="w-3.5 h-3.5 text-accent-2" />
+          <div className="font-mono text-xs uppercase tracking-widest text-accent font-semibold flex items-center gap-1.5 mb-1.5">
+            <ScarfIcon className="w-3.5 h-3.5 text-accent" />
             <span>{t.home.scarvesArchive}</span>
           </div>
           <h2 className="font-bebas text-3xl sm:text-4xl text-text m-0 tracking-wide">
@@ -119,11 +119,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
                 <div className="absolute top-3 left-3 flex items-center gap-1.5">
                   <span
-                    className={`px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold shadow-sm backdrop-blur-md ${
-                      isNew
-                        ? "bg-emerald-900/80 text-emerald-200 border border-emerald-500/30"
-                        : "bg-amber-900/80 text-amber-200 border border-amber-500/30"
-                    }`}
+                    className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold shadow-sm backdrop-blur-md bg-black/60 text-white/90 border border-white/20"
                   >
                     {isNew ? (lang === "en" ? "New" : "Nieuw") : "Vintage"}
                   </span>
@@ -156,7 +152,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                     {scarf.stadium && (
                       <div className="flex items-center justify-between text-text">
                         <span className="text-text-muted flex items-center gap-1.5">
-                          <Building2 className="w-3.5 h-3.5 text-azg" />
+                          <Building2 className="w-3.5 h-3.5 text-text-muted" />
                           <span>{t.scarves.stadium}</span>
                         </span>
                         <span className="font-mono text-right truncate max-w-[170px] font-medium">
@@ -168,7 +164,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                     {displayTrophies && (
                       <div className="flex items-center justify-between text-text">
                         <span className="text-text-muted flex items-center gap-1.5">
-                          <Trophy className="w-3.5 h-3.5 text-accent-2" />
+                          <Trophy className="w-3.5 h-3.5 text-text-muted" />
                           <span>{t.scarves.trophies}</span>
                         </span>
                         <span className="text-right truncate max-w-[170px] font-mono text-[11px]">

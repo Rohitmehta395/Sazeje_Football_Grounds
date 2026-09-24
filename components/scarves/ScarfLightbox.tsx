@@ -68,11 +68,7 @@ export function ScarfLightbox({ scarf, isOpen, onClose }: ScarfLightboxProps) {
       <div className="flex items-center justify-between z-10 w-full max-w-6xl mx-auto text-white">
         <div className="flex items-center gap-3">
           <span
-            className={`font-mono text-xs px-3 py-1 rounded-full uppercase tracking-wider font-bold border ${
-              isNew
-                ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-300"
-                : "bg-amber-950/80 border-amber-500/40 text-amber-300"
-            }`}
+            className="font-mono text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold border bg-white/10 border-white/20 text-white"
           >
             {isNew ? "OFFICIAL MATCHDAY" : "VINTAGE TRADE"}
           </span>
@@ -155,7 +151,7 @@ export function ScarfLightbox({ scarf, isOpen, onClose }: ScarfLightboxProps) {
       {/* 3. Lightbox Footer Metadata */}
       <div className="w-full max-w-6xl mx-auto text-white/80 text-xs font-mono flex items-center justify-between gap-4 pt-2 border-t border-white/10">
         <div className="truncate">
-          <span className="text-azg font-bold">{scarf.stadium}</span>
+          <span className="text-white font-bold">{scarf.stadium}</span>
         </div>
         <div className="text-white/50 text-[11px] hidden sm:block">
           Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white">Esc</kbd> to close,{" "}

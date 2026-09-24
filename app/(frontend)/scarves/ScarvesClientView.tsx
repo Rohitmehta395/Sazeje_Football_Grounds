@@ -125,7 +125,7 @@ export function ScarvesClientView({
             </div>
 
             <div className="p-4 rounded-xl bg-surface border border-border/80 shadow-card flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent-soft flex items-center justify-center text-accent-2 flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-accent-soft flex items-center justify-center text-accent flex-shrink-0">
                 <Flag className="w-5 h-5" />
               </div>
               <div>
@@ -142,10 +142,10 @@ export function ScarvesClientView({
 
         {/* 3. Editorial Intro Card from CMS */}
         {showIntro && (introHeading || introText) && (
-          <div className="p-6 sm:p-7 rounded-2xl bg-surface border border-border/80 border-l-4 border-l-azg shadow-card relative overflow-hidden">
+          <div className="p-6 sm:p-7 rounded-2xl bg-surface border border-border/80 border-l-4 border-l-accent shadow-card relative overflow-hidden">
             <div className="space-y-2 max-w-3xl">
               {introBadge && (
-                <span className="font-mono text-[10.5px] uppercase tracking-wider text-azg font-bold px-2 py-0.5 rounded bg-surface-2 border border-border inline-block">
+                <span className="font-mono text-[10.5px] uppercase tracking-wider text-text font-bold px-2 py-0.5 rounded bg-surface-2 border border-border inline-block">
                   {introBadge}
                 </span>
               )}

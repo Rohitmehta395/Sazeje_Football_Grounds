@@ -43,13 +43,12 @@ export function ScarfCategoryChooser({
       count: newCount,
       eyebrow: (t.scarves as Record<string, string>).categoryNewTag || "MATCHDAY EDITIONS • FANSHOP NEW",
       ctaText: (t.scarves as Record<string, string>).categoryNewCta || (isEn ? "Browse New Scarves" : "Blader door Nieuwe Sjaals"),
-      icon: <OfficialScarfIcon className="w-8 h-8 text-azg transition-transform duration-300 group-hover:scale-110" />,
-      watermark: <OfficialScarfIcon className="w-44 h-44 text-azg/[0.04] group-hover:text-azg/[0.08] transition-all duration-500 group-hover:scale-110" />,
-      accentBorder: "hover:border-azg/60",
-      accentGlow: "from-azg/10 via-surface to-surface dark:from-emerald-950/20",
-      iconBg: "bg-azg/10 border-azg/25 text-azg dark:bg-azg/20 dark:border-azg/40 shadow-sm",
-      badgeBg: "bg-azg/10 text-teal-800 dark:bg-azg/20 dark:text-azg border-azg/30",
-      dotColor: "bg-azg",
+      icon: <OfficialScarfIcon className="w-8 h-8 text-text transition-transform duration-300 group-hover:scale-110" />,
+      watermark: <OfficialScarfIcon className="w-44 h-44 text-text/[0.03] group-hover:text-text/[0.06] transition-all duration-500 group-hover:scale-110" />,
+      accentBorder: "hover:border-text-muted/40",
+      accentGlow: "from-surface-2/40 via-surface to-surface",
+      iconBg: "bg-surface-2 border-border text-text shadow-sm group-hover:border-text-muted/40",
+      badgeBg: "bg-surface-2 text-text border-border font-medium",
       pills: isEn
         ? ["100% Official", "Matchday Fanshop", "Mint Condition"]
         : ["100% Officieel", "Matchday Fanshop", "Nieuwstaat"],
@@ -62,13 +61,12 @@ export function ScarfCategoryChooser({
       count: secondhandCount,
       eyebrow: (t.scarves as Record<string, string>).categorySecondhandTag || "TERRACE SWAPS • VINTAGE FINDS",
       ctaText: (t.scarves as Record<string, string>).categorySecondhandCta || (isEn ? "Browse Swap Collection" : "Blader door Ruilsjaals"),
-      icon: <SwapScarvesIcon className="w-8 h-8 text-accent-2 transition-transform duration-300 group-hover:scale-110" />,
-      watermark: <SwapScarvesIcon className="w-44 h-44 text-accent-2/[0.04] group-hover:text-accent-2/[0.08] transition-all duration-500 group-hover:scale-110" />,
-      accentBorder: "hover:border-accent-2/60",
-      accentGlow: "from-accent-2/10 via-surface to-surface dark:from-amber-950/20",
-      iconBg: "bg-accent-2/10 border-accent-2/25 text-accent-2 dark:bg-accent-2/20 dark:border-accent-2/40 shadow-sm",
-      badgeBg: "bg-accent-2/10 text-amber-900 dark:bg-accent-2/20 dark:text-accent-2 border-accent-2/30",
-      dotColor: "bg-accent-2",
+      icon: <SwapScarvesIcon className="w-8 h-8 text-text transition-transform duration-300 group-hover:scale-110" />,
+      watermark: <SwapScarvesIcon className="w-44 h-44 text-text/[0.03] group-hover:text-text/[0.06] transition-all duration-500 group-hover:scale-110" />,
+      accentBorder: "hover:border-text-muted/40",
+      accentGlow: "from-surface-2/40 via-surface to-surface",
+      iconBg: "bg-surface-2 border-border text-text shadow-sm group-hover:border-text-muted/40",
+      badgeBg: "bg-surface-2 text-text border-border font-medium",
       pills: isEn
         ? ["Supporter Trades", "Vintage Terrace Heritage", "Open for Swap"]
         : ["Supporter Ruil", "Vintage Terrace Historie", "Beschikbaar voor Ruil"],
@@ -98,9 +96,8 @@ export function ScarfCategoryChooser({
 
                 {typeof opt.count === "number" && (
                   <div
-                    className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border font-mono text-xs font-semibold tracking-wider ${opt.badgeBg}`}
+                    className={`inline-flex items-center px-3 py-1.5 rounded-full border font-mono text-xs font-semibold tracking-wider ${opt.badgeBg}`}
                   >
-                    <span className={`w-2 h-2 rounded-full ${opt.dotColor} animate-pulse`} />
                     <span>
                       {opt.count}{" "}
                       {isEn

@@ -30,18 +30,8 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
   return (
     <div
-      className={`group bg-surface rounded-2xl border transition-all duration-300 overflow-hidden shadow-card flex flex-col justify-between relative ${
-        isNew
-          ? "border-border/80 hover:border-azg/60 hover:shadow-[0_10px_30px_rgba(20,184,166,0.12)]"
-          : "border-border/80 hover:border-accent-2/60 hover:shadow-[0_10px_30px_rgba(234,179,8,0.12)]"
-      }`}
+      className="group bg-surface rounded-2xl border border-border/80 hover:border-text-muted/40 hover:shadow-lg transition-all duration-300 overflow-hidden shadow-card flex flex-col justify-between relative"
     >
-      {/* Subtle ambient gradient overlay in top corner */}
-      <div
-        className={`absolute top-0 right-0 w-64 h-64 pointer-events-none rounded-full blur-3xl opacity-10 transition-opacity duration-300 group-hover:opacity-20 ${
-          isNew ? "bg-azg" : "bg-accent-2"
-        }`}
-      />
 
       <div>
         {/* 1. Scarf Photo Banner with Hover Zoom and Click to Expand */}
@@ -63,20 +53,16 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
           {/* Top Floating Category Badge & Quick Inspect Button */}
           <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-2 z-10">
             <span
-              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-md font-mono text-[10.5px] uppercase tracking-wider font-bold border shadow-sm ${
-                isNew
-                  ? "bg-black/80 border-emerald-500/40 text-emerald-300"
-                  : "bg-black/80 border-amber-500/40 text-amber-300"
-              }`}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-md font-mono text-[10.5px] uppercase tracking-wider font-semibold border shadow-sm bg-black/75 border-white/20 text-white"
             >
               {isNew ? (
                 <>
-                  <OfficialScarfIcon className="w-3.5 h-3.5 text-emerald-300" />
+                  <OfficialScarfIcon className="w-3.5 h-3.5 text-white/80" />
                   <span>{isEn ? "MATCHDAY FANSHOP" : "OFFICIEEL FANSHOP"}</span>
                 </>
               ) : (
                 <>
-                  <SwapScarvesIcon className="w-3.5 h-3.5 text-amber-300" />
+                  <SwapScarvesIcon className="w-3.5 h-3.5 text-white/80" />
                   <span>{isEn ? "TERRACE TRADE / SWAP" : "TERRACE RUIL"}</span>
                 </>
               )}
@@ -126,14 +112,14 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
           {/* Metadata Chips Grid */}
           <div className="grid grid-cols-2 gap-2 pt-2 border-t border-border/50 text-xs font-mono">
             <div className="flex items-center gap-2 text-text-muted min-w-0">
-              <StadiumIcon className="w-3.5 h-3.5 text-azg shrink-0" />
+              <StadiumIcon className="w-3.5 h-3.5 text-text-muted shrink-0" />
               <span className="truncate" title={scarf.stadium}>
                 {scarf.stadium || "—"}
               </span>
             </div>
 
             <div className="flex items-center gap-2 text-text-muted min-w-0">
-              <Calendar className="w-3.5 h-3.5 text-accent-2 shrink-0" />
+              <Calendar className="w-3.5 h-3.5 text-text-muted shrink-0" />
               <span className="truncate">
                 {isEn ? `Est. ${scarf.founded}` : `Opgericht ${scarf.founded}`}
               </span>
@@ -141,7 +127,7 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
             {displayTrophies && (
               <div className="col-span-2 flex items-start gap-2 text-text-muted pt-1">
-                <Trophy className="w-3.5 h-3.5 text-accent-2 shrink-0 mt-0.5" />
+                <Trophy className="w-3.5 h-3.5 text-text-muted shrink-0 mt-0.5" />
                 <span className="text-[11.5px] leading-relaxed break-words">
                   {displayTrophies}
                 </span>
@@ -152,10 +138,8 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
           {/* "Wist Je Dat?" / Heritage Trivia Box */}
           {displayFunFact && (
             <div className="p-3.5 rounded-xl bg-surface-2/60 border border-border/70 text-xs relative">
-              <div className={`flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider font-bold mb-1 ${
-                isNew ? "text-teal-800 dark:text-azg" : "text-amber-900 dark:text-accent-2"
-              }`}>
-                <Lightbulb className={`w-3.5 h-3.5 ${isNew ? "text-teal-700 dark:text-azg" : "text-amber-800 dark:text-accent-2"}`} />
+              <div className="flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider font-bold mb-1 text-text">
+                <Lightbulb className="w-3.5 h-3.5 text-text-muted" />
                 <span>{t.scarves.funFact}</span>
               </div>
               <p className="font-inter text-text-muted italic leading-relaxed m-0 text-[12.5px]">
@@ -171,7 +155,7 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
         {isNew ? (
           <>
             <div className="font-mono text-[11px] text-text-muted">
-              <span className="text-teal-800 dark:text-azg font-semibold">
+              <span className="text-text font-semibold">
                 {isEn ? "Matchday Acquisition" : "Matchday Aankoop"}
               </span>
             </div>
@@ -180,7 +164,7 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
               <button
                 type="button"
                 onClick={() => onOpenLightbox?.(scarf)}
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-teal-800 dark:text-azg hover:text-accent transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text transition-colors cursor-pointer"
               >
                 <Maximize2 className="w-3.5 h-3.5" />
                 <span>{isEn ? "View Photo" : "Vergroot"}</span>
@@ -189,14 +173,14 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
           </>
         ) : (
           <>
-            <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-amber-900 dark:text-accent-2 font-semibold">
-              <span className="w-2 h-2 rounded-full bg-amber-600 dark:bg-accent-2 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-text font-semibold">
+              <span className="w-2 h-2 rounded-full bg-text/60 animate-pulse" />
               <span>{isEn ? "Open for Swap" : "Beschikbaar voor Ruil"}</span>
             </div>
 
             <Link
               href={`/contact?swap=${encodeURIComponent(scarf.club)}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent-2/15 hover:bg-[#946A24] dark:hover:bg-accent-2 text-amber-900 dark:text-accent-2 hover:text-white dark:hover:text-black border border-accent-2/30 text-xs font-mono font-bold transition-all cursor-pointer shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-2 hover:bg-surface text-text hover:border-text-muted/50 border border-border text-xs font-mono font-semibold transition-all cursor-pointer shadow-xs"
             >
               <ArrowRightLeft className="w-3.5 h-3.5" />
               <span>{isEn ? "Propose Swap" : "Ruilvoorstel"}</span>
