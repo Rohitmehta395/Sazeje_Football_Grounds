@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     pageContent.seo?.metaTitle ||
     pageContent.hero.title ||
-    "Sjaalcollectie | SaZeJe Football";
+    "Sjaalcollectie | SaZeJe Groundhopping";
   const description =
     pageContent.seo?.metaDescription ||
     pageContent.hero.subtitle ||

@@ -162,7 +162,7 @@ export async function sendContactEmail(
     const resend = new Resend(apiKey);
     const fromEmail =
       process.env.RESEND_FROM_EMAIL ||
-      "SaZeJe Football <onboarding@resend.dev>";
+      "SaZeJe Groundhopping <onboarding@resend.dev>";
 
     // Generate admin notification email
     const adminEmailData = generateAdminNotificationEmail({
@@ -205,7 +205,7 @@ export async function sendContactEmail(
       const { error: autoReplyError } = await resend.emails.send({
         from: fromEmail,
         to: [cleanEmail],
-        replyTo: toEmail, // Replies to confirmation go directly to the SaZeJe Football admin inbox
+        replyTo: toEmail, // Replies to confirmation go directly to the SaZeJe Groundhopping admin inbox
         subject: confirmationEmailData.subject,
         text: confirmationEmailData.text,
         html: confirmationEmailData.html,

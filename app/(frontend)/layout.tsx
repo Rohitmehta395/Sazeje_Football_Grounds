@@ -28,7 +28,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SaZeJe Football — Voetbalreizen & Sjaalcollectie",
+  title: "SaZeJe Groundhopping — Voetbalreizen & Sjaalcollectie",
   description: "Persoonlijke reisverslagen van stadionbezoeken en sjaalcollectie door heel Europa.",
   icons: {
     icon: "/Sazaje_groundhopping_logo.jpg",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     apple: "/Sazaje_groundhopping_logo.jpg",
   },
   openGraph: {
-    title: "SaZeJe Football — Voetbalreizen & Sjaalcollectie",
+    title: "SaZeJe Groundhopping — Voetbalreizen & Sjaalcollectie",
     description: "Persoonlijke reisverslagen van stadionbezoeken en sjaalcollectie door heel Europa.",
     images: ["/Hero_Image.jpg"],
   },

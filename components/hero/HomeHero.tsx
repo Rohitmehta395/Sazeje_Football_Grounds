@@ -25,10 +25,10 @@ export interface HomeHeroProps {
 
 export function HomeHero({
   eyebrow,
-  title = "SAZEJE FOOTBALL ARCHIVE",
+  title = "SAZEJE GROUNDHOPPING ARCHIVE",
   description,
   backgroundImage = "/Hero_Image.jpg",
-  topbarLabel = "SAZEJE FOOTBALL ARCHIVE • 2024–2026",
+  topbarLabel = "SAZEJE GROUNDHOPPING ARCHIVE • 2024–2026",
   groundsCount = 10,
   countriesCount = 7,
   scarvesCount = 6,

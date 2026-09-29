@@ -44,7 +44,7 @@ export const nl = {
   home: {
     heroBadge: "UEFA GROUNDHOPPING ARCHIEF • EST. 2024",
     heroStatus: "ONDERWEG IN EUROPA",
-    heroEyebrow: "WELKOM BIJ SAZEJE FOOTBALL",
+    heroEyebrow: "WELKOM BIJ SAZEJE GROUNDHOPPING",
     heroTitle: "Voetbalreizen & Sjaalcollectie",
     heroSubtitle:
       "Persoonlijke reisverslagen van stadionbezoeken door heel Europa. Volg de reis, lees de verhalen achter elke tribune en ontdek welke ground er als volgende op de lijst staat.",
@@ -108,12 +108,12 @@ export const nl = {
   // About Page
   about: {
     heroEyebrow: "OVER & DOELEN",
-    heroTitle: "Over SaZeJe Football",
+    heroTitle: "Over SaZeJe Groundhopping",
     heroSubtitle:
       "Achtergrondverhaal over de passie voor voetbalreizen, groundhopping en het verzamelen van sjaals.",
     bioTitle: "Het Verhaal",
     bioParagraph1:
-      "SaZeJe Football is ontstaan uit een gepassioneerde liefde voor de pure voetbalsfeer in en rondom Europese stadions. Wat begon als een paar spontane uitstapjes naar wedstrijden over de grens, is uitgegroeid tot een gestructureerde passie voor groundhopping en verzamelen.",
+      "SaZeJe Groundhopping is ontstaan uit een gepassioneerde liefde voor de pure voetbalsfeer in en rondom Europese stadions. Wat begon als een paar spontane uitstapjes naar wedstrijden over de grens, is uitgegroeid tot een gestructureerde passie voor groundhopping en verzamelen.",
     bioParagraph2:
       "Elk stadionbezoek brengt unieke verhalen met zich mee — van de iconische lichtmasten tot de cultuur van de supportersscharen. Als blijvende herinnering neem ik bij voorkeur uit elk bezocht stadion of stad een officiële sjaal mee.",
     goalsTitle: "Persoonlijke Doelen",
@@ -294,7 +294,7 @@ export const nl = {
     charRemainingLabel: "over",
     maxCharsWarning: "Maximale tekenlimiet bereikt (2.000 tekens).",
     mailtoNotice:
-      "Let op: Berichten worden rechtstreeks verzonden naar het beheer van SaZeJe Football.",
+      "Let op: Berichten worden rechtstreeks verzonden naar het beheer van SaZeJe Groundhopping.",
     directInfoTitle: "Direct Contact",
     directInfoDesc:
       "Heb je een snelle vraag of tip? Neem rechtstreeks contact op via e-mail of volg onze actuele bezoeken via sociale media.",
@@ -304,7 +304,7 @@ export const nl = {
     baseLocationValue: "Nederland (Reizend door Europa)",
     copyEmail: "Kopieer e-mail",
     copiedEmail: "Gekopieerd!",
-    socialsTitle: "Volg SaZeJe Football",
+    socialsTitle: "Volg SaZeJe Groundhopping",
     socialsSubtitle: "Foto's, matchday video's en sfeerverslagen",
     faqTitle: "Veelgestelde Vragen",
     faqSubtitle: "Alles over groundhopping tips, sjaalruil en onze collectie",
@@ -328,7 +328,7 @@ export const nl = {
     ],
     reasonsTitle: "Waarom Contact Opnemen?",
     reasonsSubtitle:
-      "SaZeJe Football verbindt supporters, groundhoppers en verzamelaars uit heel Europa.",
+      "SaZeJe Groundhopping verbindt supporters, groundhoppers en verzamelaars uit heel Europa.",
     reason1Title: "Stadiontips & Verborgen Parels",
     reason1Desc:
       "Ken je een authentiek amateurstadion, een vergeten traditie of een derby die we moeten bezoeken? Laat het ons weten!",

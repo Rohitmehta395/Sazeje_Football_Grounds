@@ -10,11 +10,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     pageContent.seo?.metaTitle ||
     pageContent.hero.title ||
-    "Stadionkaart Europa | SaZeJe Football";
+    "Stadionkaart Europa | SaZeJe Groundhopping";
   const description =
     pageContent.seo?.metaDescription ||
     pageContent.hero.subtitle ||
-    "Interactieve kaart van alle bezochte voetbalstadions in Nederland en Europa door SaZeJe Football.";
+    "Interactieve kaart van alle bezochte voetbalstadions in Nederland en Europa door SaZeJe Groundhopping.";
 
   return {
     title,

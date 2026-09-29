@@ -10,11 +10,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     pageContent.seo?.metaTitle ||
     pageContent.hero.title ||
-    "Contact & Community | SaZeJe Football";
+    "Contact & Community | SaZeJe Groundhopping";
   const description =
     pageContent.seo?.metaDescription ||
     pageContent.hero.subtitle ||
-    "Neem contact op met SaZeJe Football voor stadiontips, sjaalruil voorstellen of samenwerkingen.";
+    "Neem contact op met SaZeJe Groundhopping voor stadiontips, sjaalruil voorstellen of samenwerkingen.";
 
   return {
     title,

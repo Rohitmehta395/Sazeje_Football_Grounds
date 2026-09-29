@@ -102,7 +102,7 @@ export function AboutClientView({
                 <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-surface/90 backdrop-blur-md border border-border/80 px-4 py-3 rounded-xl shadow-lg">
                   <div className="min-w-0">
                     <span className="font-bebas text-xl text-text leading-none block truncate">
-                      SaZeJe Football
+                      SaZeJe Groundhopping
                     </span>
                     <span className="font-mono text-[11px] text-azg uppercase tracking-wider block truncate">
                       {lang === "en" ? "European Groundhopper" : "Europese Groundhopper"}

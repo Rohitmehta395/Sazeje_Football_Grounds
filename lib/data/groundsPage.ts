@@ -40,12 +40,12 @@ export const DEFAULT_GROUNDS_PAGE_CONTENT: GroundsPageContent = {
     showStats: true,
   },
   seo: {
-    metaTitle: "Bezochte Grounds & Stadions | SaZeJe Football",
-    metaTitleEn: "Visited Grounds & Stadiums | SaZeJe Football",
+    metaTitle: "Bezochte Grounds & Stadions | SaZeJe Groundhopping",
+    metaTitleEn: "Visited Grounds & Stadiums | SaZeJe Groundhopping",
     metaDescription:
-      "Ontdek het complete groundhopping archief van SaZeJe Football: bezochte stadions in Nederland en Europa met wedstrijdverslagen, sfeerbeoordelingen en foto's.",
+      "Ontdek het complete groundhopping archief van SaZeJe Groundhopping: bezochte stadions in Nederland en Europa met wedstrijdverslagen, sfeerbeoordelingen en foto's.",
     metaDescriptionEn:
-      "Explore SaZeJe Football's complete groundhopping archive: visited grounds across the Netherlands and Europe with match reports, atmosphere ratings, and photos.",
+      "Explore SaZeJe Groundhopping's complete groundhopping archive: visited grounds across the Netherlands and Europe with match reports, atmosphere ratings, and photos.",
   },
 };
 

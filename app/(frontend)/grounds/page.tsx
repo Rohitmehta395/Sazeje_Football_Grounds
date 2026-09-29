@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageContent = await getGroundsPageContent();
-  const title = pageContent.seo?.metaTitle || pageContent.hero.title || "Grounds & Stadiums Archive | SaZeJe Football";
+  const title = pageContent.seo?.metaTitle || pageContent.hero.title || "Grounds & Stadiums Archive | SaZeJe Groundhopping";
   const description =
     pageContent.seo?.metaDescription ||
     pageContent.hero.subtitle ||

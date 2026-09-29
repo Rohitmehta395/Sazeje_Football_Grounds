@@ -157,7 +157,7 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
               </span>
             </div>
             <div className="font-mono text-[9px] text-text-muted tracking-wider uppercase">
-              SAZEJE FOOTBALL ARCHIVE
+              SAZEJE GROUNDHOPPING ARCHIVE
             </div>
           </div>
         </div>

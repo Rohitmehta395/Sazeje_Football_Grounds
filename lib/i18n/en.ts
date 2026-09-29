@@ -46,7 +46,7 @@ export const en: Translations = {
   home: {
     heroBadge: "UEFA GROUNDHOPPING ARCHIVE • EST. 2024",
     heroStatus: "EXPLORING EUROPE",
-    heroEyebrow: "WELCOME TO SAZEJE FOOTBALL",
+    heroEyebrow: "WELCOME TO SAZEJE GROUNDHOPPING",
     heroTitle: "Football Travels & Scarf Collection",
     heroSubtitle:
       "Personal travelogues of stadium visits across Europe. Follow the journey, read the stories behind every stand, and discover which ground is next on the list.",
@@ -110,12 +110,12 @@ export const en: Translations = {
   // About Page
   about: {
     heroEyebrow: "ABOUT & GOALS",
-    heroTitle: "About SaZeJe Football",
+    heroTitle: "About SaZeJe Groundhopping",
     heroSubtitle:
       "Background story behind the passion for football trips, groundhopping, and collecting scarves.",
     bioTitle: "The Story",
     bioParagraph1:
-      "SaZeJe Football originated from a passionate love for pure football atmosphere in and around European stadiums. What started as a few spontaneous trips across borders evolved into a structured passion for groundhopping and collecting.",
+      "SaZeJe Groundhopping originated from a passionate love for pure football atmosphere in and around European stadiums. What started as a few spontaneous trips across borders evolved into a structured passion for groundhopping and collecting.",
     bioParagraph2:
       "Every stadium visit brings unique stories — from floodlights to fan culture. As a lasting memory, I collect an official scarf from every ground or city visited.",
     goalsTitle: "Personal Goals",
@@ -296,7 +296,7 @@ export const en: Translations = {
     charRemainingLabel: "remaining",
     maxCharsWarning: "Maximum character limit reached (2,000 characters).",
     mailtoNotice:
-      "Note: Messages are sent directly to the SaZeJe Football management.",
+      "Note: Messages are sent directly to the SaZeJe Groundhopping management.",
     directInfoTitle: "Direct Contact",
     directInfoDesc:
       "Have a quick question or tip? Contact us directly via email or follow our ongoing matchday travels across social channels.",
@@ -306,7 +306,7 @@ export const en: Translations = {
     baseLocationValue: "Netherlands (Traveling Europe)",
     copyEmail: "Copy email",
     copiedEmail: "Copied!",
-    socialsTitle: "Follow SaZeJe Football",
+    socialsTitle: "Follow SaZeJe Groundhopping",
     socialsSubtitle: "Photos, matchday videos, and ground reports",
     faqTitle: "Frequently Asked Questions",
     faqSubtitle: "Everything about ground recommendations, scarf swaps, and our archive",
@@ -330,7 +330,7 @@ export const en: Translations = {
     ],
     reasonsTitle: "Why Connect With Us?",
     reasonsSubtitle:
-      "SaZeJe Football connects supporters, groundhoppers, and collectors from across Europe.",
+      "SaZeJe Groundhopping connects supporters, groundhoppers, and collectors from across Europe.",
     reason1Title: "Ground Tips & Hidden Gems",
     reason1Desc:
       "Know an authentic non-league ground, a forgotten tradition, or a derby we must experience? Let us know!",

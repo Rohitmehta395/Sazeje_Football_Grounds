@@ -1,6 +1,6 @@
-# SaZeJe Football — Next.js Migration
+# SaZeJe Groundhopping — Next.js Migration
 
-A modern Next.js (App Router) migration of the SaZeJe Football stadium visits and scarf collection application.
+A modern Next.js (App Router) migration of the SaZeJe Groundhopping stadium visits and scarf collection application.
 
 ---
 

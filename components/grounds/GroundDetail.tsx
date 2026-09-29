@@ -71,7 +71,7 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
     try {
       if (navigator.share) {
         await navigator.share({
-          title: `${ground.name} | SaZeJe Football`,
+          title: `${ground.name} | SaZeJe Groundhopping`,
           text: `Groundhopping log at ${ground.name} (${ground.club})`,
           url: window.location.href,
         });

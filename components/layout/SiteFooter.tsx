@@ -213,7 +213,7 @@ export function SiteFooter({ socialLinks }: SiteFooterProps = {}) {
               </div>
               <div className="flex flex-col">
                 <span className="font-bebas text-2xl text-text tracking-wider leading-none group-hover:text-accent transition-colors">
-                  SaZeJe Football
+                  SaZeJe Groundhopping
                 </span>
                 <span className="font-mono text-[10px] text-text-muted uppercase tracking-widest mt-0.5">
                   European Groundhopping Archive
@@ -379,7 +379,7 @@ export function SiteFooter({ socialLinks }: SiteFooterProps = {}) {
         <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-text-muted font-inter">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
             <span>
-              © {currentYear} SaZeJe Football. {t.footer.copyright}
+              © {currentYear} SaZeJe Groundhopping. {t.footer.copyright}
             </span>
 
           </div>

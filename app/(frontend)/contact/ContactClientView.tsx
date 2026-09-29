@@ -84,7 +84,7 @@ export function ContactClientView({
           />
         </React.Suspense>
 
-        {/* 2. Direct Contact (Left) & Follow SaZeJe Football (Right) */}
+        {/* 2. Direct Contact (Left) & Follow SaZeJe Groundhopping (Right) */}
         <ContactInfoCard
           directInfo={contactContent.directInfo}
           socials={contactContent.socials}

@@ -84,7 +84,7 @@ export function ContactInfoCard({
       ? [
           {
             name: "YouTube",
-            handle: "SaZeJe Football",
+            handle: "SaZeJe Groundhopping",
             url: settings.socialLinks.youtube,
             icon: (
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -99,7 +99,7 @@ export function ContactInfoCard({
       ? [
           {
             name: "Facebook",
-            handle: "SaZeJe Football",
+            handle: "SaZeJe Groundhopping",
             url: settings.socialLinks.facebook,
             icon: (
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">

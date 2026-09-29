@@ -50,12 +50,12 @@ export const DEFAULT_SCARVES_PAGE_CONTENT: ScarvesPageContent = {
     showStats: true,
   },
   seo: {
-    metaTitle: "Sjaalcollectie | SaZeJe Football",
-    metaTitleEn: "Scarf Collection | SaZeJe Football",
+    metaTitle: "Sjaalcollectie | SaZeJe Groundhopping",
+    metaTitleEn: "Scarf Collection | SaZeJe Groundhopping",
     metaDescription:
-      "Bekijk de complete verzameling officiële en tweedehands voetbalsjaals van SaZeJe Football uit heel Europa.",
+      "Bekijk de complete verzameling officiële en tweedehands voetbalsjaals van SaZeJe Groundhopping uit heel Europa.",
     metaDescriptionEn:
-      "Explore SaZeJe Football's complete collection of official and vintage football scarves from across Europe.",
+      "Explore SaZeJe Groundhopping's complete collection of official and vintage football scarves from across Europe.",
   },
 };
 

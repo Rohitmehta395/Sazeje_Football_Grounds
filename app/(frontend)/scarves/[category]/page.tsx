@@ -25,16 +25,16 @@ export async function generateMetadata({
 }: ScarfCategoryPageProps): Promise<Metadata> {
   const { category } = await params;
   if (category !== "new" && category !== "secondhand") {
-    return { title: "Scarf Collection | SaZeJe Football" };
+    return { title: "Scarf Collection | SaZeJe Groundhopping" };
   }
 
   const isNew = category === "new";
   const title = isNew
-    ? "Nieuwe Sjaals & Fanshop Collectie | SaZeJe Football"
-    : "Tweedehands Sjaals & Ruilcollectie | SaZeJe Football";
+    ? "Nieuwe Sjaals & Fanshop Collectie | SaZeJe Groundhopping"
+    : "Tweedehands Sjaals & Ruilcollectie | SaZeJe Groundhopping";
   const description = isNew
     ? "Bekijk alle nieuwe voetbalsjaals rechtstreeks gekocht in fanshops tijdens groundhop-reizen door Europa."
-    : "Bekijk alle tweedehands en ruilsjaals van SaZeJe Football, beschikbaar voor ruil met verzamelaars.";
+    : "Bekijk alle tweedehands en ruilsjaals van SaZeJe Groundhopping, beschikbaar voor ruil met verzamelaars.";
 
   return {
     title,

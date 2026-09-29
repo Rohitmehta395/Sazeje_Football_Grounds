@@ -20,11 +20,11 @@ export async function generateMetadata({
 
   if (!ground) {
     return {
-      title: "Ground Not Found | SaZeJe Football",
+      title: "Ground Not Found | SaZeJe Groundhopping",
     };
   }
 
-  const title = `${ground.name} (${ground.club}) | SaZeJe Football`;
+  const title = `${ground.name} (${ground.club}) | SaZeJe Groundhopping`;
   const description =
     ground.description ||
     `Groundhopping expedition report for ${ground.name} in ${ground.country}.`;

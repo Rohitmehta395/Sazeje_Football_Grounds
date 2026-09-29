@@ -29,7 +29,7 @@ function getTopicInfo(topicKey?: string) {
 
 /**
  * Generate a beautifully styled, custom-themed auto-responder confirmation email
- * matching SaZeJe Football's brand identity (forest green, warm sand, amber gold).
+ * matching SaZeJe Groundhopping's brand identity (forest green, warm sand, amber gold).
  */
 export function generateContactConfirmationEmail(payload: ContactEmailPayload): GeneratedEmail {
   const isEn = payload.lang === "en";
@@ -44,8 +44,8 @@ export function generateContactConfirmationEmail(payload: ContactEmailPayload): 
   const topicWithIcon = `${topicInfo.icon} ${topicLabel}`;
 
   const subject = isEn
-    ? `Thank you for contacting SaZeJe Football, ${payload.name}!`
-    : `Bedankt voor je bericht aan SaZeJe Football, ${payload.name}!`;
+    ? `Thank you for contacting SaZeJe Groundhopping, ${payload.name}!`
+    : `Bedankt voor je bericht aan SaZeJe Groundhopping, ${payload.name}!`;
 
   const preheader = isEn
     ? `We have received your message regarding "${topicLabel}" and will get back to you shortly.`
@@ -54,7 +54,7 @@ export function generateContactConfirmationEmail(payload: ContactEmailPayload): 
   const text = isEn
     ? `Hi ${payload.name},
 
-Thank you for reaching out to SaZeJe Football! We have safely received your message.
+Thank you for reaching out to SaZeJe Groundhopping! We have safely received your message.
 
 --- YOUR SUBMISSION DETAILS ---
 Topic: ${topicWithIcon}
@@ -75,11 +75,11 @@ In the meantime, explore our latest groundhopping trips and scarf collection:
 • Interactive Map: ${siteUrl}/map
 
 Best regards,
-SaZeJe Football Team
+SaZeJe Groundhopping Team
 ${siteUrl}`
     : `Beste ${payload.name},
 
-Bedankt voor je bericht aan SaZeJe Football! We hebben je inzending in goede orde ontvangen.
+Bedankt voor je bericht aan SaZeJe Groundhopping! We hebben je inzending in goede orde ontvangen.
 
 --- DETAILS VAN JE BERICHT ---
 Onderwerp: ${topicWithIcon}
@@ -100,7 +100,7 @@ Neem intussen gerust een kijkje tussen onze nieuwste stadionbezoeken en sjaalcol
 • Interactieve Kaart: ${siteUrl}/map
 
 Sportieve groet,
-SaZeJe Football Team
+SaZeJe Groundhopping Team
 ${siteUrl}`;
 
   const html = `<!DOCTYPE html>
@@ -139,7 +139,7 @@ ${siteUrl}`;
                   <td align="center">
                     <span style="font-size: 28px; line-height: 1; display: inline-block; margin-bottom: 6px;">⚽</span>
                     <h1 style="margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #FFFFFF; font-family: 'Bebas Neue', 'Trebuchet MS', Arial, sans-serif;">
-                      SaZeJe <span style="color: #D9A94F;">Football</span>
+                      SaZeJe <span style="color: #D9A94F;">Groundhopping</span>
                     </h1>
                     <p style="margin: 4px 0 0 0; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #93A8A0; font-family: monospace;">
                       ${isEn ? "Groundhopping & Scarf Collection" : "Voetbalreizen & Sjaalcollectie"}
@@ -246,7 +246,7 @@ ${safeMessage}
           <tr>
             <td style="padding: 0 32px 32px 32px;">
               <p style="margin: 0 0 14px 0; font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; color: #6B716A; text-align: center; font-family: monospace;">
-                ${isEn ? "Explore SaZeJe Football" : "Ontdek SaZeJe Football"}
+                ${isEn ? "Explore SaZeJe Groundhopping" : "Ontdek SaZeJe Groundhopping"}
               </p>
               <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
@@ -280,7 +280,7 @@ ${safeMessage}
           <tr>
             <td style="background-color: #141B19; border-top: 1px solid #31413B; padding: 24px 32px; text-align: center;">
               <p style="margin: 0 0 8px 0; font-size: 12px; font-weight: 600; color: #E7EDE9;">
-                SaZeJe Football
+                SaZeJe Groundhopping
               </p>
               <p style="margin: 0 0 14px 0; font-size: 11px; line-height: 1.5; color: #93A8A0;">
                 ${isEn
@@ -316,9 +316,9 @@ export function generateAdminNotificationEmail(payload: ContactEmailPayload): Ge
   const topicInfo = getTopicInfo(payload.topic);
   const topicWithIcon = `${topicInfo.icon} ${topicInfo.nl}`;
 
-  const subject = `[SaZeJe Football] [${(payload.topic || "general").toUpperCase()}] Nieuw bericht van ${payload.name}`;
+  const subject = `[SaZeJe Groundhopping] [${(payload.topic || "general").toUpperCase()}] Nieuw bericht van ${payload.name}`;
 
-  const text = `Nieuw contactbericht via SaZeJe Football\n\n` +
+  const text = `Nieuw contactbericht via SaZeJe Groundhopping\n\n` +
     `Afzender: ${payload.name}\n` +
     `E-mailadres: ${payload.email}\n` +
     `Onderwerp: ${topicWithIcon}\n\n` +
@@ -334,7 +334,7 @@ export function generateAdminNotificationEmail(payload: ContactEmailPayload): Ge
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #F0ECE3; margin: 0; padding: 24px; color: #20241F;">
   <div style="max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #DCD2BE; border-radius: 12px; background-color: #FBF9F4;">
     <div style="border-bottom: 2px solid #2E8B84; padding-bottom: 12px; margin-bottom: 20px;">
-      <h2 style="color: #20241F; margin: 0; font-size: 20px; letter-spacing: 0.5px;">SaZeJe Football — Nieuw Contactbericht</h2>
+      <h2 style="color: #20241F; margin: 0; font-size: 20px; letter-spacing: 0.5px;">SaZeJe Groundhopping — Nieuw Contactbericht</h2>
       <span style="display: inline-block; margin-top: 8px; font-size: 12px; font-family: monospace; font-weight: bold; background: #e6f4f1; color: #1e6b65; padding: 4px 10px; border-radius: 9999px; border: 1px solid #b3ded8;">
         ${escapeHtml(topicWithIcon)}
       </span>

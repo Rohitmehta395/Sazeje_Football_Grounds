@@ -147,7 +147,7 @@ export function SiteHeader({ activeHref, socialLinks }: SiteHeaderProps) {
             />
           </div>
           <div className="font-bebas text-[18px] min-[360px]:text-[20px] sm:text-[22px] md:text-[23px] tracking-[0.04em] whitespace-nowrap text-text">
-            SaZeJe <span className="hidden min-[340px]:inline">Football</span>
+            SaZeJe <span className="hidden min-[340px]:inline">Groundhopping</span>
           </div>
         </Link>
 

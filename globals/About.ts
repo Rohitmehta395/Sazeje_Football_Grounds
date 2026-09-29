@@ -51,7 +51,7 @@ export const About: GlobalConfig = {
               type: 'text',
               admin: {
                 width: '50%',
-                description: 'Hero title in Dutch (e.g. Over SaZeJe Football)',
+                description: 'Hero title in Dutch (e.g. Over SaZeJe Groundhopping)',
               },
             },
             {
@@ -59,7 +59,7 @@ export const About: GlobalConfig = {
               type: 'text',
               admin: {
                 width: '50%',
-                description: 'Hero title in English (e.g. About SaZeJe Football)',
+                description: 'Hero title in English (e.g. About SaZeJe Groundhopping)',
               },
             },
           ],
@@ -220,7 +220,7 @@ export const About: GlobalConfig = {
           name: 'quoteAuthor',
           type: 'text',
           admin: {
-            description: 'Quote attribution (e.g. SaZeJe Football)',
+            description: 'Quote attribution (e.g. SaZeJe Groundhopping)',
           },
         },
       ],

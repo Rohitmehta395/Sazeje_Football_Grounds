@@ -235,7 +235,7 @@ export const ContactPage: GlobalConfig = {
               type: 'text',
               admin: {
                 width: '50%',
-                description: 'Socials card title in Dutch (e.g. Volg SaZeJe Football)',
+                description: 'Socials card title in Dutch (e.g. Volg SaZeJe Groundhopping)',
               },
             },
             {
@@ -243,7 +243,7 @@ export const ContactPage: GlobalConfig = {
               type: 'text',
               admin: {
                 width: '50%',
-                description: 'Socials card title in English (e.g. Follow SaZeJe Football)',
+                description: 'Socials card title in English (e.g. Follow SaZeJe Groundhopping)',
               },
             },
           ],

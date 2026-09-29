@@ -43,8 +43,8 @@ export const DEFAULT_CONTACT_PAGE_CONTENT: ContactPageContent = {
   },
   socials: {
     showSocials: true,
-    title: "Volg SaZeJe Football",
-    titleEn: "Follow SaZeJe Football",
+    title: "Volg SaZeJe Groundhopping",
+    titleEn: "Follow SaZeJe Groundhopping",
     subtitle: "Foto's, matchday video's en sfeerverslagen",
     subtitleEn: "Photos, matchday videos, and ground reports",
   },
@@ -53,9 +53,9 @@ export const DEFAULT_CONTACT_PAGE_CONTENT: ContactPageContent = {
     sectionTitle: "Waarom Contact Opnemen?",
     sectionTitleEn: "Why Connect With Us?",
     sectionSubtitle:
-      "SaZeJe Football verbindt supporters, groundhoppers en verzamelaars uit heel Europa.",
+      "SaZeJe Groundhopping verbindt supporters, groundhoppers en verzamelaars uit heel Europa.",
     sectionSubtitleEn:
-      "SaZeJe Football connects supporters, groundhoppers, and collectors from across Europe.",
+      "SaZeJe Groundhopping connects supporters, groundhoppers, and collectors from across Europe.",
     items: [
       {
         tag: "GROUNDHOPPING",
@@ -139,12 +139,12 @@ export const DEFAULT_CONTACT_PAGE_CONTENT: ContactPageContent = {
     ],
   },
   seo: {
-    metaTitle: "Contact & Community | SaZeJe Football",
-    metaTitleEn: "Contact & Community | SaZeJe Football",
+    metaTitle: "Contact & Community | SaZeJe Groundhopping",
+    metaTitleEn: "Contact & Community | SaZeJe Groundhopping",
     metaDescription:
-      "Neem contact op met SaZeJe Football voor stadiontips, sjaalruil voorstellen of samenwerkingen rondom Europese voetbalcultuur.",
+      "Neem contact op met SaZeJe Groundhopping voor stadiontips, sjaalruil voorstellen of samenwerkingen rondom Europese voetbalcultuur.",
     metaDescriptionEn:
-      "Get in touch with SaZeJe Football for ground recommendations, scarf swap proposals, or collaborations celebrating European football culture.",
+      "Get in touch with SaZeJe Groundhopping for ground recommendations, scarf swap proposals, or collaborations celebrating European football culture.",
   },
 };
 

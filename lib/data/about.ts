@@ -18,8 +18,8 @@ const DEFAULT_ABOUT_CONTENT: AboutContent = {
   hero: {
     eyebrow: "OVER & DOELEN",
     eyebrowEn: "ABOUT & GOALS",
-    title: "Over SaZeJe Football",
-    titleEn: "About SaZeJe Football",
+    title: "Over SaZeJe Groundhopping",
+    titleEn: "About SaZeJe Groundhopping",
     subtitle: "Achtergrondverhaal over de passie voor voetbalreizen en groundhopping.",
     subtitleEn: "Background story behind the passion for football trips and groundhopping.",
     heroImage: "/Hero_Image.jpg",
@@ -29,8 +29,8 @@ const DEFAULT_ABOUT_CONTENT: AboutContent = {
     badgeEn: "GROUNDHOPPER & TRAVELER",
     title: "Het Verhaal Achter SaZeJe",
     titleEn: "The Story Behind SaZeJe",
-    lead: "SaZeJe Football is ontstaan uit een gepassioneerde liefde voor de pure voetbalsfeer in en rondom Europese stadions.",
-    leadEn: "SaZeJe Football originated from a passionate love for pure football atmosphere in and around European stadiums.",
+    lead: "SaZeJe Groundhopping is ontstaan uit een gepassioneerde liefde voor de pure voetbalsfeer in en rondom Europese stadions.",
+    leadEn: "SaZeJe Groundhopping originated from a passionate love for pure football atmosphere in and around European stadiums.",
     paragraphs: [
       {
         paragraph: "Wat begon als een paar spontane uitstapjes naar wedstrijden over de grens, is uitgegroeid tot een gestructureerde passie voor groundhopping. Het doel is niet alleen om stadions af te vinken, maar vooral om de authentieke sfeer, architectuur en supporterscultuur van dichtbij te beleven.",
@@ -43,7 +43,7 @@ const DEFAULT_ABOUT_CONTENT: AboutContent = {
     ],
     quote: "Geen wedstrijd te klein, geen stadion te ver: de magie van het spel leeft op elke tribune.",
     quoteEn: "No match too small, no ground too far: the magic of the game lives on every terrace.",
-    quoteAuthor: "SaZeJe Football",
+    quoteAuthor: "SaZeJe Groundhopping",
   },
   media: {
     secondaryImage: "/Hero_Image.jpg",

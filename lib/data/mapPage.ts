@@ -37,12 +37,12 @@ export const DEFAULT_MAP_PAGE_CONTENT: MapPageContent = {
       "From atmospheric grounds across the Low Countries to roaring continental arenas and European football shrines. Every club crest on the map marks an authentic matchday visit. Zoom into your favourite region or click any marker to open the groundhopper report.",
   },
   seo: {
-    metaTitle: "Stadionkaart Europa | SaZeJe Football",
-    metaTitleEn: "Stadium Map Europe | SaZeJe Football",
+    metaTitle: "Stadionkaart Europa | SaZeJe Groundhopping",
+    metaTitleEn: "Stadium Map Europe | SaZeJe Groundhopping",
     metaDescription:
-      "Interactieve kaart van alle bezochte voetbalstadions in Nederland en Europa door SaZeJe Football met clublocaties en wedstrijdverslagen.",
+      "Interactieve kaart van alle bezochte voetbalstadions in Nederland en Europa door SaZeJe Groundhopping met clublocaties en wedstrijdverslagen.",
     metaDescriptionEn:
-      "Interactive map of all visited football stadiums across the Netherlands and Europe by SaZeJe Football, featuring club locations and match logs.",
+      "Interactive map of all visited football stadiums across the Netherlands and Europe by SaZeJe Groundhopping, featuring club locations and match logs.",
   },
 };
 
