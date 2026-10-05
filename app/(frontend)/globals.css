@@ -6,8 +6,8 @@
   --surface-2: #DCE6EF;
   --icon-bg: #DCE6EF;
   --border: #C9D2DA;
-  --text: #172B3A;
-  --text-muted: #526575;
+  --text: #13385E;
+  --text-muted: #4E6782;
   --accent: #2563A6;
   --accent-hover: #1D4F85;
   --btn: #2563A6;
@@ -26,8 +26,8 @@ html[data-theme="dark"] {
   --surface-2: #1E2936;
   --icon-bg: #1E2936;
   --border: #2A3038;
-  --text: #F1F5F9;
-  --text-muted: #9AA8B6;
+  --text: #DBEAFE;
+  --text-muted: #8FA7BF;
   --accent: #4A90E2;
   --accent-hover: #63A4E8;
   --btn: #3B82C4;
