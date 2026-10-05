@@ -54,7 +54,7 @@ export function HomeHero({
     {
       value: scarvesCount,
       label: t.home.statsScarves,
-      icon: <ScarfIcon className="w-5 h-5 text-accent-2" />,
+      icon: <ScarfIcon className="w-5 h-5 text-accent" />,
     },
     {
       value: activeGoalsCount,
@@ -77,7 +77,7 @@ export function HomeHero({
         />
       </div>
       {/* Transparent Dark Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,20,16,0.35)] via-[rgba(15,20,16,0.55)] to-[rgba(15,20,16,0.85)] z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,19,25,0.35)] via-[rgba(15,19,25,0.55)] to-[rgba(15,19,25,0.85)] z-0" />
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-bg via-bg/40 to-transparent z-10 pointer-events-none" />
 
       {/* Main Content Area */}
@@ -85,14 +85,14 @@ export function HomeHero({
         {/* Archive Badge Pill */}
         <div className="flex items-center gap-3 mb-5 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white/90 text-xs font-mono tracking-wider uppercase shadow-sm">
-            <Trophy className="w-3.5 h-3.5 text-accent-2" />
+            <Trophy className="w-3.5 h-3.5 text-accent" />
             <span>{topbarLabel}</span>
           </div>
         </div>
 
         {/* Hero Title & Subtitle */}
         <div className="max-w-[820px]">
-          <div className="font-mono text-xs sm:text-[13px] tracking-[0.16em] uppercase text-azg font-semibold mb-2">
+          <div className="font-mono text-xs sm:text-[13px] tracking-[0.16em] uppercase text-[#63A4E8] font-bold mb-2 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
             {heroEyebrow}
           </div>
 
@@ -108,7 +108,7 @@ export function HomeHero({
           <div className="flex items-center gap-3.5">
             <Link
               href="#grounds-section"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-azg hover:bg-azg/90 text-white font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-azg/30 hover:shadow-lg hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-btn hover:bg-btn-hover text-white font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-btn/30 hover:shadow-lg hover:-translate-y-0.5"
             >
               <span>{t.home.heroCtaGrounds}</span>
               <ArrowRight className="w-4 h-4" />

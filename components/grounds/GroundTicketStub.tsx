@@ -85,7 +85,7 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
           {/* Competition */}
           <div className="flex items-center justify-between">
             <span className="flex items-center gap-2 text-text-muted">
-              <Trophy className="w-3.5 h-3.5 text-accent-2" />
+              <Trophy className="w-3.5 h-3.5 text-accent" />
               <span>{t.grounds.filterCompetition}</span>
             </span>
             <span className="font-semibold text-text truncate max-w-[170px] text-right">

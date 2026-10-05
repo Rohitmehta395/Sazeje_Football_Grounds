@@ -48,8 +48,8 @@ export function GoalCard({ goal, href }: GoalCardProps) {
           </span>
 
           {isCompleted ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 shadow-xs">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-accent/15 text-accent border border-accent/25 shadow-xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
               <span>{t.about.statusCompleted}</span>
             </span>
           ) : (
@@ -86,7 +86,7 @@ export function GoalCard({ goal, href }: GoalCardProps) {
             </span>
             <span className="font-bold font-mono text-xs">
               {isCompleted ? (
-                <span className="text-emerald-500 font-bold">100%</span>
+                <span className="text-accent font-bold">100%</span>
               ) : (
                 <span className="text-azg">{percentage}%</span>
               )}
@@ -98,8 +98,8 @@ export function GoalCard({ goal, href }: GoalCardProps) {
             <div
               className={`h-full transition-all duration-700 rounded-full ${
                 isCompleted
-                  ? "bg-gradient-to-r from-emerald-500 to-teal-400 shadow-[0_0_10px_rgba(16,185,129,0.35)]"
-                  : "bg-gradient-to-r from-azg to-teal-400 shadow-[0_0_10px_rgba(46,139,132,0.3)]"
+                  ? "bg-gradient-to-r from-accent to-accent-hover shadow-[0_0_10px_rgba(74,144,226,0.35)]"
+                  : "bg-gradient-to-r from-accent to-accent-hover shadow-[0_0_10px_rgba(74,144,226,0.3)]"
               }`}
               style={{ width: `${isCompleted ? 100 : percentage}%` }}
             />

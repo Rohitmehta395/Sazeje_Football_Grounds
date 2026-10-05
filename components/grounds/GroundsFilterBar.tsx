@@ -158,7 +158,7 @@ export function GroundsFilterBar({
             htmlFor="grounds-filter-competition"
             className="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.08em] text-text-muted mb-1.5"
           >
-            <Trophy className="w-3.5 h-3.5 text-accent-2" />
+            <Trophy className="w-3.5 h-3.5 text-accent" />
             <span>{t.grounds.filterCompetition}</span>
           </label>
           <div className="relative">

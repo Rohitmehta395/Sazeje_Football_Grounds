@@ -314,8 +314,8 @@ export function SiteFooter({ socialLinks }: SiteFooterProps = {}) {
                 className="group flex flex-col space-y-1 transition-colors"
               >
                 <div className="flex items-center gap-2">
-                  <ScarfIcon className="w-4 h-4 text-accent-2 shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="font-bebas text-2xl text-text leading-none group-hover:text-accent-2 transition-colors">
+                  <ScarfIcon className="w-4 h-4 text-accent shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-bebas text-2xl text-text leading-none group-hover:text-accent transition-colors">
                     6
                   </span>
                 </div>
@@ -355,7 +355,7 @@ export function SiteFooter({ socialLinks }: SiteFooterProps = {}) {
           {/* Column 4: Community & Scarf Swap */}
           <div className="flex flex-col space-y-4">
             <h3 className="font-bebas text-lg text-text tracking-wider uppercase m-0 flex items-center gap-1.5 h-10 whitespace-nowrap">
-              <ScarfIcon className="w-4 h-4 text-accent-2 shrink-0" />
+              <ScarfIcon className="w-4 h-4 text-accent shrink-0" />
               <span>{t.footer.communityHeading}</span>
             </h3>
             <p className="font-inter text-xs sm:text-[13px] text-text-muted leading-relaxed m-0">

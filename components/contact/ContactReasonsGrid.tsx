@@ -63,11 +63,11 @@ export function ContactReasonsGrid({
   const getIcon = (iconName?: string) => {
     switch (iconName) {
       case "scarf":
-        return <SwapScarvesIcon className="w-6 h-6 text-accent-2" />;
+        return <SwapScarvesIcon className="w-6 h-6 text-accent" />;
       case "camera":
         return <Camera className="w-6 h-6 text-accent" />;
       case "collab":
-        return <Handshake className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />;
+        return <Handshake className="w-6 h-6 text-accent" />;
       case "general":
         return <MessageSquare className="w-6 h-6 text-azg" />;
       case "ground":
@@ -80,20 +80,20 @@ export function ContactReasonsGrid({
     switch (index % 3) {
       case 1:
         return {
-          glow: "from-accent-2/10 via-surface to-surface dark:from-amber-950/20",
-          border: "border-accent-2/30",
-          ctaHover: "group-hover:text-accent-2",
+          glow: "from-accent/10 via-surface to-surface dark:from-blue-950/20",
+          border: "border-accent/30",
+          ctaHover: "group-hover:text-accent",
         };
       case 2:
         return {
-          glow: "from-accent/10 via-surface to-surface dark:from-emerald-950/20",
+          glow: "from-accent/10 via-surface to-surface dark:from-blue-950/20",
           border: "border-accent/30",
           ctaHover: "group-hover:text-accent",
         };
       case 0:
       default:
         return {
-          glow: "from-azg/10 via-surface to-surface dark:from-teal-950/20",
+          glow: "from-azg/10 via-surface to-surface dark:from-blue-950/20",
           border: "border-azg/30",
           ctaHover: "group-hover:text-azg",
         };

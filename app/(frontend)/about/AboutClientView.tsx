@@ -246,7 +246,7 @@ export function AboutClientView({
             <div className="w-full sm:w-64 shrink-0 space-y-1.5">
               <div className="w-full bg-surface-2 h-3 rounded-full overflow-hidden border border-border/40 p-[1px]">
                 <div
-                  className="bg-azg h-full rounded-full transition-all duration-700 shadow-[0_0_10px_rgba(46,139,132,0.3)]"
+                  className="bg-accent h-full rounded-full transition-all duration-700 shadow-[0_0_10px_rgba(74,144,226,0.3)]"
                   style={{ width: `${overallProgressPercentage}%` }}
                 />
               </div>

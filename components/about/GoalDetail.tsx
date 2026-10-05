@@ -42,7 +42,7 @@ export function GoalDetail({ goal, prevGoal, nextGoal, totalGoals }: GoalDetailP
           </div>
 
           {isCompleted ? (
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium bg-emerald-500/15 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-500/20 shadow-sm">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium bg-accent/15 text-accent border border-accent/25 shadow-sm">
               <CheckCircle2 className="w-4 h-4" />
               <span>{t.about.statusCompleted}</span>
             </span>
@@ -100,7 +100,7 @@ export function GoalDetail({ goal, prevGoal, nextGoal, totalGoals }: GoalDetailP
                   strokeDashoffset={`${2 * Math.PI * 42 * (1 - percentage / 100)}`}
                   strokeLinecap="round"
                   className={`transition-all duration-1000 ${
-                    isCompleted ? "text-emerald-500" : "text-azg"
+                    isCompleted ? "text-accent" : "text-azg"
                   }`}
                   fill="transparent"
                 />
@@ -178,7 +178,7 @@ export function GoalDetail({ goal, prevGoal, nextGoal, totalGoals }: GoalDetailP
             </div>
             <div className="font-mono text-sm font-bold text-text uppercase leading-none my-1">
               {isCompleted ? (
-                <span className="text-emerald-600 dark:text-emerald-400">
+                <span className="text-accent font-bold">
                   {lang === "en" ? "COMPLETED" : "BEHAALD"}
                 </span>
               ) : (

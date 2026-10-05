@@ -118,7 +118,7 @@ export function GroundsClientView({
             </div>
 
             <div className="p-4 rounded-xl bg-surface border border-border/80 shadow-card flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent-soft flex items-center justify-center text-accent-2 flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-accent-soft flex items-center justify-center text-accent flex-shrink-0">
                 <Trophy className="w-5 h-5" />
               </div>
               <div>

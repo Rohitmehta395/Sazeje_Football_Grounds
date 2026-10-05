@@ -28,12 +28,12 @@ export function PageHero({
         />
       </div>
       {/* Dark gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(20,25,20,0.15)] to-[rgba(15,18,15,0.78)] z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,19,25,0.2)] to-[rgba(15,19,25,0.82)] z-0" />
 
       {/* Hero Content Inner */}
       <div className="relative z-10 px-[24px] pb-[22px] max-w-[1160px] mx-auto w-full flex-1 flex flex-col justify-end">
         {eyebrow && (
-          <div className="font-mono text-[12px] tracking-[0.15em] uppercase text-emerald-300 font-medium mb-1">
+          <div className="inline-flex items-center px-2.5 py-0.5 rounded bg-accent text-white font-mono text-[11px] sm:text-[11.5px] tracking-[0.14em] uppercase font-bold mb-2 shadow-sm w-fit">
             {eyebrow}
           </div>
         )}

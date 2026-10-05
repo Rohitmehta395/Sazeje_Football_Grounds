@@ -63,7 +63,7 @@ export function HomeGoalsSection({ goals }: HomeGoalsSectionProps) {
                     {t.home.goalNumber.replace("{number}", String(goal.number))}
                   </span>
                   {isCompleted ? (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-emerald-500/15 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-500/20">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-accent/15 text-accent border border-accent/20">
                       <CheckCircle2 className="w-3 h-3" /> {t.about.statusCompleted}
                     </span>
                   ) : (
@@ -95,7 +95,7 @@ export function HomeGoalsSection({ goals }: HomeGoalsSectionProps) {
                 <div className="w-full bg-surface-2 h-2 rounded-full overflow-hidden border border-border/50">
                   <div
                     className={`h-full transition-all duration-500 rounded-full ${
-                      isCompleted ? "bg-emerald-500" : "bg-azg"
+                      isCompleted ? "bg-accent" : "bg-azg"
                     }`}
                     style={{ width: `${percentage}%` }}
                   />

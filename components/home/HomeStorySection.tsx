@@ -14,7 +14,7 @@ export function HomeStorySection() {
     <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-surface via-surface to-surface-2 border border-border p-8 sm:p-12 shadow-card">
       {/* Decorative subtle football pitch lines */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-azg/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent-2/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <div className="text-center mb-10">
@@ -30,7 +30,7 @@ export function HomeStorySection() {
             </div>
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-2 border border-border text-azg text-xs font-mono uppercase tracking-wider mb-3">
-            <Compass className="w-3.5 h-3.5 text-accent-2" />
+            <Compass className="w-3.5 h-3.5 text-accent" />
             <span>{t.home.storySectionEyebrow}</span>
           </div>
 
@@ -65,7 +65,7 @@ export function HomeStorySection() {
 
           <div className="bg-surface/80 dark:bg-surface/50 p-6 rounded-2xl border border-border/70 shadow-sm flex flex-col justify-between hover:border-azg/50 transition-colors">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-accent-2/15 text-accent-2 flex items-center justify-center mb-4">
+              <div className="w-10 h-10 rounded-xl bg-accent/15 text-accent flex items-center justify-center mb-4">
                 <ScarfIcon className="w-5 h-5" />
               </div>
               <h3 className="font-bebas text-xl text-text m-0 mb-2">

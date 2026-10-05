@@ -158,7 +158,7 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
             </span>
 
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] uppercase tracking-wider">
-              <Trophy className="w-3 h-3 text-accent-2" />
+              <Trophy className="w-3 h-3 text-accent" />
               <span>{ground.competition}</span>
             </span>
           </div>
@@ -265,8 +265,8 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
 
             {/* Groundhopper Insider Tip Box */}
             {displayExtra && (
-              <div className="p-5 rounded-xl bg-surface border border-border border-l-4 border-l-accent-2 shadow-card mt-6">
-                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent-2 font-bold mb-1.5">
+              <div className="p-5 rounded-xl bg-surface border border-border border-l-4 border-l-accent shadow-card mt-6">
+                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent font-bold mb-1.5">
                   <Lightbulb className="w-4 h-4" />
                   <span>{isEn ? "GROUNDHOPPER TIP & NOTES" : "GROUNDHOPPER TIP & BIJZONDERHEDEN"}</span>
                 </div>

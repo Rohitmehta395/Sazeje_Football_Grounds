@@ -67,7 +67,7 @@ export function ContactInfoCard({
           <circle cx="17.5" cy="6.5" r="1" />
         </svg>
       ),
-      badgeColor: "bg-azg/10 text-teal-800 dark:text-azg border-azg/20",
+      badgeColor: "bg-azg/10 text-accent dark:text-azg border-azg/20",
     },
     {
       name: "X / Twitter",
@@ -78,7 +78,7 @@ export function ContactInfoCard({
           <path d="M18.9 2H22l-7.6 8.7L23.3 22h-7l-5.5-7.2L4.5 22H1.4l8.2-9.3L1 2h7.2l5 6.6L18.9 2Zm-1.2 18h1.7L7.4 4H5.6L17.7 20Z" />
         </svg>
       ),
-      badgeColor: "bg-accent-2/10 text-amber-900 dark:text-accent-2 border-accent-2/20",
+      badgeColor: "bg-accent/10 text-accent border-accent/20",
     },
     ...(settings?.socialLinks?.youtube
       ? [
@@ -121,7 +121,7 @@ export function ContactInfoCard({
     {
       id: "scarf_swap",
       label: isEn ? "Scarf swap" : "Sjaalruil",
-      icon: <SwapScarvesIcon className="w-3.5 h-3.5 text-accent-2 shrink-0" />,
+      icon: <SwapScarvesIcon className="w-3.5 h-3.5 text-accent shrink-0" />,
     },
     {
       id: "collaboration",
@@ -155,7 +155,7 @@ export function ContactInfoCard({
           {/* Email Click-to-Copy Pill */}
           <div className="p-3.5 rounded-xl bg-surface-2/70 border border-border flex items-center justify-between gap-3 shadow-2xs">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-8 h-8 rounded-lg bg-azg/10 border border-azg/20 flex items-center justify-center text-teal-800 dark:text-azg shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-azg/10 border border-azg/20 flex items-center justify-center text-accent dark:text-azg shrink-0">
                 <Mail className="w-4 h-4" />
               </div>
               <a
@@ -175,7 +175,7 @@ export function ContactInfoCard({
               title={copied ? t.contact.copiedEmail : t.contact.copyEmail}
             >
               {copied ? (
-                <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <Check className="w-4 h-4 text-accent" />
               ) : (
                 <Copy className="w-4 h-4 text-text-muted hover:text-text transition-colors" />
               )}
@@ -196,7 +196,7 @@ export function ContactInfoCard({
 
             <div className="p-3.5 rounded-xl bg-surface-2/50 border border-border/70 space-y-1.5">
               <div className="flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider text-text-muted font-bold">
-                <MapPin className="w-3.5 h-3.5 text-accent-2" />
+                <MapPin className="w-3.5 h-3.5 text-accent" />
                 <span>{t.contact.baseLocation}</span>
               </div>
               <div className="font-inter text-xs text-text font-semibold">

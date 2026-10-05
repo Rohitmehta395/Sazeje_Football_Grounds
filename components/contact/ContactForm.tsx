@@ -115,7 +115,7 @@ export function ContactForm({
       id: "scarf_swap",
       label: t.contact.topicScarfSwap.replace(/^🧣\s*/, ""),
       icon: (selected: boolean) => (
-        <SwapScarvesIcon className={`w-4 h-4 shrink-0 transition-colors ${selected ? "text-white" : "text-accent-2"}`} />
+        <SwapScarvesIcon className={`w-4 h-4 shrink-0 transition-colors ${selected ? "text-white" : "text-accent"}`} />
       ),
     },
     {
@@ -202,11 +202,11 @@ export function ContactForm({
     <div id="contact-form-card" className="space-y-6">
       {submitted ? (
         /* Rich Confirmation Card */
-        <div className="p-8 sm:p-12 border border-emerald-500/40 bg-surface rounded-2xl shadow-card text-center space-y-6 animate-in fade-in zoom-in-95 duration-300 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="p-8 sm:p-12 border border-accent/40 bg-surface rounded-2xl shadow-card text-center space-y-6 animate-in fade-in zoom-in-95 duration-300 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
           
           <div className="relative z-10 space-y-5 max-w-md mx-auto">
-            <div className="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mx-auto shadow-sm">
+            <div className="w-16 h-16 rounded-2xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent mx-auto shadow-sm">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
