@@ -104,11 +104,8 @@ export function StadiumMapInner({
                 <h4 className="font-bebas text-lg m-0 text-text leading-tight">
                   {ground.name}
                 </h4>
-                <p className="font-mono text-xs text-azg uppercase m-0 mb-1">
+                <p className="font-mono text-xs text-azg uppercase m-0 mb-2">
                   {ground.club} • {getCountryDisplayName(ground.country, lang)}
-                </p>
-                <p className="font-inter text-xs text-text-muted m-0 mb-2 line-clamp-2">
-                  {lang === "en" && ground.descriptionEn ? ground.descriptionEn : ground.description}
                 </p>
                 <Link
                   href={`/grounds/${ground.id}`}

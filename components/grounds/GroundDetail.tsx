@@ -42,11 +42,9 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
   const countryName = getCountryDisplayName(ground.country, lang);
   const formattedDate = formatDate(ground.visitDate, lang);
 
-  // Localized narrative copy from CMS with fallback
-  const displayStory =
-    (isEn && ground.storyEn ? ground.storyEn : ground.story) ||
-    (isEn && ground.descriptionEn ? ground.descriptionEn : ground.description);
-
+  // Localized description and narrative copy from CMS
+  const displayDescription = isEn && ground.descriptionEn ? ground.descriptionEn : ground.description;
+  const displayStory = isEn && ground.storyEn ? ground.storyEn : ground.story;
   const displayExtra = isEn && ground.extraEn ? ground.extraEn : ground.extra;
   const displayMatchInfo = isEn && ground.matchInfoEn ? ground.matchInfoEn : ground.matchInfo;
 
@@ -257,11 +255,21 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
               </h2>
             </div>
 
-            <div className="prose prose-neutral max-w-none">
-              <p className="font-inter text-[15.5px] sm:text-base text-text/90 leading-[1.8] m-0 whitespace-pre-line">
-                {displayStory}
+            {/* Stadium Overview Description */}
+            {displayDescription && (
+              <p className="font-inter text-base sm:text-[17px] text-text font-medium leading-relaxed m-0">
+                {displayDescription}
               </p>
-            </div>
+            )}
+
+            {/* Visit Story & Match Experience */}
+            {displayStory && displayStory !== displayDescription && (
+              <div className="prose prose-neutral max-w-none pt-1">
+                <p className="font-inter text-[15.5px] sm:text-base text-text/90 leading-[1.8] m-0 whitespace-pre-line">
+                  {displayStory}
+                </p>
+              </div>
+            )}
 
             {/* Groundhopper Insider Tip Box */}
             {displayExtra && (

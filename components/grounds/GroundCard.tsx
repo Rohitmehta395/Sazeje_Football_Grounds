@@ -23,7 +23,6 @@ export function GroundCard({
   const formattedDate = formatDate(ground.visitDate, lang);
   const countryName = getCountryDisplayName(ground.country, lang);
   const displayMatchInfo = lang === "en" && ground.matchInfoEn ? ground.matchInfoEn : ground.matchInfo;
-  const displayDescription = lang === "en" && ground.descriptionEn ? ground.descriptionEn : ground.description;
 
   const content = (
     <Card isStatic={isStatic} className="relative group overflow-hidden flex flex-col h-full hover:shadow-xl transition-all duration-300">
@@ -63,10 +62,6 @@ export function GroundCard({
           <h3 className="font-bebas text-[23px] text-text m-0 mt-1 leading-tight group-hover:text-accent transition-colors">
             {ground.name}
           </h3>
-
-          <p className="text-text-muted text-[13px] m-[4px_0_0] line-clamp-2 leading-relaxed">
-            {displayDescription}
-          </p>
         </div>
 
         <div>
