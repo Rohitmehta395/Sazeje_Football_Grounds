@@ -50,8 +50,6 @@ export const DEFAULT_HOME_PAGE_CONTENT: HomePageContent = {
     slides: DEFAULT_HERO_SLIDES,
     interval: 6,
     enableAutoplay: true,
-    showControls: true,
-    showIndicators: true,
   },
   seo: {
     metaTitle: "SaZeJe Groundhopping | Europees Voetbal & Stadioncultuur",
@@ -108,16 +106,6 @@ export async function getHomePageContent(): Promise<HomePageContent> {
         ? slideshowSettings.enableAutoplay
         : DEFAULT_HOME_PAGE_CONTENT.hero.enableAutoplay;
 
-    const showControls =
-      typeof slideshowSettings.showControls === "boolean"
-        ? slideshowSettings.showControls
-        : DEFAULT_HOME_PAGE_CONTENT.hero.showControls;
-
-    const showIndicators =
-      typeof slideshowSettings.showIndicators === "boolean"
-        ? slideshowSettings.showIndicators
-        : DEFAULT_HOME_PAGE_CONTENT.hero.showIndicators;
-
     const hero = {
       eyebrow: (heroDoc.eyebrow as string) || DEFAULT_HOME_PAGE_CONTENT.hero.eyebrow,
       eyebrowEn: (heroDoc.eyebrowEn as string) || DEFAULT_HOME_PAGE_CONTENT.hero.eyebrowEn,
@@ -130,8 +118,6 @@ export async function getHomePageContent(): Promise<HomePageContent> {
       slides,
       interval,
       enableAutoplay,
-      showControls,
-      showIndicators,
     };
 
     const seo = {

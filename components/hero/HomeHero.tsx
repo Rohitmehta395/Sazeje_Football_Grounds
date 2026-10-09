@@ -21,8 +21,6 @@ export interface HomeHeroProps {
   slides?: HeroSlide[];
   interval?: number; // seconds
   enableAutoplay?: boolean;
-  showControls?: boolean;
-  showIndicators?: boolean;
   topbarLabel?: string;
   groundsCount?: number;
   countriesCount?: number;
@@ -38,8 +36,6 @@ export function HomeHero({
   slides: initialSlides,
   interval = 6,
   enableAutoplay = true,
-  showControls = true,
-  showIndicators = true,
   topbarLabel = "SAZEJE GROUNDHOPPING ARCHIVE • 2024–2026",
   groundsCount = 10,
   countriesCount = 7,
@@ -250,7 +246,7 @@ export function HomeHero({
         </div>
 
         {/* Slideshow Progress Indicators (Shown when multiple slides exist) */}
-        {hasMultipleSlides && showIndicators && (
+        {hasMultipleSlides && (
           <div className="mt-8 sm:mt-10 flex items-center gap-2 max-w-[820px]">
             {slides.map((_, idx) => {
               const isActive = idx === currentIndex;

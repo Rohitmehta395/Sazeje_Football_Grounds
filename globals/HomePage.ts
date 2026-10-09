@@ -150,9 +150,9 @@ export const HomePage: GlobalConfig = {
         {
           name: 'slideshowSettings',
           type: 'group',
-          label: 'Slideshow Controls & Animation',
+          label: 'Slideshow Settings',
           admin: {
-            description: 'Configure loop timing, autoplay, and user controls for the hero slideshow.',
+            description: 'Configure loop timing and autoplay for the hero slideshow.',
           },
           fields: [
             {
@@ -165,7 +165,7 @@ export const HomePage: GlobalConfig = {
                   min: 2,
                   max: 30,
                   admin: {
-                    width: '25%',
+                    width: '50%',
                     description: 'Slide interval (seconds)',
                   },
                 },
@@ -174,26 +174,8 @@ export const HomePage: GlobalConfig = {
                   type: 'checkbox',
                   defaultValue: true,
                   admin: {
-                    width: '25%',
+                    width: '50%',
                     description: 'Auto-advance slides in a loop',
-                  },
-                },
-                {
-                  name: 'showControls',
-                  type: 'checkbox',
-                  defaultValue: true,
-                  admin: {
-                    width: '25%',
-                    description: 'Show next / previous arrow buttons',
-                  },
-                },
-                {
-                  name: 'showIndicators',
-                  type: 'checkbox',
-                  defaultValue: true,
-                  admin: {
-                    width: '25%',
-                    description: 'Show slide indicator bars & progress',
                   },
                 },
               ],

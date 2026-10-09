@@ -18,8 +18,6 @@ export interface HomePageContent {
     slides: HeroSlide[];
     interval?: number;
     enableAutoplay?: boolean;
-    showControls?: boolean;
-    showIndicators?: boolean;
   };
   seo?: {
     metaTitle?: string;

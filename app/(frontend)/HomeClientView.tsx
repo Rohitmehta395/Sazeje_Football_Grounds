@@ -91,8 +91,6 @@ export function HomeClientView({
         slides={homePageContent?.hero?.slides}
         interval={homePageContent?.hero?.interval}
         enableAutoplay={homePageContent?.hero?.enableAutoplay}
-        showControls={homePageContent?.hero?.showControls}
-        showIndicators={homePageContent?.hero?.showIndicators}
         groundsCount={groundsCount}
         countriesCount={countriesCount}
         scarvesCount={scarves.length}
