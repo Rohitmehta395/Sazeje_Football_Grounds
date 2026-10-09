@@ -311,26 +311,6 @@ export const nl = {
     copiedEmail: "Gekopieerd!",
     socialsTitle: "Volg SaZeJe Groundhopping",
     socialsSubtitle: "Foto's, matchday video's en sfeerverslagen",
-    faqTitle: "Veelgestelde Vragen",
-    faqSubtitle: "Alles over groundhopping tips, sjaalruil en onze collectie",
-    faqs: [
-      {
-        q: "Hoe werkt een sjaalruil?",
-        a: "In onze sjaalcollectie hebben we een sectie 'Tweedehands / Ruil'. Zie je daar een sjaal tussen die je aanspreekt? Stuur ons een voorstel met details (en eventueel foto's) van de sjaal die je wilt ruilen. We ruilen per post of tijdens een matchday ontmoeting!",
-      },
-      {
-        q: "Accepteren jullie stadionaanbevelingen?",
-        a: "Zeker! We zijn altijd op zoek naar verborgen parels, sfeervolle derby's en authentieke grounds in Nederland, België, Duitsland en de rest van Europa. Tip ons gerust over grounds met karakter.",
-      },
-      {
-        q: "Zijn alle sjaals op de site beschikbaar voor ruil?",
-        a: "Nee, de 'Nieuwe Sjaals' zijn aangeschaft als officiële souvenirs tijdens onze eigen stadionbezoeken en vormen ons permanente archief. Alleen sjaals in de 'Tweedehands / Ruil' categorie zijn beschikbaar voor swap.",
-      },
-      {
-        q: "Kan ik foto's of een verslag insturen?",
-        a: "Ja, we waarderen bijdragen van medegroundhoppers! Neem contact op via het formulier en we kunnen afspreken hoe je beelden of verslagen het beste kunt aanleveren.",
-      },
-    ],
     reasonsTitle: "Waarom Contact Opnemen?",
     reasonsSubtitle:
       "SaZeJe Groundhopping verbindt supporters, groundhoppers en verzamelaars uit heel Europa.",

@@ -313,26 +313,6 @@ export const en: Translations = {
     copiedEmail: "Copied!",
     socialsTitle: "Follow SaZeJe Groundhopping",
     socialsSubtitle: "Photos, matchday videos, and ground reports",
-    faqTitle: "Frequently Asked Questions",
-    faqSubtitle: "Everything about ground recommendations, scarf swaps, and our archive",
-    faqs: [
-      {
-        q: "How does a scarf swap work?",
-        a: "In our Scarf Collection, check out the 'Secondhand / Swaps' section. If you spot a scarf you'd like to add to your collection, send us a proposal with details (and photos) of what you have to offer. We swap via tracked post or in person on matchday!",
-      },
-      {
-        q: "Do you accept ground recommendations?",
-        a: "Absolutely! We are constantly looking for overlooked lower-league gems, lively local derbies, and authentic grounds across the Netherlands, Belgium, Germany, and Europe. Send us your tips!",
-      },
-      {
-        q: "Are all scarves on the site available for trade?",
-        a: "No, 'New Scarves' were bought directly as official matchday souvenirs during our visits and remain part of our permanent archive. Only scarves listed in the 'Secondhand / Swaps' catalog are open for trade.",
-      },
-      {
-        q: "Can I submit matchday photos or stories?",
-        a: "Yes, we love connecting with fellow groundhoppers! Reach out using this contact form, and we can coordinate how to best feature your images or terrace reports.",
-      },
-    ],
     reasonsTitle: "Why Connect With Us?",
     reasonsSubtitle:
       "SaZeJe Groundhopping connects supporters, groundhoppers, and collectors from across Europe.",

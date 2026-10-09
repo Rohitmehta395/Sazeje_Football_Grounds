@@ -10,14 +10,6 @@ export interface ContactReasonItem {
   defaultTopic?: 'ground_tip' | 'scarf_swap' | 'collaboration' | 'general';
 }
 
-export interface ContactFaqItem {
-  id?: string;
-  question: string;
-  questionEn?: string;
-  answer: string;
-  answerEn?: string;
-}
-
 export interface ContactPageContent {
   hero: {
     eyebrow?: string;
@@ -55,14 +47,6 @@ export interface ContactPageContent {
     sectionSubtitle?: string;
     sectionSubtitleEn?: string;
     items: ContactReasonItem[];
-  };
-  faq: {
-    showFaq?: boolean;
-    sectionTitle?: string;
-    sectionTitleEn?: string;
-    sectionSubtitle?: string;
-    sectionSubtitleEn?: string;
-    items: ContactFaqItem[];
   };
   seo?: {
     metaTitle?: string;

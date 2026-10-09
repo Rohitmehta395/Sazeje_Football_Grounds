@@ -5,7 +5,6 @@ import Link from "next/link";
 import { PageHero } from "@/components/hero/PageHero";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactInfoCard } from "@/components/contact/ContactInfoCard";
-import { ContactFaq } from "@/components/contact/ContactFaq";
 import { ContactReasonsGrid } from "@/components/contact/ContactReasonsGrid";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { ContactPageContent, SiteSettings } from "@/types";
@@ -97,9 +96,6 @@ export function ContactClientView({
           reasons={contactContent.reasons}
           onSelectTopic={handleSelectTopic}
         />
-
-        {/* 5. Dedicated Full-Width FAQ Section */}
-        <ContactFaq faq={contactContent.faq} />
       </div>
     </div>
   );

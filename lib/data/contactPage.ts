@@ -95,49 +95,6 @@ export const DEFAULT_CONTACT_PAGE_CONTENT: ContactPageContent = {
       },
     ],
   },
-  faq: {
-    showFaq: true,
-    sectionTitle: "Veelgestelde Vragen",
-    sectionTitleEn: "Frequently Asked Questions",
-    sectionSubtitle:
-      "Alles over groundhopping tips, sjaalruil en onze collectie",
-    sectionSubtitleEn:
-      "Everything about ground recommendations, scarf swaps, and our archive",
-    items: [
-      {
-        question: "Hoe werkt een sjaalruil?",
-        questionEn: "How does a scarf swap work?",
-        answer:
-          "In onze sjaalcollectie hebben we een sectie 'Tweedehands / Ruil'. Zie je daar een sjaal tussen die je aanspreekt? Stuur ons een voorstel met details (en eventueel foto's) van de sjaal die je wilt ruilen. We ruilen per post of tijdens een matchday ontmoeting!",
-        answerEn:
-          "In our Scarf Collection, check out the 'Secondhand / Swaps' section. If you spot a scarf you'd like to add to your collection, send us a proposal with details (and photos) of what you have to offer. We swap via tracked post or in person on matchday!",
-      },
-      {
-        question: "Accepteren jullie stadionaanbevelingen?",
-        questionEn: "Do you accept ground recommendations?",
-        answer:
-          "Zeker! We zijn altijd op zoek naar verborgen parels, sfeervolle derby's en authentieke grounds in Nederland, België, Duitsland en de rest van Europa. Tip ons gerust over grounds met karakter.",
-        answerEn:
-          "Absolutely! We are constantly looking for overlooked lower-league gems, lively local derbies, and authentic grounds across the Netherlands, Belgium, Germany, and Europe. Send us your tips!",
-      },
-      {
-        question: "Zijn alle sjaals op de site beschikbaar voor ruil?",
-        questionEn: "Are all scarves on the site available for trade?",
-        answer:
-          "Nee, de 'Nieuwe Sjaals' zijn aangeschaft als officiële souvenirs tijdens onze eigen stadionbezoeken en vormen ons permanente archief. Alleen sjaals in de 'Tweedehands / Ruil' categorie zijn beschikbaar voor swap.",
-        answerEn:
-          "No, 'New Scarves' were bought directly as official matchday souvenirs during our visits and remain part of our permanent archive. Only scarves listed in the 'Secondhand / Swaps' catalog are open for trade.",
-      },
-      {
-        question: "Kan ik foto's of een verslag insturen?",
-        questionEn: "Can I submit matchday photos or stories?",
-        answer:
-          "Ja, we waarderen bijdragen van medegroundhoppers! Neem contact op via het formulier en we kunnen afspreken hoe je beelden of verslagen het beste kunt aanleveren.",
-        answerEn:
-          "Yes, we love connecting with fellow groundhoppers! Reach out using this contact form, and we can coordinate how to best feature your images or terrace reports.",
-      },
-    ],
-  },
   seo: {
     metaTitle: "Contact & Community | SaZeJe Groundhopping",
     metaTitleEn: "Contact & Community | SaZeJe Groundhopping",
@@ -164,7 +121,6 @@ export async function getContactPageContent(): Promise<ContactPageContent> {
     const directInfoDoc = (doc.directInfo as Record<string, unknown>) || {};
     const socialsDoc = (doc.socials as Record<string, unknown>) || {};
     const reasonsDoc = (doc.reasons as Record<string, unknown>) || {};
-    const faqDoc = (doc.faq as Record<string, unknown>) || {};
     const seoDoc = (doc.seo as Record<string, unknown>) || {};
 
     const heroImage = extractMediaUrl(heroDoc.heroImage) || DEFAULT_CONTACT_PAGE_CONTENT.hero.heroImage;
@@ -240,33 +196,6 @@ export async function getContactPageContent(): Promise<ContactPageContent> {
       items: reasonsItems,
     };
 
-    let faqItems = DEFAULT_CONTACT_PAGE_CONTENT.faq.items;
-    if (Array.isArray(faqDoc.items) && faqDoc.items.length > 0) {
-      faqItems = faqDoc.items.map((item: Record<string, unknown>) => ({
-        id: (item.id as string) || undefined,
-        question: (item.question as string) || "",
-        questionEn: (item.questionEn as string) || undefined,
-        answer: (item.answer as string) || "",
-        answerEn: (item.answerEn as string) || undefined,
-      }));
-    }
-
-    const faq = {
-      showFaq:
-        typeof faqDoc.showFaq === "boolean"
-          ? faqDoc.showFaq
-          : (DEFAULT_CONTACT_PAGE_CONTENT.faq.showFaq ?? true),
-      sectionTitle:
-        (faqDoc.sectionTitle as string) || DEFAULT_CONTACT_PAGE_CONTENT.faq.sectionTitle,
-      sectionTitleEn:
-        (faqDoc.sectionTitleEn as string) || DEFAULT_CONTACT_PAGE_CONTENT.faq.sectionTitleEn,
-      sectionSubtitle:
-        (faqDoc.sectionSubtitle as string) || DEFAULT_CONTACT_PAGE_CONTENT.faq.sectionSubtitle,
-      sectionSubtitleEn:
-        (faqDoc.sectionSubtitleEn as string) || DEFAULT_CONTACT_PAGE_CONTENT.faq.sectionSubtitleEn,
-      items: faqItems,
-    };
-
     const seo = {
       metaTitle: (seoDoc.metaTitle as string) || DEFAULT_CONTACT_PAGE_CONTENT.seo?.metaTitle,
       metaTitleEn: (seoDoc.metaTitleEn as string) || DEFAULT_CONTACT_PAGE_CONTENT.seo?.metaTitleEn,
@@ -281,7 +210,6 @@ export async function getContactPageContent(): Promise<ContactPageContent> {
       directInfo,
       socials,
       reasons,
-      faq,
       seo,
     };
   } catch (error) {

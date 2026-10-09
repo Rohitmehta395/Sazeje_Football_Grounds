@@ -358,27 +358,6 @@ export async function autoTranslateContactPageHook({
     }
   }
 
-  const faq = data.faq as Record<string, unknown> | undefined;
-  if (faq) {
-    await autoTranslateFields(faq, undefined, [
-      { source: "sectionTitle", target: "sectionTitleEn" },
-      { source: "sectionSubtitle", target: "sectionSubtitleEn" },
-    ]);
-
-    if (Array.isArray(faq.items)) {
-      await Promise.all(
-        faq.items.map(async (item: Record<string, unknown>) => {
-          if (item) {
-            await autoTranslateFields(item, undefined, [
-              { source: "question", target: "questionEn" },
-              { source: "answer", target: "answerEn" },
-            ]);
-          }
-        })
-      );
-    }
-  }
-
   const seo = data.seo as Record<string, unknown> | undefined;
   if (seo) {
     await autoTranslateFields(seo, undefined, [
