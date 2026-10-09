@@ -161,12 +161,12 @@ export const HomePage: GlobalConfig = {
                 {
                   name: 'interval',
                   type: 'number',
-                  defaultValue: 6,
+                  defaultValue: 4,
                   min: 2,
                   max: 30,
                   admin: {
                     width: '50%',
-                    description: 'Slide interval (seconds)',
+                    description: 'Slide interval in seconds (default: 4)',
                   },
                 },
                 {

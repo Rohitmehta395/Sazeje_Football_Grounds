@@ -96,14 +96,17 @@ export async function getHomePageContent(): Promise<HomePageContent> {
 
     const slides = configuredSlides.length > 0 ? configuredSlides : DEFAULT_HERO_SLIDES;
 
+    const rawInterval = slideshowSettings.interval;
+    const parsedInterval =
+      typeof rawInterval === "number" ? rawInterval : Number(rawInterval);
     const interval =
-      typeof slideshowSettings.interval === "number" && slideshowSettings.interval >= 2
-        ? slideshowSettings.interval
+      !isNaN(parsedInterval) && parsedInterval >= 1 && parsedInterval <= 60
+        ? parsedInterval
         : DEFAULT_HOME_PAGE_CONTENT.hero.interval;
 
     const enableAutoplay =
-      typeof slideshowSettings.enableAutoplay === "boolean"
-        ? slideshowSettings.enableAutoplay
+      slideshowSettings.enableAutoplay !== undefined
+        ? Boolean(slideshowSettings.enableAutoplay)
         : DEFAULT_HOME_PAGE_CONTENT.hero.enableAutoplay;
 
     const hero = {

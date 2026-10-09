@@ -34,7 +34,7 @@ export function HomeHero({
   description,
   backgroundImage = "/Hero_Image.jpg",
   slides: initialSlides,
-  interval = 6,
+  interval = 4,
   enableAutoplay = true,
   topbarLabel = "SAZEJE GROUNDHOPPING ARCHIVE • 2024–2026",
   groundsCount = 10,
@@ -59,10 +59,26 @@ export function HomeHero({
     ];
   }, [initialSlides, backgroundImage, title]);
 
+  const slideInterval = Math.max(Number(interval) || 4, 1);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(enableAutoplay);
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [isControlsHovered, setIsControlsHovered] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(true);
   const touchStartX = React.useRef<number | null>(null);
+
+  // Sync isPlaying whenever enableAutoplay prop updates
+  React.useEffect(() => {
+    setIsPlaying(enableAutoplay);
+  }, [enableAutoplay]);
+
+  // Pause slideshow when page tab is hidden / out of view to avoid queuing or timer drift
+  React.useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsVisible(!document.hidden);
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
 
   const heroEyebrow = eyebrow || t.home.heroEyebrow;
   const heroTitle = title;
@@ -71,16 +87,18 @@ export function HomeHero({
   const totalSlides = slides.length;
   const hasMultipleSlides = totalSlides > 1;
 
-  // Auto-advance loop timer
+  // Auto-advance loop timer: resets cleanly whenever currentIndex changes
   React.useEffect(() => {
-    if (!hasMultipleSlides || !isPlaying || isHovered) return;
+    if (!hasMultipleSlides || !isPlaying || isControlsHovered || !isVisible) {
+      return;
+    }
 
-    const timer = setInterval(() => {
+    const timer = setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % totalSlides);
-    }, Math.max(interval, 2) * 1000);
+    }, slideInterval * 1000);
 
-    return () => clearInterval(timer);
-  }, [hasMultipleSlides, isPlaying, isHovered, interval, totalSlides]);
+    return () => clearTimeout(timer);
+  }, [currentIndex, hasMultipleSlides, isPlaying, isControlsHovered, isVisible, slideInterval, totalSlides]);
 
   const handleNext = React.useCallback(() => {
     if (!hasMultipleSlides) return;
@@ -149,13 +167,13 @@ export function HomeHero({
     },
   ];
 
+  const isTimerActive = isPlaying && !isControlsHovered && isVisible;
+
   return (
     <section
       aria-label="Homepage Hero Slideshow"
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       className="relative min-h-[calc(100vh-72px)] flex flex-col justify-between text-white overflow-hidden border-b border-border/40 select-none outline-none"
@@ -172,15 +190,17 @@ export function HomeHero({
               }`}
             >
               <div
-                className={`relative w-full h-full transform transition-transform duration-[7000ms] ease-out ${
-                  isActive ? "scale-105" : "scale-100"
-                }`}
+                className="relative w-full h-full transform transition-transform ease-out"
+                style={{
+                  transform: isActive ? "scale(1.06)" : "scale(1)",
+                  transitionDuration: `${Math.max(slideInterval + 2, 6)}s`,
+                }}
               >
                 <Image
                   src={slide.image}
                   alt={slide.alt || slideCaption || heroTitle || "Stadium hero background"}
                   fill
-                  priority={idx === 0}
+                  priority={idx <= 1}
                   sizes="100vw"
                   className="object-cover object-center"
                 />
@@ -247,7 +267,11 @@ export function HomeHero({
 
         {/* Slideshow Progress Indicators (Shown when multiple slides exist) */}
         {hasMultipleSlides && (
-          <div className="mt-8 sm:mt-10 flex items-center gap-2 max-w-[820px]">
+          <div
+            className="mt-8 sm:mt-10 inline-flex items-center gap-2 max-w-[820px] p-1.5 rounded-full bg-black/35 backdrop-blur-md border border-white/15 shadow-lg w-fit"
+            onMouseEnter={() => setIsControlsHovered(true)}
+            onMouseLeave={() => setIsControlsHovered(false)}
+          >
             {slides.map((_, idx) => {
               const isActive = idx === currentIndex;
               return (
@@ -256,19 +280,19 @@ export function HomeHero({
                   type="button"
                   onClick={() => setCurrentIndex(idx)}
                   aria-label={`${t.home.slideshowSlide} ${idx + 1}`}
-                  className={`group relative h-2 rounded-full overflow-hidden transition-all duration-300 ${
-                    isActive ? "w-10 sm:w-14 bg-white/30" : "w-4 sm:w-6 bg-white/20 hover:bg-white/40"
+                  className={`group relative h-2.5 rounded-full overflow-hidden transition-all duration-300 ${
+                    isActive ? "w-12 sm:w-16 bg-white/25" : "w-5 sm:w-7 bg-white/20 hover:bg-white/40"
                   }`}
                 >
                   {isActive && (
                     <div
-                      key={`progress-${currentIndex}-${isPlaying && !isHovered}`}
+                      key={`progress-${currentIndex}-${isTimerActive}`}
                       className={`absolute inset-0 bg-accent rounded-full ${
-                        isPlaying && !isHovered ? "origin-left animate-slide-progress" : "w-full"
+                        isTimerActive ? "origin-left animate-slide-progress" : "w-full"
                       }`}
                       style={{
-                        animationDuration: `${Math.max(interval, 2)}s`,
-                        animationPlayState: isPlaying && !isHovered ? "running" : "paused",
+                        animationDuration: `${slideInterval}s`,
+                        animationPlayState: isTimerActive ? "running" : "paused",
                       }}
                     />
                   )}
