@@ -10,6 +10,7 @@ export const Media: CollectionConfig = {
   slug: 'media',
   upload: {
     mimeTypes: ['image/*'],
+    staticDir: path.resolve(dirname, '../public/media'),
   },
   access: {
     read: () => true,
