@@ -3,3 +3,5 @@ allowBuilds:
   protobufjs: true
   sharp: false
   unrs-resolver: false
+patchedDependencies:
+  payload@3.88.0: patches/payload@3.88.0.patch
