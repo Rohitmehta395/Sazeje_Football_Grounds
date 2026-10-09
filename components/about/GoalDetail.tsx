@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Goal } from "@/types";
-import { CheckCircle2, Clock, Target, Compass, ArrowLeft, ArrowRight, ShieldAlert, Sparkles } from "lucide-react";
+import { CheckCircle2, Clock, Target, Compass, ArrowLeft, ArrowRight, MapPin, Sparkles } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 
 export interface GoalDetailProps {
@@ -19,6 +19,9 @@ export function GoalDetail({ goal, prevGoal, nextGoal, totalGoals }: GoalDetailP
   const title = lang === "en" && goal.titleEn ? goal.titleEn : goal.title;
   const description = lang === "en" && goal.descriptionEn ? goal.descriptionEn : goal.description;
   const details = lang === "en" && goal.detailsEn ? goal.detailsEn : goal.details;
+  const nextDestinationText =
+    (lang === "en" && goal.nextDestinationEn ? goal.nextDestinationEn : goal.nextDestination) ||
+    t.about.nextDestinationTbd;
 
   const percentage = Math.min(
     100,
@@ -61,12 +64,6 @@ export function GoalDetail({ goal, prevGoal, nextGoal, totalGoals }: GoalDetailP
         <p className="font-inter text-base sm:text-lg text-text-muted m-0 leading-relaxed max-w-2xl">
           {description}
         </p>
-
-        {lang === "en" && !goal.titleEn && (
-          <div className="font-mono text-[11px] text-azg uppercase tracking-[0.06em] bg-surface-2 border border-border px-3 py-1.5 rounded-md inline-block mt-4">
-            {t.common.originalDutchNotice}
-          </div>
-        )}
       </div>
 
       {/* Progress & Analytics Dashboard */}
@@ -157,15 +154,15 @@ export function GoalDetail({ goal, prevGoal, nextGoal, totalGoals }: GoalDetailP
           <div className="bg-surface border border-border rounded-2xl p-5 shadow-card flex flex-col justify-between">
             <div className="flex items-center justify-between text-text-muted mb-2">
               <span className="font-mono text-xs uppercase tracking-wider font-semibold">
-                {t.about.goalCode}
+                {t.about.nextDestination}
               </span>
-              <ShieldAlert className="w-4 h-4 text-text-muted" />
+              <MapPin className="w-4 h-4 text-azg" />
             </div>
-            <div className="font-mono text-xl font-bold text-text leading-none my-1">
-              #GOAL-{goal.number}
+            <div className="font-bebas text-2xl sm:text-3xl text-text leading-tight my-1 truncate" title={nextDestinationText}>
+              {nextDestinationText}
             </div>
             <span className="font-inter text-xs text-text-muted">
-              {lang === "en" ? "Permanent database key" : "Unieke archiefcode"}
+              {t.about.nextDestinationDesc}
             </span>
           </div>
 

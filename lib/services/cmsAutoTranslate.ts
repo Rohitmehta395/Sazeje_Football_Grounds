@@ -110,6 +110,7 @@ export async function autoTranslateGoalHook({
     { source: "title", target: "titleEn", statusField: "titleEnStatus" },
     { source: "description", target: "descriptionEn", statusField: "descriptionEnStatus" },
     { source: "details", target: "detailsEn", statusField: "detailsEnStatus" },
+    { source: "nextDestination", target: "nextDestinationEn", statusField: "nextDestinationEnStatus" },
   ]);
 }
 

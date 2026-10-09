@@ -130,9 +130,9 @@ export const nl = {
     current: "Huidige Stand",
     detailsHeading: "Details & Status",
     backToGoals: "Terug naar Over & Doelen",
-    originalContentNotice:
-      "Opmerking: Onderstaande beschrijvingen zijn geschreven in de originele Nederlandse auteurstaal.",
-    goalCode: "Doel Code",
+    nextDestination: "Volgende Bestemming",
+    nextDestinationDesc: "Volgende geplande expeditie",
+    nextDestinationTbd: "Binnenkort bekend",
     milestone: "Mijlpaal",
     progress: "Voortgang",
   },

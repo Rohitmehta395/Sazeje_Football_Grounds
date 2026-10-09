@@ -132,9 +132,9 @@ export const en: Translations = {
     current: "Current Status",
     detailsHeading: "Details & Status",
     backToGoals: "Back to About & Goals",
-    originalContentNotice:
-      "Note: The descriptions below are written in the author's original Dutch language.",
-    goalCode: "Goal Code",
+    nextDestination: "Next Destination",
+    nextDestinationDesc: "Next planned expedition",
+    nextDestinationTbd: "TBD / In planning",
     milestone: "Milestone",
     progress: "Progress",
   },

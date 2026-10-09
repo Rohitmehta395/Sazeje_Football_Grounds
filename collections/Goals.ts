@@ -211,5 +211,41 @@ export const Goals: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'nextDestination',
+      type: 'text',
+      required: false,
+      admin: {
+        description: 'Next targeted destination or stadium (Dutch - e.g. De Kuip, Rotterdam)',
+      },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'nextDestinationEn',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '75%',
+            description: 'English translation of next targeted destination',
+          },
+        },
+        {
+          name: 'nextDestinationEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
+    },
   ],
 }

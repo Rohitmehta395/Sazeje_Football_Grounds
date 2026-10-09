@@ -15,6 +15,8 @@ function mapPayloadGoal(doc: Record<string, unknown>): Goal {
     status: (doc.status as "in_progress" | "completed") || "in_progress",
     details: doc.details ? String(doc.details) : undefined,
     detailsEn: doc.detailsEn ? String(doc.detailsEn) : undefined,
+    nextDestination: doc.nextDestination ? String(doc.nextDestination) : undefined,
+    nextDestinationEn: doc.nextDestinationEn ? String(doc.nextDestinationEn) : undefined,
   };
 }
 

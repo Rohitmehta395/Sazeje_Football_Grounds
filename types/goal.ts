@@ -10,5 +10,7 @@ export interface Goal {
   status: "in_progress" | "completed";
   details?: string;
   detailsEn?: string;
+  nextDestination?: string;
+  nextDestinationEn?: string;
 }
 
