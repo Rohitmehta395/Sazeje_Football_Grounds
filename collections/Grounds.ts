@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { autoTranslateGroundHook } from '../lib/services/cmsAutoTranslate'
+import { getMediaId, safeDeleteMedia } from '../lib/services/cloudinaryCleanup'
 
 function slugify(text: string): string {
   return text
@@ -33,7 +34,31 @@ export const Grounds: CollectionConfig = {
     ],
     beforeChange: [autoTranslateGroundHook],
     afterChange: [
-      async ({ doc }) => {
+      async ({ req, previousDoc, doc, operation }) => {
+        try {
+          if (operation === 'update') {
+            const oldPhotoId = getMediaId(previousDoc?.photo)
+            const newPhotoId = getMediaId(doc?.photo)
+            if (oldPhotoId && oldPhotoId !== newPhotoId) {
+              await safeDeleteMedia(req.payload, oldPhotoId)
+            }
+            const oldGalleryIds = ((previousDoc as any)?.images || [])
+              .map((item: any) => getMediaId(item?.image))
+              .filter(Boolean)
+            const newGalleryIds = new Set(
+              ((doc as any)?.images || [])
+                .map((item: any) => getMediaId(item?.image))
+                .filter(Boolean)
+            )
+            for (const oldId of oldGalleryIds) {
+              if (!newGalleryIds.has(oldId)) {
+                await safeDeleteMedia(req.payload, oldId)
+              }
+            }
+          }
+        } catch (err) {
+          console.warn('[Grounds Cleanup] Error cleaning old media:', err)
+        }
         try {
           const { revalidatePath } = await import('next/cache')
           revalidatePath('/')
@@ -51,7 +76,17 @@ export const Grounds: CollectionConfig = {
       },
     ],
     afterDelete: [
-      async ({ doc }) => {
+      async ({ req, doc }) => {
+        try {
+          const photoId = getMediaId((doc as any)?.photo)
+          if (photoId) await safeDeleteMedia(req.payload, photoId)
+          for (const item of ((doc as any)?.images || [])) {
+            const imgId = getMediaId(item?.image)
+            if (imgId) await safeDeleteMedia(req.payload, imgId)
+          }
+        } catch (err) {
+          console.warn('[Grounds Cleanup] Error cleaning deleted ground media:', err)
+        }
         try {
           const { revalidatePath } = await import('next/cache')
           revalidatePath('/')

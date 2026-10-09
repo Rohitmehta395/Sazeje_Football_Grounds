@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { autoTranslateScarfHook } from '../lib/services/cmsAutoTranslate'
+import { getMediaId, safeDeleteMedia } from '../lib/services/cloudinaryCleanup'
 
 export const Scarves: CollectionConfig = {
   slug: 'scarves',
@@ -13,7 +14,18 @@ export const Scarves: CollectionConfig = {
   hooks: {
     beforeChange: [autoTranslateScarfHook],
     afterChange: [
-      async ({ doc }) => {
+      async ({ req, previousDoc, doc, operation }) => {
+        try {
+          if (operation === 'update') {
+            const oldPhotoId = getMediaId(previousDoc?.photo)
+            const newPhotoId = getMediaId(doc?.photo)
+            if (oldPhotoId && oldPhotoId !== newPhotoId) {
+              await safeDeleteMedia(req.payload, oldPhotoId)
+            }
+          }
+        } catch (err) {
+          console.warn('[Scarves Cleanup] Error cleaning old media:', err)
+        }
         try {
           const { revalidatePath } = await import('next/cache')
           revalidatePath('/scarves')
@@ -31,7 +43,15 @@ export const Scarves: CollectionConfig = {
       },
     ],
     afterDelete: [
-      async ({ doc }) => {
+      async ({ req, doc }) => {
+        try {
+          const photoId = getMediaId(doc?.photo)
+          if (photoId) {
+            await safeDeleteMedia(req.payload, photoId)
+          }
+        } catch (err) {
+          console.warn('[Scarves Cleanup] Error cleaning deleted scarf media:', err)
+        }
         try {
           const { revalidatePath } = await import('next/cache')
           revalidatePath('/scarves')
