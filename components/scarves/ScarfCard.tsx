@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Scarf } from "@/types";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName } from "@/lib/data/countries";
-import { StadiumIcon, OfficialScarfIcon, SwapScarvesIcon } from "@/components/ui/Icons";
+import { StadiumIcon } from "@/components/ui/Icons";
 import { Calendar, Trophy, Lightbulb, Maximize2, ArrowRightLeft } from "lucide-react";
 
 export interface ScarfCardProps {
@@ -50,25 +50,9 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
             </div>
           )}
 
-          {/* Top Floating Category Badge & Quick Inspect Button */}
-          <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-2 z-10">
-            <span
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full backdrop-blur-md font-mono text-[10.5px] uppercase tracking-wider font-semibold border shadow-sm bg-black/75 border-white/20 text-white"
-            >
-              {isNew ? (
-                <>
-                  <OfficialScarfIcon className="w-3.5 h-3.5 text-white/80" />
-                  <span>{isEn ? "MATCHDAY FANSHOP" : "OFFICIEEL FANSHOP"}</span>
-                </>
-              ) : (
-                <>
-                  <SwapScarvesIcon className="w-3.5 h-3.5 text-white/80" />
-                  <span>{isEn ? "TERRACE TRADE / SWAP" : "TERRACE RUIL"}</span>
-                </>
-              )}
-            </span>
-
-            {scarf.photo && (
+          {/* Quick Inspect Button */}
+          {scarf.photo && (
+            <div className="absolute top-3 right-3 z-10">
               <button
                 type="button"
                 onClick={(e) => {
@@ -80,8 +64,8 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
               >
                 <Maximize2 className="w-3.5 h-3.5" />
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* 2. Card Body */}
