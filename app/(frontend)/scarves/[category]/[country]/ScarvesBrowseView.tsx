@@ -16,7 +16,7 @@ export interface ScarvesBrowseViewProps {
   countryName: string;
 }
 
-const ITEMS_PER_PAGE = 12;
+const ITEMS_PER_PAGE = 8;
 
 export function ScarvesBrowseView({
   initialScarves,
@@ -138,9 +138,9 @@ export function ScarvesBrowseView({
         </span>
       </div>
 
-      {/* Grid of ScarfCards */}
+      {/* Grid of ScarfCards (2 in 1 row) */}
       {paginatedScarves.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {paginatedScarves.map((scarf) => (
             <ScarfCard
               key={scarf.id}

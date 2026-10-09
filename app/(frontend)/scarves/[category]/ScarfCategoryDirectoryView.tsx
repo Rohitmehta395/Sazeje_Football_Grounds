@@ -9,6 +9,7 @@ import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName } from "@/lib/data/countries";
 import { ScarfCard } from "@/components/scarves/ScarfCard";
 import { ScarfLightbox } from "@/components/scarves/ScarfLightbox";
+import { ScarfPagination } from "@/components/scarves/ScarfPagination";
 import { CountryLink } from "@/components/scarves/CountryLink";
 import {
   OfficialScarfIcon,
@@ -30,8 +31,7 @@ import {
   Sparkles,
 } from "lucide-react";
 
-const INITIAL_VISIBLE_SCARVES = 9;
-const LOAD_MORE_STEP = 3;
+const SCARVES_PER_PAGE = 8;
 
 export interface ScarfCategoryDirectoryViewProps {
   category: string;
@@ -67,23 +67,24 @@ export function ScarfCategoryDirectoryView({
     searchParams.get("country") || "ALL"
   );
 
-  // Progressive loading: start with 9 scarves, load next 3 per click
-  const [visibleCount, setVisibleCount] = React.useState<number>(INITIAL_VISIBLE_SCARVES);
+  // Pagination state: 8 scarves per page (2 columns x 4 rows)
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
 
   // Reset pagination when search query or country filter changes
   React.useEffect(() => {
-    setVisibleCount(INITIAL_VISIBLE_SCARVES);
+    setCurrentPage(1);
   }, [searchQuery, selectedCountry]);
 
   // Handlers with performance optimization
   const handleResetFilters = React.useCallback(() => {
     setSearchQuery("");
     setSelectedCountry("ALL");
-    setVisibleCount(INITIAL_VISIBLE_SCARVES);
+    setCurrentPage(1);
   }, []);
 
-  const handleLoadMore = React.useCallback(() => {
-    setVisibleCount((prev) => prev + LOAD_MORE_STEP);
+  const handlePageChange = React.useCallback((newPage: number) => {
+    setCurrentPage(newPage);
+    window.scrollTo({ top: 380, behavior: "smooth" });
   }, []);
 
   // Lightbox state
@@ -169,14 +170,14 @@ export function ScarfCategoryDirectoryView({
     });
   }, [scarves, selectedCountry, searchQuery, lang]);
 
-  // Slice visible scarves according to progressive load state
-  const visibleScarves = React.useMemo(() => {
-    return filteredScarves.slice(0, visibleCount);
-  }, [filteredScarves, visibleCount]);
+  const totalPages = Math.max(1, Math.ceil(filteredScarves.length / SCARVES_PER_PAGE));
+  const validPage = Math.min(Math.max(1, currentPage), totalPages);
 
-  const hasMore = visibleCount < filteredScarves.length;
-  const remainingCount = Math.max(0, filteredScarves.length - visibleCount);
-  const nextBatchCount = Math.min(LOAD_MORE_STEP, remainingCount);
+  // Slice scarves for the current page
+  const paginatedScarves = React.useMemo(() => {
+    const start = (validPage - 1) * SCARVES_PER_PAGE;
+    return filteredScarves.slice(start, start + SCARVES_PER_PAGE);
+  }, [filteredScarves, validPage]);
 
   return (
     <div className="space-y-8 pb-20">
@@ -188,7 +189,7 @@ export function ScarfCategoryDirectoryView({
         backgroundImage={heroImage}
       />
 
-      <div className="max-w-[1160px] mx-auto px-4 sm:px-6 space-y-6">
+      <div className="max-w-[1140px] mx-auto px-4 sm:px-6 space-y-6">
         {/* 2. Top Navigation & Category Switcher Bar */}
         <div className="flex items-center justify-between gap-4 flex-wrap text-xs pt-1">
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-text-muted font-inter">
@@ -420,11 +421,11 @@ export function ScarfCategoryDirectoryView({
               )}
             </div>
 
-            {/* Scarf Showcase Grid */}
+            {/* Scarf Showcase Grid (2 in 1 row) */}
             {filteredScarves.length > 0 ? (
               <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {visibleScarves.map((scarf) => (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                  {paginatedScarves.map((scarf) => (
                     <ScarfCard
                       key={scarf.id}
                       scarf={scarf}
@@ -433,17 +434,13 @@ export function ScarfCategoryDirectoryView({
                   ))}
                 </div>
 
-                {/* Load More Button */}
-                {hasMore && (
-                  <div className="pt-8 flex justify-center">
-                    <button
-                      type="button"
-                      onClick={handleLoadMore}
-                      className="px-6 py-2.5 rounded-xl bg-surface border border-border text-sm font-medium text-text hover:border-accent hover:text-accent transition-colors cursor-pointer"
-                    >
-                      {isEn ? "Load more" : "Laad meer"}
-                    </button>
-                  </div>
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <ScarfPagination
+                    currentPage={validPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
                 )}
               </>
             ) : (

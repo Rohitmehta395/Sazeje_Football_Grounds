@@ -40,7 +40,7 @@ export function ScarvesCountryBrowseView({
         eyebrow={`${t.scarves.heroEyebrow} • ${categoryLabel.toUpperCase()}`}
       />
 
-      <div className="max-w-[1160px] mx-auto px-4 sm:px-6 space-y-6">
+      <div className="max-w-[1140px] mx-auto px-4 sm:px-6 space-y-6">
         {/* 2. Breadcrumbs & Return Link */}
         <div className="flex items-center justify-between gap-4 flex-wrap text-xs pt-1">
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-text-muted font-inter">

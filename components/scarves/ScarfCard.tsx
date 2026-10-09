@@ -30,12 +30,12 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
   return (
     <div
-      className="group bg-surface rounded-2xl border border-border/80 hover:border-text-muted/40 hover:shadow-lg transition-all duration-300 overflow-hidden shadow-card flex flex-col justify-between relative"
+      className="group bg-surface rounded-2xl border border-border/80 hover:border-text-muted/40 hover:shadow-lg transition-all duration-300 overflow-hidden shadow-card flex flex-col justify-between relative h-full"
     >
 
       <div>
         {/* 1. Scarf Photo Banner with Hover Zoom and Click to Expand */}
-        <div className="relative w-full aspect-[28/9] bg-surface-2 overflow-hidden border-b border-border/80">
+        <div className="relative w-full aspect-[21/8] bg-surface-2 overflow-hidden border-b border-border/80">
           {scarf.photo ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -52,28 +52,28 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
           {/* Quick Inspect Button */}
           {scarf.photo && (
-            <div className="absolute top-3 right-3 z-10">
+            <div className="absolute top-2.5 right-2.5 z-10">
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   onOpenLightbox?.(scarf);
                 }}
-                className="w-8 h-8 rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all hover:scale-110 cursor-pointer shadow-md"
+                className="w-7 h-7 rounded-full bg-black/70 hover:bg-black/90 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all hover:scale-110 cursor-pointer shadow-md"
                 title={isEn ? "Inspect photo in full screen" : "Vergroot foto op volledig scherm"}
               >
-                <Maximize2 className="w-3.5 h-3.5" />
+                <Maximize2 className="w-3 h-3" />
               </button>
             </div>
           )}
         </div>
 
         {/* 2. Card Body */}
-        <div className="p-5 sm:p-6 space-y-4">
+        <div className="p-4 sm:p-5 space-y-3">
           {/* Header: Club Title & Country Flag Tag */}
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div>
-              <h3 className="font-bebas text-2xl sm:text-3xl text-text m-0 tracking-wide group-hover:text-accent transition-colors leading-tight">
+              <h3 className="font-bebas text-2xl sm:text-[26px] text-text m-0 tracking-wide group-hover:text-accent transition-colors leading-tight">
                 {scarf.club}
               </h3>
               <div className="font-mono text-xs text-text-muted mt-0.5">
@@ -88,29 +88,31 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
           {/* Description */}
           {displayDescription && (
-            <p className="font-inter text-sm text-text/85 leading-relaxed m-0">
+            <p className="font-inter text-[13px] text-text/85 leading-relaxed m-0 line-clamp-3">
               {displayDescription}
             </p>
           )}
 
-          {/* Metadata Chips Grid */}
-          <div className="grid grid-cols-2 gap-2 pt-2 border-t border-border/50 text-xs font-mono">
-            <div className="flex items-center gap-2 text-text-muted min-w-0">
-              <StadiumIcon className="w-3.5 h-3.5 text-text-muted shrink-0" />
-              <span className="truncate" title={scarf.stadium}>
-                {scarf.stadium || "—"}
-              </span>
-            </div>
+          {/* Metadata Section */}
+          <div className="space-y-1.5 pt-2 border-t border-border/50 text-xs font-mono">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-text-muted min-w-0 flex-1">
+                <StadiumIcon className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                <span className="truncate" title={scarf.stadium}>
+                  {scarf.stadium || "—"}
+                </span>
+              </div>
 
-            <div className="flex items-center gap-2 text-text-muted min-w-0">
-              <Calendar className="w-3.5 h-3.5 text-text-muted shrink-0" />
-              <span className="truncate">
-                {isEn ? `Est. ${scarf.founded}` : `Opgericht ${scarf.founded}`}
-              </span>
+              <div className="flex items-center gap-2 text-text-muted shrink-0 ml-auto justify-end">
+                <Calendar className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                <span className="whitespace-nowrap">
+                  {isEn ? `Est. ${scarf.founded}` : `Opgericht ${scarf.founded}`}
+                </span>
+              </div>
             </div>
 
             {displayTrophies && (
-              <div className="col-span-2 flex items-start gap-2 text-text-muted pt-1">
+              <div className="flex items-start gap-2 text-text-muted pt-0.5">
                 <Trophy className="w-3.5 h-3.5 text-text-muted shrink-0 mt-0.5" />
                 <span className="text-[11.5px] leading-relaxed break-words">
                   {displayTrophies}
@@ -121,12 +123,12 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
           {/* "Wist Je Dat?" / Heritage Trivia Box */}
           {displayFunFact && (
-            <div className="p-3.5 rounded-xl bg-surface-2/60 border border-border/70 text-xs relative">
+            <div className="p-2.5 sm:p-3 rounded-xl bg-surface-2/60 border border-border/70 text-xs relative">
               <div className="flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider font-bold mb-1 text-text">
                 <Lightbulb className="w-3.5 h-3.5 text-text-muted" />
                 <span>{t.scarves.funFact}</span>
               </div>
-              <p className="font-inter text-text-muted italic leading-relaxed m-0 text-[12.5px]">
+              <p className="font-inter text-text-muted italic leading-relaxed m-0 text-[12px]">
                 &ldquo;{displayFunFact}&rdquo;
               </p>
             </div>
@@ -135,7 +137,7 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
       </div>
 
       {/* 3. Card Footer Action Bar */}
-      <div className="p-4 sm:p-5 pt-3 border-t border-border/60 bg-surface-2/30 flex items-center justify-between gap-3">
+      <div className="px-4 sm:px-5 py-3 border-t border-border/60 bg-surface-2/30 flex items-center justify-between gap-3">
         {isNew ? (
           <>
             <div className="font-mono text-[11px] text-text-muted">
