@@ -1,14 +1,15 @@
 import * as React from "react";
-import { getGrounds, getLatestGrounds, getScarves, getGoals } from "@/lib/data";
+import { getGrounds, getLatestGrounds, getScarves, getGoals, getHomePageContent } from "@/lib/data";
 import { UEFA_COUNTRIES } from "@/lib/data/countries";
 import { HomeClientView } from "./HomeClientView";
 
 export default async function HomePage() {
-  const [grounds, latestGrounds, scarves, goals] = await Promise.all([
+  const [grounds, latestGrounds, scarves, goals, homePageContent] = await Promise.all([
     getGrounds(),
     getLatestGrounds(8),
     getScarves(),
     getGoals(),
+    getHomePageContent(),
   ]);
 
   // Compute country counts for grounds
@@ -29,6 +30,7 @@ export default async function HomePage() {
       scarves={scarves}
       goals={goals}
       countries={countriesWithGroundCounts}
+      homePageContent={homePageContent}
     />
   );
 }

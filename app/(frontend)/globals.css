@@ -87,3 +87,18 @@ body {
   scrollbar-width: none;
 }
 
+@keyframes slideProgress {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.animate-slide-progress {
+  animation-name: slideProgress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+

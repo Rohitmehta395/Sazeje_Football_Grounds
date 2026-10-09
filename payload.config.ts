@@ -12,6 +12,7 @@ import { Grounds } from './collections/Grounds'
 import { Scarves } from './collections/Scarves'
 import { Goals } from './collections/Goals'
 import { Settings } from './globals/Settings'
+import { HomePage } from './globals/HomePage'
 import { About } from './globals/About'
 import { GroundsPage } from './globals/GroundsPage'
 import { MapPage } from './globals/MapPage'
@@ -29,7 +30,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Clubs, Grounds, Scarves, Goals],
-  globals: [Settings, About, GroundsPage, MapPage, ScarvesPage, ContactPage],
+  globals: [Settings, HomePage, About, GroundsPage, MapPage, ScarvesPage, ContactPage],
   plugins: [
     cloudinaryStorage({
       collections: {

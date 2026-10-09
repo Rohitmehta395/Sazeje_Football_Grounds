@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Ground, Scarf, Goal } from "@/types";
+import { Ground, Scarf, Goal, HomePageContent } from "@/types";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { HomeHero } from "@/components/hero/HomeHero";
 import { GroundCard } from "@/components/grounds/GroundCard";
@@ -21,6 +21,7 @@ export interface HomeClientViewProps {
   scarves: Scarf[];
   goals: Goal[];
   countries: CountryItem[];
+  homePageContent?: HomePageContent;
 }
 
 export function HomeClientView({
@@ -29,6 +30,7 @@ export function HomeClientView({
   scarves,
   goals,
   countries,
+  homePageContent,
 }: HomeClientViewProps) {
   const { t, lang } = useTranslation();
 
@@ -80,8 +82,17 @@ export function HomeClientView({
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* High-impact cinematic Hero */}
+      {/* High-impact cinematic Hero Slideshow */}
       <HomeHero
+        eyebrow={lang === "en" ? homePageContent?.hero?.eyebrowEn : homePageContent?.hero?.eyebrow}
+        title={lang === "en" ? homePageContent?.hero?.titleEn : homePageContent?.hero?.title}
+        description={lang === "en" ? homePageContent?.hero?.subtitleEn : homePageContent?.hero?.subtitle}
+        topbarLabel={lang === "en" ? homePageContent?.hero?.topbarLabelEn : homePageContent?.hero?.topbarLabel}
+        slides={homePageContent?.hero?.slides}
+        interval={homePageContent?.hero?.interval}
+        enableAutoplay={homePageContent?.hero?.enableAutoplay}
+        showControls={homePageContent?.hero?.showControls}
+        showIndicators={homePageContent?.hero?.showIndicators}
         groundsCount={groundsCount}
         countriesCount={countriesCount}
         scarvesCount={scarves.length}

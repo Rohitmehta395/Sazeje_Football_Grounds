@@ -417,3 +417,45 @@ export async function autoTranslateMediaHook({
   ]);
 }
 
+/**
+ * Auto-translation hooks for HomePage Global
+ */
+export async function autoTranslateHomePageHook({
+  data,
+}: {
+  data: Record<string, unknown>;
+}) {
+  if (!data) return data;
+
+  const hero = data.hero as Record<string, unknown> | undefined;
+  if (hero) {
+    await autoTranslateFields(hero, undefined, [
+      { source: "eyebrow", target: "eyebrowEn" },
+      { source: "title", target: "titleEn" },
+      { source: "subtitle", target: "subtitleEn" },
+      { source: "topbarLabel", target: "topbarLabelEn" },
+    ]);
+
+    const slides = hero.slides as Array<Record<string, unknown>> | undefined;
+    if (Array.isArray(slides)) {
+      for (const slide of slides) {
+        if (slide && typeof slide === "object") {
+          await autoTranslateFields(slide, undefined, [
+            { source: "caption", target: "captionEn" },
+          ]);
+        }
+      }
+    }
+  }
+
+  const seo = data.seo as Record<string, unknown> | undefined;
+  if (seo) {
+    await autoTranslateFields(seo, undefined, [
+      { source: "metaTitle", target: "metaTitleEn" },
+      { source: "metaDescription", target: "metaDescriptionEn" },
+    ]);
+  }
+
+  return data;
+}
+

@@ -4,9 +4,11 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
+import { HeroSlide } from "@/types";
 import {
   ArrowRight,
   Flag,
+  MapPin,
   Trophy,
 } from "lucide-react";
 import { FootballPitchIcon, ScarfIcon } from "@/components/ui/Icons";
@@ -16,6 +18,11 @@ export interface HomeHeroProps {
   title?: string;
   description?: string;
   backgroundImage?: string;
+  slides?: HeroSlide[];
+  interval?: number; // seconds
+  enableAutoplay?: boolean;
+  showControls?: boolean;
+  showIndicators?: boolean;
   topbarLabel?: string;
   groundsCount?: number;
   countriesCount?: number;
@@ -28,17 +35,100 @@ export function HomeHero({
   title = "SAZEJE GROUNDHOPPING ARCHIVE",
   description,
   backgroundImage = "/Hero_Image.jpg",
+  slides: initialSlides,
+  interval = 6,
+  enableAutoplay = true,
+  showControls = true,
+  showIndicators = true,
   topbarLabel = "SAZEJE GROUNDHOPPING ARCHIVE • 2024–2026",
   groundsCount = 10,
   countriesCount = 7,
   scarvesCount = 6,
   activeGoalsCount = 8,
 }: HomeHeroProps) {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
+
+  // Normalize slides: if slides array is passed and has items, use it. Otherwise fallback to backgroundImage.
+  const slides: HeroSlide[] = React.useMemo(() => {
+    if (initialSlides && initialSlides.length > 0) {
+      return initialSlides;
+    }
+    return [
+      {
+        image: backgroundImage,
+        caption: "MHPArena, Stuttgart • UEFA Europa League",
+        captionEn: "MHPArena, Stuttgart • UEFA Europa League",
+        alt: title || "Hero stadium background",
+      },
+    ];
+  }, [initialSlides, backgroundImage, title]);
+
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [isPlaying, setIsPlaying] = React.useState(enableAutoplay);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const touchStartX = React.useRef<number | null>(null);
 
   const heroEyebrow = eyebrow || t.home.heroEyebrow;
   const heroTitle = title;
   const heroDescription = description || t.home.heroSubtitle;
+
+  const totalSlides = slides.length;
+  const hasMultipleSlides = totalSlides > 1;
+
+  // Auto-advance loop timer
+  React.useEffect(() => {
+    if (!hasMultipleSlides || !isPlaying || isHovered) return;
+
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    }, Math.max(interval, 2) * 1000);
+
+    return () => clearInterval(timer);
+  }, [hasMultipleSlides, isPlaying, isHovered, interval, totalSlides]);
+
+  const handleNext = React.useCallback(() => {
+    if (!hasMultipleSlides) return;
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
+  }, [hasMultipleSlides, totalSlides]);
+
+  const handlePrev = React.useCallback(() => {
+    if (!hasMultipleSlides) return;
+    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+  }, [hasMultipleSlides, totalSlides]);
+
+  // Keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      handlePrev();
+    } else if (e.key === "ArrowRight") {
+      handleNext();
+    }
+  };
+
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+  };
+
+  // Current slide caption based on selected language
+  const activeSlide = slides[currentIndex] || slides[0];
+  const slideCaption =
+    lang === "en"
+      ? activeSlide?.captionEn || activeSlide?.caption
+      : activeSlide?.caption || activeSlide?.captionEn;
 
   const stats = [
     {
@@ -64,24 +154,60 @@ export function HomeHero({
   ];
 
   return (
-    <div className="relative min-h-[calc(100vh-72px)] flex flex-col justify-between text-white overflow-hidden border-b border-border/40">
-      {/* Background Stadium Photo */}
-      <div className="absolute inset-0">
-        <Image
-          src={backgroundImage}
-          alt={heroTitle || "Hero stadium background"}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+    <section
+      aria-label="Homepage Hero Slideshow"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="relative min-h-[calc(100vh-72px)] flex flex-col justify-between text-white overflow-hidden border-b border-border/40 select-none outline-none"
+    >
+      {/* Background Slides Stack with Crossfade & Cinematic Ken Burns Effect */}
+      <div className="absolute inset-0 z-0 bg-black overflow-hidden">
+        {slides.map((slide, idx) => {
+          const isActive = idx === currentIndex;
+          return (
+            <div
+              key={idx}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                isActive ? "opacity-100 z-1" : "opacity-0 pointer-events-none z-0"
+              }`}
+            >
+              <div
+                className={`relative w-full h-full transform transition-transform duration-[7000ms] ease-out ${
+                  isActive ? "scale-105" : "scale-100"
+                }`}
+              >
+                <Image
+                  src={slide.image}
+                  alt={slide.alt || slideCaption || heroTitle || "Stadium hero background"}
+                  fill
+                  priority={idx === 0}
+                  sizes="100vw"
+                  className="object-cover object-center"
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
-      {/* Transparent Dark Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,19,25,0.35)] via-[rgba(15,19,25,0.55)] to-[rgba(15,19,25,0.85)] z-0" />
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-bg via-bg/40 to-transparent z-10 pointer-events-none" />
+
+      {/* Cinematic Gradient Overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,19,25,0.4)] via-[rgba(15,19,25,0.6)] to-[rgba(15,19,25,0.92)] z-2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-bg via-bg/40 to-transparent z-10 pointer-events-none" />
+
+      {/* Top Floating Stadium Location Tag (If available) */}
+      {slideCaption && (
+        <div className="absolute top-6 right-6 z-20 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-white/90 text-xs font-mono shadow-lg transition-all duration-500 animate-fade-in">
+          <MapPin className="w-3.5 h-3.5 text-accent animate-pulse" />
+          <span className="truncate max-w-[280px] sm:max-w-[400px]">{slideCaption}</span>
+        </div>
+      )}
 
       {/* Main Content Area */}
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-16 pb-10 w-full flex-1 flex flex-col justify-center">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-16 pb-6 w-full flex-1 flex flex-col justify-center">
         {/* Archive Badge Pill */}
         <div className="flex items-center gap-3 mb-5 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white/90 text-xs font-mono tracking-wider uppercase shadow-sm">
@@ -104,8 +230,8 @@ export function HomeHero({
             {heroDescription}
           </p>
 
-          {/* Action CTA */}
-          <div className="flex items-center gap-3.5">
+          {/* Action CTA & Mobile Location Tag */}
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="#grounds-section"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-btn hover:bg-btn-hover text-white font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-btn/30 hover:shadow-lg hover:-translate-y-0.5"
@@ -113,8 +239,48 @@ export function HomeHero({
               <span>{t.home.heroCtaGrounds}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+
+            {slideCaption && (
+              <div className="flex sm:hidden items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/40 backdrop-blur-sm border border-white/15 text-white/80 text-[11px] font-mono">
+                <MapPin className="w-3 h-3 text-accent shrink-0" />
+                <span className="truncate max-w-[220px]">{slideCaption}</span>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Slideshow Progress Indicators (Shown when multiple slides exist) */}
+        {hasMultipleSlides && showIndicators && (
+          <div className="mt-8 sm:mt-10 flex items-center gap-2 max-w-[820px]">
+            {slides.map((_, idx) => {
+              const isActive = idx === currentIndex;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setCurrentIndex(idx)}
+                  aria-label={`${t.home.slideshowSlide} ${idx + 1}`}
+                  className={`group relative h-2 rounded-full overflow-hidden transition-all duration-300 ${
+                    isActive ? "w-10 sm:w-14 bg-white/30" : "w-4 sm:w-6 bg-white/20 hover:bg-white/40"
+                  }`}
+                >
+                  {isActive && (
+                    <div
+                      key={`progress-${currentIndex}-${isPlaying && !isHovered}`}
+                      className={`absolute inset-0 bg-accent rounded-full ${
+                        isPlaying && !isHovered ? "origin-left animate-slide-progress" : "w-full"
+                      }`}
+                      style={{
+                        animationDuration: `${Math.max(interval, 2)}s`,
+                        animationPlayState: isPlaying && !isHovered ? "running" : "paused",
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Floating Glassmorphic Stats Dock */}
@@ -142,6 +308,6 @@ export function HomeHero({
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
