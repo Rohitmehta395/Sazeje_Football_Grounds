@@ -3,6 +3,7 @@ import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { cloudinaryStorage } from "payload-storage-cloudinary";
 import path from "path";
 import { buildConfig } from "payload";
+import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { Users } from "./collections/Users";
@@ -47,6 +48,7 @@ const allowedOrigins = [
 ].filter(Boolean);
 
 export default buildConfig({
+  sharp,
   serverURL: getServerURL(),
   cors: allowedOrigins,
   csrf: allowedOrigins,

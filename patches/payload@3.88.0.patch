@@ -13,3 +13,15 @@ index f141dc6179a607bfb67ef7ec623a09a799b11bb0..97545877324e895346a91a34cd2b152f
              fileURL = `${baseUrl}${url}`;
          }
          let cookies = (req.headers.get('cookie') ?? '').split(';');
+diff --git a/dist/bin/loadEnv.js b/dist/bin/loadEnv.js
+index 1111111111111111111111111111111111111111..2222222222222222222222222222222222222222 100644
+--- a/dist/bin/loadEnv.js
++++ b/dist/bin/loadEnv.js
+@@ -1,6 +1,6 @@
+ import nextEnvImport from '@next/env';
+ import { findUpSync } from '../utilities/findUp.js';
+-const { loadEnvConfig } = nextEnvImport;
++const { loadEnvConfig } = nextEnvImport?.loadEnvConfig ? nextEnvImport : (nextEnvImport?.default || nextEnvImport);
+ /**
+  * Try to find user's env files and load it. Uses the same algorithm next.js uses to parse env files, meaning this also supports .env.local, .env.development, .env.production, etc.
+  */ export function loadEnv(path) {

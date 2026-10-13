@@ -12,6 +12,12 @@ export const Media: CollectionConfig = {
   upload: {
     mimeTypes: ['image/*'],
     staticDir: path.resolve(dirname, '../public/media'),
+    formatOptions: {
+      format: 'webp',
+      options: {
+        quality: 80,
+      },
+    },
   },
   access: {
     read: () => true,
