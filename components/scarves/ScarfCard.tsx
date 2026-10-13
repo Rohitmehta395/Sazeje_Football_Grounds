@@ -177,3 +177,5 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
     </div>
   );
 }
+
+export { ScarfCardSkeleton, ScarvesGridSkeleton } from "@/components/ui/CardSkeleton";

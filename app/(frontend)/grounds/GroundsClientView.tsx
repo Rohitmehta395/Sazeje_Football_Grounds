@@ -7,6 +7,7 @@ import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { Ground, GroundsPageContent } from "@/types";
 import { Flag, Trophy } from "lucide-react";
 import { StadiumIcon, ClubBadgeIcon } from "@/components/ui/Icons";
+import { GroundsGridSkeleton } from "@/components/ui/CardSkeleton";
 
 export interface GroundsClientViewProps {
   grounds: Ground[];
@@ -169,13 +170,7 @@ export function GroundsClientView({
         )}
 
         {/* Stadiums Filter & Grid */}
-        <React.Suspense
-          fallback={
-            <div className="p-12 text-center border border-border rounded-xl bg-surface-2 text-text-muted font-mono text-sm shadow-card">
-              {t.grounds.loading}
-            </div>
-          }
-        >
+        <React.Suspense fallback={<GroundsGridSkeleton count={6} />}>
           <GroundsView allGrounds={grounds} />
         </React.Suspense>
       </div>

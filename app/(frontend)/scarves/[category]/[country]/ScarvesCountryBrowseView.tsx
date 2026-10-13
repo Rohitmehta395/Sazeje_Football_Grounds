@@ -8,6 +8,7 @@ import { Scarf, Country } from "@/types";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName } from "@/lib/data/countries";
 import { ArrowLeft, Flag } from "lucide-react";
+import { ScarvesGridSkeleton } from "@/components/ui/CardSkeleton";
 
 export interface ScarvesCountryBrowseViewProps {
   category: string;
@@ -70,13 +71,7 @@ export function ScarvesCountryBrowseView({
         </div>
 
         {/* 3. Scarf Showcase Grid with Filters and Lightbox */}
-        <React.Suspense
-          fallback={
-            <div className="p-12 text-center border border-border rounded-2xl bg-surface text-text-muted font-mono text-sm shadow-card">
-              {t.scarves.loading}
-            </div>
-          }
-        >
+        <React.Suspense fallback={<ScarvesGridSkeleton count={4} />}>
           <ScarvesBrowseView
             initialScarves={scarves}
             categoryLabel={categoryLabel}

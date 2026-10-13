@@ -7,6 +7,7 @@ import {
   getScarves,
   getScarvesPageContent,
 } from "@/lib/data";
+import { ScarvesGridSkeleton } from "@/components/ui/CardSkeleton";
 
 export const revalidate = 60;
 
@@ -59,8 +60,8 @@ export default async function ScarfCategoryPage({ params }: ScarfCategoryPagePro
   return (
     <React.Suspense
       fallback={
-        <div className="min-h-[400px] flex items-center justify-center font-mono text-sm text-text-muted">
-          Laden...
+        <div className="max-w-[1160px] mx-auto px-4 sm:px-6 py-8">
+          <ScarvesGridSkeleton count={8} />
         </div>
       }
     >

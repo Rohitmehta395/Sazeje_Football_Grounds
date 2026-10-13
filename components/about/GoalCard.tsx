@@ -130,3 +130,5 @@ export function GoalCard({ goal, href }: GoalCardProps) {
   return cardContent;
 }
 
+export { GoalCardSkeleton, GoalsGridSkeleton } from "@/components/ui/CardSkeleton";
+

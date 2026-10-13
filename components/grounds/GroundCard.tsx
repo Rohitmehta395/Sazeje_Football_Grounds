@@ -91,3 +91,5 @@ export function GroundCard({
 
   return <Link href={href} className="h-full block">{content}</Link>;
 }
+
+export { GroundCardSkeleton, GroundsGridSkeleton } from "@/components/ui/CardSkeleton";

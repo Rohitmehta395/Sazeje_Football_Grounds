@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Bebas_Neue, Space_Mono, Inter } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -61,13 +62,13 @@ export default async function RootLayout({
       suppressHydrationWarning
       className={`${bebasNeue.variable} ${spaceMono.variable} ${inter.variable} font-inter antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: BLOCKING_INIT_SCRIPT }} />
-      </head>
       <body
         suppressHydrationWarning
         className="min-h-screen bg-bg text-text transition-colors duration-200 flex flex-col justify-between"
       >
+        <Script id="theme-init" strategy="beforeInteractive">
+          {BLOCKING_INIT_SCRIPT}
+        </Script>
         <LanguageProvider>
           <SiteHeader socialLinks={socialLinks} />
           <main className="pt-[72px] flex-1">{children}</main>
