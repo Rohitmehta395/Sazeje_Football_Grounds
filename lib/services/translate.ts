@@ -63,10 +63,15 @@ export async function translateText(
     try {
       const { Translate } = v2;
       const client = new Translate({ key: apiKey });
-      const [result] = await client.translate(trimmed, {
+      const translatePromise = client.translate(trimmed, {
         from,
         to,
       });
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("Translation timeout")), 3500)
+      );
+
+      const [result] = await Promise.race([translatePromise, timeoutPromise]);
 
       if (result) {
         const decoded = decodeHtmlEntities(result);
@@ -74,7 +79,7 @@ export async function translateText(
         return decoded;
       }
     } catch (err) {
-      console.warn("[Translate] Google Cloud Translation API failed, trying fallback:", err);
+      console.warn("[Translate] Google Cloud Translation API failed or timed out, trying fallback:", err);
     }
   }
 
@@ -88,8 +93,8 @@ export async function translateText(
       headers: {
         Accept: "application/json",
       },
-      // 8s timeout to avoid hanging requests
-      signal: AbortSignal.timeout(8000),
+      // 3.5s timeout to avoid hanging requests on serverless
+      signal: AbortSignal.timeout(3500),
     });
 
     if (res.ok) {

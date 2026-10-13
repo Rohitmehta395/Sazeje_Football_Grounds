@@ -56,7 +56,7 @@ export function extractCloudinaryPublicId(urlOrFilename?: string | null): string
 }
 
 /**
- * Directly removes an asset from Cloudinary by its public ID or URL
+ * Directly removes an asset from Cloudinary by its public ID or URL with timeout protection
  */
 export async function deleteAssetFromCloudinary(publicId?: string | null, url?: string | null): Promise<void> {
   const targetId = publicId || extractCloudinaryPublicId(url)
@@ -65,14 +65,15 @@ export async function deleteAssetFromCloudinary(publicId?: string | null, url?: 
   if (!ensureCloudinaryConfig()) return
 
   try {
-    const res = await cloudinary.uploader.destroy(targetId, {
+    const destroyPromise = cloudinary.uploader.destroy(targetId, {
       resource_type: 'image',
       invalidate: true,
     })
-    try {
-      await cloudinary.api.delete_derived_resources([targetId], { resource_type: 'image' })
-    } catch {}
-    console.log(`[Cloudinary Cleanup] Deleted asset "${targetId}" from Cloudinary:`, res?.result || res)
+    const timeoutPromise = new Promise<{ result?: string }>((resolve) =>
+      setTimeout(() => resolve({ result: 'timeout' }), 4000)
+    )
+    const res = await Promise.race([destroyPromise, timeoutPromise])
+    console.log(`[Cloudinary Cleanup] Deleted asset "${targetId}" from Cloudinary:`, (res as any)?.result || res)
   } catch (error) {
     console.warn(`[Cloudinary Cleanup] Failed to delete asset "${targetId}":`, error)
   }
