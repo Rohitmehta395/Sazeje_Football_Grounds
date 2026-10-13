@@ -8,7 +8,7 @@ import {
   getScarvesPageContent,
 } from "@/lib/data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export interface ScarfCategoryPageProps {
   params: Promise<{
@@ -57,11 +57,19 @@ export default async function ScarfCategoryPage({ params }: ScarfCategoryPagePro
   const countries = getCountriesWithScarfCounts(category, scarves);
 
   return (
-    <ScarfCategoryDirectoryView
-      category={category}
-      countries={countries}
-      scarves={scarves}
-      scarvesPageContent={scarvesPageContent}
-    />
+    <React.Suspense
+      fallback={
+        <div className="min-h-[400px] flex items-center justify-center font-mono text-sm text-text-muted">
+          Laden...
+        </div>
+      }
+    >
+      <ScarfCategoryDirectoryView
+        category={category}
+        countries={countries}
+        scarves={scarves}
+        scarvesPageContent={scarvesPageContent}
+      />
+    </React.Suspense>
   );
 }

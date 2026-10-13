@@ -27,7 +27,10 @@ const inter = Inter({
   display: "swap",
 });
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || "https://sazeje-football.vercel.app"),
   title: "SaZeJe Groundhopping — Voetbalreizen & Sjaalcollectie",
   description: "Persoonlijke reisverslagen van stadionbezoeken en sjaalcollectie door heel Europa.",
   icons: {

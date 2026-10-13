@@ -5,6 +5,7 @@ import { GroundDetailView } from "./GroundDetailView";
 import { getGrounds, getGroundById, getRelatedGrounds } from "@/lib/data";
 
 export const dynamicParams = true;
+export const revalidate = 60;
 
 export interface GroundDetailPageProps {
   params: Promise<{

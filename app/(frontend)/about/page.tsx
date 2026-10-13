@@ -2,7 +2,7 @@ import * as React from "react";
 import { getGoals, getAboutContent, getGrounds, getScarves } from "@/lib/data";
 import { AboutClientView } from "./AboutClientView";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function AboutPage() {
   const [aboutContent, goals, grounds, scarves] = await Promise.all([

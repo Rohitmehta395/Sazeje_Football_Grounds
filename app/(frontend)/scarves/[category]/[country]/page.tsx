@@ -4,6 +4,7 @@ import { ScarvesCountryBrowseView } from "./ScarvesCountryBrowseView";
 import { getCountries, getCountryByName, getScarves } from "@/lib/data";
 
 export const dynamicParams = true;
+export const revalidate = 60;
 
 export interface ScarfCountryBrowsePageProps {
   params: Promise<{

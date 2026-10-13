@@ -3,7 +3,7 @@ import { getGrounds, getLatestGrounds, getScarves, getGoals, getHomePageContent 
 import { UEFA_COUNTRIES } from "@/lib/data/countries";
 import { HomeClientView } from "./HomeClientView";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function HomePage() {
   const [grounds, latestGrounds, scarves, goals, homePageContent] = await Promise.all([

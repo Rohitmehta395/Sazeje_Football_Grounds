@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getContactPageContent, getSettings } from "@/lib/data";
 import { ContactClientView } from "./ContactClientView";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageContent = await getContactPageContent();

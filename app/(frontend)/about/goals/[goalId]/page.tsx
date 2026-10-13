@@ -4,6 +4,7 @@ import { GoalDetailView } from "./GoalDetailView";
 import { getGoals, getGoalById, getAdjacentGoals } from "@/lib/data";
 
 export const dynamicParams = true;
+export const revalidate = 60;
 
 export interface GoalDetailPageProps {
   params: Promise<{

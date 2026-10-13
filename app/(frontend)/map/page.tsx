@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getGrounds, getMapPageContent } from "@/lib/data";
 import { MapClientView } from "./MapClientView";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageContent = await getMapPageContent();

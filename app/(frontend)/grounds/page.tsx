@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getGrounds, getGroundsPageContent } from "@/lib/data";
 import { GroundsClientView } from "./GroundsClientView";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const pageContent = await getGroundsPageContent();
