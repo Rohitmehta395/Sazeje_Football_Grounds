@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Bebas_Neue, Space_Mono, Inter } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ThemeInitScript } from "@/components/layout/ThemeInitScript";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import { getSettings } from "@/lib/data/settings";
 import "./globals.css";
@@ -50,8 +50,6 @@ export const metadata: Metadata = {
   },
 };
 
-const BLOCKING_INIT_SCRIPT = `(function(){try{var t=document.cookie.match(/(?:^|; )theme=([^;]*)/);var m=t?t[1]:"light";document.documentElement.setAttribute("data-theme",m);var l=document.cookie.match(/(?:^|; )lang=([^;]*)/);var n=l?l[1]:"nl";document.documentElement.setAttribute("data-lang",n);}catch(e){}})();`;
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -70,9 +68,7 @@ export default async function RootLayout({
         suppressHydrationWarning
         className="min-h-screen bg-bg text-text transition-colors duration-200 flex flex-col justify-between"
       >
-        <Script id="theme-init" strategy="beforeInteractive">
-          {BLOCKING_INIT_SCRIPT}
-        </Script>
+        <ThemeInitScript />
         <LanguageProvider>
           <SiteHeader socialLinks={socialLinks} />
           <main className="pt-[72px] flex-1">{children}</main>

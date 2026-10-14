@@ -38,6 +38,7 @@ export const nl = {
     statusBadge: "Onderweg in Europa • Seizoen 2024–2026",
     backToTop: "Naar boven",
     disclaimer: "Niet-commercieel supportersarchief. Alle rechten voorbehouden.",
+    impressum: "Impressum",
   },
 
   // Home Page
@@ -323,6 +324,60 @@ export const nl = {
     reason3Title: "Samenwerkingen & Matchday Verhalen",
     reason3Desc:
       "Interesse in een gezamenlijke reportage, fotoreeks, gastbijdrage of podcast? We gaan graag in gesprek.",
+  },
+
+  // Impressum / Juridische Informatie
+  impressum: {
+    metaTitle: "Impressum & Ontwikkelaar | SaZeJe Groundhopping",
+    metaDescription:
+      "Impressum, contactgegevens van de ontwikkelaar (Rohit Mehta), juridische kennisgeving en aansprakelijkheidsdisclaimer.",
+    heroEyebrow: "WETTELIJKE INFORMATIE & COLOFON",
+    heroTitle: "Impressum",
+    heroSubtitle:
+      "Deze website is ontworpen en ontwikkeld door een onafhankelijke freelancer. Hieronder vind je alle relevante contact- en juridische informatie conform de transparantiestandaarden.",
+    breadcrumb: "Impressum",
+
+    // Left Column: Who I Am
+    whoIAmBadge: "WIE IK BEN",
+    devName: "Rohit Mehta",
+    bioP1:
+      "Ik ben een student en freelance webontwikkelaar met een passie voor het bouwen van strakke, moderne en functionele digitale ervaringen. Ik werk samen met opdrachtgevers uit diverse sectoren om hun ideeën tot leven te brengen met doordacht design en solide ontwikkeling.",
+    bioP2:
+      "De SaZeJe Football (SaZeJe Groundhopping) website is door mij ontwikkeld als freelance project. Al het ontwerp- en ontwikkelwerk — van lay-out tot functionaliteit — is zelfstandig uitgevoerd om aan de visie en eisen van de opdrachtgever te voldoen.",
+    roleLabel: "ROL",
+    roleValue: "Student - Freelancer",
+    specialisationLabel: "SPECIALISATIE",
+    specialisationValue: "Webdesign & Full Stack MERN Developer",
+
+    // Right Column: Contact Information
+    contactBadge: "CONTACTGEGEVENS",
+    contactHeading: "Neem Contact Op",
+    portfolioLabel: "PORTFOLIO",
+    portfolioValue: "rohitmehta.vercel.app",
+    portfolioUrl: "https://rohitmehta.vercel.app/",
+    emailLabel: "E-MAIL",
+    emailValue: "rohitmehtaddn@gmail.com",
+    emailUrl: "mailto:rohitmehtaddn@gmail.com",
+    phoneLabel: "TELEFOON / WHATSAPP",
+    phoneValue: "+91 82799 08698",
+    phoneUrl: "tel:+918279908698",
+    whatsAppUrl: "https://wa.me/918279908698",
+    linkedinLabel: "LINKEDIN",
+    linkedinValue: "linkedin.com/in/rohitmehta395",
+    linkedinUrl: "https://www.linkedin.com/in/rohitmehta395/",
+    instagramLabel: "INSTAGRAM",
+    instagramValue: "@rohit_._mehta",
+    instagramUrl: "https://www.instagram.com/rohit_._mehta/",
+
+    // Bottom Section: Legal Notice & Disclaimer
+    legalNoticeBadge: "JURIDISCHE KENNISGEVING",
+    legalHeading: "Aansprakelijkheid & Disclaimer",
+    disclaimerP1:
+      "Deze website is ontwikkeld in opdracht van een klant. De inhoud, gegevens en informatie die op dit platform worden gepresenteerd vallen onder de exclusieve verantwoordelijkheid van de eigenaar en beheerder van de website. De ontwikkelaar (Rohit Mehta) aanvaardt geen aansprakelijkheid voor de juistheid, volledigheid of actualiteit van de gepubliceerde inhoud.",
+    disclaimerP2:
+      "Alle externe links op deze website leiden naar inhoud van derden. De ontwikkelaar heeft geen invloed op de inhoud van gelinkte pagina's en aanvaardt daarom geen aansprakelijkheid voor de inhoud van externe websites. Op het moment van linken waren er geen wettelijke overtredingen waarneembaar.",
+    disclaimerP3:
+      "Voor technische vragen of opmerkingen over de ontwikkeling van deze website kun je rechtstreeks contact opnemen via de hierboven vermelde contactgegevens.",
   },
 
   // Common UI

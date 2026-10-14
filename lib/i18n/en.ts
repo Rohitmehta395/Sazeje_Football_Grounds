@@ -40,6 +40,7 @@ export const en: Translations = {
     statusBadge: "Exploring Europe • Season 2024–2026",
     backToTop: "Back to top",
     disclaimer: "Non-commercial supporter archive. All rights reserved.",
+    impressum: "Impressum",
   },
 
   // Home Page
@@ -325,6 +326,60 @@ export const en: Translations = {
     reason3Title: "Collaborations & Match Reports",
     reason3Desc:
       "Interested in a joint match report, photography exchange, guest article, or podcast? We'd love to chat.",
+  },
+
+  // Impressum / Legal Notice
+  impressum: {
+    metaTitle: "Impressum & Developer | SaZeJe Groundhopping",
+    metaDescription:
+      "Impressum, developer contact information (Rohit Mehta), legal notice, and liability disclaimer.",
+    heroEyebrow: "LEGAL NOTICE & IMPRINT",
+    heroTitle: "Impressum",
+    heroSubtitle:
+      "This website was designed and developed by an independent freelancer. Below you will find all relevant contact and legal information as required by transparency standards.",
+    breadcrumb: "Impressum",
+
+    // Left Column: Who I Am
+    whoIAmBadge: "WHO I AM",
+    devName: "Rohit Mehta",
+    bioP1:
+      "I'm a student and freelance web developer with a passion for building clean, modern, and functional digital experiences. I work with clients across different industries to bring their ideas to life through thoughtful design and solid development.",
+    bioP2:
+      "The SaZeJe Football (SaZeJe Groundhopping) website was developed by me as a freelance project. All design and development work — from layout to functionality — was carried out independently to meet the client's vision and requirements.",
+    roleLabel: "ROLE",
+    roleValue: "Student - Freelancer",
+    specialisationLabel: "SPECIALISATION",
+    specialisationValue: "Web Design & Full Stack MERN Developer",
+
+    // Right Column: Contact Information
+    contactBadge: "CONTACT INFORMATION",
+    contactHeading: "Get in Touch",
+    portfolioLabel: "PORTFOLIO",
+    portfolioValue: "rohitmehta.vercel.app",
+    portfolioUrl: "https://rohitmehta.vercel.app/",
+    emailLabel: "EMAIL",
+    emailValue: "rohitmehtaddn@gmail.com",
+    emailUrl: "mailto:rohitmehtaddn@gmail.com",
+    phoneLabel: "PHONE / WHATSAPP",
+    phoneValue: "+91 82799 08698",
+    phoneUrl: "tel:+918279908698",
+    whatsAppUrl: "https://wa.me/918279908698",
+    linkedinLabel: "LINKEDIN",
+    linkedinValue: "linkedin.com/in/rohitmehta395",
+    linkedinUrl: "https://www.linkedin.com/in/rohitmehta395/",
+    instagramLabel: "INSTAGRAM",
+    instagramValue: "@rohit_._mehta",
+    instagramUrl: "https://www.instagram.com/rohit_._mehta/",
+
+    // Bottom Section: Legal Notice & Disclaimer
+    legalNoticeBadge: "LEGAL NOTICE",
+    legalHeading: "Liability & Disclaimer",
+    disclaimerP1:
+      "This website was developed on behalf of a client. The content, data, and information presented on this platform are the sole responsibility of the website owner and operator. The developer (Rohit Mehta) assumes no liability for the accuracy, completeness, or timeliness of the published content.",
+    disclaimerP2:
+      "All external links on this website lead to third-party content. The developer has no influence over the content of linked pages and therefore accepts no liability for the content of external websites. At the time of linking, no legal violations were apparent.",
+    disclaimerP3:
+      "For any technical concerns or queries regarding the development of this website, feel free to reach out directly via the contact details provided above.",
   },
 
   // Common UI

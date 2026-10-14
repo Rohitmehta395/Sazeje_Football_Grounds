@@ -378,10 +378,16 @@ export function SiteFooter({ socialLinks }: SiteFooterProps = {}) {
       <div className="border-t border-border/80 bg-surface-2/40">
         <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-text-muted font-inter">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
-            <span>
+            <span suppressHydrationWarning>
               © {currentYear} SaZeJe Groundhopping. {t.footer.copyright}
             </span>
-
+            <span className="hidden sm:inline text-border">•</span>
+            <Link
+              href="/impressum"
+              className="text-text-muted hover:text-accent transition-colors underline-offset-4 hover:underline"
+            >
+              {t.footer.impressum}
+            </Link>
           </div>
 
           <button
