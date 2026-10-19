@@ -176,10 +176,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                   </div>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-border/60 flex items-center justify-between text-xs">
-                  <span className="font-mono text-text-muted uppercase text-[10px] tracking-wider">
-                    Log #{scarf.id}
-                  </span>
+                <div className="mt-5 pt-3 border-t border-border/60 flex items-center justify-end text-xs">
                   <Link
                     href={`/scarves?country=${encodeURIComponent(scarf.country)}`}
                     className="inline-flex items-center gap-1 font-semibold text-accent hover:underline group-hover:translate-x-0.5 transition-transform"
