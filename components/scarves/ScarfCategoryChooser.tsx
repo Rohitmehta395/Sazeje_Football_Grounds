@@ -4,15 +4,26 @@ import * as React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
-import { OfficialScarfIcon, SwapScarvesIcon } from "@/components/ui/Icons";
+import {
+  OfficialScarfIcon,
+  SwapScarvesIcon,
+  SpecialEditionScarfIcon,
+  MatchdayScarfIcon,
+} from "@/components/ui/Icons";
 
 export interface ScarfCategoryChooserProps {
   newTitle?: string;
   newDesc?: string;
   secondhandTitle?: string;
   secondhandDesc?: string;
+  specialEditionsTitle?: string;
+  specialEditionsDesc?: string;
+  matchdaysTitle?: string;
+  matchdaysDesc?: string;
   newCount?: number;
   secondhandCount?: number;
+  specialEditionsCount?: number;
+  matchdaysCount?: number;
 }
 
 export function ScarfCategoryChooser({
@@ -20,8 +31,14 @@ export function ScarfCategoryChooser({
   newDesc,
   secondhandTitle,
   secondhandDesc,
+  specialEditionsTitle,
+  specialEditionsDesc,
+  matchdaysTitle,
+  matchdaysDesc,
   newCount,
   secondhandCount,
+  specialEditionsCount,
+  matchdaysCount,
 }: ScarfCategoryChooserProps) {
   const { t, lang } = useTranslation();
   const isEn = lang === "en";
@@ -33,6 +50,16 @@ export function ScarfCategoryChooser({
     secondhandTitle || t.scarves.categorySecondhandTitle;
   const resolvedSecondhandDesc =
     secondhandDesc || t.scarves.categorySecondhandDesc;
+
+  const resolvedSpecialEditionsTitle =
+    specialEditionsTitle || t.scarves.categorySpecialEditionsTitle;
+  const resolvedSpecialEditionsDesc =
+    specialEditionsDesc || t.scarves.categorySpecialEditionsDesc;
+
+  const resolvedMatchdaysTitle =
+    matchdaysTitle || t.scarves.categoryMatchdaysTitle;
+  const resolvedMatchdaysDesc =
+    matchdaysDesc || t.scarves.categoryMatchdaysDesc;
 
   const options = [
     {
@@ -70,6 +97,42 @@ export function ScarfCategoryChooser({
       pills: isEn
         ? ["Supporter Trades", "Vintage Terrace Heritage", "Open for Swap"]
         : ["Supporter Ruil", "Vintage Terrace Historie", "Beschikbaar voor Ruil"],
+    },
+    {
+      id: "special-editions",
+      title: resolvedSpecialEditionsTitle,
+      description: resolvedSpecialEditionsDesc,
+      href: "/scarves/special-editions",
+      count: specialEditionsCount,
+      eyebrow: (t.scarves as Record<string, string>).categorySpecialEditionsTag || "LIMITED EDITIONS • ANNIVERSARY",
+      ctaText: (t.scarves as Record<string, string>).categorySpecialEditionsCta || (isEn ? "Browse Special Editions" : "Blader door Speciale Edities"),
+      icon: <SpecialEditionScarfIcon className="w-8 h-8 text-text transition-transform duration-300 group-hover:scale-110" />,
+      watermark: <SpecialEditionScarfIcon className="w-44 h-44 text-text/[0.03] group-hover:text-text/[0.06] transition-all duration-500 group-hover:scale-110" />,
+      accentBorder: "hover:border-text-muted/40",
+      accentGlow: "from-surface-2/40 via-surface to-surface",
+      iconBg: "bg-surface-2 border-border text-text shadow-sm group-hover:border-text-muted/40",
+      badgeBg: "bg-surface-2 text-text border-border font-medium",
+      pills: isEn
+        ? ["Limited Releases", "Club Anniversaries", "Collector Grade"]
+        : ["Gelimiteerde Oplages", "Jubileum Uitgaven", "Verzamelaarsstatus"],
+    },
+    {
+      id: "matchdays",
+      title: resolvedMatchdaysTitle,
+      description: resolvedMatchdaysDesc,
+      href: "/scarves/matchdays",
+      count: matchdaysCount,
+      eyebrow: (t.scarves as Record<string, string>).categoryMatchdaysTag || "EUROPEAN CLASHES • FINALS",
+      ctaText: (t.scarves as Record<string, string>).categoryMatchdaysCta || (isEn ? "Browse Matchday Scarves" : "Blader door Wedstrijddagen"),
+      icon: <MatchdayScarfIcon className="w-8 h-8 text-text transition-transform duration-300 group-hover:scale-110" />,
+      watermark: <MatchdayScarfIcon className="w-44 h-44 text-text/[0.03] group-hover:text-text/[0.06] transition-all duration-500 group-hover:scale-110" />,
+      accentBorder: "hover:border-text-muted/40",
+      accentGlow: "from-surface-2/40 via-surface to-surface",
+      iconBg: "bg-surface-2 border-border text-text shadow-sm group-hover:border-text-muted/40",
+      badgeBg: "bg-surface-2 text-text border-border font-medium",
+      pills: isEn
+        ? ["Dual Match Scarves", "European Nights", "Cup Finals"]
+        : ["Dubbele Wedstrijdsjaals", "Europese Avonden", "Bekerfinales"],
     },
   ];
 

@@ -3,7 +3,7 @@ import { getPayload } from "payload";
 import config from "@payload-config";
 
 export interface ScarfFilterParams {
-  category?: "new" | "secondhand" | string;
+  category?: ScarfCategory | string;
   country?: string;
   club?: string;
   search?: string;
@@ -141,6 +141,74 @@ export const DEFAULT_SCARVES: Scarf[] = [
     photo: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=800&q=80",
     dateAdded: "2024-02-20",
   },
+  {
+    id: "s7",
+    category: "special-editions",
+    club: "Real Madrid CF",
+    country: "Spanje",
+    type: "120 Aniversario Jubileumsjaal",
+    description: "Gelimiteerde herdenkingssjaal ter gelegenheid van het 120-jarig clubjubileum met gouden details en het Koninklijke embleem.",
+    descriptionEn: "Limited commemorative scarf celebrating the club's 120th anniversary featuring gold thread accents and the Royal crest.",
+    stadium: "Santiago Bernabéu",
+    founded: "1902",
+    trophies: "15x Champions League, 36x Spaans landskampioen",
+    trophiesEn: "15x Champions League, 36x La Liga Champions",
+    funFact: "Het Bernabéu museum herbergt de grootste collectie Europese bekers ter wereld.",
+    funFactEn: "The Bernabéu museum holds the most extensive collection of European Cups in world football.",
+    photo: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=80",
+    dateAdded: "2024-06-01",
+  },
+  {
+    id: "s8",
+    category: "special-editions",
+    club: "Feyenoord",
+    country: "Nederland",
+    type: "Europa Cup I 1970 Herdenkingssjaal",
+    description: "Speciale editie ter ere van de historische Europa Cup I winst in Milaan, met geborduurd San Siro motief.",
+    descriptionEn: "Special edition celebrating the historic 1970 European Cup triumph in Milan, with embroidered San Siro motifs.",
+    stadium: "Stadion Feijenoord (De Kuip)",
+    founded: "1908",
+    trophies: "1x Europa Cup I, 2x UEFA Cup, 16x Eredivisie",
+    trophiesEn: "1x European Cup, 2x UEFA Cup, 16x Eredivisie Champions",
+    funFact: "Feyenoord was in 1970 de allereerste Nederlandse club die de Europa Cup I won.",
+    funFactEn: "In 1970 Feyenoord became the very first Dutch club to lift the European Cup.",
+    photo: "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?auto=format&fit=crop&w=800&q=80",
+    dateAdded: "2024-05-06",
+  },
+  {
+    id: "s9",
+    category: "matchdays",
+    club: "Bayern München",
+    country: "Duitsland",
+    type: "UEFA Champions League Halve Finale Matchdaysjaal",
+    description: "Officiële dubbele wedstrijdsjaal van FC Bayern München tegen Real Madrid in de Allianz Arena, 2024.",
+    descriptionEn: "Official dual matchday scarf for FC Bayern München vs Real Madrid at the Allianz Arena, 2024 semi-final.",
+    stadium: "Allianz Arena",
+    founded: "1900",
+    trophies: "6x Champions League, 33x Duits landskampioen",
+    trophiesEn: "6x Champions League, 33x Bundesliga Champions",
+    funFact: "De gevel van de Allianz Arena kan in 16 miljoen verschillende kleuren oplichten.",
+    funFactEn: "The outer shell of the Allianz Arena can illuminate in over 16 million colors.",
+    photo: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80",
+    dateAdded: "2024-04-30",
+  },
+  {
+    id: "s10",
+    category: "matchdays",
+    club: "Arsenal FC",
+    country: "Engeland",
+    type: "North London Derby Matchdaysjaal",
+    description: "Officiële matchdaysjaal Arsenal vs Tottenham Hotspur in het Emirates Stadium, editie Premier League.",
+    descriptionEn: "Official matchday scarf for the North London Derby Arsenal vs Tottenham Hotspur at the Emirates Stadium.",
+    stadium: "Emirates Stadium",
+    founded: "1886",
+    trophies: "13x Engels landskampioen, 14x FA Cup",
+    trophiesEn: "13x Premier League Champions, 14x FA Cup Winners",
+    funFact: "De traditie van de North London Derby dateert al uit 1913 toen Arsenal naar Highbury verhuisde.",
+    funFactEn: "The fierce North London Derby rivalry began in 1913 when Arsenal relocated to Highbury.",
+    photo: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=800&q=80",
+    dateAdded: "2024-09-15",
+  },
 ];
 
 function filterScarvesList(list: Scarf[], filter?: ScarfFilterParams): Scarf[] {
@@ -233,42 +301,72 @@ export async function getScarfById(id: string): Promise<Scarf | undefined> {
 export async function getScarfCountsByCategory(): Promise<{
   new: number;
   secondhand: number;
+  specialEditions: number;
+  matchdays: number;
 }> {
   try {
     const payload = await getPayload({ config });
-    const newCount = await payload.count({
-      collection: "scarves",
-      where: {
-        category: {
-          equals: "new",
+    const [newCount, secondhandCount, specialEditionsCount, matchdaysCount] = await Promise.all([
+      payload.count({
+        collection: "scarves",
+        where: {
+          category: {
+            equals: "new",
+          },
         },
-      },
-    });
-    const secondhandCount = await payload.count({
-      collection: "scarves",
-      where: {
-        category: {
-          equals: "secondhand",
+      }),
+      payload.count({
+        collection: "scarves",
+        where: {
+          category: {
+            equals: "secondhand",
+          },
         },
-      },
-    });
+      }),
+      payload.count({
+        collection: "scarves",
+        where: {
+          category: {
+            equals: "special-editions",
+          },
+        },
+      }),
+      payload.count({
+        collection: "scarves",
+        where: {
+          category: {
+            equals: "matchdays",
+          },
+        },
+      }),
+    ]);
+
     const n = newCount.totalDocs;
     const s = secondhandCount.totalDocs;
-    if (n === 0 && s === 0) {
+    const se = specialEditionsCount.totalDocs;
+    const m = matchdaysCount.totalDocs;
+
+    if (n === 0 && s === 0 && se === 0 && m === 0) {
       return {
         new: DEFAULT_SCARVES.filter((item) => item.category === "new").length,
         secondhand: DEFAULT_SCARVES.filter((item) => item.category === "secondhand").length,
+        specialEditions: DEFAULT_SCARVES.filter((item) => item.category === "special-editions").length,
+        matchdays: DEFAULT_SCARVES.filter((item) => item.category === "matchdays").length,
       };
     }
     return {
       new: n,
       secondhand: s,
+      specialEditions: se,
+      matchdays: m,
     };
   } catch (error) {
     console.error("Error fetching scarf counts from Payload:", error);
     return {
       new: DEFAULT_SCARVES.filter((item) => item.category === "new").length,
       secondhand: DEFAULT_SCARVES.filter((item) => item.category === "secondhand").length,
+      specialEditions: DEFAULT_SCARVES.filter((item) => item.category === "special-editions").length,
+      matchdays: DEFAULT_SCARVES.filter((item) => item.category === "matchdays").length,
     };
   }
 }

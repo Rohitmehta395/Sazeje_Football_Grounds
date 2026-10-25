@@ -1,4 +1,4 @@
-export type ScarfCategory = "new" | "secondhand";
+export type ScarfCategory = "new" | "secondhand" | "special-editions" | "matchdays";
 
 export interface Scarf {
   id: string;

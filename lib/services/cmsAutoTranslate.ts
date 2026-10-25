@@ -284,6 +284,10 @@ export async function autoTranslateScarvesPageHook({
       { source: "newDesc", target: "newDescEn" },
       { source: "secondhandTitle", target: "secondhandTitleEn" },
       { source: "secondhandDesc", target: "secondhandDescEn" },
+      { source: "specialEditionsTitle", target: "specialEditionsTitleEn" },
+      { source: "specialEditionsDesc", target: "specialEditionsDescEn" },
+      { source: "matchdaysTitle", target: "matchdaysTitleEn" },
+      { source: "matchdaysDesc", target: "matchdaysDescEn" },
     ]);
   }
 

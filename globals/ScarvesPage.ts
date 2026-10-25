@@ -262,6 +262,90 @@ export const ScarvesPage: GlobalConfig = {
             },
           ],
         },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'specialEditionsTitle',
+              type: 'text',
+              admin: {
+                width: '50%',
+                description: 'Special editions title in Dutch (e.g. Speciale Edities)',
+              },
+            },
+            {
+              name: 'specialEditionsTitleEn',
+              type: 'text',
+              admin: {
+                width: '50%',
+                description: 'Special editions title in English (e.g. Special Editions)',
+              },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'specialEditionsDesc',
+              type: 'textarea',
+              admin: {
+                width: '50%',
+                description: 'Special editions description in Dutch',
+              },
+            },
+            {
+              name: 'specialEditionsDescEn',
+              type: 'textarea',
+              admin: {
+                width: '50%',
+                description: 'Special editions description in English',
+              },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'matchdaysTitle',
+              type: 'text',
+              admin: {
+                width: '50%',
+                description: 'Matchdays title in Dutch (e.g. Wedstrijddagen)',
+              },
+            },
+            {
+              name: 'matchdaysTitleEn',
+              type: 'text',
+              admin: {
+                width: '50%',
+                description: 'Matchdays title in English (e.g. Matchdays)',
+              },
+            },
+          ],
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'matchdaysDesc',
+              type: 'textarea',
+              admin: {
+                width: '50%',
+                description: 'Matchdays description in Dutch',
+              },
+            },
+            {
+              name: 'matchdaysDescEn',
+              type: 'textarea',
+              admin: {
+                width: '50%',
+                description: 'Matchdays description in English',
+              },
+            },
+          ],
+        },
       ],
     },
     {
@@ -338,6 +422,8 @@ export const ScarvesPage: GlobalConfig = {
           revalidatePath('/scarves')
           revalidatePath('/scarves/new')
           revalidatePath('/scarves/secondhand')
+          revalidatePath('/scarves/special-editions')
+          revalidatePath('/scarves/matchdays')
           revalidatePath('/')
         } catch {
           // Safe catch during static builds/scripts

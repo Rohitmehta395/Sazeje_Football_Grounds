@@ -1,4 +1,4 @@
-import { Country, Scarf } from "@/types";
+import { Country, Scarf, ScarfCategory } from "@/types";
 
 export const UEFA_COUNTRIES: Country[] = [
   { name: "Albanië", nameEn: "Albania", flag: "🇦🇱" },
@@ -78,7 +78,7 @@ export function getCountryDisplayName(nameNL: string, lang: "nl" | "en" = "nl"):
 }
 
 export function getCountriesWithScarfCounts(
-  category: "new" | "secondhand" | string,
+  category: ScarfCategory | string,
   scarves: Scarf[] = []
 ): Country[] {
   return UEFA_COUNTRIES.map((c) => {

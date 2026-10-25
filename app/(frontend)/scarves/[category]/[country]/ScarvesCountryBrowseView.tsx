@@ -27,10 +27,20 @@ export function ScarvesCountryBrowseView({
   const isEn = lang === "en";
 
   const countryDisplayName = getCountryDisplayName(decodedCountryName, lang);
-  const categoryLabel =
-    category === "new"
-      ? t.scarves.categoryNewTitle
-      : t.scarves.categorySecondhandTitle;
+  const categoryLabel = React.useMemo(() => {
+    switch (category) {
+      case "new":
+        return t.scarves.categoryNewTitle;
+      case "secondhand":
+        return t.scarves.categorySecondhandTitle;
+      case "special-editions":
+        return t.scarves.categorySpecialEditionsTitle;
+      case "matchdays":
+        return t.scarves.categoryMatchdaysTitle;
+      default:
+        return category;
+    }
+  }, [category, t.scarves]);
 
   return (
     <div className="space-y-8 pb-20">

@@ -14,6 +14,8 @@ import { CountryLink } from "@/components/scarves/CountryLink";
 import {
   OfficialScarfIcon,
   SwapScarvesIcon,
+  SpecialEditionScarfIcon,
+  MatchdayScarfIcon,
   StadiumIcon,
   ClubBadgeIcon,
 } from "@/components/ui/Icons";
@@ -50,12 +52,6 @@ export function ScarfCategoryDirectoryView({
   const isEn = lang === "en";
   const searchParams = useSearchParams();
 
-  const isNew = category === "new";
-  const otherCategory = isNew ? "secondhand" : "new";
-  const otherCategoryLabel = isNew
-    ? t.scarves.categorySecondhandTitle
-    : t.scarves.categoryNewTitle;
-
   // Active view mode: 'showcase' (grid of scarves) or 'directory' (country list)
   const [viewMode, setViewMode] = React.useState<"showcase" | "directory">("showcase");
 
@@ -90,17 +86,61 @@ export function ScarfCategoryDirectoryView({
   // Lightbox state
   const [activeLightboxScarf, setActiveLightboxScarf] = React.useState<Scarf | null>(null);
 
-  // Resolved titles from CMS
+  // Resolved titles & metadata from CMS
   const categoriesDoc = scarvesPageContent?.categories;
-  const categoryTitle = isNew
-    ? (isEn ? categoriesDoc?.newTitleEn : categoriesDoc?.newTitle) || t.scarves.categoryNewTitle
-    : (isEn ? categoriesDoc?.secondhandTitleEn : categoriesDoc?.secondhandTitle) ||
-      t.scarves.categorySecondhandTitle;
 
-  const categoryDesc = isNew
-    ? (isEn ? categoriesDoc?.newDescEn : categoriesDoc?.newDesc) || t.scarves.categoryNewDesc
-    : (isEn ? categoriesDoc?.secondhandDescEn : categoriesDoc?.secondhandDesc) ||
-      t.scarves.categorySecondhandDesc;
+  const categoryMeta = React.useMemo(() => {
+    switch (category) {
+      case "new":
+        return {
+          title: (isEn ? categoriesDoc?.newTitleEn : categoriesDoc?.newTitle) || t.scarves.categoryNewTitle,
+          description: (isEn ? categoriesDoc?.newDescEn : categoriesDoc?.newDesc) || t.scarves.categoryNewDesc,
+          tag: (t.scarves as Record<string, string>).categoryNewTag || (isEn ? "MATCHDAY EDITIONS • OFFICIAL" : "MATCHDAY EDITIES • OFFICIEEL"),
+          icon: <OfficialScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
+        };
+      case "secondhand":
+        return {
+          title: (isEn ? categoriesDoc?.secondhandTitleEn : categoriesDoc?.secondhandTitle) || t.scarves.categorySecondhandTitle,
+          description: (isEn ? categoriesDoc?.secondhandDescEn : categoriesDoc?.secondhandDesc) || t.scarves.categorySecondhandDesc,
+          tag: (t.scarves as Record<string, string>).categorySecondhandTag || (isEn ? "TERRACE SWAPS & TRADES" : "TERRACE RUIL & VINTAGE"),
+          icon: <SwapScarvesIcon className="w-3.5 h-3.5 text-text-muted" />,
+        };
+      case "special-editions":
+        return {
+          title: (isEn ? categoriesDoc?.specialEditionsTitleEn : categoriesDoc?.specialEditionsTitle) || t.scarves.categorySpecialEditionsTitle,
+          description: (isEn ? categoriesDoc?.specialEditionsDescEn : categoriesDoc?.specialEditionsDesc) || t.scarves.categorySpecialEditionsDesc,
+          tag: (t.scarves as Record<string, string>).categorySpecialEditionsTag || (isEn ? "LIMITED EDITIONS • ANNIVERSARY" : "GELIMITEERDE OPLAGES • JUBILEUM"),
+          icon: <SpecialEditionScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
+        };
+      case "matchdays":
+        return {
+          title: (isEn ? categoriesDoc?.matchdaysTitleEn : categoriesDoc?.matchdaysTitle) || t.scarves.categoryMatchdaysTitle,
+          description: (isEn ? categoriesDoc?.matchdaysDescEn : categoriesDoc?.matchdaysDesc) || t.scarves.categoryMatchdaysDesc,
+          tag: (t.scarves as Record<string, string>).categoryMatchdaysTag || (isEn ? "EUROPEAN CLASHES • FINALS" : "EUROPESE DUELS • FINALES"),
+          icon: <MatchdayScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
+        };
+      default:
+        return {
+          title: category,
+          description: "",
+          tag: "SCARVES",
+          icon: <OfficialScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
+        };
+    }
+  }, [category, isEn, categoriesDoc, t.scarves]);
+
+  const categoryTitle = categoryMeta.title;
+  const categoryDesc = categoryMeta.description;
+
+  const allCategories = React.useMemo(
+    () => [
+      { id: "new", label: t.scarves.categoryNewTitle },
+      { id: "secondhand", label: t.scarves.categorySecondhandTitle },
+      { id: "special-editions", label: t.scarves.categorySpecialEditionsTitle },
+      { id: "matchdays", label: t.scarves.categoryMatchdaysTitle },
+    ],
+    [t.scarves]
+  );
 
   const heroImage = scarvesPageContent?.hero?.heroImage || "/Hero_Image.jpg";
 
@@ -204,13 +244,24 @@ export function ScarfCategoryDirectoryView({
             <span className="text-text font-semibold">{categoryTitle}</span>
           </nav>
 
-          <Link
-            href={`/scarves/${otherCategory}`}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-border text-text-muted hover:text-text hover:border-accent transition-colors font-mono text-xs"
-          >
-            <span>{isEn ? `Switch to ${otherCategoryLabel}` : `Wissel naar ${otherCategoryLabel}`}</span>
-            <ArrowRight className="w-3.5 h-3.5 text-accent" />
-          </Link>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            {allCategories.map((cat) => {
+              const isActive = cat.id === category;
+              return (
+                <Link
+                  key={cat.id}
+                  href={`/scarves/${cat.id}`}
+                  className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border font-mono text-xs transition-all ${
+                    isActive
+                      ? "bg-text text-bg border-text font-semibold shadow-xs"
+                      : "bg-surface border-border text-text-muted hover:text-text hover:border-text-muted/50"
+                  }`}
+                >
+                  <span>{cat.label}</span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
 
         {/* 3. Category Feature Banner Card */}
@@ -223,17 +274,8 @@ export function ScarfCategoryDirectoryView({
                 <span
                   className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px] uppercase tracking-wider font-semibold border border-border bg-surface-2 text-text shadow-xs"
                 >
-                  {isNew ? (
-                    <>
-                      <OfficialScarfIcon className="w-3.5 h-3.5 text-text-muted" />
-                      <span>{isEn ? "MATCHDAY EDITIONS • OFFICIAL" : "MATCHDAY EDITIES • OFFICIEEL"}</span>
-                    </>
-                  ) : (
-                    <>
-                      <SwapScarvesIcon className="w-3.5 h-3.5 text-text-muted" />
-                      <span>{isEn ? "TERRACE SWAPS & TRADES" : "TERRACE RUIL & VINTAGE"}</span>
-                    </>
-                  )}
+                  {categoryMeta.icon}
+                  <span>{categoryMeta.tag}</span>
                 </span>
 
                 <span className="font-mono text-xs text-text-muted">
@@ -275,7 +317,7 @@ export function ScarfCategoryDirectoryView({
                 </div>
               </div>
 
-              {!isNew && (
+              {category === "secondhand" && (
                 <Link
                   href="/contact?subject=Scarf%20Swap"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-2 hover:bg-surface border border-border text-text font-mono text-xs font-semibold transition-all shadow-sm hover:border-text-muted/50"

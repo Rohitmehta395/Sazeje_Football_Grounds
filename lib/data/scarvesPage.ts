@@ -45,6 +45,14 @@ export const DEFAULT_SCARVES_PAGE_CONTENT: ScarvesPageContent = {
     secondhandTitleEn: "Secondhand / Swaps",
     secondhandDesc: "Vintage vondsten, supporterssjaals en unieke exemplaren geruild met verzamelaars.",
     secondhandDescEn: "Vintage finds, collector scarves, and unique pieces acquired through trades.",
+    specialEditionsTitle: "Speciale Edities",
+    specialEditionsTitleEn: "Special Editions",
+    specialEditionsDesc: "Zeldzame verzamelaarsedities, jubileum- en herdenkingssjaals ter ere van historische clubmijlpalen.",
+    specialEditionsDescEn: "Rare collector editions, anniversary releases, and commemorative scarves marking historic club milestones.",
+    matchdaysTitle: "Wedstrijddagen",
+    matchdaysTitleEn: "Matchdays",
+    matchdaysDesc: "Officiële wedstrijdsjaals van Europese topaffiches, bekerfinales en memorabele derby's.",
+    matchdaysDescEn: "Official matchday scarves from European clashes, cup finals, and legendary derby fixtures.",
   },
   stats: {
     showStats: true,
@@ -115,6 +123,22 @@ export async function getScarvesPageContent(): Promise<ScarvesPageContent> {
         (catDoc.secondhandDesc as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.secondhandDesc,
       secondhandDescEn:
         (catDoc.secondhandDescEn as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.secondhandDescEn,
+      specialEditionsTitle:
+        (catDoc.specialEditionsTitle as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.specialEditionsTitle,
+      specialEditionsTitleEn:
+        (catDoc.specialEditionsTitleEn as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.specialEditionsTitleEn,
+      specialEditionsDesc:
+        (catDoc.specialEditionsDesc as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.specialEditionsDesc,
+      specialEditionsDescEn:
+        (catDoc.specialEditionsDescEn as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.specialEditionsDescEn,
+      matchdaysTitle:
+        (catDoc.matchdaysTitle as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.matchdaysTitle,
+      matchdaysTitleEn:
+        (catDoc.matchdaysTitleEn as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.matchdaysTitleEn,
+      matchdaysDesc:
+        (catDoc.matchdaysDesc as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.matchdaysDesc,
+      matchdaysDescEn:
+        (catDoc.matchdaysDescEn as string) || DEFAULT_SCARVES_PAGE_CONTENT.categories?.matchdaysDescEn,
     };
 
     const stats = {

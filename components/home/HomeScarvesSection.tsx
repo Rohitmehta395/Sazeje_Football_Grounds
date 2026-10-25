@@ -14,7 +14,10 @@ export interface HomeScarvesSectionProps {
 
 export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
   const { t, lang } = useTranslation();
-  const [activeCategory, setActiveCategory] = React.useState<"all" | "new" | "secondhand">("all");
+  const isEn = lang === "en";
+  const [activeCategory, setActiveCategory] = React.useState<
+    "all" | "new" | "secondhand" | "special-editions" | "matchdays"
+  >("all");
 
   const filteredScarves = React.useMemo(() => {
     if (activeCategory === "all") return scarves.slice(0, 3);
@@ -85,18 +88,58 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
           {t.home.scarvesTabSecondhand} (
           {scarves.filter((s) => s.category === "secondhand").length})
         </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveCategory("special-editions")}
+          className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wider uppercase transition-all duration-200 shrink-0 border ${
+            activeCategory === "special-editions"
+              ? "bg-text text-bg border-text shadow-sm"
+              : "bg-surface text-text-muted hover:text-text border-border"
+          }`}
+        >
+          {t.home.scarvesTabSpecialEditions} (
+          {scarves.filter((s) => s.category === "special-editions").length})
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveCategory("matchdays")}
+          className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wider uppercase transition-all duration-200 shrink-0 border ${
+            activeCategory === "matchdays"
+              ? "bg-text text-bg border-text shadow-sm"
+              : "bg-surface text-text-muted hover:text-text border-border"
+          }`}
+        >
+          {t.home.scarvesTabMatchdays} (
+          {scarves.filter((s) => s.category === "matchdays").length})
+        </button>
       </div>
 
       {/* Scarves Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredScarves.map((scarf) => {
           const countryDisplay = getCountryDisplayName(scarf.country, lang);
-          const isNew = scarf.category === "new";
           const displayType = lang === "en" && scarf.typeEn ? scarf.typeEn : scarf.type;
           const displayDescription =
             lang === "en" && scarf.descriptionEn ? scarf.descriptionEn : scarf.description;
           const displayTrophies =
             lang === "en" && scarf.trophiesEn ? scarf.trophiesEn : scarf.trophies;
+
+          const categoryBadge =
+            scarf.category === "new"
+              ? isEn
+                ? "New"
+                : "Nieuw"
+              : scarf.category === "special-editions"
+              ? isEn
+                ? "Special"
+                : "Speciaal"
+              : scarf.category === "matchdays"
+              ? isEn
+                ? "Matchday"
+                : "Wedstrijd"
+              : "Vintage";
 
           return (
             <article
@@ -121,7 +164,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                   <span
                     className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold shadow-sm backdrop-blur-md bg-black/60 text-white/90 border border-white/20"
                   >
-                    {isNew ? (lang === "en" ? "New" : "Nieuw") : "Vintage"}
+                    {categoryBadge}
                   </span>
                 </div>
 
@@ -178,7 +221,7 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
 
                 <div className="mt-5 pt-3 border-t border-border/60 flex items-center justify-end text-xs">
                   <Link
-                    href={`/scarves?country=${encodeURIComponent(scarf.country)}`}
+                    href={`/scarves/${scarf.category}/${encodeURIComponent(scarf.country)}`}
                     className="inline-flex items-center gap-1 font-semibold text-accent hover:underline group-hover:translate-x-0.5 transition-transform"
                   >
                     <span>{t.home.viewInCollection}</span>

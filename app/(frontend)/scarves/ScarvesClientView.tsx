@@ -60,6 +60,18 @@ export function ScarvesClientView({
   const secondhandDesc = isEn
     ? categories?.secondhandDescEn
     : categories?.secondhandDesc;
+  const specialEditionsTitle = isEn
+    ? categories?.specialEditionsTitleEn
+    : categories?.specialEditionsTitle;
+  const specialEditionsDesc = isEn
+    ? categories?.specialEditionsDescEn
+    : categories?.specialEditionsDesc;
+  const matchdaysTitle = isEn
+    ? categories?.matchdaysTitleEn
+    : categories?.matchdaysTitle;
+  const matchdaysDesc = isEn
+    ? categories?.matchdaysDescEn
+    : categories?.matchdaysDesc;
 
   // Dynamic Live Stats
   const showStats = scarvesPageContent.stats?.showStats ?? true;
@@ -67,6 +79,12 @@ export function ScarvesClientView({
     const newCount = scarves.filter((s) => s.category === "new").length;
     const secondhandCount = scarves.filter(
       (s) => s.category === "secondhand"
+    ).length;
+    const specialEditionsCount = scarves.filter(
+      (s) => s.category === "special-editions"
+    ).length;
+    const matchdaysCount = scarves.filter(
+      (s) => s.category === "matchdays"
     ).length;
     const clubsCount = new Set(scarves.map((s) => s.club).filter(Boolean)).size;
     const countriesCount = new Set(
@@ -77,6 +95,8 @@ export function ScarvesClientView({
       totalCount: scarves.length,
       newCount,
       secondhandCount,
+      specialEditionsCount,
+      matchdaysCount,
       clubsCount,
       countriesCount,
     };
@@ -169,8 +189,14 @@ export function ScarvesClientView({
           newDesc={newDesc}
           secondhandTitle={secondhandTitle}
           secondhandDesc={secondhandDesc}
+          specialEditionsTitle={specialEditionsTitle}
+          specialEditionsDesc={specialEditionsDesc}
+          matchdaysTitle={matchdaysTitle}
+          matchdaysDesc={matchdaysDesc}
           newCount={stats.newCount}
           secondhandCount={stats.secondhandCount}
+          specialEditionsCount={stats.specialEditionsCount}
+          matchdaysCount={stats.matchdaysCount}
         />
       </div>
     </div>

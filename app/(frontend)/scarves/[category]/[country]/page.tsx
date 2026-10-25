@@ -13,8 +13,15 @@ export interface ScarfCountryBrowsePageProps {
   }>;
 }
 
+const VALID_CATEGORIES = [
+  "new",
+  "secondhand",
+  "special-editions",
+  "matchdays",
+] as const;
+
 export async function generateStaticParams() {
-  const categories = ["new", "secondhand"];
+  const categories = VALID_CATEGORIES;
   const countries = getCountries();
 
   const paramsList: { category: string; country: string }[] = [];
@@ -35,7 +42,7 @@ export default async function ScarfCountryBrowsePage({
   const { category, country } = await params;
   const decodedCountryName = decodeURIComponent(country);
 
-  if (category !== "new" && category !== "secondhand") {
+  if (!VALID_CATEGORIES.includes(category as (typeof VALID_CATEGORIES)[number])) {
     notFound();
   }
 

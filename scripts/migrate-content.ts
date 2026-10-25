@@ -477,7 +477,7 @@ async function migrateContent() {
     const createdScarf = await payload.create({
       collection: "scarves",
       data: {
-        category: s.category as "new" | "secondhand",
+        category: s.category as "new" | "secondhand" | "special-editions" | "matchdays",
         club: s.club,
         country: s.country,
         type: s.type,

@@ -26,6 +26,14 @@ export interface ScarvesPageContent {
     secondhandTitleEn?: string;
     secondhandDesc?: string;
     secondhandDescEn?: string;
+    specialEditionsTitle?: string;
+    specialEditionsTitleEn?: string;
+    specialEditionsDesc?: string;
+    specialEditionsDescEn?: string;
+    matchdaysTitle?: string;
+    matchdaysTitleEn?: string;
+    matchdaysDesc?: string;
+    matchdaysDescEn?: string;
   };
   stats?: {
     showStats?: boolean;

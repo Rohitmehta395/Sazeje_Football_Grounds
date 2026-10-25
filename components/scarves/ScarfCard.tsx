@@ -16,7 +16,6 @@ export interface ScarfCardProps {
 export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
   const { t, lang } = useTranslation();
   const isEn = lang === "en";
-  const isNew = scarf.category === "new";
 
   const countryDisplayName = getCountryDisplayName(scarf.country, lang);
   const displayDescription =
@@ -138,7 +137,60 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
       {/* 3. Card Footer Action Bar */}
       <div className="px-4 sm:px-5 py-3 border-t border-border/60 bg-surface-2/30 flex items-center justify-between gap-3">
-        {isNew ? (
+        {scarf.category === "secondhand" ? (
+          <>
+            <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-text font-semibold">
+              <span className="w-2 h-2 rounded-full bg-text/60 animate-pulse" />
+              <span>{isEn ? "Open for Swap" : "Beschikbaar voor Ruil"}</span>
+            </div>
+
+            <Link
+              href={`/contact?swap=${encodeURIComponent(scarf.club)}`}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-2 hover:bg-surface text-text hover:border-text-muted/50 border border-border text-xs font-mono font-semibold transition-all cursor-pointer shadow-xs"
+            >
+              <ArrowRightLeft className="w-3.5 h-3.5" />
+              <span>{isEn ? "Propose Swap" : "Ruilvoorstel"}</span>
+            </Link>
+          </>
+        ) : scarf.category === "special-editions" ? (
+          <>
+            <div className="font-mono text-[11px] text-text-muted">
+              <span className="text-text font-semibold">
+                {isEn ? "Special Collector Edition" : "Speciale Verzamelaarseditie"}
+              </span>
+            </div>
+
+            {scarf.photo && (
+              <button
+                type="button"
+                onClick={() => onOpenLightbox?.(scarf)}
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text transition-colors cursor-pointer"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span>{isEn ? "View Photo" : "Vergroot"}</span>
+              </button>
+            )}
+          </>
+        ) : scarf.category === "matchdays" ? (
+          <>
+            <div className="font-mono text-[11px] text-text-muted">
+              <span className="text-text font-semibold">
+                {isEn ? "Official Matchday Edition" : "Officiële Wedstrijdeditie"}
+              </span>
+            </div>
+
+            {scarf.photo && (
+              <button
+                type="button"
+                onClick={() => onOpenLightbox?.(scarf)}
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text transition-colors cursor-pointer"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span>{isEn ? "View Photo" : "Vergroot"}</span>
+              </button>
+            )}
+          </>
+        ) : (
           <>
             <div className="font-mono text-[11px] text-text-muted">
               <span className="text-text font-semibold">
@@ -156,21 +208,6 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
                 <span>{isEn ? "View Photo" : "Vergroot"}</span>
               </button>
             )}
-          </>
-        ) : (
-          <>
-            <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-text font-semibold">
-              <span className="w-2 h-2 rounded-full bg-text/60 animate-pulse" />
-              <span>{isEn ? "Open for Swap" : "Beschikbaar voor Ruil"}</span>
-            </div>
-
-            <Link
-              href={`/contact?swap=${encodeURIComponent(scarf.club)}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-2 hover:bg-surface text-text hover:border-text-muted/50 border border-border text-xs font-mono font-semibold transition-all cursor-pointer shadow-xs"
-            >
-              <ArrowRightLeft className="w-3.5 h-3.5" />
-              <span>{isEn ? "Propose Swap" : "Ruilvoorstel"}</span>
-            </Link>
           </>
         )}
       </div>

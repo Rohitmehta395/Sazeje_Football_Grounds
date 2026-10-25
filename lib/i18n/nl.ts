@@ -81,6 +81,8 @@ export const nl = {
     scarvesTabAll: "Alle Categorieën",
     scarvesTabNew: "Nieuw / Matchday",
     scarvesTabSecondhand: "Tweedehands / Vintage",
+    scarvesTabSpecialEditions: "Speciale Edities",
+    scarvesTabMatchdays: "Wedstrijddagen",
     viewAllScarves: "Bekijk Volledige Collectie",
     goalsSectionEyebrow: "ROADMAP & MIJLPALEN",
     goalsSectionTitle: "Actieve Groundhopping Doelen",
@@ -201,6 +203,16 @@ export const nl = {
     categorySecondhandDesc:
       "Bijzondere vondsten, ruilsjaals en vintage ontdekkingen verkregen via supporters en verzamelaars.",
     categorySecondhandCta: "Blader door Ruilsjaals",
+    categorySpecialEditionsTitle: "Speciale Edities",
+    categorySpecialEditionsTag: "GELIMITEERDE OPLAGES • JUBILEUM",
+    categorySpecialEditionsDesc:
+      "Zeldzame verzamelaarsedities, jubileum- en herdenkingssjaals uitgebracht voor bijzondere clubmomenten.",
+    categorySpecialEditionsCta: "Blader door Speciale Edities",
+    categoryMatchdaysTitle: "Wedstrijddagen",
+    categoryMatchdaysTag: "EUROPESE DUELS • FINALES",
+    categoryMatchdaysDesc:
+      "Officiële wedstrijdsjaals van specifieke Europese topaffiches, bekerfinales en legendarische ontmoetingen.",
+    categoryMatchdaysCta: "Blader door Wedstrijddagen",
     selectCountryTitle: "Selecteer een Land",
     selectCountrySubtitle:
       "Kies een land om de sjaals per competitie en club te bekijken",

@@ -17,25 +17,52 @@ export interface ScarfCategoryPageProps {
   }>;
 }
 
+const VALID_CATEGORIES = [
+  "new",
+  "secondhand",
+  "special-editions",
+  "matchdays",
+] as const;
+
+type ValidCategory = (typeof VALID_CATEGORIES)[number];
+
 export async function generateStaticParams() {
-  return [{ category: "new" }, { category: "secondhand" }];
+  return [
+    { category: "new" },
+    { category: "secondhand" },
+    { category: "special-editions" },
+    { category: "matchdays" },
+  ];
 }
 
 export async function generateMetadata({
   params,
 }: ScarfCategoryPageProps): Promise<Metadata> {
   const { category } = await params;
-  if (category !== "new" && category !== "secondhand") {
+  if (!VALID_CATEGORIES.includes(category as ValidCategory)) {
     return { title: "Scarf Collection | SaZeJe Groundhopping" };
   }
 
-  const isNew = category === "new";
-  const title = isNew
-    ? "Nieuwe Sjaals & Fanshop Collectie | SaZeJe Groundhopping"
-    : "Tweedehands Sjaals & Ruilcollectie | SaZeJe Groundhopping";
-  const description = isNew
-    ? "Bekijk alle nieuwe voetbalsjaals rechtstreeks gekocht in fanshops tijdens groundhop-reizen door Europa."
-    : "Bekijk alle tweedehands en ruilsjaals van SaZeJe Groundhopping, beschikbaar voor ruil met verzamelaars.";
+  let title = "Sjaalcollectie | SaZeJe Groundhopping";
+  let description = "Bekijk de complete voetbalsjaal collectie van SaZeJe Groundhopping.";
+
+  if (category === "new") {
+    title = "Nieuwe Sjaals & Fanshop Collectie | SaZeJe Groundhopping";
+    description =
+      "Bekijk alle nieuwe voetbalsjaals rechtstreeks gekocht in fanshops tijdens groundhop-reizen door Europa.";
+  } else if (category === "secondhand") {
+    title = "Tweedehands Sjaals & Ruilcollectie | SaZeJe Groundhopping";
+    description =
+      "Bekijk alle tweedehands en ruilsjaals van SaZeJe Groundhopping, beschikbaar voor ruil met verzamelaars.";
+  } else if (category === "special-editions") {
+    title = "Speciale Edities & Jubileumsjaals | SaZeJe Groundhopping";
+    description =
+      "Ontdek zeldzame en gelimiteerde speciale edities, jubileum- en herdenkingssjaals uit heel Europa.";
+  } else if (category === "matchdays") {
+    title = "Wedstrijddagen & Matchday Sjaals | SaZeJe Groundhopping";
+    description =
+      "Bekijk officiële wedstrijddag- en duelsjaals van historische Europese affiches, bekerfinales en derby's.";
+  }
 
   return {
     title,
@@ -46,7 +73,7 @@ export async function generateMetadata({
 export default async function ScarfCategoryPage({ params }: ScarfCategoryPageProps) {
   const { category } = await params;
 
-  if (category !== "new" && category !== "secondhand") {
+  if (!VALID_CATEGORIES.includes(category as ValidCategory)) {
     notFound();
   }
 

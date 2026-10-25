@@ -83,6 +83,8 @@ export const en: Translations = {
     scarvesTabAll: "All Categories",
     scarvesTabNew: "New / Matchday",
     scarvesTabSecondhand: "Secondhand / Vintage",
+    scarvesTabSpecialEditions: "Special Editions",
+    scarvesTabMatchdays: "Matchdays",
     viewAllScarves: "View Full Collection",
     goalsSectionEyebrow: "ROADMAP & MILESTONES",
     goalsSectionTitle: "Active Groundhopping Goals",
@@ -203,6 +205,16 @@ export const en: Translations = {
     categorySecondhandDesc:
       "Special finds, traded scarves, and vintage discoveries obtained from fellow collectors.",
     categorySecondhandCta: "Browse Swap Collection",
+    categorySpecialEditionsTitle: "Special Editions",
+    categorySpecialEditionsTag: "LIMITED EDITIONS • ANNIVERSARY",
+    categorySpecialEditionsDesc:
+      "Rare collector editions, anniversary releases, and commemorative scarves marking historic club milestones.",
+    categorySpecialEditionsCta: "Browse Special Editions",
+    categoryMatchdaysTitle: "Matchdays",
+    categoryMatchdaysTag: "EUROPEAN CLASHES • FINALS",
+    categoryMatchdaysDesc:
+      "Official matchday scarves from European fixtures, cup finals, and legendary derby encounters.",
+    categoryMatchdaysCta: "Browse Matchday Scarves",
     selectCountryTitle: "Select a Country",
     selectCountrySubtitle:
       "Choose a country to browse scarves by league and club",

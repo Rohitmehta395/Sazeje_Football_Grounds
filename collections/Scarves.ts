@@ -66,9 +66,11 @@ export const Scarves: CollectionConfig = {
       options: [
         { label: 'New (Self-Bought at Ground)', value: 'new' },
         { label: 'Secondhand / Gifted', value: 'secondhand' },
+        { label: 'Special Editions (Anniversary / Limited)', value: 'special-editions' },
+        { label: 'Matchdays (Duels & Finals)', value: 'matchdays' },
       ],
       admin: {
-        description: 'Scarf category (New or Secondhand)',
+        description: 'Scarf category (New, Secondhand, Special Editions, or Matchdays)',
       },
     },
     {
