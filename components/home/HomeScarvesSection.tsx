@@ -146,12 +146,9 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
               key={scarf.id}
               className="bg-surface border border-border rounded-2xl overflow-hidden shadow-card flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
             >
-              {/* Photo Banner */}
+              {/* Photo Banner with Ambient Blurred Background */}
               <div
-                className="h-44 bg-cover bg-center relative bg-surface-2 overflow-hidden"
-                style={{
-                  backgroundImage: `url('${scarf.photo || "/placeholder-scarf.jpg"}')`,
-                }}
+                className="h-44 relative bg-surface-2 overflow-hidden border-b border-border/80"
                 role="img"
                 aria-label={
                   lang === "en"
@@ -159,8 +156,31 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                     : `Foto van sjaal ${scarf.club}`
                 }
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-                <div className="absolute top-3 left-3 flex items-center gap-1.5">
+                {/* Ambient blurred backdrop so letterboxing blends seamlessly */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center blur-md opacity-35 scale-110 pointer-events-none"
+                  style={{
+                    backgroundImage: `url('${scarf.photo || "/placeholder-scarf.jpg"}')`,
+                  }}
+                  aria-hidden="true"
+                />
+
+                {/* Crisp foreground scarf image: full width with border-radius */}
+                <div className="relative z-[1] w-full h-full flex items-center justify-center p-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={scarf.photo || "/placeholder-scarf.jpg"}
+                    alt={
+                      lang === "en"
+                        ? `Photo of ${scarf.club} scarf`
+                        : `Foto van sjaal ${scarf.club}`
+                    }
+                    className="max-w-full max-h-full w-auto h-auto object-contain rounded-xl shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+
+                <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+                <div className="absolute top-3 left-3 z-[3] flex items-center gap-1.5">
                   <span
                     className="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider font-semibold shadow-sm backdrop-blur-md bg-black/60 text-white/90 border border-white/20"
                   >
@@ -168,11 +188,11 @@ export function HomeScarvesSection({ scarves }: HomeScarvesSectionProps) {
                   </span>
                 </div>
 
-                <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-mono text-white/90 bg-black/50 backdrop-blur-md border border-white/20">
+                <div className="absolute top-3 right-3 z-[3] px-2.5 py-1 rounded-full text-[11px] font-mono text-white/90 bg-black/50 backdrop-blur-md border border-white/20">
                   {countryDisplay}
                 </div>
 
-                <div className="absolute bottom-2.5 left-3 right-3 text-xs font-mono text-white/90 truncate">
+                <div className="absolute bottom-2.5 left-3 right-3 z-[3] text-xs font-mono text-white/90 truncate">
                   {displayType}
                 </div>
               </div>

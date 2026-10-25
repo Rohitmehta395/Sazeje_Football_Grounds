@@ -19,13 +19,30 @@ export function ScarfEntry({ scarf }: ScarfEntryProps) {
 
   return (
     <article className="mb-[44px] pb-[44px] border-b border-border last:border-b-0 last:mb-0 last:pb-0 max-w-[640px] mx-auto">
-      {/* Scarf Banner Photo */}
-      <div
-        className="w-full aspect-[32/9] bg-cover bg-center rounded-[12px] border border-border shadow-card bg-surface-2"
-        style={{ backgroundImage: `url('${scarf.photo}')` }}
-        role="img"
-        aria-label={lang === "en" ? `Photo of ${scarf.club} scarf` : `Foto van ${scarf.club} sjaal`}
-      />
+      {/* Scarf Banner Photo with Ambient Blurred Background */}
+      <div className="relative w-full aspect-[32/9] rounded-[12px] border border-border shadow-card bg-surface-2 overflow-hidden">
+        {scarf.photo ? (
+          <>
+            <div
+              className="absolute inset-0 bg-cover bg-center blur-md opacity-35 scale-110 pointer-events-none"
+              style={{ backgroundImage: `url('${scarf.photo}')` }}
+              aria-hidden="true"
+            />
+            <div className="relative z-[1] w-full h-full flex items-center justify-center p-2">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={scarf.photo}
+                alt={lang === "en" ? `Photo of ${scarf.club} scarf` : `Foto van ${scarf.club} sjaal`}
+                className="max-w-full max-h-full w-auto h-auto object-contain rounded-xl shadow-md"
+              />
+            </div>
+          </>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center font-mono text-xs text-text-muted">
+            No scarf photo
+          </div>
+        )}
+      </div>
 
       {/* Title & Meta */}
       <h3 className="font-bebas text-[24px] text-text mt-[16px] mb-[4px] text-center">

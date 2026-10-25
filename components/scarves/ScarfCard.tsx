@@ -33,16 +33,28 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
     >
 
       <div>
-        {/* 1. Scarf Photo Banner with Hover Zoom and Click to Expand */}
+        {/* 1. Scarf Photo Banner with Ambient Blurred Background and Click to Expand */}
         <div className="relative w-full aspect-[21/8] bg-surface-2 overflow-hidden border-b border-border/80">
           {scarf.photo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={scarf.photo}
-              alt={`${scarf.club} scarf`}
-              className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105 cursor-pointer"
-              onClick={() => onOpenLightbox?.(scarf)}
-            />
+            <>
+              {/* Ambient blurred backdrop so letterboxing blends seamlessly */}
+              <div
+                className="absolute inset-0 bg-cover bg-center blur-md opacity-35 scale-110 pointer-events-none"
+                style={{ backgroundImage: `url(${scarf.photo})` }}
+                aria-hidden="true"
+              />
+
+              {/* Crisp foreground image: fitted with object-contain to preserve full width, with border radius */}
+              <div className="relative z-[1] w-full h-full flex items-center justify-center p-2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={scarf.photo}
+                  alt={`${scarf.club} scarf`}
+                  className="max-w-full max-h-full w-auto h-auto object-contain rounded-xl shadow-md transition-transform duration-500 ease-out group-hover:scale-[1.03] cursor-pointer"
+                  onClick={() => onOpenLightbox?.(scarf)}
+                />
+              </div>
+            </>
           ) : (
             <div className="w-full h-full flex items-center justify-center font-mono text-xs text-text-muted">
               No scarf photo
