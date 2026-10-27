@@ -249,7 +249,7 @@ export function HomeHero({
           {/* Action CTA & Mobile Location Tag */}
           <div className="flex flex-wrap items-center gap-4">
             <Link
-              href="#grounds-section"
+              href="/grounds"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-btn hover:bg-btn-hover text-white font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-btn/30 hover:shadow-lg hover:-translate-y-0.5"
             >
               <span>{t.home.heroCtaGrounds}</span>
