@@ -83,7 +83,7 @@ export function AboutClientView({
       />
 
       <div className="max-w-[1160px] mx-auto px-4 sm:px-6 space-y-16 pt-8 sm:pt-10">
-        {/* 2. The Groundhopper Story & Full-width Quote */}
+        {/* 2. The Groundhopper Story */}
         <section aria-label="About the Groundhopper" className="space-y-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             {/* Left Column: Visual Showcase Card */}
@@ -147,23 +147,6 @@ export function AboutClientView({
               </div>
             </div>
           </div>
-
-          {/* Full-width Quote Banner */}
-          {aboutContent.story.quote && (
-            <div className="relative bg-surface border border-border rounded-xl px-5 py-3.5 sm:py-4 shadow-sm overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-full blur-xl pointer-events-none" />
-              <div className="relative flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 text-center">
-                <p className="font-inter italic text-xs sm:text-sm text-text leading-relaxed m-0">
-                  &ldquo;{lang === "en" && aboutContent.story.quoteEn ? aboutContent.story.quoteEn : aboutContent.story.quote}&rdquo;
-                </p>
-                {aboutContent.story.quoteAuthor && (
-                  <span className="font-mono text-[11px] text-accent uppercase tracking-wider font-semibold shrink-0">
-                    — {aboutContent.story.quoteAuthor}
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
         </section>
 
         {/* 3. Matchday & Grounds Gallery Section */}
