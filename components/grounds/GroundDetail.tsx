@@ -218,7 +218,7 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-4 py-2 flex-wrap">
+              <div className="flex items-center gap-5 sm:gap-6 py-2 flex-wrap">
                 <div className="flex items-center gap-3">
                   <ClubBadgeIcon className="w-6 h-6 text-accent shrink-0" />
                   <div>
