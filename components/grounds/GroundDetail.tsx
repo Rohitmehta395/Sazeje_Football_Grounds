@@ -23,14 +23,21 @@ import {
   Share2,
   Check,
 } from "lucide-react";
-import { ClubBadgeIcon, StadiumIcon, FootballIcon } from "@/components/ui/Icons";
+import {
+  ClubBadgeIcon,
+  StadiumIcon,
+  FootballIcon,
+} from "@/components/ui/Icons";
 
 export interface GroundDetailProps {
   ground: Ground;
   relatedGrounds?: Ground[];
 }
 
-export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps) {
+export function GroundDetail({
+  ground,
+  relatedGrounds = [],
+}: GroundDetailProps) {
   const { t, lang } = useTranslation();
   const isEn = lang === "en";
 
@@ -43,10 +50,12 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
   const formattedDate = formatDate(ground.visitDate, lang);
 
   // Localized description and narrative copy from CMS
-  const displayDescription = isEn && ground.descriptionEn ? ground.descriptionEn : ground.description;
+  const displayDescription =
+    isEn && ground.descriptionEn ? ground.descriptionEn : ground.description;
   const displayStory = isEn && ground.storyEn ? ground.storyEn : ground.story;
   const displayExtra = isEn && ground.extraEn ? ground.extraEn : ground.extra;
-  const displayMatchInfo = isEn && ground.matchInfoEn ? ground.matchInfoEn : ground.matchInfo;
+  const displayMatchInfo =
+    isEn && ground.matchInfoEn ? ground.matchInfoEn : ground.matchInfo;
 
   // All gallery images
   const allImages = React.useMemo(() => {
@@ -104,15 +113,23 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
     <div className="space-y-8 pb-16">
       {/* 1. Breadcrumbs Bar */}
       <div className="flex items-center justify-between gap-4 flex-wrap text-xs">
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-text-muted font-inter">
-          <Link href="/grounds" className="hover:text-text transition-colors flex items-center gap-1.5 font-medium">
+        <nav
+          aria-label="Breadcrumb"
+          className="flex items-center gap-2 text-text-muted font-inter"
+        >
+          <Link
+            href="/grounds"
+            className="hover:text-text transition-colors flex items-center gap-1.5 font-medium"
+          >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>{t.grounds.backToGrounds}</span>
           </Link>
           <span>/</span>
           <span className="text-text-muted">{countryName}</span>
           <span>/</span>
-          <span className="text-text font-semibold truncate max-w-[200px]">{ground.name}</span>
+          <span className="text-text font-semibold truncate max-w-[200px]">
+            {ground.name}
+          </span>
         </nav>
 
         <button
@@ -123,7 +140,9 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-azg" />
-              <span className="text-azg font-mono">{isEn ? "Link Copied!" : "Gekopieerd!"}</span>
+              <span className="text-azg font-mono">
+                {isEn ? "Link Copied!" : "Gekopieerd!"}
+              </span>
             </>
           ) : (
             <>
@@ -139,7 +158,9 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
         {/* Background photo */}
         <div
           className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
-          style={{ backgroundImage: `url('${ground.photo || "/placeholder-ground.jpg"}')` }}
+          style={{
+            backgroundImage: `url('${ground.photo || "/placeholder-ground.jpg"}')`,
+          }}
           role="img"
           aria-label={ground.name}
         />
@@ -168,7 +189,9 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] uppercase transition-colors cursor-pointer"
             >
               <Camera className="w-3.5 h-3.5 text-azg" />
-              <span>{allImages.length} {isEn ? "Photos" : "Foto's"}</span>
+              <span>
+                {allImages.length} {isEn ? "Photos" : "Foto's"}
+              </span>
             </button>
           )}
         </div>
@@ -193,7 +216,10 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
                 {ground.name}
               </h1>
               <p className="font-inter text-sm sm:text-base text-white/85 mt-1.5 mb-0 max-w-2xl drop-shadow">
-                {isEn ? `Home ground of ${ground.club}` : `Thuisbasis van ${ground.club}`} • {countryName}
+                {isEn
+                  ? `Home ground of ${ground.club}`
+                  : `Thuisbasis van ${ground.club}`}{" "}
+                • {countryName}
               </p>
             </div>
           </div>
@@ -218,7 +244,7 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
                 </div>
               </div>
 
-              <div className="flex items-center gap-5 sm:gap-6 py-2 flex-wrap">
+              <div className="flex items-center justify-between gap-4 py-2 flex-wrap">
                 <div className="flex items-center gap-3">
                   <ClubBadgeIcon className="w-6 h-6 text-accent shrink-0" />
                   <div>
@@ -276,7 +302,11 @@ export function GroundDetail({ ground, relatedGrounds = [] }: GroundDetailProps)
               <div className="p-5 rounded-xl bg-surface border border-border border-l-4 border-l-accent shadow-card mt-6">
                 <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent font-bold mb-1.5">
                   <Lightbulb className="w-4 h-4" />
-                  <span>{isEn ? "GROUNDHOPPER TIP & NOTES" : "GROUNDHOPPER TIP & BIJZONDERHEDEN"}</span>
+                  <span>
+                    {isEn
+                      ? "GROUNDHOPPER TIP & NOTES"
+                      : "GROUNDHOPPER TIP & BIJZONDERHEDEN"}
+                  </span>
                 </div>
                 <p className="font-inter text-sm text-text-muted leading-relaxed m-0">
                   {displayExtra}
