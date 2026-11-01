@@ -183,7 +183,7 @@ export const en: Translations = {
     verifiedGroundhop: "Verified Groundhop",
     coordinates: "Coordinates",
     homeClub: "Home Club",
-    officialMatchLog: "Official Match Log",
+    officialMatchLog: "Information Sheet",
     viewOnEuropeMap: "View on Europe Map",
     groundhopperTipNotes: "Groundhopper Tip & Notes",
     moreVisitedGrounds: "More Visited Grounds in {country}",

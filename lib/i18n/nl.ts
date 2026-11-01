@@ -181,7 +181,7 @@ export const nl = {
     verifiedGroundhop: "Geverifieerd Bezoek",
     coordinates: "Coördinaten",
     homeClub: "Thuisclub",
-    officialMatchLog: "Officieel Matchlog",
+    officialMatchLog: "Informatiefiche",
     viewOnEuropeMap: "Bekijk op Europa Kaart",
     groundhopperTipNotes: "Groundhopper Tip & Bijzonderheden",
     moreVisitedGrounds: "Meer Bezochte Stadions in {country}",

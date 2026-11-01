@@ -14,8 +14,6 @@ import {
   Flag,
   ExternalLink,
   Map as MapIcon,
-  CheckCircle2,
-  Sparkles,
 } from "lucide-react";
 import { ClubBadgeIcon } from "@/components/ui/Icons";
 
@@ -34,15 +32,10 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
   return (
     <div className="relative bg-surface-2 border border-border rounded-2xl overflow-hidden shadow-card">
       {/* Ticket Top Header Bar */}
-      <div className="bg-surface px-5 py-4 border-b border-border flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-azg animate-pulse" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-azg font-bold">
-            {t.grounds.officialMatchLog.toUpperCase()}
-          </span>
-        </div>
-        <span className="font-mono text-[10px] text-text-muted/70 uppercase">
-          ID: #{ground.id.slice(0, 8)}
+      <div className="bg-surface px-5 py-4 border-b border-border flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-azg animate-pulse" />
+        <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-azg font-bold">
+          {t.grounds.officialMatchLog.toUpperCase()}
         </span>
       </div>
 
@@ -124,8 +117,8 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
         <div className="absolute -top-[10px] -right-[10px] w-5 h-5 rounded-full bg-bg border-l border-border" />
       </div>
 
-      {/* Ticket Bottom Actions & Verification Stamp */}
-      <div className="p-5 space-y-4">
+      {/* Ticket Bottom Actions */}
+      <div className="p-5">
         {/* Navigation Action Buttons */}
         <div className="space-y-2">
           <Link
@@ -145,21 +138,6 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
             <span>Google Maps</span>
             <ExternalLink className="w-3 h-3" />
           </a>
-        </div>
-
-        {/* Vintage Groundhopper Verification Stamp */}
-        <div className="pt-2">
-          <div className="border-2 border-dashed border-azg/50 rounded-xl p-3 text-center rotate-[-1.5deg] bg-azg/5">
-            <div className="flex items-center justify-center gap-1.5 text-azg mb-0.5">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span className="font-mono text-[10px] font-bold tracking-[0.16em] uppercase">
-                {t.grounds.verifiedGroundhop.toUpperCase()}
-              </span>
-            </div>
-            <div className="font-mono text-[9px] text-text-muted tracking-wider uppercase">
-              SAZEJE GROUNDHOPPING ARCHIVE
-            </div>
-          </div>
         </div>
       </div>
     </div>
