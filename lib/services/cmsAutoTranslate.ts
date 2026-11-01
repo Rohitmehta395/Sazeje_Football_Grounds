@@ -75,6 +75,7 @@ export async function autoTranslateGroundHook({
     { source: "story", target: "storyEn", statusField: "storyEnStatus" },
     { source: "matchInfo", target: "matchInfoEn", statusField: "matchInfoEnStatus" },
     { source: "extra", target: "extraEn", statusField: "extraEnStatus" },
+    { source: "weather", target: "weatherEn", statusField: "weatherEnStatus" },
   ]);
 }
 

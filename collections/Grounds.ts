@@ -164,6 +164,66 @@ export const Grounds: CollectionConfig = {
       },
     },
     {
+      type: 'row',
+      fields: [
+        {
+          name: 'spectators',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Toeschouwers / Attendance (e.g. 53.289)',
+          },
+        },
+        {
+          name: 'ticketPrice',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Ticketprijs / Ticket price (e.g. € 35, £ 45)',
+          },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'weather',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '40%',
+            description: 'Weer / Weather (Dutch, e.g. Bewolkt, 8°C)',
+          },
+        },
+        {
+          name: 'weatherEn',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '35%',
+            description: 'English translation of weather (e.g. Cloudy, 8°C)',
+          },
+        },
+        {
+          name: 'weatherEnStatus',
+          type: 'select',
+          required: true,
+          defaultValue: 'auto',
+          options: [
+            { label: '⚡ Auto (Machine)', value: 'auto' },
+            { label: '✏️ Edited (Human)', value: 'edited' },
+          ],
+          admin: {
+            width: '25%',
+            description: 'Translation status',
+          },
+        },
+      ],
+    },
+    {
       name: 'description',
       type: 'textarea',
       required: true,

@@ -14,6 +14,11 @@ export interface Ground {
   matchInfo: string;
   matchInfoEn?: string;
   visitDate: string;
+  spectators?: string;
+  ticketPrice?: string;
+  weather?: string;
+  weatherEn?: string;
+  weatherEnStatus?: "auto" | "edited";
   extra?: string;
   extraEn?: string;
   images: string[];

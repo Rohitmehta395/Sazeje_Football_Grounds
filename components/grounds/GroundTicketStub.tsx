@@ -9,13 +9,15 @@ import { getCountryDisplayName } from "@/lib/data/countries";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import {
   Calendar,
-  MapPin,
   Trophy,
   Flag,
   ExternalLink,
   Map as MapIcon,
+  Users,
+  Ticket,
+  CloudSun,
 } from "lucide-react";
-import { ClubBadgeIcon } from "@/components/ui/Icons";
+import { ClubBadgeIcon, StadiumIcon } from "@/components/ui/Icons";
 
 export interface GroundTicketStubProps {
   ground: Ground;
@@ -25,6 +27,8 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
   const { t, lang } = useTranslation();
   const formattedVisitDate = formatDate(ground.visitDate, lang);
   const countryName = getCountryDisplayName(ground.country, lang);
+  const displayWeather =
+    lang === "en" && ground.weatherEn ? ground.weatherEn : ground.weather;
 
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${ground.lat},${ground.lng}`;
   const interactiveMapUrl = `/map?lat=${ground.lat}&lng=${ground.lng}&ground=${ground.id}`;
@@ -66,27 +70,38 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
 
         {/* Specifications List */}
         <div className="space-y-3 font-inter text-xs text-text">
-          {/* Country */}
+          {/* Stadion */}
           <div className="flex items-center justify-between">
             <span className="flex items-center gap-2 text-text-muted">
-              <Flag className="w-3.5 h-3.5 text-azg" />
-              <span>{t.grounds.filterCountry}</span>
+              <StadiumIcon className="w-3.5 h-3.5 text-azg" />
+              <span>{t.grounds.stadium}</span>
             </span>
-            <span className="font-semibold text-text">{countryName}</span>
+            <span className="font-semibold text-text truncate max-w-[170px] text-right">
+              {ground.name}
+            </span>
           </div>
 
-          {/* Competition */}
+          {/* Competitie */}
           <div className="flex items-center justify-between">
             <span className="flex items-center gap-2 text-text-muted">
               <Trophy className="w-3.5 h-3.5 text-accent" />
-              <span>{t.grounds.filterCompetition}</span>
+              <span>{t.grounds.competition}</span>
             </span>
             <span className="font-semibold text-text truncate max-w-[170px] text-right">
               {ground.competition}
             </span>
           </div>
 
-          {/* Visit Date */}
+          {/* Land */}
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-2 text-text-muted">
+              <Flag className="w-3.5 h-3.5 text-azg" />
+              <span>{t.grounds.country}</span>
+            </span>
+            <span className="font-semibold text-text">{countryName}</span>
+          </div>
+
+          {/* Bezoekdatum */}
           <div className="flex items-center justify-between">
             <span className="flex items-center gap-2 text-text-muted">
               <Calendar className="w-3.5 h-3.5 text-accent" />
@@ -97,14 +112,36 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
             </span>
           </div>
 
-          {/* GPS Coordinates */}
+          {/* Toeschouwers */}
           <div className="flex items-center justify-between">
             <span className="flex items-center gap-2 text-text-muted">
-              <MapPin className="w-3.5 h-3.5 text-text-muted" />
-              <span>{t.grounds.coordinates}</span>
+              <Users className="w-3.5 h-3.5 text-azg" />
+              <span>{t.grounds.spectators}</span>
             </span>
-            <span className="font-mono text-[11px] text-text-muted">
-              {ground.lat.toFixed(4)}°, {ground.lng.toFixed(4)}°
+            <span className="font-mono font-medium text-text">
+              {ground.spectators || "—"}
+            </span>
+          </div>
+
+          {/* Ticketprijs */}
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-2 text-text-muted">
+              <Ticket className="w-3.5 h-3.5 text-accent" />
+              <span>{t.grounds.ticketPrice}</span>
+            </span>
+            <span className="font-mono font-medium text-text">
+              {ground.ticketPrice || "—"}
+            </span>
+          </div>
+
+          {/* Weer */}
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-2 text-text-muted">
+              <CloudSun className="w-3.5 h-3.5 text-azg" />
+              <span>{t.grounds.weather}</span>
+            </span>
+            <span className="font-medium text-text truncate max-w-[170px] text-right">
+              {displayWeather || "—"}
             </span>
           </div>
         </div>
