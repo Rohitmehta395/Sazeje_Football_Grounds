@@ -18,6 +18,7 @@ import {
   CloudSun,
 } from "lucide-react";
 import { ClubBadgeIcon, StadiumIcon } from "@/components/ui/Icons";
+import { CountryFlag } from "@/components/ui/CountryFlag";
 
 export interface GroundTicketStubProps {
   ground: Ground;
@@ -98,7 +99,14 @@ export function GroundTicketStub({ ground }: GroundTicketStubProps) {
               <Flag className="w-3.5 h-3.5 text-azg" />
               <span>{t.grounds.country}</span>
             </span>
-            <span className="font-semibold text-text">{countryName}</span>
+            <span className="inline-flex items-center gap-2 font-semibold text-text">
+              <CountryFlag
+                countryName={ground.country}
+                customFlagUrl={ground.countryFlag}
+                className="w-5 h-3.5 rounded-[2px] object-cover shadow-xs border border-border/80 shrink-0"
+              />
+              <span>{countryName}</span>
+            </span>
           </div>
 
           {/* Bezoekdatum */}

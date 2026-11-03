@@ -4,6 +4,7 @@ export interface Ground {
   club: string;
   clubLogo?: string;
   country: string;
+  countryFlag?: string;
   competition: string;
   lat: number;
   lng: number;

@@ -28,6 +28,7 @@ import {
   StadiumIcon,
   FootballIcon,
 } from "@/components/ui/Icons";
+import { CountryFlag } from "@/components/ui/CountryFlag";
 
 export interface GroundDetailProps {
   ground: Ground;
@@ -153,40 +154,36 @@ export function GroundDetail({
         </button>
       </div>
 
-      {/* 2. High-Impact Cinematic Hero Header */}
-      <div className="relative rounded-2xl overflow-hidden border border-border shadow-2xl h-[340px] sm:h-[440px] lg:h-[480px]">
-        {/* Background photo */}
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
-          style={{
-            backgroundImage: `url('${ground.photo || "/placeholder-ground.jpg"}')`,
-          }}
-          role="img"
-          aria-label={ground.name}
-        />
+      {/* 2. Cohesive Stadium Card Unit (Photo + Integrated Info Bar) */}
+      <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-border shadow-xl bg-surface">
+        {/* Top: Unobstructed Stadium Photo Canvas */}
+        <div className="relative h-[320px] sm:h-[440px] lg:h-[490px] overflow-hidden bg-surface-2 group">
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.02]"
+            style={{
+              backgroundImage: `url('${ground.photo || "/placeholder-ground.jpg"}')`,
+            }}
+            role="img"
+            aria-label={ground.name}
+          />
 
-        {/* Cinematic multi-stop gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20" />
+          {/* Subtle vignette gradient for corners */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30 pointer-events-none" />
 
-        {/* Top Floating Badges */}
-        <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between gap-2 z-10">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] uppercase tracking-wider">
-              <Flag className="w-3 h-3 text-azg" />
-              <span>{countryName}</span>
-            </span>
-
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] uppercase tracking-wider">
-              <Trophy className="w-3 h-3 text-accent" />
+          {/* Top-Left Floating Badge: Competition */}
+          <div className="absolute top-3.5 sm:top-5 left-4 sm:left-6 z-10">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] uppercase tracking-wider font-medium shadow-sm">
+              <Trophy className="w-3.5 h-3.5 text-accent" />
               <span>{ground.competition}</span>
             </span>
           </div>
 
+          {/* Top-Right Floating Button: Photo Gallery */}
           {allImages.length > 0 && (
             <button
               type="button"
               onClick={() => handleOpenLightbox(0)}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] uppercase transition-colors cursor-pointer"
+              className="absolute top-3.5 sm:top-5 right-4 sm:right-6 z-10 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] uppercase tracking-wider transition-colors cursor-pointer shadow-sm"
             >
               <Camera className="w-3.5 h-3.5 text-azg" />
               <span>
@@ -194,33 +191,49 @@ export function GroundDetail({
               </span>
             </button>
           )}
+
+          {/* Bottom-Left Pill inside Photo */}
+          <div className="absolute bottom-3.5 sm:bottom-4 left-4 sm:left-6 z-10">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white/95 font-mono text-[11px] uppercase tracking-wider">
+              <StadiumIcon className="w-3.5 h-3.5 text-azg" />
+              <span>EST. VISIT {ground.visitDate?.slice(0, 4)}</span>
+            </div>
+          </div>
         </div>
 
-        {/* Hero Title and Subtitle Block */}
-        <div className="absolute bottom-0 inset-x-0 p-5 sm:p-8 z-10 flex flex-col justify-end">
-          <div className="flex items-center gap-2 text-azg font-mono text-xs uppercase tracking-[0.14em] font-semibold mb-1">
-            <StadiumIcon className="w-4 h-4" />
-            <span>EST. VISIT {ground.visitDate?.slice(0, 4)}</span>
-          </div>
-
-          <div className="flex items-center gap-4">
+        {/* Bottom: Dedicated Info Bar (matching reference design with our theme) */}
+        <div className="px-5 py-4 sm:px-7 sm:py-5 bg-surface border-t border-border flex items-center justify-between gap-4 flex-wrap">
+          {/* Left: Club Logo + Stadium Name + Subtitle */}
+          <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
             {ground.clubLogo && (
               <img
                 src={ground.clubLogo}
                 alt={ground.club}
-                className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-xl bg-white/10 p-1.5 backdrop-blur-md border border-white/20 shadow-lg shrink-0 hidden xs:block"
+                className="w-12 h-12 sm:w-14 sm:h-14 object-contain rounded-xl bg-surface-2 p-1.5 border border-border shrink-0 shadow-xs"
               />
             )}
-            <div>
-              <h1 className="font-bebas text-4xl sm:text-6xl lg:text-7xl text-white m-0 leading-[0.95] drop-shadow-lg tracking-wide">
+            <div className="min-w-0">
+              <h1 className="font-bebas text-3xl sm:text-5xl lg:text-6xl text-text m-0 leading-[0.95] tracking-wide truncate">
                 {ground.name}
               </h1>
-              <p className="font-inter text-sm sm:text-base text-white/85 mt-1.5 mb-0 max-w-2xl drop-shadow">
+              <p className="font-inter text-xs sm:text-sm text-text-muted mt-1 sm:mt-1.5 mb-0 font-medium truncate">
                 {isEn
                   ? `Home ground of ${ground.club}`
                   : `Thuisbasis van ${ground.club}`}{" "}
                 • {countryName}
               </p>
+            </div>
+          </div>
+
+          {/* Right: Sleek Country Pill [Flag] NEDERLAND */}
+          <div className="shrink-0">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-azg/60 bg-accent-soft/30 text-azg font-mono text-xs sm:text-[13px] uppercase tracking-wider font-bold shadow-xs">
+              <CountryFlag
+                countryName={ground.country}
+                customFlagUrl={ground.countryFlag}
+                className="w-5 h-3.5 rounded-[2px] object-cover shrink-0 shadow-xs"
+              />
+              <span>{countryName}</span>
             </div>
           </div>
         </div>

@@ -41,12 +41,21 @@ function mapPayloadGround(doc: Record<string, unknown>): Ground {
     clubName = club;
   }
 
+  const flag = doc.countryFlag as Record<string, unknown> | string | undefined;
+  const countryFlagUrl =
+    typeof flag === "object" && flag && "url" in flag && typeof flag.url === "string"
+      ? flag.url
+      : typeof flag === "string"
+      ? flag
+      : undefined;
+
   return {
     id: String(doc.slug || doc.id),
     name: String(doc.name || ""),
     club: clubName,
     clubLogo: clubLogoUrl,
     country: String(doc.country || ""),
+    countryFlag: countryFlagUrl,
     competition: String(doc.competition || ""),
     lat: Number(doc.lat) || 0,
     lng: Number(doc.lng) || 0,

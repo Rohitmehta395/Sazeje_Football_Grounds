@@ -113,12 +113,28 @@ export const Grounds: CollectionConfig = {
       },
     },
     {
-      name: 'country',
-      type: 'text',
-      required: true,
-      admin: {
-        description: 'Country name in Dutch matching static country list (e.g. Nederland, Spanje, Duitsland)',
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'country',
+          type: 'text',
+          required: true,
+          admin: {
+            width: '50%',
+            description: 'Country name in Dutch matching static country list (e.g. Nederland, Spanje, Duitsland)',
+          },
+        },
+        {
+          name: 'countryFlag',
+          type: 'upload',
+          relationTo: 'media',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Custom country flag image (optional - overrides default flag)',
+          },
+        },
+      ],
     },
     {
       name: 'competition',
