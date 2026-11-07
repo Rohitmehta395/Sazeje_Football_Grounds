@@ -529,7 +529,7 @@ async function migrateContent() {
   for (const g of SOURCE_GROUNDS) {
     console.log(`Creating Ground: ${g.name} (${g.country})...`);
 
-    // Club relationship
+    // Club relationship (Home Club)
     let clubId: number | undefined = undefined;
     if (g.club) {
       const existingClubs = await payload.find({
@@ -553,6 +553,37 @@ async function migrateContent() {
         });
         clubId = Number(newClub.id);
         console.log(`  Created Club: ${newClub.name} (ID: ${newClub.id})`);
+      }
+    }
+
+    // Away Club relationship (from matchInfo)
+    let awayClubId: number | undefined = undefined;
+    const parsedAwayName = g.matchInfo
+      ? g.matchInfo.split(",")[0]?.split(/[—–-]/)[1]?.trim()
+      : undefined;
+
+    if (parsedAwayName) {
+      const existingAwayClubs = await payload.find({
+        collection: "clubs",
+        where: {
+          name: {
+            equals: parsedAwayName,
+          },
+        },
+        limit: 1,
+      });
+
+      if (existingAwayClubs.docs[0]) {
+        awayClubId = Number(existingAwayClubs.docs[0].id);
+      } else {
+        const newAwayClub = await payload.create({
+          collection: "clubs",
+          data: {
+            name: parsedAwayName,
+          },
+        });
+        awayClubId = Number(newAwayClub.id);
+        console.log(`  Created Away Club: ${newAwayClub.name} (ID: ${newAwayClub.id})`);
       }
     }
 
@@ -589,6 +620,7 @@ async function migrateContent() {
       data: {
         name: g.name,
         club: clubId,
+        awayClub: awayClubId,
         country: g.country,
         competition: g.competition,
         lat: g.lat,

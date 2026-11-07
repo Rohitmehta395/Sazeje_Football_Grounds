@@ -3,6 +3,10 @@ export interface Ground {
   name: string;
   club: string;
   clubLogo?: string;
+  homeTeamLogo?: string;
+  awayClub?: string;
+  awayClubLogo?: string;
+  awayTeamLogo?: string;
   country: string;
   countryFlag?: string;
   competition: string;

@@ -95,20 +95,26 @@ export function GroundDetail({
 
   // Helper to parse match info into fixture & score if available
   const parsedMatch = React.useMemo(() => {
-    if (!displayMatchInfo) return null;
-    const parts = displayMatchInfo.split(",");
-    const fixture = parts[0]?.trim() || displayMatchInfo;
+    if (!displayMatchInfo && !ground.awayClub) return null;
+    const parts = (displayMatchInfo || "").split(",");
+    const fixture = parts[0]?.trim() || displayMatchInfo || "";
     const score = parts[1]?.trim() || "";
 
-    // Split teams by "—" or "-"
+    // Split teams by "—", "–", or "-"
     const teams = fixture.split(/[—–-]/).map((t) => t.trim());
+    const homeTeam = teams[0] || ground.club || fixture;
+    const awayTeam = teams[1] || ground.awayClub || "";
+
     return {
-      homeTeam: teams[0] || fixture,
-      awayTeam: teams[1] || "",
+      homeTeam,
+      awayTeam,
       score,
       fullText: displayMatchInfo,
     };
-  }, [displayMatchInfo]);
+  }, [displayMatchInfo, ground.club, ground.awayClub]);
+
+  const homeTeamLogoUrl = ground.homeTeamLogo || ground.clubLogo;
+  const awayTeamLogoUrl = ground.awayTeamLogo || ground.awayClubLogo;
 
   return (
     <div className="space-y-8 pb-16">
@@ -257,27 +263,59 @@ export function GroundDetail({
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-4 py-2 flex-wrap">
-                <div className="flex items-center gap-3">
-                  <ClubBadgeIcon className="w-6 h-6 text-accent shrink-0" />
-                  <div>
-                    <div className="font-bebas text-2xl sm:text-3xl text-text leading-tight">
-                      {parsedMatch.homeTeam}
+              <div className="flex items-center justify-between gap-4 py-1 flex-wrap sm:flex-nowrap">
+                <div className="space-y-3 min-w-0">
+                  {/* Home Team (Dominant / Primary focus with ~2x logo) */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-surface border border-border/80 flex items-center justify-center p-1.5 shrink-0 shadow-2xs">
+                      {homeTeamLogoUrl ? (
+                        <img
+                          src={homeTeamLogoUrl}
+                          alt={parsedMatch.homeTeam}
+                          className="w-full h-full object-contain"
+                        />
+                      ) : (
+                        <ClubBadgeIcon className="w-7 h-7 sm:w-8 sm:h-8 text-accent shrink-0" />
+                      )}
                     </div>
-                    {parsedMatch.awayTeam && (
-                      <div className="font-inter text-xs text-text-muted mt-0.5">
-                        vs. {parsedMatch.awayTeam}
+                    <div className="min-w-0">
+                      <div className="font-bebas text-2xl sm:text-3xl text-text leading-tight truncate">
+                        {parsedMatch.homeTeam}
                       </div>
-                    )}
+                    </div>
                   </div>
+
+                  {/* Away Team (Connected with subtle fixture line, ~2x smaller logo) */}
+                  {parsedMatch.awayTeam && (
+                    <div className="flex items-center gap-2.5 ml-4 sm:ml-5 pl-3 border-l-2 border-border/70">
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-surface border border-border/80 flex items-center justify-center p-0.5 shrink-0 shadow-2xs">
+                        {awayTeamLogoUrl ? (
+                          <img
+                            src={awayTeamLogoUrl}
+                            alt={parsedMatch.awayTeam}
+                            className="w-full h-full object-contain"
+                          />
+                        ) : (
+                          <ClubBadgeIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-text-muted shrink-0" />
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2 flex-wrap min-w-0">
+                        <span className="text-xs text-text-muted font-mono font-medium">vs.</span>
+                        <span className="font-inter text-xs sm:text-sm font-semibold text-text-muted hover:text-text transition-colors truncate">
+                          {parsedMatch.awayTeam}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
+                {/* Score Badge */}
                 {parsedMatch.score ? (
-                  <div className="font-bebas text-3xl sm:text-4xl text-azg bg-accent-soft px-4 py-1.5 rounded-xl border border-accent/20 tracking-wider">
+                  <div className="font-bebas text-3xl sm:text-4xl text-azg bg-accent-soft px-4 py-2 rounded-xl border border-accent/20 tracking-wider shrink-0 self-center">
                     {parsedMatch.score}
                   </div>
                 ) : (
-                  <div className="font-mono text-xs text-text-muted">
+                  <div className="font-mono text-xs text-text-muted shrink-0 self-center">
                     {ground.competition}
                   </div>
                 )}

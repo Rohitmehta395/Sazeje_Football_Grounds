@@ -104,13 +104,29 @@ export const Grounds: CollectionConfig = {
       },
     },
     {
-      name: 'club',
-      type: 'relationship',
-      relationTo: 'clubs',
-      required: false,
-      admin: {
-        description: 'Home club (select or create a Club with logo)',
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'club',
+          type: 'relationship',
+          relationTo: 'clubs',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Home club (select or create a Club with logo)',
+          },
+        },
+        {
+          name: 'awayClub',
+          type: 'relationship',
+          relationTo: 'clubs',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Away club for match fixture (select or create a Club with logo)',
+          },
+        },
+      ],
     },
     {
       type: 'row',
@@ -318,6 +334,31 @@ export const Grounds: CollectionConfig = {
       admin: {
         description: 'Match details (Dutch - e.g. fixture, score, attendance)',
       },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'homeTeamLogo',
+          type: 'upload',
+          relationTo: 'media',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Custom home team logo override (falls back to Home Club logo)',
+          },
+        },
+        {
+          name: 'awayTeamLogo',
+          type: 'upload',
+          relationTo: 'media',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Custom away team logo override (falls back to Away Club logo)',
+          },
+        },
+      ],
     },
     {
       type: 'row',

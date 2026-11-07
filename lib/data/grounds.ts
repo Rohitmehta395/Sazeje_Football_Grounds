@@ -41,6 +41,39 @@ function mapPayloadGround(doc: Record<string, unknown>): Ground {
     clubName = club;
   }
 
+  let awayClubName: string | undefined = undefined;
+  let awayClubLogoUrl: string | undefined = undefined;
+
+  const awayClub = doc.awayClub as Record<string, unknown> | string | undefined;
+  if (typeof awayClub === "object" && awayClub !== null) {
+    awayClubName = typeof awayClub.name === "string" ? awayClub.name : undefined;
+    const logo = awayClub.logo as Record<string, unknown> | string | undefined;
+    if (typeof logo === "object" && logo !== null && "url" in logo && typeof logo.url === "string") {
+      awayClubLogoUrl = logo.url;
+    } else if (typeof logo === "string") {
+      awayClubLogoUrl = logo;
+    }
+  } else if (typeof awayClub === "string") {
+    awayClubName = awayClub;
+  }
+
+  // Direct media upload overrides for fixture team logos
+  const homeLogoMedia = doc.homeTeamLogo as Record<string, unknown> | string | undefined;
+  const homeTeamLogoUrl =
+    typeof homeLogoMedia === "object" && homeLogoMedia && "url" in homeLogoMedia && typeof homeLogoMedia.url === "string"
+      ? homeLogoMedia.url
+      : typeof homeLogoMedia === "string"
+      ? homeLogoMedia
+      : undefined;
+
+  const awayLogoMedia = doc.awayTeamLogo as Record<string, unknown> | string | undefined;
+  const awayTeamLogoUrl =
+    typeof awayLogoMedia === "object" && awayLogoMedia && "url" in awayLogoMedia && typeof awayLogoMedia.url === "string"
+      ? awayLogoMedia.url
+      : typeof awayLogoMedia === "string"
+      ? awayLogoMedia
+      : undefined;
+
   const flag = doc.countryFlag as Record<string, unknown> | string | undefined;
   const countryFlagUrl =
     typeof flag === "object" && flag && "url" in flag && typeof flag.url === "string"
@@ -54,6 +87,10 @@ function mapPayloadGround(doc: Record<string, unknown>): Ground {
     name: String(doc.name || ""),
     club: clubName,
     clubLogo: clubLogoUrl,
+    homeTeamLogo: homeTeamLogoUrl,
+    awayClub: awayClubName,
+    awayClubLogo: awayClubLogoUrl,
+    awayTeamLogo: awayTeamLogoUrl,
     country: String(doc.country || ""),
     countryFlag: countryFlagUrl,
     competition: String(doc.competition || ""),
@@ -135,7 +172,44 @@ export async function getGroundById(idOrSlug: string): Promise<Ground | undefine
       depth: 2,
       limit: 1,
     });
-    return docs[0] ? mapPayloadGround(docs[0]) : undefined;
+    if (!docs[0]) return undefined;
+
+    const mapped = mapPayloadGround(docs[0]);
+
+    // Fallback: If away team logo is not set, attempt to find a matching Club in the CMS by away team name
+    if (!mapped.awayTeamLogo && !mapped.awayClubLogo) {
+      const awayCandidate =
+        mapped.awayClub ||
+        (mapped.matchInfo ? mapped.matchInfo.split(",")[0]?.split(/[—–-]/)[1]?.trim() : undefined);
+
+      if (awayCandidate) {
+        try {
+          const clubLookup = await payload.find({
+            collection: "clubs",
+            where: {
+              name: {
+                equals: awayCandidate,
+              },
+            },
+            depth: 1,
+            limit: 1,
+          });
+
+          if (clubLookup.docs[0]?.logo) {
+            const logo = clubLookup.docs[0].logo as Record<string, unknown> | string;
+            if (typeof logo === "object" && logo && "url" in logo && typeof logo.url === "string") {
+              mapped.awayClubLogo = logo.url;
+            } else if (typeof logo === "string") {
+              mapped.awayClubLogo = logo;
+            }
+          }
+        } catch {
+          // Graceful fallback if clubs query fails
+        }
+      }
+    }
+
+    return mapped;
   } catch (error) {
     console.error(`Error fetching ground ${idOrSlug} from Payload:`, error);
     return undefined;
