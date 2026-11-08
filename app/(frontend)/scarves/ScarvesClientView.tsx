@@ -5,8 +5,7 @@ import { PageHero } from "@/components/hero/PageHero";
 import { ScarfCategoryChooser } from "@/components/scarves/ScarfCategoryChooser";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { Scarf, ScarvesPageContent } from "@/types";
-import { ScarfIcon, ClubBadgeIcon } from "@/components/ui/Icons";
-import { Flag } from "lucide-react";
+import { Medal, ShieldCheck, Flag } from "lucide-react";
 
 export interface ScarvesClientViewProps {
   scarves: Scarf[];
@@ -115,46 +114,49 @@ export function ScarvesClientView({
       <div className="max-w-[1160px] mx-auto px-4 sm:px-6 space-y-8 pt-2">
         {/* 2. Dynamic Live Stats Ribbon */}
         {showStats && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-            <div className="p-4 rounded-xl bg-surface border border-border/80 shadow-card flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent-soft flex items-center justify-center text-accent flex-shrink-0">
-                <ScarfIcon className="w-5 h-5" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 items-stretch">
+            {/* 1. Total Scarves (Gold/Orange accent) */}
+            <div className="p-4 rounded-xl bg-surface border border-border/80 shadow-card flex items-center gap-3.5 h-full">
+              <div className="w-11 h-11 rounded-lg bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/20 dark:border-amber-500/30 flex items-center justify-center shrink-0">
+                <Medal className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               </div>
-              <div>
-                <div className="font-bebas text-2xl sm:text-3xl text-text leading-none">
+              <div className="flex items-baseline gap-2 min-w-0">
+                <span className="font-bebas text-2xl sm:text-3xl text-text leading-none shrink-0">
                   {stats.totalCount}
-                </div>
-                <div className="font-mono text-[11px] text-text-muted uppercase tracking-wider mt-0.5">
-                  {isEn ? "Total Scarves" : "Totale Sjaals"}
-                </div>
+                </span>
+                <span className="font-mono text-xs sm:text-[13px] text-text-muted uppercase tracking-wider font-semibold truncate">
+                  {isEn ? "Scarves" : "Sjaals"}
+                </span>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface border border-border/80 shadow-card flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent-soft flex items-center justify-center text-accent flex-shrink-0">
-                <ClubBadgeIcon className="w-5 h-5" />
+            {/* 2. Clubs Represented (Blue accent) */}
+            <div className="p-4 rounded-xl bg-surface border border-border/80 shadow-card flex items-center gap-3.5 h-full">
+              <div className="w-11 h-11 rounded-lg bg-blue-500/10 dark:bg-blue-500/20 border border-blue-500/20 dark:border-blue-500/30 flex items-center justify-center shrink-0">
+                <ShieldCheck className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               </div>
-              <div>
-                <div className="font-bebas text-2xl sm:text-3xl text-text leading-none">
+              <div className="flex items-baseline gap-2 min-w-0">
+                <span className="font-bebas text-2xl sm:text-3xl text-text leading-none shrink-0">
                   {stats.clubsCount}
-                </div>
-                <div className="font-mono text-[11px] text-text-muted uppercase tracking-wider mt-0.5">
-                  {isEn ? "Clubs Represented" : "Clubs Vertegenwoordigd"}
-                </div>
+                </span>
+                <span className="font-mono text-xs sm:text-[13px] text-text-muted uppercase tracking-wider font-semibold truncate">
+                  {isEn ? "Clubs" : "Clubs"}
+                </span>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface border border-border/80 shadow-card flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent-soft flex items-center justify-center text-accent flex-shrink-0">
-                <Flag className="w-5 h-5" />
+            {/* 3. Countries (Green accent) */}
+            <div className="p-4 rounded-xl bg-surface border border-border/80 shadow-card flex items-center gap-3.5 h-full">
+              <div className="w-11 h-11 rounded-lg bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/20 dark:border-emerald-500/30 flex items-center justify-center shrink-0">
+                <Flag className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
               </div>
-              <div>
-                <div className="font-bebas text-2xl sm:text-3xl text-text leading-none">
+              <div className="flex items-baseline gap-2 min-w-0">
+                <span className="font-bebas text-2xl sm:text-3xl text-text leading-none shrink-0">
                   {stats.countriesCount}
-                </div>
-                <div className="font-mono text-[11px] text-text-muted uppercase tracking-wider mt-0.5">
+                </span>
+                <span className="font-mono text-xs sm:text-[13px] text-text-muted uppercase tracking-wider font-semibold truncate">
                   {isEn ? "Countries" : "Landen"}
-                </div>
+                </span>
               </div>
             </div>
           </div>
