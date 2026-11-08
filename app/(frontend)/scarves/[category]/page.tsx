@@ -51,9 +51,9 @@ export async function generateMetadata({
     description =
       "Bekijk alle nieuwe voetbalsjaals rechtstreeks gekocht in fanshops tijdens groundhop-reizen door Europa.";
   } else if (category === "secondhand") {
-    title = "Tweedehands Sjaals & Ruilcollectie | SaZeJe Groundhopping";
+    title = "Tweedehands Sjaalcollectie | SaZeJe Groundhopping";
     description =
-      "Bekijk alle tweedehands en ruilsjaals van SaZeJe Groundhopping, beschikbaar voor ruil met verzamelaars.";
+      "Bekijk alle vintage en tweedehands voetbalsjaals van SaZeJe Groundhopping uit heel Europa.";
   } else if (category === "special-editions") {
     title = "Speciale Edities & Jubileumsjaals | SaZeJe Groundhopping";
     description =

@@ -98,13 +98,24 @@ export function ScarfCategoryDirectoryView({
           tag: (t.scarves as Record<string, string>).categoryNewTag || (isEn ? "MATCHDAY EDITIONS • OFFICIAL" : "MATCHDAY EDITIES • OFFICIEEL"),
           icon: <OfficialScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
         };
-      case "secondhand":
+      case "secondhand": {
+        const rawTitle = (isEn ? categoriesDoc?.secondhandTitleEn : categoriesDoc?.secondhandTitle) || t.scarves.categorySecondhandTitle;
+        const cleanTitle = rawTitle && (rawTitle.toLowerCase().includes("swap") || rawTitle.toLowerCase().includes("ruil"))
+          ? (isEn ? "Secondhand" : "Tweedehands")
+          : rawTitle;
+        const rawDesc = (isEn ? categoriesDoc?.secondhandDescEn : categoriesDoc?.secondhandDesc) || t.scarves.categorySecondhandDesc;
+        const cleanDesc = rawDesc && (rawDesc.toLowerCase().includes("trade") || rawDesc.toLowerCase().includes("ruil") || rawDesc.toLowerCase().includes("swap"))
+          ? (isEn
+              ? "Vintage finds, pre-owned collector scarves, and unique pieces from different football clubs."
+              : "Vintage vondsten, pre-owned verzamelaarssjaals en unieke stukken van verschillende voetbalclubs.")
+          : rawDesc;
         return {
-          title: (isEn ? categoriesDoc?.secondhandTitleEn : categoriesDoc?.secondhandTitle) || t.scarves.categorySecondhandTitle,
-          description: (isEn ? categoriesDoc?.secondhandDescEn : categoriesDoc?.secondhandDesc) || t.scarves.categorySecondhandDesc,
-          tag: (t.scarves as Record<string, string>).categorySecondhandTag || (isEn ? "TERRACE SWAPS & TRADES" : "TERRACE RUIL & VINTAGE"),
+          title: cleanTitle,
+          description: cleanDesc,
+          tag: (t.scarves as Record<string, string>).categorySecondhandTag || (isEn ? "VINTAGE & COLLECTOR FINDS" : "VINTAGE & VERZAMELAARSVONDSTEN"),
           icon: <SwapScarvesIcon className="w-3.5 h-3.5 text-text-muted" />,
         };
+      }
       case "special-editions":
         return {
           title: (isEn ? categoriesDoc?.specialEditionsTitleEn : categoriesDoc?.specialEditionsTitle) || t.scarves.categorySpecialEditionsTitle,

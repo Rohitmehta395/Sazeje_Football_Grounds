@@ -53,12 +53,32 @@ export function ScarvesClientView({
   const categories = scarvesPageContent.categories;
   const newTitle = isEn ? categories?.newTitleEn : categories?.newTitle;
   const newDesc = isEn ? categories?.newDescEn : categories?.newDesc;
-  const secondhandTitle = isEn
+
+  const rawSecondhandTitle = isEn
     ? categories?.secondhandTitleEn
     : categories?.secondhandTitle;
-  const secondhandDesc = isEn
+  const secondhandTitle =
+    rawSecondhandTitle &&
+    (rawSecondhandTitle.toLowerCase().includes("swap") ||
+      rawSecondhandTitle.toLowerCase().includes("ruil"))
+      ? isEn
+        ? "Secondhand"
+        : "Tweedehands"
+      : rawSecondhandTitle;
+
+  const rawSecondhandDesc = isEn
     ? categories?.secondhandDescEn
     : categories?.secondhandDesc;
+  const secondhandDesc =
+    rawSecondhandDesc &&
+    (rawSecondhandDesc.toLowerCase().includes("trade") ||
+      rawSecondhandDesc.toLowerCase().includes("ruil") ||
+      rawSecondhandDesc.toLowerCase().includes("swap"))
+      ? isEn
+        ? "Vintage finds, pre-owned collector scarves, and unique pieces from different football clubs."
+        : "Vintage vondsten, pre-owned verzamelaarssjaals en unieke stukken van verschillende voetbalclubs."
+      : rawSecondhandDesc;
+
   const specialEditionsTitle = isEn
     ? categories?.specialEditionsTitleEn
     : categories?.specialEditionsTitle;

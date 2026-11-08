@@ -200,24 +200,24 @@ export const nl = {
     heroSubtitle:
       "Verzameling van officiële en tweedehands voetbalsjaals uit de hele wereld.",
     categoryNewTitle: "Nieuwe Sjaals",
-    categoryNewTag: "MATCHDAY EDITIES • OFFICIEEL NIEUW",
+    categoryNewTag: "MATCHDAY EDITIES",
     categoryNewDesc:
-      "Sjaals rechtstreeks aangeschaft bij stadionbezoeken, fanshops en officiële clubwinkels.",
+      "Rechtstreeks aangeschaft tijdens stadionbezoeken, clubstores en matchday fanshops.",
     categoryNewCta: "Blader door Nieuwe Sjaals",
-    categorySecondhandTitle: "Tweedehands & Ruil",
-    categorySecondhandTag: "TERRACE RUIL & VINTAGE VONDSTEN",
+    categorySecondhandTitle: "Tweedehands",
+    categorySecondhandTag: "VINTAGE & VERZAMELAARSVONDSTEN",
     categorySecondhandDesc:
-      "Bijzondere vondsten, ruilsjaals en vintage ontdekkingen verkregen via supporters en verzamelaars.",
-    categorySecondhandCta: "Blader door Ruilsjaals",
+      "Vintage vondsten, pre-owned verzamelaarssjaals en unieke stukken van verschillende voetbalclubs.",
+    categorySecondhandCta: "Blader door Tweedehands Collectie",
     categorySpecialEditionsTitle: "Speciale Edities",
-    categorySpecialEditionsTag: "GELIMITEERDE OPLAGES • JUBILEUM",
+    categorySpecialEditionsTag: "GELIMITEERDE RELEASES",
     categorySpecialEditionsDesc:
-      "Zeldzame verzamelaarsedities, jubileum- en herdenkingssjaals uitgebracht voor bijzondere clubmomenten.",
+      "Zeldzame verzamelaarsedities, jubileumuitgaven en herdenkingssjaals ter ere van historische clubmijlpalen.",
     categorySpecialEditionsCta: "Blader door Speciale Edities",
     categoryMatchdaysTitle: "Wedstrijddagen",
-    categoryMatchdaysTag: "EUROPESE DUELS • FINALES",
+    categoryMatchdaysTag: "EUROPESE KRAKERS & FINALES",
     categoryMatchdaysDesc:
-      "Officiële wedstrijdsjaals van specifieke Europese topaffiches, bekerfinales en legendarische ontmoetingen.",
+      "Officiële wedstrijdsjaals van Europese topaffiches, bekerfinales en legendarische derby's.",
     categoryMatchdaysCta: "Blader door Wedstrijddagen",
     selectCountryTitle: "Selecteer een Land",
     selectCountrySubtitle:

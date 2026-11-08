@@ -202,24 +202,24 @@ export const en: Translations = {
     heroSubtitle:
       "Collection of official and secondhand football scarves from around the world.",
     categoryNewTitle: "New Scarves",
-    categoryNewTag: "MATCHDAY EDITIONS • FANSHOP NEW",
+    categoryNewTag: "MATCHDAY EDITIONS",
     categoryNewDesc:
-      "Scarves bought directly during match visits, club stores, and official team shops.",
+      "Purchased directly during stadium visits, club stores, and matchday fanshops.",
     categoryNewCta: "Browse New Scarves",
-    categorySecondhandTitle: "Secondhand & Swaps",
-    categorySecondhandTag: "TERRACE SWAPS & VINTAGE FINDS",
+    categorySecondhandTitle: "Secondhand",
+    categorySecondhandTag: "VINTAGE & COLLECTOR FINDS",
     categorySecondhandDesc:
-      "Special finds, traded scarves, and vintage discoveries obtained from fellow collectors.",
-    categorySecondhandCta: "Browse Swap Collection",
+      "Vintage finds, pre-owned collector scarves, and unique pieces from different football clubs.",
+    categorySecondhandCta: "Browse Secondhand Collection",
     categorySpecialEditionsTitle: "Special Editions",
-    categorySpecialEditionsTag: "LIMITED EDITIONS • ANNIVERSARY",
+    categorySpecialEditionsTag: "LIMITED RELEASES",
     categorySpecialEditionsDesc:
       "Rare collector editions, anniversary releases, and commemorative scarves marking historic club milestones.",
     categorySpecialEditionsCta: "Browse Special Editions",
     categoryMatchdaysTitle: "Matchdays",
-    categoryMatchdaysTag: "EUROPEAN CLASHES • FINALS",
+    categoryMatchdaysTag: "EUROPEAN CLASHES & FINALS",
     categoryMatchdaysDesc:
-      "Official matchday scarves from European fixtures, cup finals, and legendary derby encounters.",
+      "Official matchday scarves from European clashes, cup finals, and legendary derby fixtures.",
     categoryMatchdaysCta: "Browse Matchday Scarves",
     selectCountryTitle: "Select a Country",
     selectCountrySubtitle:
