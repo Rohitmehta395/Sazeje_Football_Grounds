@@ -74,10 +74,84 @@ export function getCountryByName(name: string): Country | undefined {
   );
 }
 
+export const GLOBAL_COUNTRY_CODES: Record<string, string> = {
+  india: "in",
+  in: "in",
+  noorwegen: "no",
+  norway: "no",
+  no: "no",
+  engeland: "gb-eng",
+  england: "gb-eng",
+  duitsland: "de",
+  germany: "de",
+  de: "de",
+  nederland: "nl",
+  netherlands: "nl",
+  nl: "nl",
+  spanje: "es",
+  spain: "es",
+  es: "es",
+  italië: "it",
+  italy: "it",
+  it: "it",
+  frankrijk: "fr",
+  france: "fr",
+  fr: "fr",
+  belgië: "be",
+  belgium: "be",
+  be: "be",
+  portugal: "pt",
+  pt: "pt",
+  schotland: "gb-sct",
+  scotland: "gb-sct",
+  wales: "gb-wls",
+  brazilië: "br",
+  brazil: "br",
+  br: "br",
+  argentinië: "ar",
+  argentina: "ar",
+  ar: "ar",
+  usa: "us",
+  "verenigde staten": "us",
+  us: "us",
+  japan: "jp",
+  jp: "jp",
+  australië: "au",
+  australia: "au",
+  au: "au",
+  marokko: "ma",
+  morocco: "ma",
+  ma: "ma",
+  egypte: "eg",
+  egypt: "eg",
+  eg: "eg",
+  turkije: "tr",
+  turkey: "tr",
+  tr: "tr",
+};
+
+export function getCountryCode(countryName?: string): string | undefined {
+  if (!countryName) return undefined;
+  const cleanName = countryName.replace(/^[^\w\säöüéèáóúñçÅåØøÆæÀ-ÿ]+/, "").trim().toLowerCase();
+
+  const uefa = getCountryByName(countryName);
+  if (uefa?.code) return uefa.code.toLowerCase();
+
+  if (GLOBAL_COUNTRY_CODES[cleanName]) {
+    return GLOBAL_COUNTRY_CODES[cleanName];
+  }
+
+  if (cleanName.length === 2 && /^[a-z]{2}$/i.test(cleanName)) {
+    return cleanName.toLowerCase();
+  }
+
+  return undefined;
+}
+
 export function getCountryFlagUrl(countryName: string): string | undefined {
-  const country = getCountryByName(countryName);
-  if (country?.code) {
-    return `https://flagcdn.com/w80/${country.code.toLowerCase()}.png`;
+  const code = getCountryCode(countryName);
+  if (code) {
+    return `https://flagcdn.com/w80/${code.toLowerCase()}.png`;
   }
   return undefined;
 }
@@ -89,6 +163,78 @@ export function getCountryDisplayName(nameNL: string, lang: "nl" | "en" = "nl"):
     (c) => c.name.toLowerCase() === cleanName.toLowerCase() || c.name.toLowerCase() === nameNL.toLowerCase()
   );
   return found?.nameEn || nameNL;
+}
+
+export function getCountryFlagEmoji(countryName?: string): string | undefined {
+  if (!countryName) return undefined;
+  const country = getCountryByName(countryName);
+  if (country?.flag) return country.flag;
+
+  // Global fallbacks for countries outside UEFA list
+  const lower = countryName.trim().toLowerCase();
+  const globalFlags: Record<string, string> = {
+    india: "🇮🇳",
+    brazil: "🇧🇷",
+    brazilië: "🇧🇷",
+    argentina: "🇦🇷",
+    argentinië: "🇦🇷",
+    usa: "🇺🇸",
+    "verenigde staten": "🇺🇸",
+    japan: "🇯🇵",
+    australia: "🇦🇺",
+    australië: "🇦🇺",
+    morocco: "🇲🇦",
+    marokko: "🇲🇦",
+    egypt: "🇪🇬",
+    egypte: "🇪🇬",
+    england: "🇬🇧",
+    engeland: "🇬🇧",
+    scotland: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    schotland: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    wales: "🏴󠁧󠁢󠁷󠁬󠁳󠁿",
+    norway: "🇳🇴",
+    noorwegen: "🇳🇴",
+    germany: "🇩🇪",
+    duitsland: "🇩🇪",
+    spain: "🇪🇸",
+    spanje: "🇪🇸",
+    netherlands: "🇳🇱",
+    nederland: "🇳🇱",
+    italy: "🇮🇹",
+    italië: "🇮🇹",
+    france: "🇫🇷",
+    frankrijk: "🇫🇷",
+    belgium: "🇧🇪",
+    belgië: "🇧🇪",
+    portugal: "🇵🇹",
+  };
+  return globalFlags[lower];
+}
+
+export function resolveScarfLeagueAndFlag(
+  league?: string,
+  countryFlag?: string,
+  countryName?: string
+): { flag?: string; leagueName: string } {
+  let flag = countryFlag?.trim();
+  let leagueName = league?.trim() || "";
+
+  // Check if leagueName starts with an emoji flag (e.g. "🇳🇴 Eliteserien")
+  const emojiRegex = /^(\p{Regional_Indicator}{2}|\p{Emoji_Presentation}|\p{Emoji}\uFE0F)\s*/u;
+  const match = leagueName.match(emojiRegex);
+  if (match) {
+    if (!flag) {
+      flag = match[1];
+    }
+    leagueName = leagueName.slice(match[0].length).trim();
+  }
+
+  // Fallback flag from countryName if not provided
+  if (!flag && countryName) {
+    flag = getCountryFlagEmoji(countryName);
+  }
+
+  return { flag, leagueName };
 }
 
 export function getCountriesWithScarfCounts(

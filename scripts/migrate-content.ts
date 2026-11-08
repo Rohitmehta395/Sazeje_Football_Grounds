@@ -504,11 +504,29 @@ async function migrateContent() {
       );
     }
 
+    // Club relationship
+    let clubId: number | undefined = undefined;
+    if (s.club) {
+      const existingClubs = await payload.find({
+        collection: "clubs",
+        where: {
+          name: {
+            equals: s.club,
+          },
+        },
+        limit: 1,
+      });
+      if (existingClubs.docs[0]) {
+        clubId = Number(existingClubs.docs[0].id);
+      }
+    }
+
     const createdScarf = await payload.create({
       collection: "scarves",
       data: {
         category: s.category as "new" | "secondhand" | "special-editions" | "matchdays",
         club: s.club,
+        clubRelationship: clubId || undefined,
         country: s.country,
         type: s.type,
         description: s.description,

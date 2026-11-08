@@ -18,19 +18,49 @@ function mapPayloadScarf(doc: Record<string, unknown>): Scarf {
       ? photo
       : "";
 
+  // Club logo resolution:
+  // 1. Direct upload on scarf (doc.clubLogo)
+  // 2. Linked clubRelationship (doc.clubRelationship?.logo)
+  let resolvedClubLogo: string | undefined = undefined;
+
+  const directClubLogo = doc.clubLogo as Record<string, unknown> | string | undefined;
+  if (typeof directClubLogo === "object" && directClubLogo && "url" in directClubLogo && typeof directClubLogo.url === "string") {
+    resolvedClubLogo = directClubLogo.url;
+  } else if (typeof directClubLogo === "string") {
+    resolvedClubLogo = directClubLogo;
+  }
+
+  if (!resolvedClubLogo) {
+    const clubRel = doc.clubRelationship as Record<string, unknown> | undefined;
+    if (typeof clubRel === "object" && clubRel && "logo" in clubRel) {
+      const relLogo = clubRel.logo as Record<string, unknown> | string | undefined;
+      if (typeof relLogo === "object" && relLogo && "url" in relLogo && typeof relLogo.url === "string") {
+        resolvedClubLogo = relLogo.url;
+      } else if (typeof relLogo === "string") {
+        resolvedClubLogo = relLogo;
+      }
+    }
+  }
+
   return {
     id: String(doc.id),
     category: doc.category as ScarfCategory,
+    clubCategory: doc.clubCategory ? String(doc.clubCategory) : undefined,
     club: String(doc.club || ""),
+    clubLogo: resolvedClubLogo,
     country: String(doc.country || ""),
+    countryFlag: doc.countryFlag ? String(doc.countryFlag) : undefined,
+    league: doc.league ? String(doc.league) : undefined,
     type: String(doc.type || ""),
     typeEn: doc.typeEn ? String(doc.typeEn) : undefined,
     description: String(doc.description || ""),
     descriptionEn: doc.descriptionEn ? String(doc.descriptionEn) : undefined,
     stadium: String(doc.stadium || ""),
+    town: doc.town ? String(doc.town) : undefined,
     founded: String(doc.founded || ""),
     trophies: String(doc.trophies || ""),
     trophiesEn: doc.trophiesEn ? String(doc.trophiesEn) : undefined,
+    seasonsInTopDivision: doc.seasonsInTopDivision ? String(doc.seasonsInTopDivision) : undefined,
     funFact: String(doc.funFact || ""),
     funFactEn: doc.funFactEn ? String(doc.funFactEn) : undefined,
     photo: photoUrl,
@@ -44,6 +74,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "new",
     club: "FC Barcelona",
     country: "Spanje",
+    league: "La Liga",
     type: "Matchday Sjaal",
     description: "Officiële matchday-sjaal gekocht bij Camp Nou, editie seizoen 2024/25 in traditionele blaugrana-kleuren.",
     descriptionEn: "Official matchday scarf purchased at Camp Nou, 2024/25 edition featuring iconic blaugrana stripes.",
@@ -61,6 +92,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "new",
     club: "Liverpool FC",
     country: "Engeland",
+    league: "Premier League",
     type: "Klassieke Jacquard Sjaal",
     description: "Straatverkoper net buiten Anfield Road, klassiek rood-geel ontwerp met 'You'll Never Walk Alone'.",
     descriptionEn: "Acquired outside Anfield Road, classic red and gold jacquard design featuring 'You'll Never Walk Alone'.",
@@ -78,6 +110,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "secondhand",
     club: "Borussia Dortmund",
     country: "Duitsland",
+    league: "Bundesliga",
     type: "Vintage Südtribüne Sjaal",
     description: "Gevonden op een ruilbeurs in het Ruhrgebied, jaren '90 ontwerp met het historische BVB logo.",
     descriptionEn: "Traded at a Ruhr collectors fair, 90s vintage design with the historic BVB crest.",
@@ -95,6 +128,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "secondhand",
     club: "Ajax",
     country: "Nederland",
+    league: "Eredivisie",
     type: "Retro Kampioenssjaal",
     description: "Klassieke retro sjaal verkregen via een mede-groundhopper, herinnering aan historische Europese avonden.",
     descriptionEn: "Classic retro scarf obtained through a fellow groundhopper, commemorating European cup nights.",
@@ -112,6 +146,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "new",
     club: "AC Milan",
     country: "Italië",
+    league: "Serie A",
     type: "Curva Sud Winter Sjaal",
     description: "Officiële dik gebreide rossoneri sjaal gekocht voor de Curva Sud bij San Siro op een ijskoude decemberavond.",
     descriptionEn: "Heavy-knit official rossoneri scarf bought for the Curva Sud at San Siro on a chilly December evening.",
@@ -129,6 +164,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "secondhand",
     club: "Club Brugge",
     country: "België",
+    league: "Jupiler Pro League",
     type: "Vintage Blauw-Zwart Sjaal",
     description: "Klassieke vintage sjaal geruild met een lokale fan bij café 't Gezelleke in Brugge.",
     descriptionEn: "Classic vintage scarf traded with a local supporter at a Bruges pub near the ground.",
@@ -146,6 +182,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "special-editions",
     club: "Real Madrid CF",
     country: "Spanje",
+    league: "La Liga",
     type: "120 Aniversario Jubileumsjaal",
     description: "Gelimiteerde herdenkingssjaal ter gelegenheid van het 120-jarig clubjubileum met gouden details en het Koninklijke embleem.",
     descriptionEn: "Limited commemorative scarf celebrating the club's 120th anniversary featuring gold thread accents and the Royal crest.",
@@ -163,6 +200,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "special-editions",
     club: "Feyenoord",
     country: "Nederland",
+    league: "Eredivisie",
     type: "Europa Cup I 1970 Herdenkingssjaal",
     description: "Speciale editie ter ere van de historische Europa Cup I winst in Milaan, met geborduurd San Siro motief.",
     descriptionEn: "Special edition celebrating the historic 1970 European Cup triumph in Milan, with embroidered San Siro motifs.",
@@ -180,6 +218,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "matchdays",
     club: "Bayern München",
     country: "Duitsland",
+    league: "Bundesliga",
     type: "UEFA Champions League Halve Finale Matchdaysjaal",
     description: "Officiële dubbele wedstrijdsjaal van FC Bayern München tegen Real Madrid in de Allianz Arena, 2024.",
     descriptionEn: "Official dual matchday scarf for FC Bayern München vs Real Madrid at the Allianz Arena, 2024 semi-final.",
@@ -197,6 +236,7 @@ export const DEFAULT_SCARVES: Scarf[] = [
     category: "matchdays",
     club: "Arsenal FC",
     country: "Engeland",
+    league: "Premier League",
     type: "North London Derby Matchdaysjaal",
     description: "Officiële matchdaysjaal Arsenal vs Tottenham Hotspur in het Emirates Stadium, editie Premier League.",
     descriptionEn: "Official matchday scarf for the North London Derby Arsenal vs Tottenham Hotspur at the Emirates Stadium.",
@@ -252,7 +292,7 @@ export async function getScarves(filter?: ScarfFilterParams): Promise<Scarf[]> {
     const { docs } = await payload.find({
       collection: "scarves",
       where: Object.keys(where).length > 0 ? where : undefined,
-      depth: 1,
+      depth: 2,
       limit: 1000,
       sort: "-dateAdded",
     });

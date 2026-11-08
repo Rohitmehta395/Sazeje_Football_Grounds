@@ -4,9 +4,10 @@ import * as React from "react";
 import Link from "next/link";
 import { Scarf } from "@/types";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
-import { getCountryDisplayName } from "@/lib/data/countries";
-import { StadiumIcon } from "@/components/ui/Icons";
-import { Calendar, Trophy, Lightbulb, Maximize2, ArrowRightLeft } from "lucide-react";
+import { getCountryDisplayName, resolveScarfLeagueAndFlag } from "@/lib/data/countries";
+import { StadiumIcon, ClubBadgeIcon } from "@/components/ui/Icons";
+import { CountryFlag } from "@/components/ui/CountryFlag";
+import { Calendar, Trophy, MapPin, Clock, Tag, Maximize2, ArrowRightLeft } from "lucide-react";
 
 export interface ScarfCardProps {
   scarf: Scarf;
@@ -24,8 +25,26 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
     (isEn && scarf.typeEn ? scarf.typeEn : scarf.type) || scarf.type;
   const displayTrophies =
     (isEn && scarf.trophiesEn ? scarf.trophiesEn : scarf.trophies) || scarf.trophies;
-  const displayFunFact =
-    (isEn && scarf.funFactEn ? scarf.funFactEn : scarf.funFact) || scarf.funFact;
+  const { flag: leagueFlag, leagueName } = resolveScarfLeagueAndFlag(
+    scarf.league,
+    scarf.countryFlag,
+    scarf.country
+  );
+
+  const categoryBadge =
+    scarf.category === "new"
+      ? isEn
+        ? "New"
+        : "Nieuw"
+      : scarf.category === "special-editions"
+      ? isEn
+        ? "Special"
+        : "Speciaal"
+      : scarf.category === "matchdays"
+      ? isEn
+        ? "Matchday"
+        : "Wedstrijd"
+      : "Vintage";
 
   return (
     <div
@@ -81,69 +100,147 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
 
         {/* 2. Card Body */}
         <div className="p-4 sm:p-5 space-y-3">
-          {/* Header: Club Title & Country Flag Tag */}
+          {/* Header: Club Identity (Logo + Name) & Country Flag Tag */}
           <div className="flex flex-wrap items-start justify-between gap-2">
-            <div>
-              <h3 className="font-bebas text-2xl sm:text-[26px] text-text m-0 tracking-wide group-hover:text-accent transition-colors leading-tight">
-                {scarf.club}
-              </h3>
-              <div className="font-mono text-xs text-text-muted mt-0.5">
-                {displayType}
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-3.5">
+                {scarf.clubLogo ? (
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-surface border border-border/80 flex items-center justify-center p-1.5 shrink-0 shadow-2xs">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={scarf.clubLogo}
+                      alt={`${scarf.club} logo`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-accent-soft border border-accent/30 flex items-center justify-center text-accent shrink-0">
+                    <ClubBadgeIcon className="w-6 h-6 sm:w-7 sm:h-7" />
+                  </div>
+                )}
+                <h3 className="font-bebas text-3xl sm:text-4xl text-text m-0 tracking-wide group-hover:text-accent transition-colors leading-tight truncate">
+                  {scarf.club}
+                </h3>
               </div>
+
+              {/* League & Country Flag under Club Identity (only when leagueName is present) */}
+              {Boolean(leagueName && leagueName.trim()) && (
+                <div className="flex items-center gap-1.5 font-mono text-xs sm:text-[13px] text-text-muted mt-2 font-medium">
+                  <CountryFlag
+                    countryName={scarf.country}
+                    customFlagUrl={scarf.countryFlag}
+                    className="w-4 h-3 object-cover rounded-[2px] shadow-2xs shrink-0"
+                    fallbackToEmoji={false}
+                  />
+                  <span className="truncate">{leagueName}</span>
+                </div>
+              )}
             </div>
 
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-2 border border-border text-xs font-inter font-medium text-text">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-2 border border-border text-xs font-inter font-medium text-text shrink-0 shadow-xs">
+              <CountryFlag
+                countryName={scarf.country}
+                customFlagUrl={scarf.countryFlag}
+                className="w-4 h-3 object-cover rounded-[2px] shadow-2xs shrink-0"
+                fallbackToEmoji={false}
+              />
               <span>{countryDisplayName}</span>
             </span>
           </div>
 
-          {/* Description */}
-          {displayDescription && (
-            <p className="font-inter text-[13px] text-text/85 leading-relaxed m-0 line-clamp-3">
-              {displayDescription}
-            </p>
-          )}
-
-          {/* Metadata Section */}
-          <div className="space-y-1.5 pt-2 border-t border-border/50 text-xs font-mono">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-text-muted min-w-0 flex-1">
-                <StadiumIcon className="w-3.5 h-3.5 text-text-muted shrink-0" />
-                <span className="truncate" title={scarf.stadium}>
-                  {scarf.stadium || "—"}
+          {/* Details Rows: Seven Vertically Stacked Items in Exact Order (no capacity, no empty fields) */}
+          <div className="mt-4 pt-3.5 border-t border-dashed border-border/80 space-y-2 text-xs">
+            {/* 1. League Name */}
+            {Boolean(leagueName && leagueName.trim()) && (
+              <div className="flex items-center justify-between text-text">
+                <span className="text-text-muted flex items-center gap-1.5">
+                  <Trophy className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                  <span>{isEn ? "League" : "Competitie"}</span>
+                </span>
+                <span className="font-mono text-right truncate max-w-[170px] font-medium">
+                  {leagueName}
                 </span>
               </div>
+            )}
 
-              <div className="flex items-center gap-2 text-text-muted shrink-0 ml-auto justify-end">
-                <Calendar className="w-3.5 h-3.5 text-text-muted shrink-0" />
-                <span className="whitespace-nowrap">
-                  {isEn ? `Est. ${scarf.founded}` : `Opgericht ${scarf.founded}`}
+            {/* 2. Stadium */}
+            {Boolean(scarf.stadium && scarf.stadium.trim()) && (
+              <div className="flex items-center justify-between text-text">
+                <span className="text-text-muted flex items-center gap-1.5">
+                  <StadiumIcon className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                  <span>{t.scarves.stadium}</span>
+                </span>
+                <span className="font-mono text-right truncate max-w-[170px] font-medium">
+                  {scarf.stadium}
                 </span>
               </div>
-            </div>
+            )}
 
-            {displayTrophies && (
-              <div className="flex items-start gap-2 text-text-muted pt-0.5">
-                <Trophy className="w-3.5 h-3.5 text-text-muted shrink-0 mt-0.5" />
-                <span className="text-[11.5px] leading-relaxed break-words">
+            {/* 3. Town */}
+            {Boolean(scarf.town && scarf.town.trim()) && (
+              <div className="flex items-center justify-between text-text">
+                <span className="text-text-muted flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                  <span>{isEn ? "Town" : "Stad"}</span>
+                </span>
+                <span className="font-mono text-right truncate max-w-[170px] font-medium">
+                  {scarf.town}
+                </span>
+              </div>
+            )}
+
+            {/* 4. Founded */}
+            {Boolean(scarf.founded && scarf.founded.trim()) && (
+              <div className="flex items-center justify-between text-text">
+                <span className="text-text-muted flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                  <span>{t.scarves.founded}</span>
+                </span>
+                <span className="font-mono text-right truncate max-w-[170px] font-medium">
+                  {scarf.founded}
+                </span>
+              </div>
+            )}
+
+            {/* 5. Prizes */}
+            {Boolean(displayTrophies && displayTrophies.trim()) && (
+              <div className="flex items-center justify-between text-text">
+                <span className="text-text-muted flex items-center gap-1.5">
+                  <Trophy className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                  <span>{isEn ? "Prizes" : "Prijzenkast"}</span>
+                </span>
+                <span className="text-right truncate max-w-[170px] font-mono text-[11px] font-medium">
                   {displayTrophies}
                 </span>
               </div>
             )}
-          </div>
 
-          {/* "Wist Je Dat?" / Heritage Trivia Box */}
-          {displayFunFact && (
-            <div className="p-2.5 sm:p-3 rounded-xl bg-surface-2/60 border border-border/70 text-xs relative">
-              <div className="flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider font-bold mb-1 text-text">
-                <Lightbulb className="w-3.5 h-3.5 text-text-muted" />
-                <span>{t.scarves.funFact}</span>
+            {/* 6. Seasons in Top Division */}
+            {Boolean(scarf.seasonsInTopDivision && scarf.seasonsInTopDivision.trim()) && (
+              <div className="flex items-center justify-between text-text">
+                <span className="text-text-muted flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                  <span>{isEn ? "Seasons in Top Division" : "Seizoenen op hoogste niveau"}</span>
+                </span>
+                <span className="font-mono text-right truncate max-w-[170px] font-medium">
+                  {scarf.seasonsInTopDivision}
+                </span>
               </div>
-              <p className="font-inter text-text-muted italic leading-relaxed m-0 text-[12px]">
-                &ldquo;{displayFunFact}&rdquo;
-              </p>
-            </div>
-          )}
+            )}
+
+            {/* 7. Category */}
+            {Boolean((scarf.clubCategory && scarf.clubCategory.trim()) || categoryBadge) && (
+              <div className="flex items-center justify-between text-text">
+                <span className="text-text-muted flex items-center gap-1.5">
+                  <Tag className="w-3.5 h-3.5 text-text-muted shrink-0" />
+                  <span>{isEn ? "Category" : "Categorie"}</span>
+                </span>
+                <span className="font-mono text-right truncate max-w-[170px] font-medium">
+                  {scarf.clubCategory || categoryBadge}
+                </span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
