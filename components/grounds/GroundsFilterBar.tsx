@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
-import { getCountryDisplayName } from "@/lib/data/countries";
+import { getCountryDisplayName, getCountryFlagEmoji } from "@/lib/data/countries";
 import {
   Flag,
   Trophy,
@@ -142,11 +142,15 @@ export function GroundsFilterBar({
               onChange={(e) => handleChange("country", e.target.value)}
               className="w-full appearance-none bg-surface border border-border text-text pl-9 pr-8 py-2.5 rounded-lg font-inter text-[13.5px] outline-none focus:border-accent focus:ring-1 focus:ring-accent cursor-pointer hover:border-border/80 transition-colors"
             >
-              {countries.map((c) => (
-                <option key={c} value={c}>
-                  {c === "Alle landen" ? t.grounds.allCountries : getCountryDisplayName(c, lang)}
-                </option>
-              ))}
+              {countries.map((c) => {
+                const flag = c !== "Alle landen" ? getCountryFlagEmoji(c) : "";
+                const label = c === "Alle landen" ? t.grounds.allCountries : getCountryDisplayName(c, lang);
+                return (
+                  <option key={c} value={c}>
+                    {flag ? `${flag} ${label}` : label}
+                  </option>
+                );
+              })}
             </select>
             <ChevronDown className="w-4 h-4 text-text-muted pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
           </div>

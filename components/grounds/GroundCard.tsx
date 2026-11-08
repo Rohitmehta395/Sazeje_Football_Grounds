@@ -7,6 +7,7 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName } from "@/lib/data/countries";
 import { formatDate } from "@/lib/utils/formatDate";
+import { CountryFlag } from "@/components/ui/CountryFlag";
 
 export interface GroundCardProps {
   ground: Ground;
@@ -34,8 +35,17 @@ export function GroundCard({
         aria-label={lang === "en" ? `Photo of stadium ${ground.name}` : `Foto van stadion ${ground.name}`}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-        <Badge variant="dark" className="absolute top-[12px] left-[12px] shadow-sm backdrop-blur-md bg-black/50 border border-white/20">
-          {countryName}
+        <Badge
+          variant="dark"
+          className="absolute top-[12px] left-[12px] shadow-sm backdrop-blur-md bg-black/50 border border-white/20 inline-flex items-center gap-1.5"
+        >
+          <CountryFlag
+            countryName={ground.country}
+            customFlagUrl={ground.countryFlag}
+            className="w-4 h-3 object-cover rounded-[2px] shadow-2xs shrink-0"
+            fallbackToEmoji={false}
+          />
+          <span>{countryName}</span>
         </Badge>
         {displayMatchInfo && (
           <div className="absolute bottom-[10px] left-[12px] right-[12px] font-mono text-[11px] text-white/95 truncate bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded border border-white/10">
