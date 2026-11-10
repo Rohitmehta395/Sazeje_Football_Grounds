@@ -12,14 +12,6 @@ import { ScarfLightbox } from "@/components/scarves/ScarfLightbox";
 import { ScarfPagination } from "@/components/scarves/ScarfPagination";
 import { CountryLink } from "@/components/scarves/CountryLink";
 import {
-  OfficialScarfIcon,
-  SpecialEditionScarfIcon,
-  MatchdayScarfIcon,
-  StadiumIcon,
-  ClubBadgeIcon,
-  ScarfIcon,
-} from "@/components/ui/Icons";
-import {
   ArrowLeft,
   Search,
   X,
@@ -94,8 +86,7 @@ export function ScarfCategoryDirectoryView({
         return {
           title: (isEn ? categoriesDoc?.newTitleEn : categoriesDoc?.newTitle) || t.scarves.categoryNewTitle,
           description: (isEn ? categoriesDoc?.newDescEn : categoriesDoc?.newDesc) || t.scarves.categoryNewDesc,
-          tag: (t.scarves as Record<string, string>).categoryNewTag || (isEn ? "MATCHDAY EDITIONS • OFFICIAL" : "MATCHDAY EDITIES • OFFICIEEL"),
-          icon: <OfficialScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
+          tag: (t.scarves as Record<string, string>).categoryNewTag || (isEn ? "MATCHDAY EDITIONS" : "MATCHDAY EDITIES"),
         };
       case "secondhand": {
         const rawTitle = (isEn ? categoriesDoc?.secondhandTitleEn : categoriesDoc?.secondhandTitle) || t.scarves.categorySecondhandTitle;
@@ -112,29 +103,25 @@ export function ScarfCategoryDirectoryView({
           title: cleanTitle,
           description: cleanDesc,
           tag: (t.scarves as Record<string, string>).categorySecondhandTag || (isEn ? "VINTAGE & COLLECTOR FINDS" : "VINTAGE & VERZAMELAARSVONDSTEN"),
-          icon: <ScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
         };
       }
       case "special-editions":
         return {
           title: (isEn ? categoriesDoc?.specialEditionsTitleEn : categoriesDoc?.specialEditionsTitle) || t.scarves.categorySpecialEditionsTitle,
           description: (isEn ? categoriesDoc?.specialEditionsDescEn : categoriesDoc?.specialEditionsDesc) || t.scarves.categorySpecialEditionsDesc,
-          tag: (t.scarves as Record<string, string>).categorySpecialEditionsTag || (isEn ? "LIMITED EDITIONS • ANNIVERSARY" : "GELIMITEERDE OPLAGES • JUBILEUM"),
-          icon: <SpecialEditionScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
+          tag: (t.scarves as Record<string, string>).categorySpecialEditionsTag || (isEn ? "LIMITED RELEASES" : "GELIMITEERDE RELEASES"),
         };
       case "matchdays":
         return {
           title: (isEn ? categoriesDoc?.matchdaysTitleEn : categoriesDoc?.matchdaysTitle) || t.scarves.categoryMatchdaysTitle,
           description: (isEn ? categoriesDoc?.matchdaysDescEn : categoriesDoc?.matchdaysDesc) || t.scarves.categoryMatchdaysDesc,
-          tag: (t.scarves as Record<string, string>).categoryMatchdaysTag || (isEn ? "EUROPEAN CLASHES • FINALS" : "EUROPESE DUELS • FINALES"),
-          icon: <MatchdayScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
+          tag: (t.scarves as Record<string, string>).categoryMatchdaysTag || (isEn ? "EUROPEAN CLASHES & FINALS" : "EUROPESE KRAKERS & FINALES"),
         };
       default:
         return {
           title: category,
           description: "",
           tag: "SCARVES",
-          icon: <OfficialScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
         };
     }
   }, [category, isEn, categoriesDoc, t.scarves]);
@@ -282,9 +269,8 @@ export function ScarfCategoryDirectoryView({
             <div className="space-y-2 max-w-2xl">
               <div className="flex items-center gap-2">
                 <span
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px] uppercase tracking-wider font-semibold border border-border bg-surface-2 text-text shadow-xs"
+                  className="inline-flex items-center px-3 py-1 rounded-full font-mono text-[11px] uppercase tracking-wider font-semibold border border-border bg-surface-2 text-text shadow-xs"
                 >
-                  {categoryMeta.icon}
                   <span>{categoryMeta.tag}</span>
                 </span>
 
