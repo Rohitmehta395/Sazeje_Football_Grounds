@@ -21,7 +21,7 @@ import {
   ShieldCheck,
   Clock,
 } from "lucide-react";
-import { StadiumIcon, SwapScarvesIcon } from "@/components/ui/Icons";
+import { StadiumIcon } from "@/components/ui/Icons";
 import { TurnstileWidget } from "./TurnstileWidget";
 
 export interface ContactFormProps {
@@ -41,31 +41,25 @@ export function ContactForm({
   const [serverError, setServerError] = React.useState<string | null>(null);
   const [isRateLimited, setIsRateLimited] = React.useState(false);
 
-  // Check URL parameters for pre-filling (e.g. from Scarf Swap or Ground detail)
+  // Check URL parameters for pre-filling (e.g. from Ground detail)
   const urlSubject = searchParams.get("subject") || "";
-  const urlSwapClub = searchParams.get("swap") || "";
   const urlGround = searchParams.get("ground") || "";
 
   const initialTopic = React.useMemo(() => {
     if (selectedTopicOverride) return selectedTopicOverride;
-    if (urlSubject.toLowerCase().includes("swap") || urlSwapClub) return "scarf_swap";
     if (urlSubject.toLowerCase().includes("ground") || urlGround) return "ground_tip";
+    if (urlSubject.toLowerCase().includes("collab")) return "collaboration";
     return "general";
-  }, [selectedTopicOverride, urlSubject, urlSwapClub, urlGround]);
+  }, [selectedTopicOverride, urlSubject, urlGround]);
 
   const initialMessage = React.useMemo(() => {
-    if (urlSwapClub) {
-      return isEn
-        ? `Hello, I saw the ${urlSwapClub} scarf in your collection and would like to propose a swap.`
-        : `Hallo, ik zag de sjaal van ${urlSwapClub} in jullie collectie en wil graag een ruilvoorstel doen.`;
-    }
     if (urlGround) {
       return isEn
         ? `Hello, I have a tip regarding ${urlGround}: `
         : `Hallo, ik heb een tip over ${urlGround}: `;
     }
     return "";
-  }, [urlSwapClub, urlGround, isEn]);
+  }, [urlGround, isEn]);
 
   const {
     register,
@@ -112,13 +106,6 @@ export function ContactForm({
       ),
     },
     {
-      id: "scarf_swap",
-      label: t.contact.topicScarfSwap.replace(/^🧣\s*/, ""),
-      icon: (selected: boolean) => (
-        <SwapScarvesIcon className={`w-4 h-4 shrink-0 transition-colors ${selected ? "text-white" : "text-accent"}`} />
-      ),
-    },
-    {
       id: "collaboration",
       label: t.contact.topicCollaboration.replace(/^🤝\s*/, ""),
       icon: (selected: boolean) => (
@@ -145,8 +132,6 @@ export function ContactForm({
     switch (selectedTopic) {
       case "ground_tip":
         return t.contact.messagePlaceholderGroundTip;
-      case "scarf_swap":
-        return t.contact.messagePlaceholderScarfSwap;
       case "collaboration":
         return t.contact.messagePlaceholderCollab;
       default:
@@ -317,7 +302,7 @@ export function ContactForm({
             <label className="block text-[11px] font-mono uppercase tracking-[0.08em] text-text-muted font-bold">
               {t.contact.topicLabel}
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {topicOptions.map((opt) => {
                 const isSelected = selectedTopic === opt.id;
                 return (

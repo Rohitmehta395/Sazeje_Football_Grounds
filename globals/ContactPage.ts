@@ -407,7 +407,7 @@ export const ContactPage: GlobalConfig = {
                   defaultValue: 'ground',
                   options: [
                     { label: 'Stadium / Ground (Groundhopping)', value: 'ground' },
-                    { label: 'Scarf (Vintage Scarf Swap)', value: 'scarf' },
+                    { label: 'Scarf (Scarf Archive & History)', value: 'scarf' },
                     { label: 'Camera (Matchday Photography & Stories)', value: 'camera' },
                     { label: 'Handshake / Collaboration', value: 'collab' },
                     { label: 'Chat / General Inquiry', value: 'general' },
@@ -422,7 +422,6 @@ export const ContactPage: GlobalConfig = {
                   defaultValue: 'ground_tip',
                   options: [
                     { label: '🏟️ Ground Tip', value: 'ground_tip' },
-                    { label: '🧣 Scarf Swap Offer', value: 'scarf_swap' },
                     { label: '🤝 Collaboration', value: 'collaboration' },
                     { label: '💬 General Question', value: 'general' },
                   ],

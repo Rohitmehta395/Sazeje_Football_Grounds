@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { StadiumIcon, SwapScarvesIcon } from "@/components/ui/Icons";
+import { StadiumIcon, ScarfIcon } from "@/components/ui/Icons";
 import { Camera, Handshake, MessageSquare, ArrowRight } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { ContactPageContent, ContactReasonItem } from "@/types";
@@ -25,45 +25,69 @@ export function ContactReasonsGrid({
   const sectionTitle = isEn && reasons?.sectionTitleEn ? reasons.sectionTitleEn : reasons?.sectionTitle || t.contact.reasonsTitle;
   const sectionSubtitle = isEn && reasons?.sectionSubtitleEn ? reasons.sectionSubtitleEn : reasons?.sectionSubtitle || t.contact.reasonsSubtitle;
 
-  const items = reasons?.items && reasons.items.length > 0
-    ? reasons.items
-    : [
-        {
-          tag: "GROUNDHOPPING",
-          tagEn: "GROUNDHOPPING",
-          title: t.contact.reason1Title,
-          titleEn: t.contact.reason1Title,
-          description: t.contact.reason1Desc,
-          descriptionEn: t.contact.reason1Desc,
-          icon: "ground" as const,
-          defaultTopic: "ground_tip" as const,
-        },
-        {
-          tag: "VINTAGE SCARF SWAP",
-          tagEn: "VINTAGE SCARF SWAP",
-          title: t.contact.reason2Title,
-          titleEn: t.contact.reason2Title,
-          description: t.contact.reason2Desc,
-          descriptionEn: t.contact.reason2Desc,
-          icon: "scarf" as const,
-          defaultTopic: "scarf_swap" as const,
-        },
-        {
-          tag: "MATCHDAY STORIES",
-          tagEn: "MATCHDAY STORIES",
-          title: t.contact.reason3Title,
-          titleEn: t.contact.reason3Title,
-          description: t.contact.reason3Desc,
-          descriptionEn: t.contact.reason3Desc,
-          icon: "camera" as const,
-          defaultTopic: "collaboration" as const,
-        },
-      ];
+  const items =
+    reasons?.items && reasons.items.length > 0
+      ? reasons.items.map((item) => {
+          const isSwap =
+            (item.defaultTopic as string) === "scarf_swap" ||
+            item.tag?.toLowerCase().includes("swap") ||
+            item.tagEn?.toLowerCase().includes("swap") ||
+            item.title?.toLowerCase().includes("ruil") ||
+            item.titleEn?.toLowerCase().includes("swap");
+          if (isSwap) {
+            return {
+              ...item,
+              tag: item.tag?.toLowerCase().includes("swap") ? "SJAALARCHIEF" : item.tag,
+              tagEn: item.tagEn?.toLowerCase().includes("swap") ? "SCARF ARCHIVE" : item.tagEn,
+              title: isEn ? "Scarf Collection & Inquiries" : "Sjaalcollectie & Historie",
+              titleEn: "Scarf Collection & Inquiries",
+              description: isEn
+                ? "Have a question about a specific scarf in our collection or want to know more about its history? Feel free to ask."
+                : "Heb je een vraag over een specifieke sjaal uit onze collectie of wil je meer weten over de herkomst? Vraag het ons gerust.",
+              descriptionEn:
+                "Have a question about a specific scarf in our collection or want to know more about its history? Feel free to ask.",
+              defaultTopic: "general" as const,
+            };
+          }
+          return item;
+        })
+      : [
+          {
+            tag: "GROUNDHOPPING",
+            tagEn: "GROUNDHOPPING",
+            title: t.contact.reason1Title,
+            titleEn: t.contact.reason1Title,
+            description: t.contact.reason1Desc,
+            descriptionEn: t.contact.reason1Desc,
+            icon: "ground" as const,
+            defaultTopic: "ground_tip" as const,
+          },
+          {
+            tag: "SCARF ARCHIVE",
+            tagEn: "SCARF ARCHIVE",
+            title: t.contact.reason2Title,
+            titleEn: t.contact.reason2Title,
+            description: t.contact.reason2Desc,
+            descriptionEn: t.contact.reason2Desc,
+            icon: "scarf" as const,
+            defaultTopic: "general" as const,
+          },
+          {
+            tag: "MATCHDAY STORIES",
+            tagEn: "MATCHDAY STORIES",
+            title: t.contact.reason3Title,
+            titleEn: t.contact.reason3Title,
+            description: t.contact.reason3Desc,
+            descriptionEn: t.contact.reason3Desc,
+            icon: "camera" as const,
+            defaultTopic: "collaboration" as const,
+          },
+        ];
 
   const getIcon = (iconName?: string) => {
     switch (iconName) {
       case "scarf":
-        return <SwapScarvesIcon className="w-6 h-6 text-accent" />;
+        return <ScarfIcon className="w-6 h-6 text-accent" />;
       case "camera":
         return <Camera className="w-6 h-6 text-accent" />;
       case "collab":

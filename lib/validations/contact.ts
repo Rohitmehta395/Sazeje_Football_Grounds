@@ -8,7 +8,6 @@ const NAME_REGEX = /^[a-zA-Z0-9 .,'’\-À-ž]{2,100}$/;
 
 export const contactTopics = [
   "ground_tip",
-  "scarf_swap",
   "collaboration",
   "general",
 ] as const;

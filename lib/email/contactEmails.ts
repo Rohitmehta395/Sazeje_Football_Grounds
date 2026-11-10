@@ -65,7 +65,7 @@ Message:
 
 --- WHAT TO EXPECT ---
 We typically review and reply to messages within 24 to 48 hours (often faster on match days!).
-If this is a scarf swap proposal or stadium recommendation, we can't wait to check it out!
+If this is a stadium recommendation or collaboration proposal, we can't wait to check it out!
 
 Need to provide extra details or photos? You can reply directly to this email.
 
@@ -90,7 +90,7 @@ Je bericht:
 
 --- WAT KUN JE VERWACHTEN? ---
 We proberen elk bericht binnen 24 tot 48 uur te beantwoorden (op wedstrijddagen vaak nog sneller!).
-Betreft het een sjaalruil of een tip voor een bijzonder stadion? Dan kijken we er extra naar uit!
+Betreft het een stadiontip of een bijzonder reisverhaal? Dan kijken we er extra naar uit!
 
 Heb je aanvullende informatie of foto's? Je kunt direct antwoorden op deze e-mail.
 
@@ -228,8 +228,8 @@ ${safeMessage}
                     </h4>
                     <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #2F483A;">
                       ${isEn
-                        ? "We typically review every message within <strong>24 to 48 hours</strong>. If your message is about a scarf swap or ground recommendation, we can't wait to review the details!"
-                        : "We streven ernaar om elk bericht binnen <strong>24 tot 48 uur</strong> te beantwoorden. Gaat het om een sjaalruil of een stadiontip? Dan kijken we hier met extra veel plezier naar!"}
+                        ? "We typically review every message within <strong>24 to 48 hours</strong>. If your message is about a ground recommendation or collaboration, we can't wait to review the details!"
+                        : "We streven ernaar om elk bericht binnen <strong>24 tot 48 uur</strong> te beantwoorden. Gaat het om een stadiontip of samenwerking? Dan kijken we hier met extra veel plezier naar!"}
                     </p>
                     <p style="margin: 8px 0 0 0; font-size: 12px; line-height: 1.4; color: #536B61;">
                       ${isEn

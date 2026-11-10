@@ -21,9 +21,9 @@ export const DEFAULT_SCARVES_PAGE_CONTENT: ScarvesPageContent = {
     title: "Europese Sjaalcollectie",
     titleEn: "European Scarf Collection",
     subtitle:
-      "Een levend overzicht van officiële en historische voetbalsjaals verzameld tijdens Europese groundhop-reizen. Van officiële clubfanshops tot unieke vintage ruilsjaals.",
+      "Een levend overzicht van officiële en historische voetbalsjaals verzameld tijdens Europese groundhop-reizen. Van officiële clubfanshops tot unieke vintage verzamelaarsstukken.",
     subtitleEn:
-      "A curated archive of official and historic football scarves gathered across European stadium expeditions. From official matchday club stores to rare vintage collector trades.",
+      "A curated archive of official and historic football scarves gathered across European stadium expeditions. From official matchday club stores to rare vintage collector finds.",
     heroImage: "/Hero_Image.jpg",
   },
   intro: {

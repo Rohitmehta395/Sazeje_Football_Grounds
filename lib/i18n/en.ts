@@ -33,10 +33,10 @@ export const en: Translations = {
     statsScarves: "Scarves",
     statsGoals: "Active Goals",
     viewAllStats: "View Bucketlist & Goals",
-    communityHeading: "Community & Swap",
+    communityHeading: "Community & Tips",
     communityText:
-      "Have a stadium tip, a travel story, or a rare scarf you'd like to trade? We'd love to hear from you.",
-    ctaShareTip: "Submit Tip or Scarf",
+      "Have a stadium tip, a travel story, or a ground recommendation? We'd love to hear from you.",
+    ctaShareTip: "Submit a Tip",
     statusBadge: "Exploring Europe • Season 2024–2026",
     backToTop: "Back to top",
     disclaimer: "Non-commercial supporter archive. All rights reserved.",
@@ -101,11 +101,11 @@ export const en: Translations = {
     storyPillar3Title: "Endless Exploration",
     storyPillar3Desc: "From local grass-roots fixtures to legendary roaring cauldrons across Europe.",
     storyReadMore: "Read Our Story",
-    ctaSectionTitle: "Have a stadium tip or a scarf to swap?",
+    ctaSectionTitle: "Have a stadium tip or groundhopping story?",
     ctaSectionSubtitle:
-      "We are always eager for groundhopping recommendations, atmospheric stories, or rare scarves to trade.",
+      "We are always eager for groundhopping recommendations, atmospheric stories, and forgotten terrace gems.",
     ctaButtonContact: "Get in Touch",
-    ctaButtonScarves: "Browse Swappable Scarves",
+    ctaButtonScarves: "Explore Scarf Collection",
     scarvesArchive: "SCARF COLLECTION ARCHIVE",
     viewInCollection: "View in Collection",
     filterResults: "Filter results",
@@ -246,8 +246,8 @@ export const en: Translations = {
     searchPlaceholderCategory: "Search scarf, club, or stadium...",
     activeFilterResults: "{count} scarves found",
     inspectPhoto: "Inspect photo",
-    swapProposal: "Propose a Swap",
-    swapBadge: "Open for Swap",
+    swapProposal: "View Photo",
+    swapBadge: "Vintage & Secondhand",
     officialFanshopBadge: "Official Matchday Edition",
     countriesWithScarves: "Countries with Scarves in Collection",
     allCountriesList: "All European Countries",
@@ -256,10 +256,10 @@ export const en: Translations = {
     showingCount: "Showing {visible} of {total} scarves",
     allLoaded: "All scarves loaded",
     matchdayFanshop: "Matchday Fanshop",
-    terraceTrade: "Terrace Trade",
+    terraceTrade: "Vintage Collection",
     matchdayAcquisition: "Matchday Acquisition",
-    openForSwap: "Open for Swap",
-    proposeSwap: "Propose Swap",
+    openForSwap: "Vintage & Secondhand",
+    proposeSwap: "View Photo",
   },
 
   // Map Page
@@ -283,10 +283,10 @@ export const en: Translations = {
     heroEyebrow: "COMMUNITY & CONNECT",
     heroTitle: "Get in Touch",
     heroSubtitle:
-      "Have a question, ground tip, or scarf swap proposal? Send us a message and share your passion for European football culture.",
+      "Have a question, ground tip, or collaboration idea? Send us a message and share your passion for European football culture.",
     topicLabel: "What is your inquiry about?",
     topicGroundTip: "🏟️ Ground Tip",
-    topicScarfSwap: "🧣 Scarf Swap Offer",
+    topicScarfSwap: "💬 Scarf Archive Question",
     topicCollaboration: "🤝 Collaboration",
     topicGeneral: "💬 General Question",
     labelName: "Name",
@@ -295,11 +295,11 @@ export const en: Translations = {
     emailPlaceholder: "name@example.com",
     labelTopic: "Topic",
     labelMessage: "Message",
-    messagePlaceholder: "Write your message, question, or swap offer here...",
+    messagePlaceholder: "Write your message or question here...",
     messagePlaceholderGroundTip:
       "Tell us about the ground, the club, the terrace atmosphere, and why we should visit...",
     messagePlaceholderScarfSwap:
-      "Specify which scarf from our collection you're interested in and what piece you'd like to offer in exchange...",
+      "Tell us which scarf or club from our collection you'd like to ask about...",
     messagePlaceholderCollab:
       "Share your ideas for a collaboration, feature report, photography, or podcast...",
     messagePlaceholderGeneral: "Write your message or question here...",
@@ -338,9 +338,9 @@ export const en: Translations = {
     reason1Title: "Ground Tips & Hidden Gems",
     reason1Desc:
       "Know an authentic non-league ground, a forgotten tradition, or a derby we must experience? Let us know!",
-    reason2Title: "Scarf Swapping & Collecting",
+    reason2Title: "Scarf Collection & Inquiries",
     reason2Desc:
-      "Have a rare club or friendship scarf to trade? We are always open to fair swaps with fellow passionate collectors.",
+      "Have a question about a specific club scarf in our archive, or want to know more about its history? Feel free to ask.",
     reason3Title: "Collaborations & Match Reports",
     reason3Desc:
       "Interested in a joint match report, photography exchange, guest article, or podcast? We'd love to chat.",

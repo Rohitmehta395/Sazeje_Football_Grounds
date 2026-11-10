@@ -31,10 +31,10 @@ export const nl = {
     statsScarves: "Sjaals",
     statsGoals: "Doelen Actief",
     viewAllStats: "Bekijk Bucketlist & Doelen",
-    communityHeading: "Community & Ruil",
+    communityHeading: "Community & Tips",
     communityText:
-      "Heb je een stadionaanbeveling, een reisverhaal of wil je een sjaal ruilen? Laat gerust van je horen.",
-    ctaShareTip: "Tip of Sjaal Insturen",
+      "Heb je een stadionaanbeveling, een verborgen parel of een reisverhaal? Laat gerust van je horen.",
+    ctaShareTip: "Tip Insturen",
     statusBadge: "Onderweg in Europa • Seizoen 2024–2026",
     backToTop: "Naar boven",
     disclaimer: "Niet-commercieel supportersarchief. Alle rechten voorbehouden.",
@@ -77,7 +77,7 @@ export const nl = {
       "Ontdek alle bezochte stadions verspreid over het continent, van iconische kathedralen tot intieme cult-grounds.",
     mapSectionCta: "Open Volledige Kaart",
     featuredScarvesTitle: "Uitgelichte Sjaals",
-    featuredScarvesSubtitle: "Een selectie uit het groeiende archief van officiële matchday- en ruilsjaals.",
+    featuredScarvesSubtitle: "Een selectie uit het groeiende archief van officiële matchday- en verzamelaarssjaals.",
     scarvesTabAll: "Alle Categorieën",
     scarvesTabNew: "Nieuw / Matchday",
     scarvesTabSecondhand: "Tweedehands / Vintage",
@@ -99,7 +99,7 @@ export const nl = {
     storyPillar3Title: "Eindeloze Verkenning",
     storyPillar3Desc: "Van lokale cultvelden in de regio tot kolkende stadions door heel Europa.",
     storyReadMore: "Lees Ons Verhaal",
-    ctaSectionTitle: "Heb je een gouden tip of sjaal om te ruilen?",
+    ctaSectionTitle: "Heb je een gouden tip of groundhopverhaal?",
     ctaSectionSubtitle:
       "We zijn altijd op zoek naar bijzondere stadionaanbevelingen, verhalen of unieke sjaals voor het archief.",
     ctaButtonContact: "Neem Contact Op",
@@ -244,8 +244,8 @@ export const nl = {
     searchPlaceholderCategory: "Zoek sjaal, club of stadion...",
     activeFilterResults: "{count} sjaals gevonden",
     inspectPhoto: "Vergroot foto",
-    swapProposal: "Doe een Ruilvoorstel",
-    swapBadge: "Beschikbaar voor Ruil",
+    swapProposal: "Vergroot foto",
+    swapBadge: "Vintage & Tweedehands",
     officialFanshopBadge: "Officiële Fanshop Uitgave",
     countriesWithScarves: "Landen met Sjaals in Collectie",
     allCountriesList: "Alle Europese Landen",
@@ -254,10 +254,10 @@ export const nl = {
     showingCount: "{visible} van {total} sjaals getoond",
     allLoaded: "Alle sjaals getoond",
     matchdayFanshop: "Officiële Fanshop",
-    terraceTrade: "Terrace Ruil",
+    terraceTrade: "Vintage Collectie",
     matchdayAcquisition: "Matchday Aankoop",
-    openForSwap: "Beschikbaar voor Ruil",
-    proposeSwap: "Ruilvoorstel",
+    openForSwap: "Vintage & Tweedehands",
+    proposeSwap: "Vergroot foto",
   },
 
   // Map Page
@@ -281,10 +281,10 @@ export const nl = {
     heroEyebrow: "COMMUNITY & VERBINDING",
     heroTitle: "Neem Contact Op",
     heroSubtitle:
-      "Vraag, tip voor een stadion, of een sjaal om te ruilen? Stuur ons een bericht en deel je passie voor voetbalcultuur.",
+      "Vraag, tip voor een stadion of idee voor een samenwerking? Stuur ons een bericht en deel je passie voor voetbalcultuur.",
     topicLabel: "Waar gaat je bericht over?",
     topicGroundTip: "🏟️ Ground Tip",
-    topicScarfSwap: "🧣 Sjaal Ruilvoorstel",
+    topicScarfSwap: "💬 Sjaalarchief Vraag",
     topicCollaboration: "🤝 Samenwerking",
     topicGeneral: "💬 Algemeen",
     labelName: "Naam",
@@ -293,11 +293,11 @@ export const nl = {
     emailPlaceholder: "naam@voorbeeld.nl",
     labelTopic: "Onderwerp",
     labelMessage: "Bericht",
-    messagePlaceholder: "Schrijf hier je bericht, vraag of ruilvoorstel...",
+    messagePlaceholder: "Schrijf hier je bericht of vraag...",
     messagePlaceholderGroundTip:
       "Vertel ons over het stadion, de club, de sfeer en waarom we deze ground moeten bezoeken...",
     messagePlaceholderScarfSwap:
-      "Geef aan welke sjaal uit onze collectie je interesseert en wat voor stuk je zelf wilt aanbieden...",
+      "Geef aan welke sjaal of club uit onze collectie je interesseert...",
     messagePlaceholderCollab:
       "Deel je idee voor een samenwerking, gastreportage, fotografie of podcast...",
     messagePlaceholderGeneral: "Schrijf hier je bericht of vraag...",
@@ -336,9 +336,9 @@ export const nl = {
     reason1Title: "Stadiontips & Verborgen Parels",
     reason1Desc:
       "Ken je een authentiek amateurstadion, een vergeten traditie of een derby die we moeten bezoeken? Laat het ons weten!",
-    reason2Title: "Sjaals Ruilen & Verzamelen",
+    reason2Title: "Sjaalcollectie & Historie",
     reason2Desc:
-      "Heb je een zeldzame club- of vriendschapssjaal om te ruilen? Wij staan altijd open voor een goed ruilvoorstel.",
+      "Heb je een vraag over een specifieke sjaal uit onze collectie of wil je meer weten over de herkomst? Vraag het ons gerust.",
     reason3Title: "Samenwerkingen & Matchday Verhalen",
     reason3Desc:
       "Interesse in een gezamenlijke reportage, fotoreeks, gastbijdrage of podcast? We gaan graag in gesprek.",

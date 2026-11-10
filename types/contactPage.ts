@@ -7,7 +7,7 @@ export interface ContactReasonItem {
   description: string;
   descriptionEn?: string;
   icon?: 'ground' | 'scarf' | 'camera' | 'collab' | 'general';
-  defaultTopic?: 'ground_tip' | 'scarf_swap' | 'collaboration' | 'general';
+  defaultTopic?: 'ground_tip' | 'collaboration' | 'general';
 }
 
 export interface ContactPageContent {

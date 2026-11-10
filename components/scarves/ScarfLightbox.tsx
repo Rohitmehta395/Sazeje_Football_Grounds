@@ -55,7 +55,14 @@ export function ScarfLightbox({ scarf, isOpen, onClose }: ScarfLightboxProps) {
   if (!isOpen || !scarf) return null;
 
   const countryDisplay = getCountryDisplayName(scarf.country, lang);
-  const isNew = scarf.category === "new";
+  const categoryLabel =
+    scarf.category === "new"
+      ? "OFFICIAL MATCHDAY"
+      : scarf.category === "special-editions"
+      ? "SPECIAL EDITION"
+      : scarf.category === "matchdays"
+      ? "MATCHDAY FIXTURE"
+      : "VINTAGE & SECONDHAND";
 
   return (
     <div
@@ -70,7 +77,7 @@ export function ScarfLightbox({ scarf, isOpen, onClose }: ScarfLightboxProps) {
           <span
             className="font-mono text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold border bg-white/10 border-white/20 text-white"
           >
-            {isNew ? "OFFICIAL MATCHDAY" : "VINTAGE TRADE"}
+            {categoryLabel}
           </span>
           <div>
             <h2 className="font-bebas text-2xl sm:text-3xl m-0 leading-tight tracking-wide">

@@ -352,10 +352,10 @@ export function SiteFooter({ socialLinks }: SiteFooterProps = {}) {
             </div>
           </div>
 
-          {/* Column 4: Community & Scarf Swap */}
+          {/* Column 4: Community & Tips */}
           <div className="flex flex-col space-y-4">
             <h3 className="font-bebas text-lg text-text tracking-wider uppercase m-0 flex items-center gap-1.5 h-10 whitespace-nowrap">
-              <ScarfIcon className="w-4 h-4 text-accent shrink-0" />
+              <Send className="w-4 h-4 text-accent shrink-0" />
               <span>{t.footer.communityHeading}</span>
             </h3>
             <p className="font-inter text-xs sm:text-[13px] text-text-muted leading-relaxed m-0">

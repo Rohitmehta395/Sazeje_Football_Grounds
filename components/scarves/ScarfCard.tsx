@@ -1,13 +1,12 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { Scarf } from "@/types";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { getCountryDisplayName, resolveScarfLeagueAndFlag } from "@/lib/data/countries";
 import { StadiumIcon, ClubBadgeIcon } from "@/components/ui/Icons";
 import { CountryFlag } from "@/components/ui/CountryFlag";
-import { Calendar, Trophy, MapPin, Clock, Tag, Maximize2, ArrowRightLeft } from "lucide-react";
+import { Calendar, Trophy, MapPin, Clock, Tag, Maximize2 } from "lucide-react";
 
 export interface ScarfCardProps {
   scarf: Scarf;
@@ -248,18 +247,22 @@ export function ScarfCard({ scarf, onOpenLightbox }: ScarfCardProps) {
       <div className="px-4 sm:px-5 py-3 border-t border-border/60 bg-surface-2/30 flex items-center justify-between gap-3">
         {scarf.category === "secondhand" ? (
           <>
-            <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-text font-semibold">
-              <span className="w-2 h-2 rounded-full bg-text/60 animate-pulse" />
-              <span>{isEn ? "Open for Swap" : "Beschikbaar voor Ruil"}</span>
+            <div className="font-mono text-[11px] text-text-muted">
+              <span className="text-text font-semibold">
+                {isEn ? "Vintage & Secondhand" : "Vintage & Tweedehands"}
+              </span>
             </div>
 
-            <Link
-              href={`/contact?swap=${encodeURIComponent(scarf.club)}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-2 hover:bg-surface text-text hover:border-text-muted/50 border border-border text-xs font-mono font-semibold transition-all cursor-pointer shadow-xs"
-            >
-              <ArrowRightLeft className="w-3.5 h-3.5" />
-              <span>{isEn ? "Propose Swap" : "Ruilvoorstel"}</span>
-            </Link>
+            {scarf.photo && (
+              <button
+                type="button"
+                onClick={() => onOpenLightbox?.(scarf)}
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text transition-colors cursor-pointer"
+              >
+                <Maximize2 className="w-3.5 h-3.5" />
+                <span>{isEn ? "View Photo" : "Vergroot"}</span>
+              </button>
+            )}
           </>
         ) : scarf.category === "special-editions" ? (
           <>

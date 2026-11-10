@@ -13,7 +13,7 @@ import {
   Handshake,
   MessageSquare,
 } from "lucide-react";
-import { StadiumIcon, SwapScarvesIcon } from "@/components/ui/Icons";
+import { StadiumIcon } from "@/components/ui/Icons";
 import { useTranslation } from "@/lib/i18n/LanguageContext";
 import { ContactPageContent, SiteSettings } from "@/types";
 
@@ -117,11 +117,6 @@ export function ContactInfoCard({
       id: "ground_tip",
       label: isEn ? "Ground tip" : "Stadiontip",
       icon: <StadiumIcon className="w-3.5 h-3.5 text-azg shrink-0" />,
-    },
-    {
-      id: "scarf_swap",
-      label: isEn ? "Scarf swap" : "Sjaalruil",
-      icon: <SwapScarvesIcon className="w-3.5 h-3.5 text-accent shrink-0" />,
     },
     {
       id: "collaboration",

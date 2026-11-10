@@ -21,9 +21,9 @@ export const DEFAULT_CONTACT_PAGE_CONTENT: ContactPageContent = {
     title: "Neem Contact Op",
     titleEn: "Get in Touch",
     subtitle:
-      "Vraag, tip voor een stadion, of een sjaal om te ruilen? Stuur ons een bericht en deel je passie voor voetbalcultuur.",
+      "Vraag, tip voor een stadion of idee voor een samenwerking? Stuur ons een bericht en deel je passie voor voetbalcultuur.",
     subtitleEn:
-      "Have a question, ground tip, or scarf swap proposal? Send us a message and share your passion for European football culture.",
+      "Have a question, ground tip, or collaboration idea? Send us a message and share your passion for European football culture.",
     heroImage: "/Hero_Image.jpg",
   },
   directInfo: {
@@ -70,16 +70,16 @@ export const DEFAULT_CONTACT_PAGE_CONTENT: ContactPageContent = {
         defaultTopic: "ground_tip",
       },
       {
-        tag: "VINTAGE SCARF SWAP",
-        tagEn: "VINTAGE SCARF SWAP",
-        title: "Sjaals Ruilen & Verzamelen",
-        titleEn: "Scarf Swapping & Collecting",
+        tag: "SCARF ARCHIVE",
+        tagEn: "SCARF ARCHIVE",
+        title: "Sjaalcollectie & Historie",
+        titleEn: "Scarf Collection & Inquiries",
         description:
-          "Heb je een zeldzame club- of vriendschapssjaal om te ruilen? Wij staan altijd open voor een goed ruilvoorstel.",
+          "Heb je een vraag over een specifieke sjaal uit onze collectie of wil je meer weten over de herkomst? Vraag het ons gerust.",
         descriptionEn:
-          "Have a rare club or friendship scarf to trade? We are always open to fair swaps with fellow passionate collectors.",
+          "Have a question about a specific scarf in our collection or want to know more about its history? Feel free to ask.",
         icon: "scarf",
-        defaultTopic: "scarf_swap",
+        defaultTopic: "general",
       },
       {
         tag: "MATCHDAY STORIES",
@@ -99,9 +99,9 @@ export const DEFAULT_CONTACT_PAGE_CONTENT: ContactPageContent = {
     metaTitle: "Contact & Community | SaZeJe Groundhopping",
     metaTitleEn: "Contact & Community | SaZeJe Groundhopping",
     metaDescription:
-      "Neem contact op met SaZeJe Groundhopping voor stadiontips, sjaalruil voorstellen of samenwerkingen rondom Europese voetbalcultuur.",
+      "Neem contact op met SaZeJe Groundhopping voor stadiontips of samenwerkingen rondom Europese voetbalcultuur.",
     metaDescriptionEn:
-      "Get in touch with SaZeJe Groundhopping for ground recommendations, scarf swap proposals, or collaborations celebrating European football culture.",
+      "Get in touch with SaZeJe Groundhopping for ground recommendations or collaborations celebrating European football culture.",
   },
 };
 

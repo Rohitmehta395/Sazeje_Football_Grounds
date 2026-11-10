@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     pageContent.seo?.metaDescription ||
     pageContent.hero.subtitle ||
-    "Neem contact op met SaZeJe Groundhopping voor stadiontips, sjaalruil voorstellen of samenwerkingen.";
+    "Neem contact op met SaZeJe Groundhopping voor stadiontips, samenwerkingen of algemene vragen.";
 
   return {
     title,

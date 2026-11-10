@@ -13,11 +13,11 @@ import { ScarfPagination } from "@/components/scarves/ScarfPagination";
 import { CountryLink } from "@/components/scarves/CountryLink";
 import {
   OfficialScarfIcon,
-  SwapScarvesIcon,
   SpecialEditionScarfIcon,
   MatchdayScarfIcon,
   StadiumIcon,
   ClubBadgeIcon,
+  ScarfIcon,
 } from "@/components/ui/Icons";
 import {
   ArrowLeft,
@@ -29,7 +29,6 @@ import {
   Check,
   ArrowRight,
   Flag,
-  ArrowRightLeft,
   Sparkles,
 } from "lucide-react";
 
@@ -113,7 +112,7 @@ export function ScarfCategoryDirectoryView({
           title: cleanTitle,
           description: cleanDesc,
           tag: (t.scarves as Record<string, string>).categorySecondhandTag || (isEn ? "VINTAGE & COLLECTOR FINDS" : "VINTAGE & VERZAMELAARSVONDSTEN"),
-          icon: <SwapScarvesIcon className="w-3.5 h-3.5 text-text-muted" />,
+          icon: <ScarfIcon className="w-3.5 h-3.5 text-text-muted" />,
         };
       }
       case "special-editions":
@@ -327,16 +326,6 @@ export function ScarfCategoryDirectoryView({
                   </div>
                 </div>
               </div>
-
-              {category === "secondhand" && (
-                <Link
-                  href="/contact?subject=Scarf%20Swap"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-2 hover:bg-surface border border-border text-text font-mono text-xs font-semibold transition-all shadow-sm hover:border-text-muted/50"
-                >
-                  <ArrowRightLeft className="w-3.5 h-3.5" />
-                  <span>{isEn ? "Propose a Scarf Swap" : "Stuur een Ruilvoorstel"}</span>
-                </Link>
-              )}
             </div>
           </div>
         </div>
