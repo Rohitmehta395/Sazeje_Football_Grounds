@@ -38,6 +38,13 @@ const getServerURL = () => {
 
 const allowedOrigins = [
   "http://localhost:3000",
+  "http://localhost:3001",
+  "http://localhost:3002",
+  "http://localhost:3003",
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:3001",
+  "http://127.0.0.1:3002",
+  "http://127.0.0.1:3003",
   "https://sazejefootball.vercel.app",
   "https://sazeje-football.vercel.app",
   process.env.NEXT_PUBLIC_SERVER_URL || "",

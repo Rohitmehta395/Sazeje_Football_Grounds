@@ -89,7 +89,11 @@ export async function autoTranslateGroundHook({
           img.caption.trim() &&
           (!img.captionEn || !(img.captionEn as string).trim())
         ) {
-          img.captionEn = await translateText(img.caption, "nl", "en");
+          try {
+            img.captionEn = await translateText(img.caption, "nl", "en");
+          } catch (err) {
+            console.error(`[AutoTranslate] Failed to translate image caption:`, err);
+          }
         }
       })
     );
