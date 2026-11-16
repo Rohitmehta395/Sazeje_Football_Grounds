@@ -288,7 +288,7 @@ export function GroundDetail({
                     <div className="flex items-center gap-3.5 sm:gap-4 -my-1">
                       <div className="w-13 sm:w-16 shrink-0" />
                       <span className="font-mono text-xs sm:text-sm text-text-muted font-medium lowercase tracking-wider">
-                        vs.
+                        —
                       </span>
                     </div>
                   )}
