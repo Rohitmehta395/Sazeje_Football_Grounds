@@ -70,13 +70,32 @@ export async function autoTranslateGroundHook({
   data: Record<string, unknown>;
   originalDoc?: Record<string, unknown>;
 }) {
-  return autoTranslateFields(data, originalDoc, [
+  const result = await autoTranslateFields(data, originalDoc, [
     { source: "description", target: "descriptionEn", statusField: "descriptionEnStatus" },
     { source: "story", target: "storyEn", statusField: "storyEnStatus" },
     { source: "matchInfo", target: "matchInfoEn", statusField: "matchInfoEnStatus" },
     { source: "extra", target: "extraEn", statusField: "extraEnStatus" },
     { source: "weather", target: "weatherEn", statusField: "weatherEnStatus" },
+    { source: "photoCaption", target: "photoCaptionEn" },
   ]);
+
+  // Translate individual gallery image captions if Dutch is provided and English is empty
+  if (Array.isArray(data.images)) {
+    await Promise.all(
+      data.images.map(async (img: Record<string, unknown>) => {
+        if (
+          img &&
+          typeof img.caption === "string" &&
+          img.caption.trim() &&
+          (!img.captionEn || !(img.captionEn as string).trim())
+        ) {
+          img.captionEn = await translateText(img.caption, "nl", "en");
+        }
+      })
+    );
+  }
+
+  return result;
 }
 
 /**

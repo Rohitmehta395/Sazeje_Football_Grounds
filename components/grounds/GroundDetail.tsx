@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from "react";
 import Link from "next/link";
-import { Ground } from "@/types";
+import { Ground, GroundImageItem } from "@/types";
 import { GroundLightbox } from "./GroundLightbox";
 import { GroundTicketStub } from "./GroundTicketStub";
 import { GroundCard } from "./GroundCard";
@@ -58,17 +58,34 @@ export function GroundDetail({
   const displayMatchInfo =
     isEn && ground.matchInfoEn ? ground.matchInfoEn : ground.matchInfo;
 
-  // All gallery images
-  const allImages = React.useMemo(() => {
-    const list: string[] = [];
-    if (ground.photo) list.push(ground.photo);
-    if (ground.images && ground.images.length > 0) {
+  // All gallery image items (with bilingual captions)
+  const allImageItems = React.useMemo(() => {
+    const list: GroundImageItem[] = [];
+    if (ground.photo) {
+      list.push({
+        url: ground.photo,
+        caption: ground.photoCaption,
+        captionEn: ground.photoCaptionEn,
+      });
+    }
+    if (ground.gallery && ground.gallery.length > 0) {
+      ground.gallery.forEach((item) => {
+        if (item?.url && !list.some((existing) => existing.url === item.url)) {
+          list.push(item);
+        }
+      });
+    } else if (ground.images && ground.images.length > 0) {
       ground.images.forEach((img) => {
-        if (img && !list.includes(img)) list.push(img);
+        const url = typeof img === "string" ? img : img?.url;
+        if (url && !list.some((existing) => existing.url === url)) {
+          list.push(typeof img === "string" ? { url } : img);
+        }
       });
     }
     return list;
-  }, [ground.photo, ground.images]);
+  }, [ground.photo, ground.photoCaption, ground.photoCaptionEn, ground.gallery, ground.images]);
+
+  const allImages = React.useMemo(() => allImageItems.map((item) => item.url), [allImageItems]);
 
   const handleOpenLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -450,7 +467,7 @@ export function GroundDetail({
 
       {/* Lightbox Modal */}
       <GroundLightbox
-        images={allImages}
+        images={allImageItems}
         initialIndex={lightboxIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}

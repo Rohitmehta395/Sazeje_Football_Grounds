@@ -1,3 +1,9 @@
+export interface GroundImageItem {
+  url: string;
+  caption?: string;
+  captionEn?: string;
+}
+
 export interface Ground {
   id: string;
   name: string;
@@ -26,7 +32,10 @@ export interface Ground {
   weatherEnStatus?: "auto" | "edited";
   extra?: string;
   extraEn?: string;
-  images: string[];
+  images: (string | GroundImageItem)[];
+  gallery?: GroundImageItem[];
   photo: string;
+  photoCaption?: string;
+  photoCaptionEn?: string;
   dateAdded: string;
 }

@@ -2,10 +2,12 @@
 
 /* eslint-disable @next/next/no-img-element */
 import * as React from "react";
-import { ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { GroundImageItem } from "@/types";
+import { useTranslation } from "@/lib/i18n/LanguageContext";
 
 export interface GroundLightboxProps {
-  images: string[];
+  images: (string | GroundImageItem)[];
   initialIndex?: number;
   isOpen: boolean;
   onClose: () => void;
@@ -19,7 +21,20 @@ export function GroundLightbox({
   onClose,
   groundName,
 }: GroundLightboxProps) {
+  const { lang } = useTranslation();
+  const isEn = lang === "en";
+
   const [currentIndex, setCurrentIndex] = React.useState(initialIndex);
+
+  // Normalize image list so it consistently holds { url, caption, captionEn }
+  const normalizedImages = React.useMemo(() => {
+    return images.map((item) => {
+      if (typeof item === "string") {
+        return { url: item };
+      }
+      return item;
+    });
+  }, [images]);
 
   React.useEffect(() => {
     setCurrentIndex(initialIndex);
@@ -33,9 +48,9 @@ export function GroundLightbox({
       if (e.key === "Escape") {
         onClose();
       } else if (e.key === "ArrowLeft") {
-        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : normalizedImages.length - 1));
       } else if (e.key === "ArrowRight") {
-        setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+        setCurrentIndex((prev) => (prev < normalizedImages.length - 1 ? prev + 1 : 0));
       }
     };
 
@@ -47,20 +62,26 @@ export function GroundLightbox({
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isOpen, images.length, onClose]);
+  }, [isOpen, normalizedImages.length, onClose]);
 
-  if (!isOpen || images.length === 0) return null;
+  if (!isOpen || normalizedImages.length === 0) return null;
 
-  const currentImage = images[currentIndex];
+  const currentItem = normalizedImages[currentIndex] || normalizedImages[0];
+  const currentImageUrl = currentItem?.url || "";
+
+  // Determine active caption based on current site language with fallback
+  const activeCaption = isEn
+    ? (currentItem?.captionEn?.trim() || currentItem?.caption?.trim() || "")
+    : (currentItem?.caption?.trim() || currentItem?.captionEn?.trim() || "");
 
   const handlePrev = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : normalizedImages.length - 1));
   };
 
   const handleNext = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+    setCurrentIndex((prev) => (prev < normalizedImages.length - 1 ? prev + 1 : 0));
   };
 
   return (
@@ -78,7 +99,7 @@ export function GroundLightbox({
             {groundName}
           </span>
           <span className="font-mono text-xs text-azg bg-white/10 px-2.5 py-1 rounded-full border border-white/10">
-            {currentIndex + 1} / {images.length}
+            {currentIndex + 1} / {normalizedImages.length}
           </span>
         </div>
 
@@ -97,28 +118,42 @@ export function GroundLightbox({
         className="relative flex-1 flex items-center justify-center my-2 sm:my-4 max-w-6xl mx-auto w-full overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {images.length > 1 && (
+        {normalizedImages.length > 1 && (
           <button
             type="button"
             onClick={handlePrev}
-            className="absolute left-2 sm:left-4 z-20 w-11 h-11 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-105 cursor-pointer"
+            className="absolute left-2 sm:left-4 z-30 w-11 h-11 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-105 cursor-pointer shadow-xl"
             aria-label="Previous photo"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
         )}
 
-        <img
-          src={currentImage}
-          alt={`${groundName} photo ${currentIndex + 1}`}
-          className="max-h-[75vh] max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 select-none"
-        />
+        {/* Image wrapper strictly constrained to viewport with bottom caption overlay */}
+        <div className="relative inline-flex items-center justify-center max-h-[75vh] max-w-full">
+          <img
+            src={currentImageUrl}
+            alt={activeCaption || `${groundName} photo ${currentIndex + 1}`}
+            className="max-h-[75vh] max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 select-none"
+          />
 
-        {images.length > 1 && (
+          {/* Compact bilingual caption bar/pill overlaid at bottom edge of opened photo */}
+          {activeCaption && (
+            <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 max-w-[90%] sm:max-w-xl w-auto pointer-events-none px-2">
+              <div className="bg-black/70 backdrop-blur-md border border-white/15 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-center shadow-lg pointer-events-auto">
+                <p className="font-inter text-xs sm:text-sm text-white font-medium leading-relaxed m-0 text-center select-text">
+                  {activeCaption}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {normalizedImages.length > 1 && (
           <button
             type="button"
             onClick={handleNext}
-            className="absolute right-2 sm:right-4 z-20 w-11 h-11 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-105 cursor-pointer"
+            className="absolute right-2 sm:right-4 z-30 w-11 h-11 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-105 cursor-pointer shadow-xl"
             aria-label="Next photo"
           >
             <ChevronRight className="w-6 h-6" />
@@ -127,12 +162,12 @@ export function GroundLightbox({
       </div>
 
       {/* Bottom Thumbnail Strip */}
-      {images.length > 1 && (
+      {normalizedImages.length > 1 && (
         <div
           className="flex items-center justify-center gap-2 overflow-x-auto py-2 max-w-4xl mx-auto w-full z-10 scrollbar-none"
           onClick={(e) => e.stopPropagation()}
         >
-          {images.map((img, idx) => (
+          {normalizedImages.map((imgItem, idx) => (
             <button
               key={idx}
               type="button"
@@ -144,7 +179,7 @@ export function GroundLightbox({
               }`}
             >
               <img
-                src={img}
+                src={imgItem.url}
                 alt=""
                 className="w-14 h-11 sm:w-16 sm:h-12 object-cover"
               />

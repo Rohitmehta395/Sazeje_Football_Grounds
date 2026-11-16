@@ -434,6 +434,29 @@ export const Grounds: CollectionConfig = {
       },
     },
     {
+      type: 'row',
+      fields: [
+        {
+          name: 'photoCaption',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Cover photo caption in Dutch (optional)',
+          },
+        },
+        {
+          name: 'photoCaptionEn',
+          type: 'text',
+          required: false,
+          admin: {
+            width: '50%',
+            description: 'Cover photo caption in English (optional)',
+          },
+        },
+      ],
+    },
+    {
       name: 'images',
       type: 'array',
       admin: {
@@ -445,6 +468,29 @@ export const Grounds: CollectionConfig = {
           type: 'upload',
           relationTo: 'media',
           required: true,
+        },
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'caption',
+              type: 'text',
+              required: false,
+              admin: {
+                width: '50%',
+                description: 'Photo caption in Dutch (optional)',
+              },
+            },
+            {
+              name: 'captionEn',
+              type: 'text',
+              required: false,
+              admin: {
+                width: '50%',
+                description: 'Photo caption in English (optional)',
+              },
+            },
+          ],
         },
       ],
     },
