@@ -93,7 +93,7 @@ export function GroundLightbox({
       onClick={onClose}
     >
       {/* Top Bar: Title, Counter & Close Button */}
-      <div className="flex items-center justify-between z-10 w-full max-w-6xl mx-auto text-white">
+      <div className="flex items-center justify-between z-10 w-full max-w-6xl mx-auto text-white shrink-0">
         <div className="flex items-center gap-3">
           <span className="font-bebas text-xl sm:text-2xl tracking-wide text-white/90">
             {groundName}
@@ -115,7 +115,7 @@ export function GroundLightbox({
 
       {/* Center Display: Main Image & Prev/Next Arrows */}
       <div
-        className="relative flex-1 flex items-center justify-center my-2 sm:my-4 max-w-6xl mx-auto w-full overflow-hidden"
+        className="relative flex-1 min-h-0 flex items-center justify-center my-1 sm:my-2 max-w-6xl mx-auto w-full overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {normalizedImages.length > 1 && (
@@ -129,25 +129,11 @@ export function GroundLightbox({
           </button>
         )}
 
-        {/* Image wrapper strictly constrained to viewport with bottom caption overlay */}
-        <div className="relative inline-flex items-center justify-center max-h-[75vh] max-w-full">
-          <img
-            src={currentImageUrl}
-            alt={activeCaption || `${groundName} photo ${currentIndex + 1}`}
-            className="max-h-[75vh] max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 select-none"
-          />
-
-          {/* Compact bilingual caption bar/pill overlaid at bottom edge of opened photo */}
-          {activeCaption && (
-            <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 max-w-[90%] sm:max-w-xl w-auto pointer-events-none px-2">
-              <div className="bg-black/70 backdrop-blur-md border border-white/15 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-center shadow-lg pointer-events-auto">
-                <p className="font-inter text-xs sm:text-sm text-white font-medium leading-relaxed m-0 text-center select-text">
-                  {activeCaption}
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
+        <img
+          src={currentImageUrl}
+          alt={activeCaption || `${groundName} photo ${currentIndex + 1}`}
+          className="max-h-[64vh] sm:max-h-[68vh] max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 select-none"
+        />
 
         {normalizedImages.length > 1 && (
           <button
@@ -161,10 +147,24 @@ export function GroundLightbox({
         )}
       </div>
 
+      {/* Dedicated Caption Bar: Positioned Below the Image, 80% screen width */}
+      {activeCaption && (
+        <div
+          className="w-[80vw] max-w-[80vw] mx-auto my-1.5 sm:my-2 z-20 flex justify-center shrink-0"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="w-full bg-black/70 backdrop-blur-md border border-white/15 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-center shadow-lg">
+            <p className="font-inter text-xs sm:text-sm text-white/95 font-medium leading-relaxed m-0 text-center select-text">
+              {activeCaption}
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Bottom Thumbnail Strip */}
       {normalizedImages.length > 1 && (
         <div
-          className="flex items-center justify-center gap-2 overflow-x-auto py-2 max-w-4xl mx-auto w-full z-10 scrollbar-none"
+          className="flex items-center justify-center gap-2 overflow-x-auto py-1 sm:py-2 max-w-4xl mx-auto w-full z-10 scrollbar-none shrink-0"
           onClick={(e) => e.stopPropagation()}
         >
           {normalizedImages.map((imgItem, idx) => (
