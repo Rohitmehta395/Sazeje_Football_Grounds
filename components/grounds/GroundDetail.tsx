@@ -268,52 +268,70 @@ export function GroundDetail({
         <div className="lg:col-span-8 space-y-8">
           {/* Matchday Scoreboard Card */}
           {parsedMatch && (
-            <div className="bg-surface border border-border rounded-2xl p-5 sm:p-6 shadow-card">
-              <div className="flex items-center justify-between pb-3 border-b border-border/70 mb-4">
-                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-azg font-bold">
-                  <FootballIcon className="w-4 h-4" />
-                  <span>{isEn ? "MATCHDAY LOG" : "WEDSTRIJDFICHE"}</span>
+            <div className="bg-surface border border-border/80 rounded-2xl p-4 sm:p-5 shadow-card">
+              {/* Card Header: Competition / Matchday label + Visit Date */}
+              <div className="flex items-center justify-between gap-4 mb-3.5 sm:mb-4">
+                <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs uppercase tracking-[0.16em] text-azg font-bold">
+                  <FootballIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-azg shrink-0" />
+                  <span>
+                    {ground.competition
+                      ? ground.competition.toUpperCase()
+                      : isEn
+                      ? "MATCHDAY LOG"
+                      : "WEDSTRIJDFICHE"}
+                  </span>
                 </div>
-                <div className="flex items-center gap-1.5 font-mono text-xs text-text-muted">
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>{formattedDate}</span>
-                </div>
+                {formattedDate && (
+                  <div className="flex items-center gap-1.5 font-mono text-[11px] sm:text-xs text-text-muted">
+                    <Calendar className="w-3 h-3 text-text-muted" />
+                    <span>{formattedDate}</span>
+                  </div>
+                )}
               </div>
 
-              <div className="flex items-center justify-between gap-6 py-2">
-                <div className="space-y-2.5 sm:space-y-3 min-w-0">
-                  {/* Home Team */}
-                  <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
-                    <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-surface border border-border/80 flex items-center justify-center p-2 shrink-0 shadow-2xs">
-                      {homeTeamLogoUrl ? (
-                        <img
-                          src={homeTeamLogoUrl}
-                          alt={parsedMatch.homeTeam}
-                          className="w-full h-full object-contain"
-                        />
-                      ) : (
-                        <ClubBadgeIcon className="w-8 h-8 sm:w-9 sm:h-9 text-accent shrink-0" />
-                      )}
-                    </div>
-                    <span className="font-bebas text-3xl sm:text-4xl text-text leading-none tracking-wide truncate">
+              {/* Matchday Fixture: Strictly aligned CSS grid for logos, names & dash */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-0.5">
+                <div className="grid grid-cols-[auto_1fr] items-center gap-x-3.5 sm:gap-x-4 gap-y-1.5 sm:gap-y-2 min-w-0">
+                  {/* Row 1: Home Team Logo + Name */}
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-surface border border-border/80 flex items-center justify-center p-2 shrink-0 shadow-2xs">
+                    {homeTeamLogoUrl ? (
+                      <img
+                        src={homeTeamLogoUrl}
+                        alt={parsedMatch.homeTeam}
+                        className="w-full h-full object-contain"
+                      />
+                    ) : (
+                      <ClubBadgeIcon className="w-6 h-6 sm:w-7 sm:h-7 text-accent shrink-0" />
+                    )}
+                  </div>
+                  <div className="min-w-0 flex items-center">
+                    <span className="font-bebas text-2xl sm:text-3xl text-text leading-none tracking-wide truncate">
                       {parsedMatch.homeTeam}
                     </span>
                   </div>
 
-                  {/* "vs." row aligned between team names */}
+                  {/* Row 2: Spacer + Dash (only if away team exists) */}
                   {parsedMatch.awayTeam && (
-                    <div className="flex items-center gap-3.5 sm:gap-4 -my-1">
-                      <div className="w-13 sm:w-16 shrink-0" />
-                      <span className="font-mono text-xs sm:text-sm text-text-muted font-medium lowercase tracking-wider">
-                        —
-                      </span>
-                    </div>
+                    <>
+                      <div
+                        aria-hidden="true"
+                        className="w-12 sm:w-14 flex justify-center items-center"
+                      />
+                      <div className="min-w-0 flex items-center">
+                        <span
+                          className="font-bebas text-xl sm:text-2xl text-text font-bold leading-none select-none"
+                          aria-hidden="true"
+                        >
+                          —
+                        </span>
+                      </div>
+                    </>
                   )}
 
-                  {/* Away Team (starts at exact same left as Home Team) */}
+                  {/* Row 3: Away Team Logo + Name (only if away team exists) */}
                   {parsedMatch.awayTeam && (
-                    <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
-                      <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-surface border border-border/80 flex items-center justify-center p-2 shrink-0 shadow-2xs">
+                    <>
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-surface border border-border/80 flex items-center justify-center p-2 shrink-0 shadow-2xs">
                         {awayTeamLogoUrl ? (
                           <img
                             src={awayTeamLogoUrl}
@@ -321,24 +339,22 @@ export function GroundDetail({
                             className="w-full h-full object-contain"
                           />
                         ) : (
-                          <ClubBadgeIcon className="w-8 h-8 sm:w-9 sm:h-9 text-text-muted shrink-0" />
+                          <ClubBadgeIcon className="w-6 h-6 sm:w-7 sm:h-7 text-text-muted shrink-0" />
                         )}
                       </div>
-                      <span className="font-bebas text-3xl sm:text-4xl text-text leading-none tracking-wide truncate">
-                        {parsedMatch.awayTeam}
-                      </span>
-                    </div>
+                      <div className="min-w-0 flex items-center">
+                        <span className="font-bebas text-2xl sm:text-3xl text-text leading-none tracking-wide truncate">
+                          {parsedMatch.awayTeam}
+                        </span>
+                      </div>
+                    </>
                   )}
                 </div>
 
-                {/* Score Badge */}
-                {parsedMatch.score ? (
-                  <div className="font-bebas text-3xl sm:text-5xl text-azg bg-accent-soft px-5 py-3 sm:px-6 sm:py-4 rounded-2xl border border-accent/20 tracking-wider shrink-0 self-center">
+                {/* Score Badge (if score available) */}
+                {parsedMatch.score && (
+                  <div className="font-bebas text-3xl sm:text-4xl text-azg bg-accent-soft px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl border border-accent/20 tracking-wider shrink-0 self-center shadow-2xs">
                     {parsedMatch.score}
-                  </div>
-                ) : (
-                  <div className="font-mono text-xs text-text-muted shrink-0 self-center">
-                    {ground.competition}
                   </div>
                 )}
               </div>
